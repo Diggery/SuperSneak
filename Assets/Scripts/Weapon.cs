@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour {
 	float coolDownTimer;
 	
 	void Start() {
-	
+		
 	}
 	
 	public void setUpWeapon(GameObject newBullet, float newCoolDown) {
@@ -20,10 +20,11 @@ public class Weapon : MonoBehaviour {
 		coolDownTimer -= Time.deltaTime;
 	}
 	
-	public void fire() {
+	public void fire(Transform target) {
 		if (coolDownTimer > 0) return;
 		Rigidbody newBullet = Instantiate(bullet, transform.position, transform.rotation) as Rigidbody;
-		newBullet.AddRelativeForce(Vector3.forward * 100, ForceMode.Impulse);
+		Vector3 shootVector = ( target.position - transform.position).normalized;
+		newBullet.AddForce(shootVector * 100, ForceMode.Impulse);
 		coolDownTimer = coolDown;
 	}
 }

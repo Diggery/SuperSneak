@@ -12,7 +12,8 @@ public class EnemyController : MonoBehaviour {
 	public GameObject bullet; 
 	public float coolDown;
 	
-	Transform player;
+	[HideInInspector]
+	public Transform player;
 	
 	NavMeshAgent navAgent;
 	
@@ -28,11 +29,11 @@ public class EnemyController : MonoBehaviour {
 	
 	public bool looking;
 	
+	[HideInInspector]
+	public bool isRunning;
 	float walkSpeed;
 	float runSpeed;
 	float currentSpeed;
-	[HideInInspector]
-	public float actualSpeed;
 	float speedGoal;
 	
 	public Transform head;
@@ -56,12 +57,7 @@ public class EnemyController : MonoBehaviour {
 	void Update () {
 		currentSpeed = Mathf.Lerp (currentSpeed, speedGoal, Time.deltaTime * 2);
 		navAgent.speed = currentSpeed;
-		
-		float newSpeed = navAgent.velocity.magnitude;
-		
-		if (Mathf.Abs(newSpeed - actualSpeed) < 1.0f) actualSpeed = newSpeed;
-			
-		
+					
 		if (enemyAI.currentActivity == EnemyAI.Activity.Chasing) {
 			RaycastHit hit;
 			Vector3 startPos = new Vector3 (transform.position.x, 1.5f, transform.position.z);
@@ -130,8 +126,10 @@ public class EnemyController : MonoBehaviour {
 	
 	public void startWalking () {
 		speedGoal = walkSpeed;
+		isRunning = false;
 	}	
 	public void startRunning () {
+		isRunning = true;
 		speedGoal = runSpeed;
 	}
 	

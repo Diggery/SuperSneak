@@ -79,7 +79,7 @@ public class EnemyAI : MonoBehaviour {
 					if ((transform.position - chaseTarget.position).sqrMagnitude > 200) {
 						transform.Translate(Vector3.forward * Time.deltaTime * 5);
 					}
-					gameObject.BroadcastMessage("fire", SendMessageOptions.DontRequireReceiver);
+					gameObject.BroadcastMessage("fire", enemyController.player, SendMessageOptions.DontRequireReceiver);
 				} else {
 					navAgent.Resume();
 				}
