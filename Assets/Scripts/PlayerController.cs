@@ -39,14 +39,11 @@ public class PlayerController : MonoBehaviour {
 		
 		float newSpeed = characterController.velocity.magnitude;
 		
-		if (Mathf.Abs(newSpeed - currentSpeed) < 1.0f) currentSpeed = newSpeed;
-			
-
+		currentSpeed = newSpeed;
 		
 		//regen health
 		currentHealth = Mathf.Clamp(currentHealth + Time.deltaTime * 0.5f, 0, maxHealth);	
 		
-	//	currentInput = Vector3.Lerp(currentInput, Vector3.zero, Time.deltaTime * 10);
 	}
 	
 	public void damage(float amount, Vector3 origin) {

@@ -97,10 +97,7 @@ public class PlayerAnimator : MonoBehaviour {
 	}
 	
 	public void playDieAnim(Vector3 attackOrigin) {
-//		Vector3 currentRot = transform.eulerAngles;
-//		float directionOfAttacker = Util.getDirection(transform.position, attackOrigin);
-//		
-//		print (directionOfAttacker);
+
 		if (currentState == AnimState.Dead) return;	
 
 		currentState = AnimState.Dead;	
