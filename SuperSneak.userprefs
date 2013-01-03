@@ -1,6 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/KeyboardControl.cs">
+    <Files>
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="42" Column="27" />
+      <File FileName="Assets/Scripts/KeyboardControl.cs" Line="36" Column="42" />
+      <File FileName="Assets/Scripts/PlayerAnimator.cs" Line="80" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

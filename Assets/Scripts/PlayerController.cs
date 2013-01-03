@@ -25,17 +25,18 @@ public class PlayerController : MonoBehaviour {
 
 	}
 	
-	void Update () {
-	    if (characterController.isGrounded && !dead) {
-			currentDirection = Camera.main.transform.parent.TransformDirection(currentInput); 
-	        currentDirection *= moveSpeed;
-	    } else {
-			currentDirection = Vector3.zero;
-		}
-
-    	currentDirection.y -= gravity * Time.deltaTime;
-    	characterController.Move(currentDirection * Time.deltaTime);
+	void Update () {		
 		
+		Vector3 moveVector;
+		
+		if (currentInput.sqrMagnitude > 0.05f){
+			currentDirection = Camera.main.transform.parent.TransformDirection(currentInput); 
+			moveVector = currentDirection * moveSpeed;			
+		} else {
+			moveVector = Vector3.zero;			
+		}
+    	
+		characterController.Move(moveVector * Time.deltaTime);
 		
 		float newSpeed = characterController.velocity.magnitude;
 		
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	public void moveInput(Vector3 newInput) {
-		currentInput = new Vector3(-newInput.x, newInput.z, newInput.y);	
+		currentInput = new Vector3(-newInput.x, newInput.z, newInput.y);
 	}
 
 	public void setInputOff() {
