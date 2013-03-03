@@ -87,7 +87,7 @@ public class PlayerAnimator : MonoBehaviour {
 	void playIdleAnim() {
 		currentState = AnimState.Idle;	
 	}
-	
+
 	void playRunAnim() {
 		currentState = AnimState.Running;	
 	}
@@ -97,12 +97,12 @@ public class PlayerAnimator : MonoBehaviour {
 	}
 	
 	public void playDieAnim(Vector3 attackOrigin) {
-
 		if (currentState == AnimState.Dead) return;	
+		Vector3 localSpace = transform.InverseTransformPoint(attackOrigin);
 
 		currentState = AnimState.Dead;	
 		
-		if (Random.value > 0.5f) {
+		if (localSpace.z < 0) {
 			playerModel.animation.CrossFade("FallForward", 0.25f, PlayMode.StopSameLayer);	
 		} else {
 			playerModel.animation.CrossFade("FallBack", 0.25f, PlayMode.StopSameLayer);	

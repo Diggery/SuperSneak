@@ -31,4 +31,14 @@ public class EnemyAnimator : MonoBehaviour {
 			if (!guardModel.animation.IsPlaying("Walk")) guardModel.animation.CrossFade("Walk", 0.1f, PlayMode.StopSameLayer);
 		}
 	}
+	
+		
+	public void playAimAnim() {
+		if (guardModel.animation.IsPlaying("PullGun")) return;
+		guardModel.animation.CrossFade("PullGun", 0.1f, PlayMode.StopSameLayer);
+	}
+	
+	public void stopAiming() {
+		guardModel.animation.Stop("PullGun");	
+	}
 }

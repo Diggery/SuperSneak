@@ -13,6 +13,7 @@ public class FloorBuilder : EditorWindow {
     static void Init () {
         // Get existing open window or if none, make a new one:
         FloorBuilder window = (FloorBuilder)EditorWindow.GetWindow (typeof (FloorBuilder));
+		Debug.Log (window);
 		
     }
     

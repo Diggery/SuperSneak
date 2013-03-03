@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour {
 	public bool inputOn;
 
 	float moveSpeed = 4.0f;
-	float gravity = 20.0f;
 	
 	public Vector3 currentInput;
 	public float currentSpeed;
@@ -29,13 +28,14 @@ public class PlayerController : MonoBehaviour {
 		
 		Vector3 moveVector;
 		
-		if (currentInput.sqrMagnitude > 0.05f){
+		if (!dead && currentInput.sqrMagnitude > 0.05f){
 			currentDirection = Camera.main.transform.parent.TransformDirection(currentInput); 
 			moveVector = currentDirection * moveSpeed;			
 		} else {
 			moveVector = Vector3.zero;			
 		}
-    	
+		
+    	moveVector.y = -1.0f;
 		characterController.Move(moveVector * Time.deltaTime);
 		
 		float newSpeed = characterController.velocity.magnitude;

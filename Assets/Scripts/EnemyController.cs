@@ -33,6 +33,7 @@ public class EnemyController : MonoBehaviour {
 	public bool isRunning;
 	float walkSpeed;
 	float runSpeed;
+	float turnSpeed = 180;
 	float currentSpeed;
 	float speedGoal;
 	
@@ -52,60 +53,38 @@ public class EnemyController : MonoBehaviour {
 		enemyAI = GetComponent<EnemyAI>();
 		Weapon weaponScript = weapon.gameObject.AddComponent<Weapon>();
 		weaponScript.setUpWeapon(bullet, coolDown);
+		
+		startWalking();
 	}
 	
 	void Update () {
 		currentSpeed = Mathf.Lerp (currentSpeed, speedGoal, Time.deltaTime * 2);
 		navAgent.speed = currentSpeed;
-					
-		if (enemyAI.currentActivity == EnemyAI.Activity.Chasing) {
-			RaycastHit hit;
-			Vector3 startPos = new Vector3 (transform.position.x, 1.5f, transform.position.z);
-			Vector3 endPos = new Vector3 (player.position.x, 1.5f, player.position.z);
-			if (Physics.Linecast(startPos, endPos, out hit)) {
-				if (hit.transform.tag == "Player") {
-					Debug.DrawLine(startPos, hit.point, Color.red);
-					enemyAI.inView(hit.transform);
-				} else {
-					Debug.DrawLine(startPos, hit.point, Color.green);
-					enemyAI.outOfView();
-				}
-			}
-		}		
-			
-
 	}
 	
 	void LateUpdate () {
-		
-		// make him look around
-		headTimer -= Time.deltaTime;
-		if (headTimer < 0.0f) setHeadTarget();
-			
-		Vector3 headTargetPos = headTarget.localPosition;
-		
-		if (enemyAI.currentActivity != EnemyAI.Activity.Chasing && enemyAI.currentActivity != EnemyAI.Activity.Responding) {
-			headTargetPos.x = Mathf.Lerp (headTargetPos.x, headGoal, Time.deltaTime * 2);	
-		} else {
-			headTargetPos.x = Mathf.Lerp (headTargetPos.x, 0, Time.deltaTime * 2);	
-		}
-		
-		headTarget.localPosition = headTargetPos;
-	
-		head.LookAt(headTarget);
-		Vector3 headRot = head.localEulerAngles;
-		headRot.z -= 90;
-		head.localRotation = Quaternion.Euler(headRot);
+
 	}
 	
-	void setHeadTarget() {
-		if (Mathf.Abs(headGoal) > 0.01f) {
-			headGoal = 0.0f;
-		} else {
-			headTimer = Random.Range(1.0f, 6.0f);
-			headGoal = Random.Range(0.5f, 1.0f) + 0.5f;
-			if (Random.value > 0.5f)  headGoal *= -1;
-		}
+	public void faceTarget(Vector2 target) {
+		Vector3 localSpace = transform.InverseTransformPoint(new Vector3(target.x, 0,target.y));
+		float turnAmount = Mathf.Clamp (localSpace.x * turnSpeed, -turnSpeed, turnSpeed);
+		transform.Rotate(0, turnAmount * Time.deltaTime, 0);
+	}
+	public void approachTarget(Vector2 target) {
+		if (isRunning) startWalking();
+		Vector3 targetPos = new Vector3(target.x, 0, target.y);
+		transform.position = Vector3.MoveTowards(transform.position, targetPos, walkSpeed * Time.deltaTime);
+	}
+	
+	public void walkTo(Vector2 newLoc) {
+		startWalking();	
+		move(newLoc);
+	}
+	
+	public void runTo(Vector2 newLoc) {
+		startRunning();	
+		move(newLoc);
 	}
 
 	public void move (Vector2 newTarget) {
@@ -116,7 +95,7 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void spotPlayer (Transform target) {
-		enemyAI.chase(target);	
+		enemyAI.spotPlayer(target);	
 		currentSpeed = runSpeed * 0.5f;
 	}
 	
@@ -124,11 +103,11 @@ public class EnemyController : MonoBehaviour {
 		return player.position;	
 	}
 	
-	public void startWalking () {
+	public void startWalking() {
 		speedGoal = walkSpeed;
 		isRunning = false;
 	}	
-	public void startRunning () {
+	public void startRunning() {
 		isRunning = true;
 		speedGoal = runSpeed;
 	}
@@ -138,11 +117,27 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void alert(Vector3 alertPos) {
-		//if (enemyManager.alerted) return;
 		enemyManager.alert(alertPos);	
 	}
 	
 	public EnemyAI.Activity getCurrentActivity () {
 		return enemyAI.currentActivity;
+	}
+	
+	public bool canSeeTarget() {
+		RaycastHit hit;
+		Vector3 startPos = new Vector3 (transform.position.x, 1.5f, transform.position.z);
+		Vector3 endPos = new Vector3 (player.position.x, 1.5f, player.position.z);
+		if (Physics.Linecast(startPos, endPos, out hit)) {
+			if (hit.transform.tag == "Player") {
+				Debug.DrawLine(startPos, hit.point, Color.red);
+				return true;
+			} else {
+				Debug.DrawLine(startPos, hit.point, Color.gray);
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }

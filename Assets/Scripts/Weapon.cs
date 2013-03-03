@@ -19,12 +19,11 @@ public class Weapon : MonoBehaviour {
 	void Update () {
 		coolDownTimer -= Time.deltaTime;
 	}
-	
-	public void fire(Transform target) {
+	public void fire(Vector3 target) {
 		if (coolDownTimer > 0) return;
 		Rigidbody newBullet = Instantiate(bullet, transform.position, transform.rotation) as Rigidbody;
-		Vector3 shootVector = ( target.position - transform.position).normalized;
-		newBullet.AddForce(shootVector * 100, ForceMode.Impulse);
+		Vector3 shootVector = ( target - transform.position).normalized;
+		newBullet.AddForce(shootVector * 10, ForceMode.Impulse);
 		coolDownTimer = coolDown;
 	}
 }

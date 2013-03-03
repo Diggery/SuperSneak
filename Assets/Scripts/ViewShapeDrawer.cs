@@ -6,6 +6,7 @@ public class ViewShapeDrawer : MonoBehaviour {
 	public Transform viewTarget;
 
 	public bool showView;
+	public int distanceCheck;
 	public Mesh viewMesh;
 	public float fadeGoal;
 	public float fadeAmount;
@@ -40,13 +41,13 @@ public class ViewShapeDrawer : MonoBehaviour {
 		if (fadeAmount > 0.1) drawViewShape ();
 		
 		// check to see if they are in range
-		Transform currentPlayer = GameObject.FindWithTag("Player").transform;
+//		Transform currentPlayer = GameObject.FindWithTag("Player").transform;
 
-		if ((transform.position - currentPlayer.position).sqrMagnitude > 500) {
-			showView = false;
-		} else {
-			showView = true;
-		}
+//		if ((transform.position - currentPlayer.position).sqrMagnitude > distanceCheck) {
+//			showView = false;
+//		} else {
+//			showView = true;
+//		}
 		
 		float heading = Util.getDirection(Vector3.zero, viewTarget.localPosition);
 		transform.localRotation = Quaternion.Euler(0, heading, 0);
