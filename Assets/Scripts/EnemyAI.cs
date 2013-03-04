@@ -14,27 +14,32 @@ public class EnemyAI : MonoBehaviour {
 	NavMeshAgent navAgent;
 	
 	bool canSeeTarget;
-	bool readyToFire;
+	[HideInInspector]
+	public bool readyToFire;
 	Vector2 lastKnownPos;
 	
 	public bool startOnGuard;
 	
-	public float decisionTimer;
+	public float lookingTimer;
 
 	void Start () {
 		enemyController = GetComponent<EnemyController>();
 		enemyAnimator = GetComponent<EnemyAnimator>();
 		navAgent = GetComponent<NavMeshAgent>();
 		if (startOnGuard) {
-		//	lookAround(100);
+			lookAround();
 		} else {
-		//	patrol();
+			patrol();
 		}
 	}
 
 	
 	
 	void Update () {
+		float targetRange = (transform.position - enemyController.player.position).magnitude;
+		if (targetRange < 2.0f) {
+			spotPlayer(enemyController.player);
+		}
 
 		switch (currentActivity) {
 			case Activity.Patrolling :
@@ -43,7 +48,8 @@ public class EnemyAI : MonoBehaviour {
 			break;
 			
 			case Activity.Looking :
-
+				lookingTimer -= Time.deltaTime;
+				if (lookingTimer < 0) patrol();
 			
 			break;
 			
@@ -52,7 +58,6 @@ public class EnemyAI : MonoBehaviour {
 			break;
 			
 			case Activity.Chasing :
-				float targetRange = (transform.position - enemyController.player.position).magnitude;
 				
 				if (enemyController.canSeeTarget()) {
 					lastKnownPos = new Vector2(enemyController.player.position.x, enemyController.player.position.z);
@@ -66,8 +71,9 @@ public class EnemyAI : MonoBehaviour {
 					if (targetRange < 20) {
 						Vector3 fireTarget = new Vector3(enemyController.player.position.x, 1.5f, enemyController.player.position.z);
 						BroadcastMessage("fire", fireTarget);
+						readyToFire = true;
 					} else {
-						//readyToFire = false;
+						readyToFire = false;
 					}
 				
 				} else {
@@ -107,7 +113,15 @@ public class EnemyAI : MonoBehaviour {
 	}
 	
 	public void lookAround() {
-		currentActivity = Activity.Looking;
+		readyToFire = false;
+		currentActivity = Activity.Looking; 
+		lookingTimer = enemyAnimator.playLookAroundAnim();
+		enemyController.startWalking();
+		
+	}
+	public void patrol() {
+		readyToFire = false;
+		currentActivity = Activity.Patrolling;
 	}
 	
 	public void spotPlayer(Transform target) {

@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour {
 	public Transform weapon; 
 	public GameObject bullet; 
 	public float coolDown;
+	public float spinUp;
 	
 	[HideInInspector]
 	public Transform player;
@@ -52,7 +53,7 @@ public class EnemyController : MonoBehaviour {
 		runSpeed = enemyManager.getRunSpeed(EnemyType);
 		enemyAI = GetComponent<EnemyAI>();
 		Weapon weaponScript = weapon.gameObject.AddComponent<Weapon>();
-		weaponScript.setUpWeapon(bullet, coolDown);
+		weaponScript.setUpWeapon(bullet, coolDown, spinUp);
 		
 		startWalking();
 	}

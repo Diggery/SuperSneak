@@ -7,7 +7,7 @@ public class ViewShapeDrawer : MonoBehaviour {
 
 	public bool showView;
 	public int distanceCheck;
-	public Mesh viewMesh;
+	Mesh viewMesh;
 	public float fadeGoal;
 	public float fadeAmount;
 	public float innerRadius;
