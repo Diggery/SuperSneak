@@ -36,6 +36,8 @@ public class EnemyController : MonoBehaviour {
 	float runSpeed;
 	float turnSpeed = 180;
 	float currentSpeed;
+	Vector3 lastMovePos;
+	float actualSpeed;
 	float speedGoal;
 	
 	public Transform head;
@@ -56,6 +58,8 @@ public class EnemyController : MonoBehaviour {
 		weaponScript.setUpWeapon(bullet, coolDown, spinUp);
 		
 		startWalking();
+		
+
 	}
 	
 	void Update () {
@@ -64,39 +68,49 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	void LateUpdate () {
-
+		// speed check
+		Vector3 moveDelta = lastMovePos - transform.position;
+		actualSpeed = moveDelta.magnitude;
+		lastMovePos = transform.position;
+		
 	}
 	
-	public void faceTarget(Vector2 target) {
-		Vector3 localSpace = transform.InverseTransformPoint(new Vector3(target.x, 0,target.y));
+	public bool isMoving() {
+		if (actualSpeed > 0.01f) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void faceTarget(Vector3 target) {
+		Vector3 localSpace = transform.InverseTransformPoint(new Vector3(target.x, 0,target.z));
 		float turnAmount = Mathf.Clamp (localSpace.x * turnSpeed, -turnSpeed, turnSpeed);
 		transform.Rotate(0, turnAmount * Time.deltaTime, 0);
 	}
-	public void approachTarget(Vector2 target) {
+	public void approachTarget(Vector3 target) {
 		if (isRunning) startWalking();
-		Vector3 targetPos = new Vector3(target.x, 0, target.y);
+		Vector3 targetPos = new Vector3(target.x, 0, target.z);
 		transform.position = Vector3.MoveTowards(transform.position, targetPos, walkSpeed * Time.deltaTime);
 	}
 	
-	public void walkTo(Vector2 newLoc) {
+	public void walkTo(Vector3 newLoc) {
 		startWalking();	
 		move(newLoc);
 	}
 	
-	public void runTo(Vector2 newLoc) {
+	public void runTo(Vector3 newLoc) {
 		startRunning();	
 		move(newLoc);
 	}
 
-	public void move (Vector2 newTarget) {
-		if (navAgent) navAgent.SetDestination(new Vector3(newTarget.x, 0.0f, newTarget.y));
-	}
 	public void move (Vector3 newTarget) {
 		if (navAgent) navAgent.SetDestination(new Vector3(newTarget.x, 0.0f, newTarget.z));
 	}
 	
 	public void spotPlayer (Transform target) {
-		enemyAI.spotPlayer(target);	
+		Events.Send(gameObject, "GuardRadio", "Spotted");
+		enemyAI.spotPlayer();	
 		currentSpeed = runSpeed * 0.5f;
 	}
 	
@@ -141,4 +155,5 @@ public class EnemyController : MonoBehaviour {
 			return false;
 		}
 	}
+
 }

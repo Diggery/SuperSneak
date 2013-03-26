@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ViewShapeDrawer : MonoBehaviour {
 
-	public Transform viewTarget;
+	public Transform head;
 
 	public bool showView;
 	public int distanceCheck;
@@ -49,8 +49,10 @@ public class ViewShapeDrawer : MonoBehaviour {
 //			showView = true;
 //		}
 		
-		float heading = Util.getDirection(Vector3.zero, viewTarget.localPosition);
-		transform.localRotation = Quaternion.Euler(0, heading, 0);
+		//float heading = Util.getDirection(Vector3.zero, viewTarget.localPosition);
+		
+		float heading = head.eulerAngles.y;
+		transform.rotation = Quaternion.Euler(0, heading, 0);
 
 	}
 	
@@ -99,6 +101,8 @@ public class ViewShapeDrawer : MonoBehaviour {
 	    Vector3[] vertices = viewMesh.vertices;
 	    Color[] colors = viewMesh.colors;
 		
+		if (colors.Length < 1) return;
+		
 		float segmentAngle = 2 * (angle / vertices.Length) * (Mathf.PI/180);
 		float radianOffset = (90 + angle/2.0f - segmentAngle * 0.5f) * (Mathf.PI/180);
 		
@@ -112,7 +116,6 @@ public class ViewShapeDrawer : MonoBehaviour {
 			innerPos.z = innerRadius * fadeAmount * Mathf.Sin(-segmentAngle * i + radianOffset);
 			outerPos.x = outerRadius * fadeAmount * Mathf.Cos(-segmentAngle * i + radianOffset);
 			outerPos.z = outerRadius * fadeAmount * Mathf.Sin(-segmentAngle * i + radianOffset);
-			
 			colors[i] = viewColor * fadeAmount;
 			colors[i+segments] = viewColor * fadeAmount;
 			
