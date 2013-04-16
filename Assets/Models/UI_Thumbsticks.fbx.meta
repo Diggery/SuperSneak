@@ -7,6 +7,9 @@ ModelImporter:
     4300004: LeftThumb
     4300006: LowerRight
     4300008: button
+    4300010: LeftAnchor
+    4300012: RightAnchor
+    4300014: RightThumb
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -51,6 +54,19 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
+    LeftAnchor:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+      data:
+        first: 23
+        second: 6a182300
+      data:
+        first: 33
+        second: aa5a3200
     LeftThumb:
       data:
         first: 1
@@ -90,7 +106,7 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
-    anchor:
+    RightAnchor:
       data:
         first: 1
         second: a6860100
@@ -103,7 +119,7 @@ ModelImporter:
       data:
         first: 33
         second: a65a3200
-    button:
+    RightThumb:
       data:
         first: 1
         second: a0860100

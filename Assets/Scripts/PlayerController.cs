@@ -5,13 +5,16 @@ public class PlayerController : MonoBehaviour {
 	
 	CharacterController characterController;
 	PlayerAnimator playerAnimator;
+	BombThrower playerBombThrower;
 	
-	public bool inputOn;
+	public bool leftInputOn;
+	public Vector3 currentLeftInput;
+	public bool rightInputOn;
+	public Vector3 currentRightInput;
 
 	float runSpeed = 4.0f;
 	float walkSpeed = 2.0f;
 	
-	public Vector3 currentInput;
 	public float currentSpeed;
 	public Vector3 currentDirection;
 	
@@ -22,9 +25,10 @@ public class PlayerController : MonoBehaviour {
 	Transform head;
 	RagDollController ragDoll;
 
-	public void setUp (Transform thiefHead, RagDollController thiefRagDoll) {
+	public void setUp (Transform thiefHead, RagDollController thiefRagDoll, BombThrower newBombThrower) {
 		//head = thiefHead;
 		ragDoll = thiefRagDoll;
+		playerBombThrower = newBombThrower;
 		characterController = GetComponent<CharacterController>();
 		playerAnimator = GetComponent<PlayerAnimator>();
 
@@ -34,10 +38,10 @@ public class PlayerController : MonoBehaviour {
 		if (dead) return;
 		
 		Vector3 moveVector = Vector3.zero;
-		float movePower = currentInput.magnitude;
+		float movePower = currentLeftInput.magnitude;
 		
 		if (!dead && movePower > 0.05f){
-			currentDirection = Camera.main.transform.parent.TransformDirection(currentInput); 
+			currentDirection = Camera.main.transform.parent.TransformDirection(currentLeftInput); 
 			moveVector = currentDirection.normalized;
 			if (movePower > 0.5) {
 				moveVector *= runSpeed;
@@ -84,17 +88,33 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 	
-	public void setInputOn() {
-		inputOn = true;
+	public void setLeftInputOn() {
+		leftInputOn = true;
 	}
 	
-	public void moveInput(Vector3 newInput) {
-		currentInput = new Vector3(-newInput.x, newInput.z, newInput.y);
+	public void setRightInputOn() {
+		rightInputOn = true;
+		playerBombThrower.readyBomb();
 	}
-
-	public void setInputOff() {
-		inputOn = false;
+		
+	public void leftInput(Vector3 newInput) {
+		currentLeftInput = new Vector3(-newInput.x, newInput.z, newInput.y);
 	}
 	
+	public void rightInput(Vector3 newInput) {
+		currentRightInput = new Vector3(-newInput.x, newInput.z, newInput.y);
+	}
 
+	public void setLeftInputOff() {
+		leftInputOn = false;
+	}
+	
+	public void setRightInputOff() {
+		
+		if (rightInputOn) {
+			playerBombThrower.throwBomb(currentRightInput);
+			
+		}
+		rightInputOn = false;
+	}
 }

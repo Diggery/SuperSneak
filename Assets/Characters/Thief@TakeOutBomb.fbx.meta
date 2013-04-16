@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 52b153ccba9f0424daed160a102fa0a2
+guid: cd63fd8f929b3418b907ec78c12c5e75
 ModelImporter:
   fileIDToRecycleName:
     4300000: Thief_Body
-    7400000: Take 001 //// Thief
+    7400000: Take 001 //// Thief@TakeOutBomb
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -35,7 +35,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
-    normalImportMode: 1
+    normalImportMode: 0
     tangentImportMode: 1
   textMetaNamesToFileIDs:
     //RootNode:

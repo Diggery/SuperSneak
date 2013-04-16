@@ -12,7 +12,7 @@ public class PlayerAnimator : MonoBehaviour {
 	Transform playerModel;
 	PlayerController playerController;
 
-	public void setUp (Transform thiefObj) {
+	public void setUp (Transform thiefObj, Transform upperBody) {
 		playerModel = thiefObj;
 		playerModel.animation.Stop();
 		playerController = GetComponent<PlayerController>();
@@ -25,13 +25,19 @@ public class PlayerAnimator : MonoBehaviour {
 
 		playerModel.animation["Run"].wrapMode = WrapMode.Loop;
 		playerModel.animation["Run"].layer = 1;	
-		
-		AnimationEvent runningFootstep = new AnimationEvent();
-		runningFootstep.functionName = "playSound";
-		runningFootstep.stringParameter = "runningFootStep";
-		runningFootstep.time = 0.0f;
-		playerModel.animation["Run"].clip.AddEvent(runningFootstep);
-		
+		AnimationEvent runningFootstepEvent = new AnimationEvent();
+		runningFootstepEvent.functionName = "playSound";
+		runningFootstepEvent.stringParameter = "runningFootStep";
+		runningFootstepEvent.time = 0.0f;
+		playerModel.animation["Run"].clip.AddEvent(runningFootstepEvent);
+
+		playerModel.animation["TakeOutBomb"].wrapMode = WrapMode.ClampForever;
+		playerModel.animation["TakeOutBomb"].layer = 2;	
+		playerModel.animation["TakeOutBomb"].AddMixingTransform(upperBody);
+		AnimationEvent takeOutBombEvent = new AnimationEvent();
+		takeOutBombEvent.functionName = "takeOutBomb";
+		takeOutBombEvent.time = 0.5f;
+		playerModel.animation["TakeOutBomb"].clip.AddEvent(takeOutBombEvent);		
 	}
 	
 	void Update () {
@@ -81,7 +87,7 @@ public class PlayerAnimator : MonoBehaviour {
 	
 	void selectState() {
 		if (currentState != AnimState.Idle && playerController.currentSpeed < 0.1f) playIdleAnim();
-		if (playerController.inputOn) {
+		if (playerController.leftInputOn) {
 			if (playerController.currentSpeed > 0.1f && playerController.currentSpeed < 3.0f) playSneakAnim();
 			if (playerController.currentSpeed > 3.0f) playRunAnim();
 		}

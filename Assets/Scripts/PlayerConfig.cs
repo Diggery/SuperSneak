@@ -38,14 +38,17 @@ public class PlayerConfig : MonoBehaviour {
 
 		Transform thiefRightHand = thiefObj.Find ("Thief_Skeleton/Root/UpperBody/Spine1/Spine2/RightShoulder/RightElbow/RightWrist");
 		if (!thiefRightHand) Debug.Log("ERROR: Can't Find Player Hand");	
+		
+		Transform thiefUpperBody = thiefObj.Find ("Thief_Skeleton/Root/UpperBody");
+		if (!thiefUpperBody) Debug.Log("ERROR: Can't Find Player UpperBody");	
 
 		Transform thiefUpperTorso = thiefObj.Find ("Thief_Skeleton/Root/UpperBody/Spine1/Spine2");
 		if (!thiefUpperTorso) Debug.Log("ERROR: Can't Find Player Torso");	
 
 		
-		playerAnimator.setUp(thiefObj);
-		playerController.setUp(thiefHead, playerRagDoll);
-		playerBombThrower.setUp(thiefRightHand);
+		playerAnimator.setUp(thiefObj, thiefUpperBody);
+		playerController.setUp(thiefHead, playerRagDoll, playerBombThrower);
+		playerBombThrower.setUp(thiefRightHand, playerAnimator);
 		
 		setUpData.layerName = "PlayerRagDoll";
 		setUpData.rootTransform = thiefObj.Find("Thief_Skeleton/Root");

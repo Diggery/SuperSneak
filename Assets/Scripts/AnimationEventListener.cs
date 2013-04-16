@@ -11,4 +11,8 @@ public class AnimationEventListener : MonoBehaviour {
 			break;
 		}
 	}
+	
+	public void takeOutBomb() {
+		transform.parent.gameObject.SendMessage("readyBomb");
+	}
 }

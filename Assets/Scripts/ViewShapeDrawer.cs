@@ -33,7 +33,7 @@ public class ViewShapeDrawer : MonoBehaviour {
 	}
 	
 	
-	void Update () {
+	void LateUpdate() {
 		
 		if (!head && enemyController) head = enemyController.getHead();
 		
