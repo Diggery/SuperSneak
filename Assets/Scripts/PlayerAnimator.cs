@@ -12,31 +12,34 @@ public class PlayerAnimator : MonoBehaviour {
 	Transform playerModel;
 	PlayerController playerController;
 
-	void Start () {
-		playerModel = transform.Find("Thief");
+	public void setUp (Transform thiefObj) {
+		playerModel = thiefObj;
+		playerModel.animation.Stop();
 		playerController = GetComponent<PlayerController>();
 
 		playerModel.animation["Idle01"].wrapMode = WrapMode.Once;
 		playerModel.animation["Idle01"].layer = 1;
 
-		playerModel.animation["Sneak"].wrapMode = WrapMode.Loop;
-		playerModel.animation["Sneak"].layer = 1;	
+		playerModel.animation["Walk"].wrapMode = WrapMode.Loop;
+		playerModel.animation["Walk"].layer = 1;	
 
 		playerModel.animation["Run"].wrapMode = WrapMode.Loop;
 		playerModel.animation["Run"].layer = 1;	
 		
-		playerModel.animation["FallBack"].wrapMode = WrapMode.ClampForever;
-		playerModel.animation["FallBack"].layer = 5;
-		
-		playerModel.animation["FallForward"].wrapMode = WrapMode.ClampForever;
-		playerModel.animation["FallForward"].layer = 5;
-
+		AnimationEvent runningFootstep = new AnimationEvent();
+		runningFootstep.functionName = "playSound";
+		runningFootstep.stringParameter = "runningFootStep";
+		runningFootstep.time = 0.0f;
+		playerModel.animation["Run"].clip.AddEvent(runningFootstep);
 		
 	}
 	
 	void Update () {
 
-		if (currentState == AnimState.Dead || currentState == AnimState.Stunned) { 
+		if (currentState == AnimState.Dead) return;
+		
+		if (currentState == AnimState.Stunned) { 
+			
 		} else {
 			selectState();
 		}
@@ -50,8 +53,8 @@ public class PlayerAnimator : MonoBehaviour {
 			}
 			break;
 		case AnimState.Sneaking :
-			if (!playerModel.animation.IsPlaying("Sneak")) {
-				playerModel.animation.CrossFade("Sneak", 0.5f, PlayMode.StopSameLayer);
+			if (!playerModel.animation.IsPlaying("Walk")) {
+				playerModel.animation.CrossFade("Walk", 0.5f, PlayMode.StopSameLayer);
 			}
 			break;
 		case AnimState.Running :
@@ -67,7 +70,7 @@ public class PlayerAnimator : MonoBehaviour {
 		float animSpeed = playerController.currentSpeed * 0.3f;
 		
 		playerModel.animation["Run"].speed = animSpeed;
-		playerModel.animation["Sneak"].speed = animSpeed;
+		playerModel.animation["Walk"].speed = animSpeed;
 		
 		if (currentState != AnimState.Dead && currentState != AnimState.Stunned) {
 			Quaternion heading = Quaternion.Euler(0, Util.getDirection(playerController.currentDirection), 0);
@@ -96,18 +99,20 @@ public class PlayerAnimator : MonoBehaviour {
 		currentState = AnimState.Sneaking;	
 	}
 	
-	public void playDieAnim(Vector3 attackOrigin) {
+	public void die(Vector3 attackOrigin) {
 		if (currentState == AnimState.Dead) return;	
-		Vector3 localSpace = transform.InverseTransformPoint(attackOrigin);
-
 		currentState = AnimState.Dead;	
-		
-		if (localSpace.z < 0) {
-			playerModel.animation.CrossFade("FallForward", 0.25f, PlayMode.StopSameLayer);	
-		} else {
-			playerModel.animation.CrossFade("FallBack", 0.25f, PlayMode.StopSameLayer);	
-		}
-		
+		playerModel.animation.Stop();
+//		Vector3 localSpace = transform.InverseTransformPoint(attackOrigin);
+//
+//		currentState = AnimState.Dead;	
+//		
+//		if (localSpace.z < 0) {
+//			playerModel.animation.CrossFade("FallForward", 0.25f, PlayMode.StopSameLayer);	
+//		} else {
+//			playerModel.animation.CrossFade("FallBack", 0.25f, PlayMode.StopSameLayer);	
+//		}
+//		
 		
 	}
 }

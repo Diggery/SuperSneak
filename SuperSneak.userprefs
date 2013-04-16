@@ -1,15 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyAI.cs">
-    <Files>
-      <File FileName="Assets/Scripts/EnemyAI.cs" Line="78" Column="5" />
-      <File FileName="Assets/Scripts/EnemyController.cs" Line="79" Column="1" />
-      <File FileName="Assets/Scripts/EnemyAnimator.cs" Line="43" Column="22" />
-      <File FileName="Assets/Scripts/ViewShapeDrawer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Util.cs" Line="1" Column="1" />
-      <File FileName="../../AvatarEverest/WindyDay/Assets/Plugins/MusicBedPlayer.cs" Line="34" Column="52" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

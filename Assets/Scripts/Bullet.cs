@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour {
     void OnCollisionEnter(Collision collision) {
 		lifeSpan = 0.25f;
 		if (collision.transform.tag == "Player") {
-			collision.gameObject.GetComponent<PlayerController>().damage(damage, startPos);
+			collision.gameObject.GetComponent<PlayerController>().addDamage(damage, startPos);
 		}
 	}
 }

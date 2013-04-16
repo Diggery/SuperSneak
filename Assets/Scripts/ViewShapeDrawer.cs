@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ViewShapeDrawer : MonoBehaviour {
 
-	public Transform head;
+	Transform head;
 
 	public bool showView;
 	public int distanceCheck;
@@ -17,6 +17,7 @@ public class ViewShapeDrawer : MonoBehaviour {
 
  	Color viewColor;
  	Color goalColor;
+	public Color deadColor;
 	public Color patrolColor;
 	public Color chaseColor;
 	public Color investigateColor;
@@ -34,6 +35,7 @@ public class ViewShapeDrawer : MonoBehaviour {
 	
 	void Update () {
 		
+		if (!head && enemyController) head = enemyController.getHead();
 		
 		//check to see if the unit is looking around
 		if (enemyController.looking) fadeGoal = 1.0f; else fadeGoal = 0.0f;
@@ -49,7 +51,6 @@ public class ViewShapeDrawer : MonoBehaviour {
 //			showView = true;
 //		}
 		
-		//float heading = Util.getDirection(Vector3.zero, viewTarget.localPosition);
 		
 		float heading = head.eulerAngles.y;
 		transform.rotation = Quaternion.Euler(0, heading, 0);
@@ -70,6 +71,10 @@ public class ViewShapeDrawer : MonoBehaviour {
 		
 		EnemyAI.Activity currentActivity = enemyController.getCurrentActivity();
 		switch (currentActivity) {
+			case EnemyAI.Activity.Dead : 
+				goalColor = deadColor; 
+				angleGoal = 10;
+				break;			
 			case EnemyAI.Activity.Patrolling : 
 				goalColor = patrolColor; 
 				angleGoal = 60;
@@ -123,7 +128,12 @@ public class ViewShapeDrawer : MonoBehaviour {
 			
 			Vector3 worldInnerPos = transform.TransformPoint(innerPos);
 			Vector3 worldOuterPos = transform.TransformPoint(outerPos);
-			if (Physics.Linecast (worldInnerPos, worldOuterPos, out hit)) {
+			
+			int layer1 = LayerMask.NameToLayer("PlayerRagDoll"); 
+			int layer2 = LayerMask.NameToLayer("EnemyRagDoll"); 
+			int layermask = ~((1 << layer1) | (1 << layer2));
+			
+			if (Physics.Linecast (worldInnerPos, worldOuterPos, out hit, layermask)) {
 				outerPos = transform.InverseTransformPoint(hit.point);
 				if (hit.transform.tag == "Player") {
 					colors[i+segments] = hitColor;

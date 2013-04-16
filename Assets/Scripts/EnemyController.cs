@@ -9,7 +9,8 @@ public class EnemyController : MonoBehaviour {
 	public Transform breakRoom;
 	
 	public Transform weapon; 
-	public GameObject bullet; 
+	public GameObject bullet;
+	Transform[] accessories;
 	public float coolDown;
 	public float spinUp;
 	
@@ -17,9 +18,13 @@ public class EnemyController : MonoBehaviour {
 	public Transform player;
 	
 	NavMeshAgent navAgent;
+	EnemyAnimator enemyAnimator;
 	
 	[HideInInspector]
 	public EnemyManager enemyManager;
+	
+	[HideInInspector]
+	public RagDollController ragDoll;
 	
 	public EnemyTypes EnemyType;
 
@@ -39,14 +44,22 @@ public class EnemyController : MonoBehaviour {
 	Vector3 lastMovePos;
 	float actualSpeed;
 	float speedGoal;
+	float hearingRange = 10;
 	
-	public Transform head;
-	public Transform headTarget;
+	public float currentHealth;
+	public float maxHealth;
+	bool dead;
+	
+	Transform head;
 	float headGoal;
 	float headTimer;
 	float headOffset;
 	
-	void Start () {
+	public void setUp(Transform newHead, Transform newWeapon, RagDollController newRagdoll, Transform[] newAccessories) {
+		head = newHead;
+		weapon = newWeapon;
+		ragDoll = newRagdoll;
+		accessories = newAccessories;
 		navAgent = GetComponent<NavMeshAgent>();
 		player = GameObject.FindWithTag ("Player").transform;
 		breakRoom = GameObject.Find ("BreakRoom").transform;
@@ -56,14 +69,33 @@ public class EnemyController : MonoBehaviour {
 		enemyAI = GetComponent<EnemyAI>();
 		Weapon weaponScript = weapon.gameObject.AddComponent<Weapon>();
 		weaponScript.setUpWeapon(bullet, coolDown, spinUp);
+		enemyAnimator = GetComponent<EnemyAnimator>();
 		
 		startWalking();
 		
+		Events.Listen(gameObject, "SoundEvents");  
 
+	}
+
+	
+	public Transform getHead() {
+		return head;
 	}
 	
 	void Update () {
-		currentSpeed = Mathf.Lerp (currentSpeed, speedGoal, Time.deltaTime * 2);
+	
+		if (Input.GetKeyUp(KeyCode.B)) {
+			die(transform.position);	
+		} 	
+		if (Input.GetKeyUp(KeyCode.N)) {
+			revive();	
+		} 
+		
+		if (enemyAI.currentActivity == EnemyAI.Activity.Dead) {
+			currentSpeed = 0;
+		} else {
+			currentSpeed = Mathf.Lerp (currentSpeed, speedGoal, Time.deltaTime * 2);
+		}
 		navAgent.speed = currentSpeed;
 	}
 	
@@ -143,7 +175,12 @@ public class EnemyController : MonoBehaviour {
 		RaycastHit hit;
 		Vector3 startPos = new Vector3 (transform.position.x, 1.5f, transform.position.z);
 		Vector3 endPos = new Vector3 (player.position.x, 1.5f, player.position.z);
-		if (Physics.Linecast(startPos, endPos, out hit)) {
+				
+		int layer1 = LayerMask.NameToLayer("Default"); // default
+		int layer2 = LayerMask.NameToLayer("Player"); // player
+		int layermask = ((1 << layer1) | (1 << layer2));
+		
+		if (Physics.Linecast(startPos, endPos, out hit, layermask)) {
 			if (hit.transform.tag == "Player") {
 				Debug.DrawLine(startPos, hit.point, Color.red);
 				return true;
@@ -152,8 +189,51 @@ public class EnemyController : MonoBehaviour {
 				return false;
 			}
 		} else {
+			
 			return false;
 		}
+	}
+	
+	public void addDamage(float amount) {
+		addDamage(amount, transform.position);
+	}
+	
+	public void addDamage(float amount, Vector3 origin) {
+		currentHealth -= amount;
+		if (currentHealth < 0) die(origin);
+	}
+	
+	public void die(Vector3 origin) {
+		enemyAI.die();
+		startWalking();
+		enemyAnimator.stopAnims();
+		navAgent.Stop();
+		ragDoll.enableRagDoll();
+		foreach (Transform accessory in accessories) {
+			accessory.parent = null;
+			accessory.gameObject.AddComponent<Rigidbody>();
+			accessory.gameObject.AddComponent<BoxCollider>();
+		}
+		accessories = new Transform[0];
+	}
+	
+	public void revive() {
+		ragDoll.disableRagDoll();
+		Vector3 ragDollPos = ragDoll.getRagDollPos();
+		ragDoll.resetRagDollPos();
+		transform.position = new Vector3(ragDollPos.x, 0.0f, ragDollPos.z);
+		Invoke ("rebootAI", enemyAnimator.playGetUpAnim());
+	}
+	
+	public void rebootAI() {
+		enemyAI.revive();
+	}
+	
+	public void SoundEvents(Events.Notification notification) {
+		Vector3 soundPos = (Vector3)notification.data;
+		if ((transform.position - soundPos).magnitude > hearingRange) return;
+		enemyAI.heardSomething(soundPos);
+		
 	}
 
 }

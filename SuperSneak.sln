@@ -9,6 +9,8 @@ Project("{D494556B-A3B2-FBDA-AC07-76AA24386B39}") = "SuperSneak", "Assembly-CSha
 EndProject
 Project("{D494556B-A3B2-FBDA-AC07-76AA24386B39}") = "SuperSneak", "Assembly-UnityScript-firstpass.unityproj", "{C5A9F224-2DD7-3726-473B-692D55562EF2}"
 EndProject
+Project("{D494556B-A3B2-FBDA-AC07-76AA24386B39}") = "SuperSneak", "Assembly-UnityScript.unityproj", "{09760471-7049-03A4-264E-AF2ACB5B52DF}"
+EndProject
 Project("{D494556B-A3B2-FBDA-AC07-76AA24386B39}") = "SuperSneak", "Assembly-UnityScript-Editor-firstpass.unityproj", "{D2F70B39-BF86-A1EA-CA26-29CA263646BF}"
 EndProject
 Global
@@ -33,6 +35,10 @@ Global
 		{C5A9F224-2DD7-3726-473B-692D55562EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5A9F224-2DD7-3726-473B-692D55562EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5A9F224-2DD7-3726-473B-692D55562EF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09760471-7049-03A4-264E-AF2ACB5B52DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09760471-7049-03A4-264E-AF2ACB5B52DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09760471-7049-03A4-264E-AF2ACB5B52DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09760471-7049-03A4-264E-AF2ACB5B52DF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2F70B39-BF86-A1EA-CA26-29CA263646BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2F70B39-BF86-A1EA-CA26-29CA263646BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F70B39-BF86-A1EA-CA26-29CA263646BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,7 +47,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-															GlobalSection(MonoDevelopProperties) = preSolution
+																																														GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

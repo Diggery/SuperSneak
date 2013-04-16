@@ -6,12 +6,13 @@ public class EnemyAI : MonoBehaviour {
 	
 	Transform enemyObj;
 	
-	public enum Activity { Patrolling, Looking, OnBreak, Chasing, Shooting, Investigating, Responding }
+	public enum Activity { Dead, Patrolling, Looking, OnBreak, Chasing, Shooting, Investigating, Responding }
 	public Activity currentActivity = Activity.Patrolling;
 	
 	EnemyController enemyController;
 	EnemyAnimator enemyAnimator;
 	NavMeshAgent navAgent;
+	
 	
 	bool canSeeTarget;
 	[HideInInspector]
@@ -21,6 +22,7 @@ public class EnemyAI : MonoBehaviour {
 	public bool startOnGuard;
 	
 	public float lookingTimer;
+	float alertLevel;
 
 	void Start () {
 		Events.Listen(gameObject, "GuardRadio");  
@@ -37,6 +39,12 @@ public class EnemyAI : MonoBehaviour {
 	
 	
 	void Update () {
+		if (currentActivity == Activity.Dead) {
+			return;
+		}
+		
+		if (alertLevel > 0) alertLevel -= Time.deltaTime;
+		
 		float targetRange = (transform.position - enemyController.player.position).magnitude;
 		if (targetRange < 2.0f) {
 			spotPlayer();
@@ -103,38 +111,58 @@ public class EnemyAI : MonoBehaviour {
 	}
 		
 	void gotoRoom() {
+		if (currentActivity == Activity.Dead) return;
 		GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
 		int roomIndex = Random.Range(0, rooms.Length);
 		enemyController.move(rooms[roomIndex].transform.position);
 	}
 	
 	public void chase(Transform target) {
+		if (currentActivity == Activity.Dead) return;
 		
 	}
 	
 	public void investigate(Vector3 alertPos) {
+		if (currentActivity == Activity.Dead) return;
 		currentActivity = Activity.Investigating;
 		lastKnownPos = alertPos;
 		enemyController.runTo(lastKnownPos);
 	}
 	
 	public void lookAround() {
+		if (currentActivity == Activity.Dead) return;
+		navAgent.Stop();
 		readyToFire = false;
 		currentActivity = Activity.Looking; 
 		lookingTimer = enemyAnimator.playLookAroundAnim();
 		enemyController.startWalking();
 	}
 	
+	public void heardSomething(Vector3 soundPos) {
+		print ("HeardSomething " + alertLevel);
+		if (currentActivity == Activity.Dead) return;
+		alertLevel++;
+		if (currentActivity == Activity.Patrolling) {
+			lookAround();
+		}
+		if (currentActivity == Activity.Looking && alertLevel > 3.0f) {
+			investigate(soundPos);
+		}
+	}
+	
 	public void patrol() {
+		if (currentActivity == Activity.Dead) return;
 		readyToFire = false;
 		currentActivity = Activity.Patrolling;
 	}
 	
 	public void spotPlayer() {
+		if (currentActivity == Activity.Dead) return;
 		currentActivity = Activity.Chasing;
 	}
 	
 	public void GuardRadio(Events.Notification notification) {
+		if (currentActivity == Activity.Dead) return;
 		string message = (string)notification.data;
 		switch (message) {
 		case "Spotted" :
@@ -148,6 +176,15 @@ public class EnemyAI : MonoBehaviour {
 		default :
 			break;
 		}
+	}
+	
+	public void die() {
+		currentActivity = Activity.Dead;
+		
+	}
+	public void revive() {
+		currentActivity = Activity.Looking;
+		lookingTimer = 3.0f;
 	}
 
 }

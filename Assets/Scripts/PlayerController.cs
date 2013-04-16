@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour {
 	
 	public bool inputOn;
 
-	float moveSpeed = 4.0f;
+	float runSpeed = 4.0f;
+	float walkSpeed = 2.0f;
 	
 	public Vector3 currentInput;
 	public float currentSpeed;
@@ -17,20 +18,33 @@ public class PlayerController : MonoBehaviour {
 	public float currentHealth;
 	public float maxHealth;
 	bool dead;
+	
+	Transform head;
+	RagDollController ragDoll;
 
-	void Start () {
+	public void setUp (Transform thiefHead, RagDollController thiefRagDoll) {
+		//head = thiefHead;
+		ragDoll = thiefRagDoll;
 		characterController = GetComponent<CharacterController>();
 		playerAnimator = GetComponent<PlayerAnimator>();
 
 	}
-	
-	void Update () {		
+
+	void Update () {
+		if (dead) return;
 		
-		Vector3 moveVector;
+		Vector3 moveVector = Vector3.zero;
+		float movePower = currentInput.magnitude;
 		
-		if (!dead && currentInput.sqrMagnitude > 0.05f){
+		if (!dead && movePower > 0.05f){
 			currentDirection = Camera.main.transform.parent.TransformDirection(currentInput); 
-			moveVector = currentDirection * moveSpeed;			
+			moveVector = currentDirection.normalized;
+			if (movePower > 0.5) {
+				moveVector *= runSpeed;
+			} else {
+				moveVector *= walkSpeed;
+			}
+			
 		} else {
 			moveVector = Vector3.zero;			
 		}
@@ -47,14 +61,27 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 	
-	public void damage(float amount, Vector3 origin) {
+	public void addDamage(float amount) {
+		addDamage(amount, transform.position);
+	}
+	
+	public void addDamage(float amount, Vector3 origin) {
 		currentHealth -= amount;
 		if (currentHealth < 0) die(origin);
 	}
 	
 	public void die(Vector3 origin) {
+		
+		if (dead) return;
+		
 		dead = true;
-		playerAnimator.playDieAnim(origin);
+		Vector3 deathForce = (transform.position - origin).normalized + new Vector3(0.0f, 0.5f, 0.0f);
+		deathForce *= 100;
+		ragDoll.enableRagDoll(deathForce);
+		playerAnimator.die(origin);
+		
+		Destroy(GetComponent<CharacterController>());
+		
 	}
 	
 	public void setInputOn() {
@@ -68,4 +95,6 @@ public class PlayerController : MonoBehaviour {
 	public void setInputOff() {
 		inputOn = false;
 	}
+	
+
 }
