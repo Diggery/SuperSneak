@@ -6,6 +6,7 @@ public class PlayerConfig : MonoBehaviour {
 	PlayerController playerController;
 	PlayerAnimator playerAnimator;
 	BombThrower playerBombThrower;
+	public Transform bombTargetPrefab;
 	
 	public Transform playerPrefab; 
 	Transform thiefObj; 
@@ -48,7 +49,7 @@ public class PlayerConfig : MonoBehaviour {
 		
 		playerAnimator.setUp(thiefObj, thiefUpperBody);
 		playerController.setUp(thiefHead, playerRagDoll, playerBombThrower);
-		playerBombThrower.setUp(thiefRightHand, playerAnimator);
+		playerBombThrower.setUp(thiefRightHand, playerAnimator, playerController, bombTargetPrefab);
 		
 		setUpData.layerName = "PlayerRagDoll";
 		setUpData.rootTransform = thiefObj.Find("Thief_Skeleton/Root");

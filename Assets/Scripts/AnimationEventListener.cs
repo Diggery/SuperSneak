@@ -12,7 +12,11 @@ public class AnimationEventListener : MonoBehaviour {
 		}
 	}
 	
-	public void takeOutBomb() {
+	public void readyBomb() {
 		transform.parent.gameObject.SendMessage("readyBomb");
+	}
+	
+	public void throwBomb() {
+		transform.parent.gameObject.SendMessage("throwBomb");
 	}
 }

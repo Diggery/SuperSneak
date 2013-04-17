@@ -35,9 +35,19 @@ public class PlayerAnimator : MonoBehaviour {
 		playerModel.animation["TakeOutBomb"].layer = 2;	
 		playerModel.animation["TakeOutBomb"].AddMixingTransform(upperBody);
 		AnimationEvent takeOutBombEvent = new AnimationEvent();
-		takeOutBombEvent.functionName = "takeOutBomb";
+		takeOutBombEvent.functionName = "readyBomb";
 		takeOutBombEvent.time = 0.5f;
-		playerModel.animation["TakeOutBomb"].clip.AddEvent(takeOutBombEvent);		
+		playerModel.animation["TakeOutBomb"].clip.AddEvent(takeOutBombEvent);	
+		
+		playerModel.animation["Throw"].wrapMode = WrapMode.Once;
+		playerModel.animation["Throw"].layer = 2;	
+		playerModel.animation["Throw"].AddMixingTransform(upperBody);
+		AnimationEvent ThrowBombEvent = new AnimationEvent();
+		ThrowBombEvent.functionName = "throwBomb";
+		ThrowBombEvent.time = 0.2f;
+		playerModel.animation["Throw"].clip.AddEvent(ThrowBombEvent);	
+		
+				
 	}
 	
 	void Update () {
@@ -109,16 +119,16 @@ public class PlayerAnimator : MonoBehaviour {
 		if (currentState == AnimState.Dead) return;	
 		currentState = AnimState.Dead;	
 		playerModel.animation.Stop();
-//		Vector3 localSpace = transform.InverseTransformPoint(attackOrigin);
-//
-//		currentState = AnimState.Dead;	
-//		
-//		if (localSpace.z < 0) {
-//			playerModel.animation.CrossFade("FallForward", 0.25f, PlayMode.StopSameLayer);	
-//		} else {
-//			playerModel.animation.CrossFade("FallBack", 0.25f, PlayMode.StopSameLayer);	
-//		}
-//		
-		
+
+	}
+	
+	public float playReadyBombAnim() {
+		playerModel.animation.CrossFade("TakeOutBomb", 0.05f, PlayMode.StopSameLayer);
+		return playerModel.animation["TakeOutBomb"].length;
+	}
+	
+	public float playThrowBombAnim() {
+		playerModel.animation.CrossFade("Throw", 0.05f, PlayMode.StopSameLayer);
+		return playerModel.animation["Throw"].length;
 	}
 }

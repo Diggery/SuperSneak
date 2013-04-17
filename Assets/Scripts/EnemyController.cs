@@ -194,6 +194,11 @@ public class EnemyController : MonoBehaviour {
 		}
 	}
 	
+	public void addExpDamage(Vector4 expData) {
+		Vector3 expPos = new Vector3 (expData.x, expData.y, expData.z);
+		addDamage(expData.w, expPos);
+	}
+	
 	public void addDamage(float amount) {
 		addDamage(amount, transform.position);
 	}
@@ -208,7 +213,9 @@ public class EnemyController : MonoBehaviour {
 		startWalking();
 		enemyAnimator.stopAnims();
 		navAgent.Stop();
-		ragDoll.enableRagDoll();
+		Vector3 deathForce = (transform.position - origin).normalized + new Vector3(0.0f, 0.5f, 0.0f);
+		deathForce *= 100;
+		ragDoll.enableRagDoll(deathForce);
 		foreach (Transform accessory in accessories) {
 			accessory.parent = null;
 			accessory.gameObject.AddComponent<Rigidbody>();

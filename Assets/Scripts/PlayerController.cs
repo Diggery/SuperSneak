@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour {
 	
 	CharacterController characterController;
 	PlayerAnimator playerAnimator;
-	BombThrower playerBombThrower;
+	public BombThrower playerBombThrower;
 	
 	public bool leftInputOn;
 	public Vector3 currentLeftInput;
@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 	
+	public void addExpDamage(Vector4 expData) {
+		Vector3 expPos = new Vector3 (expData.x, expData.y, expData.z);
+		addDamage(expData.w, expPos);
+	}
+	
 	public void addDamage(float amount) {
 		addDamage(amount, transform.position);
 	}
@@ -94,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 	
 	public void setRightInputOn() {
 		rightInputOn = true;
-		playerBombThrower.readyBomb();
+		playerAnimator.playReadyBombAnim();
 	}
 		
 	public void leftInput(Vector3 newInput) {
@@ -112,8 +117,7 @@ public class PlayerController : MonoBehaviour {
 	public void setRightInputOff() {
 		
 		if (rightInputOn) {
-			playerBombThrower.throwBomb(currentRightInput);
-			
+			playerAnimator.playThrowBombAnim();
 		}
 		rightInputOn = false;
 	}
