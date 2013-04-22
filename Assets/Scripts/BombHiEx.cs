@@ -23,6 +23,9 @@ public class BombHiEx : MonoBehaviour {
 	
 	
 	public void detonate() {
+		Vector4 soundEventData = new Vector4(transform.position.x, transform.position.y, transform.position.z, 5.0f);
+		Events.Send(gameObject, "SoundEvents", soundEventData);
+
 		Instantiate(explosionParticles, transform.position, Quaternion.identity);
 		
         Collider[] victims = Physics.OverlapSphere(transform.position, blastRadius);

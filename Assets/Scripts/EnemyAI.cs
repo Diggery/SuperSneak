@@ -138,16 +138,17 @@ public class EnemyAI : MonoBehaviour {
 		enemyController.startWalking();
 	}
 	
-	public void heardSomething(Vector3 soundPos) {
+	public void heardSomething(Vector3 soundPos, float volume) {
 		print ("HeardSomething " + alertLevel);
 		if (currentActivity == Activity.Dead) return;
+		
 		alertLevel++;
-		if (currentActivity == Activity.Patrolling) {
-			lookAround();
-		}
-		if (currentActivity == Activity.Looking && alertLevel > 3.0f) {
-			investigate(soundPos);
-		}
+		
+		if (volume > 4.0f) investigate(soundPos);
+		
+		if (currentActivity == Activity.Patrolling) lookAround();
+			
+		if (currentActivity == Activity.Looking && alertLevel > 3.0f) investigate(soundPos);
 	}
 	
 	public void patrol() {

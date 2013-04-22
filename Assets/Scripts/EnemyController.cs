@@ -237,9 +237,11 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void SoundEvents(Events.Notification notification) {
-		Vector3 soundPos = (Vector3)notification.data;
-		if ((transform.position - soundPos).magnitude > hearingRange) return;
-		enemyAI.heardSomething(soundPos);
+		Vector4 soundData = (Vector4)notification.data;
+		Vector3 soundPos = new Vector3(soundData.x, soundData.y, soundData.z);
+		float volume = soundData.w;
+		if ((transform.position - soundPos).magnitude > hearingRange * volume) return;
+		enemyAI.heardSomething(soundPos, volume);
 		
 	}
 

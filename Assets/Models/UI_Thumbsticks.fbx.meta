@@ -10,6 +10,23 @@ ModelImporter:
     4300010: LeftAnchor
     4300012: RightAnchor
     4300014: RightThumb
+    4300016: RightTumb
+    4300018: RightActiveRing
+    4300020: RightProgressRing
+    4300022: NameField
+    4300024: Background
+    4300026: ItemGraphic
+    4300028: NameField
+    4300030: Background
+    4300032: ItemGraphic
+    4300034: NameField
+    4300036: Background
+    4300038: ItemGraphic
+    4300040: Slot0
+    4300042: Slot1
+    4300044: Slot2
+    4300046: Slot3
+    4300048: Slot4
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -54,6 +71,13 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
+    Inventory:
+      data:
+        first: 1
+        second: ca860100
+      data:
+        first: 4
+        second: aa1a0600
     LeftAnchor:
       data:
         first: 1
@@ -106,6 +130,19 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
+    RightActiveRing:
+      data:
+        first: 1
+        second: b0860100
+      data:
+        first: 4
+        second: 901a0600
+      data:
+        first: 23
+        second: 6e182300
+      data:
+        first: 33
+        second: ae5a3200
     RightAnchor:
       data:
         first: 1
@@ -119,6 +156,19 @@ ModelImporter:
       data:
         first: 33
         second: a65a3200
+    RightProgressRing:
+      data:
+        first: 1
+        second: ae860100
+      data:
+        first: 4
+        second: 8e1a0600
+      data:
+        first: 23
+        second: 6c182300
+      data:
+        first: 33
+        second: ac5a3200
     RightThumb:
       data:
         first: 1
@@ -132,3 +182,68 @@ ModelImporter:
       data:
         first: 33
         second: a05a3200
+    Slot0:
+      data:
+        first: 1
+        second: b4860100
+      data:
+        first: 4
+        second: 941a0600
+      data:
+        first: 23
+        second: 70182300
+      data:
+        first: 33
+        second: b05a3200
+    Slot1:
+      data:
+        first: 1
+        second: b2860100
+      data:
+        first: 4
+        second: 921a0600
+      data:
+        first: 23
+        second: 72182300
+      data:
+        first: 33
+        second: b25a3200
+    Slot2:
+      data:
+        first: 1
+        second: ba860100
+      data:
+        first: 4
+        second: 9a1a0600
+      data:
+        first: 23
+        second: 74182300
+      data:
+        first: 33
+        second: b45a3200
+    Slot3:
+      data:
+        first: 1
+        second: b8860100
+      data:
+        first: 4
+        second: 981a0600
+      data:
+        first: 23
+        second: 76182300
+      data:
+        first: 33
+        second: b65a3200
+    Slot4:
+      data:
+        first: 1
+        second: b6860100
+      data:
+        first: 4
+        second: 961a0600
+      data:
+        first: 23
+        second: 78182300
+      data:
+        first: 33
+        second: b85a3200

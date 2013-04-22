@@ -5,25 +5,29 @@ public class BombThrower : MonoBehaviour {
 
 	Transform selectedBomb;
 	Transform rightHand;
+
 	Vector3 bombDirection;
-	public GameObject[] bombTypes;
 	public PlayerAnimator playerAnimator;
 	public PlayerController playerController;
-	Transform bombTarget;
-	
+	BombTarget bombTarget;
+		
 	float throwingDistance = 8;
 	
 	public void setUp (Transform rightHandObj, PlayerAnimator newPlayerAnimator, PlayerController newPlayerController, Transform bombTargetPrefab) {
 		rightHand = rightHandObj;
 		playerAnimator = newPlayerAnimator;
 		playerController = newPlayerController;
-		bombTarget = Instantiate(bombTargetPrefab, transform.position, Quaternion.identity) as Transform;
-		//bombTarget.parent = transform;
+		Transform bombTargetObj = Instantiate(bombTargetPrefab, transform.position, Quaternion.identity) as Transform;
+		bombTarget = bombTargetObj.GetComponent<BombTarget>();
 	}
 	
 	void Update () {
 		if (playerController.rightInputOn) {
-			
+			if (playerController.currentRightInput.sqrMagnitude < 0.04f) {
+				bombTarget.targetTooClose();
+			} else {
+				bombTarget.targetOn();
+			}
 			Vector3 input = playerController.currentRightInput * throwingDistance;
 			Vector3 targetPosGoal = transform.position + Camera.main.transform.parent.TransformDirection(input);
 			
@@ -41,29 +45,54 @@ public class BombThrower : MonoBehaviour {
 				targetPosGoal = hit.point;
 				targetPosGoal.y = 0.0f;
 			}
-			bombTarget.position = targetPosGoal;
+			
+			bombTarget.transform.position = targetPosGoal;
+
+		} else {
+			bombTarget.targetOff();
 		}
 	}
 	
 	public void readyBomb() {
-		GameObject bomb = Instantiate(bombTypes[0], rightHand.position, rightHand.rotation) as GameObject;
+		GameObject bombPrefab = playerController.getBomb();
+		if (!bombPrefab) return;
+		GameObject bomb = Instantiate(bombPrefab, rightHand.position, rightHand.rotation) as GameObject;
+		string bombType = bombPrefab.name;
+		int breakIndex = bombType.IndexOf("_");
+		bomb.name = bombType.Substring(breakIndex + 1);
 		selectedBomb = bomb.transform;
 		selectedBomb.parent = rightHand;
 		selectedBomb.localPosition = Vector3.zero;
 	}
+	
+	public Transform getBomb() {
+		return selectedBomb;
+	}
+	
+	public void putAwayBomb() {
+		if (selectedBomb) {
+			Destroy(selectedBomb.gameObject);
+			playerController.addBomb(selectedBomb.name);
+		}
+	}
 
 	public void throwBomb() {
+		
+		if (!selectedBomb) return;
+				
 		Vector3 direction;
 		
-		direction = Util.BallisticVel(rightHand.position, bombTarget.position);
+		direction = Util.BallisticVel(rightHand.position, bombTarget.transform.position);
 		
-		
-		playerAnimator.playReadyBombAnim();
 		selectedBomb.parent = null;
 		selectedBomb.rigidbody.isKinematic = false;
 		selectedBomb.rigidbody.useGravity = true;
 		direction += new Vector3(0.0f, 0.5f, 0.0f);
 		selectedBomb.rigidbody.AddForce(direction * 0.92f, ForceMode.Impulse);
-		playerAnimator.playThrowBombAnim();
+		playerController.doneThrowing();
+	}
+	
+	public void resetBombTarget() {
+		bombTarget.reset();
 	}
 }

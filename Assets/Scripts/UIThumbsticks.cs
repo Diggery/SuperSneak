@@ -14,12 +14,17 @@ public class UIThumbsticks : MonoBehaviour {
 	Transform lowerRight;
 	
 	Transform leftThumb;
+	Transform rightAnchor;
+	Vector3 rightAnchorHome;
+	public AnimationCurve stickCurve;
+	float stickTimer;
 	Transform rightThumb;
 	
 	PlayerController playerController;
+	UIInventory inventory;
 	
-	bool leftTouched;	
-	bool rightTouched;	
+	public bool leftTouched;	
+	public bool rightTouched;	
 	Vector3 homeOffset;	
 	Vector3 leftPosGoal;	
 	Vector3 rightPosGoal;	
@@ -43,8 +48,17 @@ public class UIThumbsticks : MonoBehaviour {
 		leftThumb = UIThumbsticksObj.Find("LowerLeft/LeftAnchor/LeftThumb");
 		leftThumb.gameObject.AddComponent<UIElement>().setTarget(gameObject);
 		
+		rightAnchor = UIThumbsticksObj.Find("LowerRight/RightAnchor");
+		rightAnchorHome = rightAnchor.localPosition;
+		
 		rightThumb = UIThumbsticksObj.Find("LowerRight/RightAnchor/RightThumb");
 		rightThumb.gameObject.AddComponent<UIElement>().setTarget(gameObject);
+		rightThumb.parent.gameObject.AddComponent<UIBombStickBehavior>().setUp(this, rightThumb);
+		
+		Transform inventoryPos = UIThumbsticksObj.Find("LowerRight/Inventory");
+		inventory = GetComponent<UIInventory>();
+		inventory.setUp(inventoryPos);
+
 	}
 	
 	void Update () {
@@ -85,18 +99,31 @@ public class UIThumbsticks : MonoBehaviour {
 		
 		if (rightTouched) {
 			rightThumb.localPosition = Vector3.Lerp(rightThumb.localPosition, rightPosGoal, Time.deltaTime * 10.0f);
-			rightThumb.localScale = Vector3.Lerp(leftThumb.localScale, new Vector3(1.2f, 1.2f, 1.2f), Time.deltaTime * 10.0f);
+			rightThumb.localScale = Vector3.Lerp(rightThumb.localScale, new Vector3(1.2f, 1.2f, 1.2f), Time.deltaTime * 10.0f);
 		} else {
 			rightThumb.localPosition = Vector3.Lerp(rightThumb.localPosition, Vector3.zero, Time.deltaTime * 10.0f);
 			rightThumb.localScale = Vector3.Lerp(rightThumb.localScale, Vector3.one, Time.deltaTime * 10.0f);
 		}
-			
+		
+		
+		//Vector3 rightAnchorGoal;
+		if (inventory.currentItems.Count < 1 && !rightTouched) {
+			//rightAnchorGoal = rightAnchorHome + new Vector3(0.0f, -0.2f, 0.0f);
+			if (stickTimer < 1) stickTimer += Time.deltaTime;
+		} else {
+			//rightAnchorGoal = rightAnchorHome;
+			if (stickTimer > 0) stickTimer -= Time.deltaTime;
+
+		}
+		rightAnchor.localPosition = rightAnchorHome + new Vector3(0.0f, stickCurve.Evaluate(stickTimer) * -0.5f, 0.0f);
+		
 		playerController.leftInput(leftThumb.localPosition * 10.0f);
 		playerController.rightInput(rightThumb.localPosition * 10.0f);
 	}
 	
 	public void touchDown(TouchManager.TouchDownEvent touchEvent) {
-
+		inventory.closeInventory();
+		
 		if (touchEvent.touchTarget.name.Equals("LeftThumb")) {
 			leftTouched = true;
 			playerController.setLeftInputOn();

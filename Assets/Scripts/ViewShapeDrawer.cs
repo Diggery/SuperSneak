@@ -25,17 +25,30 @@ public class ViewShapeDrawer : MonoBehaviour {
 	public Color breakColor;
 	public Color hitColor;
 	
+	
+	Transform currentPlayer;
+	
 	EnemyController enemyController;
 
 	void Start () {
 	    viewMesh = GetComponent<MeshFilter>().mesh;
 		enemyController = transform.root.GetComponent<EnemyController>();
+		currentPlayer = GameObject.FindWithTag("Player").transform;
+		distanceCheck *= distanceCheck;
+		transform.parent = null;
 	}
-	
+	void Update() {
+		
+	}	
 	
 	void LateUpdate() {
 		
 		if (!head && enemyController) head = enemyController.getHead();
+		
+		float heading = head.eulerAngles.y;
+		Vector3 shapePos = new Vector3(enemyController.transform.position.x, 0.5f, enemyController.transform.position.z);
+		transform.position = shapePos;
+		transform.rotation = Quaternion.Euler(0, heading, 0);		
 		
 		//check to see if the unit is looking around
 		if (enemyController.looking) fadeGoal = 1.0f; else fadeGoal = 0.0f;
@@ -43,21 +56,16 @@ public class ViewShapeDrawer : MonoBehaviour {
 		if (fadeAmount > 0.1) drawViewShape ();
 		
 		// check to see if they are in range
-//		Transform currentPlayer = GameObject.FindWithTag("Player").transform;
-
-//		if ((transform.position - currentPlayer.position).sqrMagnitude > distanceCheck) {
-//			showView = false;
-//		} else {
-//			showView = true;
-//		}
-		
-		
-		float heading = head.eulerAngles.y;
-		transform.rotation = Quaternion.Euler(0, heading, 0);
+		if ((transform.position - currentPlayer.position).sqrMagnitude > distanceCheck) {
+			showView = false;
+		} else {
+			showView = true;
+		}
 
 	}
 	
 	void drawViewShape () {
+
 		Color controlColor;
 		
 		if (showView) {
@@ -67,7 +75,12 @@ public class ViewShapeDrawer : MonoBehaviour {
 		}
 		
 		renderer.material.color = Color.Lerp(renderer.material.color, controlColor, Time.deltaTime * 5);
-		if (renderer.material.color.a < 0.05f) return;
+		if (renderer.material.color.a < 0.05f) {
+			renderer.enabled = false;
+			return;
+		} else {
+			renderer.enabled = true;
+		}
 		
 		EnemyAI.Activity currentActivity = enemyController.getCurrentActivity();
 		switch (currentActivity) {

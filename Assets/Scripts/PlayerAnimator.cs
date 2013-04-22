@@ -39,12 +39,20 @@ public class PlayerAnimator : MonoBehaviour {
 		takeOutBombEvent.time = 0.5f;
 		playerModel.animation["TakeOutBomb"].clip.AddEvent(takeOutBombEvent);	
 		
+		playerModel.animation["PutAwayBomb"].wrapMode = WrapMode.ClampForever;
+		playerModel.animation["PutAwayBomb"].layer = 2;	
+		playerModel.animation["PutAwayBomb"].AddMixingTransform(upperBody);
+		AnimationEvent putAwayBombEvent = new AnimationEvent();
+		putAwayBombEvent.functionName = "putAwayBomb";
+		putAwayBombEvent.time = 0.25f;
+		playerModel.animation["PutAwayBomb"].clip.AddEvent(putAwayBombEvent);	
+	
 		playerModel.animation["Throw"].wrapMode = WrapMode.Once;
 		playerModel.animation["Throw"].layer = 2;	
 		playerModel.animation["Throw"].AddMixingTransform(upperBody);
 		AnimationEvent ThrowBombEvent = new AnimationEvent();
 		ThrowBombEvent.functionName = "throwBomb";
-		ThrowBombEvent.time = 0.2f;
+		ThrowBombEvent.time = 0.25f;
 		playerModel.animation["Throw"].clip.AddEvent(ThrowBombEvent);	
 		
 				
@@ -129,6 +137,11 @@ public class PlayerAnimator : MonoBehaviour {
 	
 	public float playThrowBombAnim() {
 		playerModel.animation.CrossFade("Throw", 0.05f, PlayMode.StopSameLayer);
+		return playerModel.animation["Throw"].length;
+	}
+	
+	public float playPutAwayBombAnim() {
+		playerModel.animation.CrossFade("PutAwayBomb", 0.05f, PlayMode.StopSameLayer);
 		return playerModel.animation["Throw"].length;
 	}
 }

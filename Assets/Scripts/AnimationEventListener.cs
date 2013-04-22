@@ -7,7 +7,8 @@ public class AnimationEventListener : MonoBehaviour {
 		
 		switch (soundName) {
 		case "runningFootStep" :
-			Events.Send(gameObject, "SoundEvents", transform.position);
+			Vector4 soundData = new Vector4(transform.position.x, transform.position.y, transform.position.z, 1.0f);
+			Events.Send(gameObject, "SoundEvents", soundData);
 			break;
 		}
 	}
@@ -18,5 +19,9 @@ public class AnimationEventListener : MonoBehaviour {
 	
 	public void throwBomb() {
 		transform.parent.gameObject.SendMessage("throwBomb");
+	}
+	
+	public void putAwayBomb() {
+		transform.parent.gameObject.SendMessage("putAwayBomb");
 	}
 }

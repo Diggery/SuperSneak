@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 	CharacterController characterController;
 	PlayerAnimator playerAnimator;
 	public BombThrower playerBombThrower;
+	public UIInventory inventory;
 	
 	public bool leftInputOn;
 	public Vector3 currentLeftInput;
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour {
 		playerBombThrower = newBombThrower;
 		characterController = GetComponent<CharacterController>();
 		playerAnimator = GetComponent<PlayerAnimator>();
-
 	}
 
 	void Update () {
@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour {
 		
 		//regen health
 		currentHealth = Mathf.Clamp(currentHealth + Time.deltaTime * 0.5f, 0, maxHealth);	
-		
 	}
 	
 	public void addExpDamage(Vector4 expData) {
@@ -93,6 +92,22 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 	
+	public void setInventory(UIInventory newInventory) {
+		inventory = newInventory;
+	}
+	
+	public GameObject getBomb() {
+		return inventory.getItem();
+	}
+	
+	public void addBomb(string type) {
+		inventory.addItem(type);
+	}
+	
+	public void doneThrowing() {
+		inventory.unlockList();
+	}
+	
 	public void setLeftInputOn() {
 		leftInputOn = true;
 	}
@@ -100,6 +115,7 @@ public class PlayerController : MonoBehaviour {
 	public void setRightInputOn() {
 		rightInputOn = true;
 		playerAnimator.playReadyBombAnim();
+		playerBombThrower.resetBombTarget();
 	}
 		
 	public void leftInput(Vector3 newInput) {
@@ -115,6 +131,10 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	public void setRightInputOff() {
+		if (currentRightInput.sqrMagnitude < 0.04f || !playerBombThrower.getBomb()) {
+			playerAnimator.playPutAwayBombAnim();
+			return;
+		}
 		
 		if (rightInputOn) {
 			playerAnimator.playThrowBombAnim();
