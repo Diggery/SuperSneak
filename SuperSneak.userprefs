@@ -1,12 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BombTarget.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CrateController.cs">
     <Files>
-      <File FileName="Assets/Scripts/UIBombStickBehavior.cs" Line="34" Column="104" />
-      <File FileName="Assets/Scripts/UIThumbsticks.cs" Line="34" Column="58" />
-      <File FileName="Assets/Scripts/BombThrower.cs" Line="27" Column="18" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="120" Column="45" />
-      <File FileName="Assets/Scripts/BombTarget.cs" Line="35" Column="43" />
+      <File FileName="Assets/Scripts/CrateController.cs" Line="19" Column="18" />
+      <File FileName="Assets/Scripts/UIInventory.cs" Line="82" Column="14" />
+      <File FileName="Assets/Scripts/Bullet.cs" Line="19" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

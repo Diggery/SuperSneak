@@ -79,7 +79,7 @@ public class UIInventory : MonoBehaviour {
 	
 	public void toggleInventory(UIInventoryItem selectedItem) {
 		if (inventoryOpen) {
-			closeInventory(selectedItem);
+			selectItem(selectedItem);
 		} else {
 			openInventory();
 		}
@@ -95,10 +95,9 @@ public class UIInventory : MonoBehaviour {
 		scrollOffset = 0.0f;
 	}	
 	
-	public void closeInventory(UIInventoryItem selectedItem) {
-		inventoryOpen = false;
+	public void selectItem(UIInventoryItem selectedItem) {
 		moveItemToSelected(selectedItem);
-		scrollOffset = 0.0f;
+		closeInventory();
 	}
 	
 	public void addItem(string newItemType) {
