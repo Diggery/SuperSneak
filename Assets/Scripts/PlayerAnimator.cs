@@ -3,11 +3,11 @@ using System.Collections;
 
 public class PlayerAnimator : MonoBehaviour {
 	
-	public enum AnimState { Idle, Sneaking, Running, Stunned, Dead } 
+	public enum AnimState { Idle, Sneaking, Running, Stunned, Dead, OpeningCrate } 
 	public AnimState currentState = AnimState.Idle;
 
 	float lookDirection;
-	
+	Vector3 headingOverride;
 	
 	Transform playerModel;
 	PlayerController playerController;
@@ -19,6 +19,9 @@ public class PlayerAnimator : MonoBehaviour {
 
 		playerModel.animation["Idle01"].wrapMode = WrapMode.Once;
 		playerModel.animation["Idle01"].layer = 1;
+
+		playerModel.animation["OpenCrate"].wrapMode = WrapMode.Once;
+		playerModel.animation["OpenCrate"].layer = 1;
 
 		playerModel.animation["Walk"].wrapMode = WrapMode.Loop;
 		playerModel.animation["Walk"].layer = 1;	
@@ -63,7 +66,9 @@ public class PlayerAnimator : MonoBehaviour {
 		if (currentState == AnimState.Dead) return;
 		
 		if (currentState == AnimState.Stunned) { 
-			
+
+		} else if (currentState == AnimState.OpeningCrate) {
+			if (!playerModel.animation.IsPlaying("OpenCrate")) selectState();
 		} else {
 			selectState();
 		}
@@ -97,10 +102,14 @@ public class PlayerAnimator : MonoBehaviour {
 		playerModel.animation["Walk"].speed = animSpeed;
 		
 		if (currentState != AnimState.Dead && currentState != AnimState.Stunned) {
-			Quaternion heading = Quaternion.Euler(0, Util.getDirection(playerController.currentDirection), 0);
+			Quaternion heading;
+			if (currentState == AnimState.OpeningCrate) {
+				heading = Quaternion.Euler(0, Util.getDirection(headingOverride) - 180, 0);
+			} else {
+				heading = Quaternion.Euler(0, Util.getDirection(playerController.currentDirection), 0);
+			}
 			transform.rotation = Quaternion.Lerp(transform.rotation, heading, Time.deltaTime * 8.0f);
 		}
-
 	}
 	
 	void selectState() {
@@ -108,6 +117,16 @@ public class PlayerAnimator : MonoBehaviour {
 		if (playerController.leftInputOn) {
 			if (playerController.currentSpeed > 0.1f && playerController.currentSpeed < 3.0f) playSneakAnim();
 			if (playerController.currentSpeed > 3.0f) playRunAnim();
+		}
+	}
+	
+	public bool isStopped() {
+		if (currentState == AnimState.OpeningCrate ||
+			currentState == AnimState.Dead ||
+			currentState == AnimState.Stunned) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -143,5 +162,12 @@ public class PlayerAnimator : MonoBehaviour {
 	public float playPutAwayBombAnim() {
 		playerModel.animation.CrossFade("PutAwayBomb", 0.05f, PlayMode.StopSameLayer);
 		return playerModel.animation["Throw"].length;
+	}
+	
+	public float playOpenCrateAnim(Vector3 cratePos) {
+		headingOverride = cratePos;
+		currentState = AnimState.OpeningCrate;
+		playerModel.animation.CrossFade("OpenCrate", 0.05f, PlayMode.StopSameLayer);
+		return playerModel.animation["OpenCrate"].length;
 	}
 }

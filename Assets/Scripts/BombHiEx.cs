@@ -9,12 +9,14 @@ public class BombHiEx : MonoBehaviour {
 	float timer = 0.0f;
 	public GameObject explosionParticles;
 	SphereCollider collision;
+	bool dud = false;
 
 	void Start () {
 		collision = GetComponent<SphereCollider>();
 	}
 	
 	void Update () {
+		if (dud) return;
 		if (rigidbody.useGravity) timer += Time.deltaTime;
 		if (!collision.enabled && timer >  0.25f) collision.enabled = true;
 		if (timer > fuseTime) detonate();
@@ -39,6 +41,7 @@ public class BombHiEx : MonoBehaviour {
 	}
 	
     void OnCollisionEnter(Collision collision) {
+		if (dud) return;
 		if (collision.transform.tag == "Enemy") detonate();
 	}
 }

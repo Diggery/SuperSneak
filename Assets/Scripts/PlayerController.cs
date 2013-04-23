@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 moveVector = Vector3.zero;
 		float movePower = currentLeftInput.magnitude;
 		
-		if (!dead && movePower > 0.05f){
+		if (movePower > 0.05f){
 			currentDirection = Camera.main.transform.parent.TransformDirection(currentLeftInput); 
 			moveVector = currentDirection.normalized;
 			if (movePower > 0.5) {
@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour {
 		}
 		
     	moveVector.y = -1.0f;
+		
+		if (playerAnimator.isStopped()) moveVector = Vector3.zero;
+		
 		characterController.Move(moveVector * Time.deltaTime);
 		
 		float newSpeed = characterController.velocity.magnitude;
@@ -140,5 +143,9 @@ public class PlayerController : MonoBehaviour {
 			playerAnimator.playThrowBombAnim();
 		}
 		rightInputOn = false;
+	}
+	
+	public void openCrate(Vector3 cratePos) {
+		playerAnimator.playOpenCrateAnim(cratePos);
 	}
 }

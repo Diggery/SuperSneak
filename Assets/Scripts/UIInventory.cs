@@ -100,6 +100,7 @@ public class UIInventory : MonoBehaviour {
 		closeInventory();
 	}
 	
+	
 	public void addItem(string newItemType) {
 		//find if type is already in list
 		foreach (UIInventoryItem item in currentItems) {
@@ -125,6 +126,13 @@ public class UIInventory : MonoBehaviour {
 				break;
 			}
 		}
+	}
+	
+	public GameObject getItemPrefab(string name) {
+		foreach (ItemTypes itemType in itemTypes) {
+			if (itemType.name.Equals(name)) return itemType.prefab;
+		}
+		return null;
 	}
 	
 	public void useItem(UIInventoryItem usedItem) {
@@ -158,4 +166,9 @@ public class UIInventory : MonoBehaviour {
 	public void unlockList() {
 		lockList = false;
 	}
+	
+	public Transform getInventoryPos() {
+		return inventoryPos;
+	}
+
 }

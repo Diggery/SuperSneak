@@ -5,6 +5,7 @@ ModelImporter:
     4300000: Box
     4300002: Lid
     7400000: Take 001 //// Crate
+    7400002: Open //// Crate
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -19,7 +20,12 @@ ModelImporter:
     animationPositionError: .5
     animationScaleError: .5
     animationWrapMode: 0
-    clipAnimations: []
+    clipAnimations:
+    - name: Open
+      firstFrame: 1
+      lastFrame: 48
+      wrapMode: 0
+      loop: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
