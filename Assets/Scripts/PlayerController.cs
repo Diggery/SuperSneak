@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 	CharacterController characterController;
 	PlayerAnimator playerAnimator;
 	public BombThrower playerBombThrower;
-	public UIInventory inventory;
+	public InventoryController inventory;
 	
 	public bool leftInputOn;
 	public Vector3 currentLeftInput;
@@ -95,15 +95,15 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 	
-	public void setInventory(UIInventory newInventory) {
+	public void setInventory(InventoryController newInventory) {
 		inventory = newInventory;
 	}
 	
 	public GameObject getBomb() {
-		return inventory.getItem();
+		return inventory.getBomb();
 	}
 	
-	public void addBomb(string type) {
+	public void addItem(string type) {
 		inventory.addItem(type);
 	}
 	

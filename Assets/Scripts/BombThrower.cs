@@ -72,7 +72,7 @@ public class BombThrower : MonoBehaviour {
 	public void putAwayBomb() {
 		if (selectedBomb) {
 			Destroy(selectedBomb.gameObject);
-			playerController.addBomb(selectedBomb.name);
+			playerController.addItem(selectedBomb.name);
 		}
 	}
 

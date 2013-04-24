@@ -12,6 +12,7 @@ public class UIThumbsticks : MonoBehaviour {
 	
 	Transform lowerLeft;
 	Transform lowerRight;
+	Transform upperRight;
 	
 	Transform leftThumb;
 	Transform rightAnchor;
@@ -21,7 +22,7 @@ public class UIThumbsticks : MonoBehaviour {
 	Transform rightThumb;
 	
 	PlayerController playerController;
-	UIInventory inventory;
+	InventoryController inventory;
 	
 	public bool leftTouched;	
 	public bool rightTouched;	
@@ -45,6 +46,12 @@ public class UIThumbsticks : MonoBehaviour {
 		lowerRight = UIThumbsticksObj.Find("LowerRight");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerRight);
 	
+		upperRight = UIThumbsticksObj.Find("UpperRight");
+		Camera.main.transform.GetComponent<UIManager>().lockToEdge(upperRight);
+		
+		Transform cashBox = UIThumbsticksObj.Find("UpperRight/Cash");
+		UICashDisplay cashDisplay = cashBox.gameObject.AddComponent<UICashDisplay>();
+		
 		leftThumb = UIThumbsticksObj.Find("LowerLeft/LeftAnchor/LeftThumb");
 		leftThumb.gameObject.AddComponent<UIElement>().setTarget(gameObject);
 		
@@ -56,8 +63,8 @@ public class UIThumbsticks : MonoBehaviour {
 		rightThumb.parent.gameObject.AddComponent<UIBombStickBehavior>().setUp(this, rightThumb);
 		
 		Transform inventoryPos = UIThumbsticksObj.Find("LowerRight/Inventory");
-		inventory = GetComponent<UIInventory>();
-		inventory.setUp(inventoryPos);
+		inventory = GetComponent<InventoryController>();
+		inventory.setUp(inventoryPos, cashDisplay);
 
 	}
 	

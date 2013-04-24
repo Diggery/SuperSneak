@@ -8,30 +8,37 @@ public class CrateController : MonoBehaviour {
 	bool opening;
 	bool opened;
 	Transform midPoint;
-	Transform endPoint;
 	PlayerController playerController;
-	UIInventory inventory;
+	InventoryController inventory;
 	public AnimationCurve transCurve;
 
 	
-	public GameObject bombPrefab;
+	public GameObject itemPrefab;
 
 	void Start () {
 		Transform inventoryObj = Camera.main.transform.Find("UI");
-		inventory = inventoryObj.GetComponent<UIInventory>();
+		inventory = inventoryObj.GetComponent<InventoryController>();
 		if (!inventory) Debug.Log("ERROR: crate cant find inventory");
 		midPoint = transform.Find ("Box/MidPoint");
-		endPoint = inventory.getInventoryPos();
+		
+		
+		//if crate is empty, add a random amount of cash and jewels
+		if (contents.Count < 1) {
+			
+			for (int i = 0; i < Random.Range(3,10); i++) {
+				if (Random.value < 0.5f) {
+					contents.Add("Cash");
+				} else {
+					contents.Add("Jewel");
+				}
+				
+			}
+			
+		}
 	}
 	
 	void Update () {
 	
-	}
-	
-	void oxpenCrate() {
-		animation.Play("Open");
-		Invoke("crateOpened", animation["Open"].length);
-		opened = true;
 	}
 	
 	IEnumerator openCrate() {
@@ -41,9 +48,10 @@ public class CrateController : MonoBehaviour {
 		yield return new WaitForSeconds(animation["Open"].length);
 		
 		for (int i = 0; i < contents.Count; i++) {
-			GameObject addedBomb = Instantiate(inventory.getItemPrefab(contents[i]), transform.position, Quaternion.identity) as GameObject;
-			addedBomb.transform.name = contents[i];
-			addedBomb.AddComponent<AddInventoryItem>().setUp(transform, midPoint, endPoint, playerController, transCurve);
+			GameObject addeditem = Instantiate(inventory.getItemPrefab(contents[i]), transform.position, Quaternion.identity) as GameObject;
+			addeditem.transform.name = contents[i];
+			Transform itemEndPoint = inventory.getInventoryPos(contents[i]);
+			addeditem.AddComponent<AddInventoryItem>().setUp(transform, midPoint, itemEndPoint, playerController, transCurve);
 			yield return new WaitForSeconds(0.1f);
 		}
 	}

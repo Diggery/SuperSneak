@@ -32,6 +32,7 @@ public class AddInventoryItem : MonoBehaviour {
 			transform.position = Vector3.Lerp(midPos.position + midPosOffset, endPos.position, secondLeg);
 		}
 		
+		transform.Rotate(midPosOffset * 180 * Time.deltaTime);
 		
 		if (timer > 1.0f) {
 			killSelf();
@@ -39,7 +40,7 @@ public class AddInventoryItem : MonoBehaviour {
 	}
 	
 	void killSelf() {
-		player.addBomb(transform.name);
+		player.addItem(transform.name);
 		Destroy(gameObject);
 	}
 }

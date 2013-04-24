@@ -27,6 +27,8 @@ ModelImporter:
     4300044: Slot2
     4300046: Slot3
     4300048: Slot4
+    4300050: Cash
+    4300052: UpperRight
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -71,6 +73,19 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
+    Cash:
+      data:
+        first: 1
+        second: bc860100
+      data:
+        first: 4
+        second: 9c1a0600
+      data:
+        first: 23
+        second: 7a182300
+      data:
+        first: 33
+        second: ba5a3200
     Inventory:
       data:
         first: 1
@@ -247,3 +262,16 @@ ModelImporter:
       data:
         first: 33
         second: b85a3200
+    UpperRight:
+      data:
+        first: 1
+        second: be860100
+      data:
+        first: 4
+        second: 9e1a0600
+      data:
+        first: 23
+        second: 7c182300
+      data:
+        first: 33
+        second: bc5a3200
