@@ -1,12 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Jewel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyController.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CrateController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/InventoryController.cs" Line="233" Column="23" />
-      <File FileName="Assets/Scripts/UICashDisplay.cs" Line="27" Column="27" />
-      <File FileName="Assets/Scripts/Jewel.cs" Line="16" Column="1" />
+      <File FileName="Assets/Scripts/BombEffectGas.cs" Line="43" Column="52" />
+      <File FileName="Assets/Scripts/BombFuse.cs" Line="29" Column="26" />
+      <File FileName="Assets/Scripts/BombEffectHiEx.cs" Line="9" Column="1" />
+      <File FileName="Assets/Scripts/AreaOfEffect.cs" Line="8" Column="13" />
+      <File FileName="Assets/Scripts/EnemyController.cs" Line="215" Column="1" />
+      <File FileName="Assets/Scripts/BombThrower.cs" Line="37" Column="55" />
+      <File FileName="Assets/Scripts/ControlRoom.cs" Line="9" Column="2" />
+      <File FileName="Assets/Scripts/EnemyAI.cs" Line="61" Column="1" />
+      <File FileName="Assets/Scripts/EnemyAnimator.cs" Line="56" Column="110" />
+      <File FileName="Assets/Scripts/ParticleKiller.cs" Line="8" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

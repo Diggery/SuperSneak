@@ -8,6 +8,9 @@ ModelImporter:
     4300006: Door1
     4300008: Door2
     4300010: Open
+    4300012: ClosedWall
+    4300014: NoWall
+    7400000: Take 001 //// Room_Walls
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -52,19 +55,32 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
-    Open:
+    ClosedWall:
       data:
         first: 1
-        second: a6860100
+        second: a4860100
       data:
         first: 4
-        second: 861a0600
+        second: 841a0600
       data:
         first: 23
-        second: 64182300
+        second: 62182300
       data:
         first: 33
-        second: a45a3200
+        second: a25a3200
+    NoWall:
+      data:
+        first: 1
+        second: a2860100
+      data:
+        first: 4
+        second: 821a0600
+      data:
+        first: 23
+        second: 60182300
+      data:
+        first: 33
+        second: a05a3200
     OpenWall:
       data:
         first: 1
@@ -78,16 +94,3 @@ ModelImporter:
       data:
         first: 33
         second: aa5a3200
-    Wall:
-      data:
-        first: 1
-        second: a2860100
-      data:
-        first: 4
-        second: 821a0600
-      data:
-        first: 23
-        second: 60182300
-      data:
-        first: 33
-        second: a05a3200

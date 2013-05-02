@@ -7,17 +7,12 @@ using System.Collections;
 public class RoomConfig : MonoBehaviour {
 
 	bool decorateRoom;
-	public Transform selectionMarker;
 	public bool selected;
 	
 	public Transform[,] allRooms;
 	public Vector2 floorLoc;
 	
 	public WallConfig[] walls;
-	
-	void Start () {
-		
-	}
 	
 	public int getWallType(int wall) {
 		return walls[wall].getWallType();
@@ -41,7 +36,7 @@ public class RoomConfig : MonoBehaviour {
 				case 1 : // east
 					roomOffset = new Vector3(10.0f, 5.0f, 0.0f);
 					oppositeWall = 3;
-				break;
+					break;
 				case 2 : //south
 					roomOffset = new Vector3(0.0f, 5.0f, -10.0f);
 					oppositeWall = 0;
@@ -56,20 +51,19 @@ public class RoomConfig : MonoBehaviour {
 					break;
 			}		
 			int floorMask = 1 << 10;
-			RaycastHit hit;			
+			RaycastHit hit;							
+	
 			if (Physics.Raycast (transform.position + roomOffset, Vector3.down, out hit, 10.0f, floorMask)) {
+
 				RoomConfig neighborRoom = hit.transform.parent.GetComponent<RoomConfig>();
 				if (neighborRoom.selected) {
 					setWallType(wallDirection, wallType);
 					neighborRoom.setWallType(oppositeWall, wallType);
 				}
+			} else {
+				setWallType(wallDirection, 2);
 			}
 		}
-	}
-	
-	
-	public void status() {
-
 	}
 	
 	public void setRooms(Transform[,] newRooms, Vector2 newFloorLoc) {
@@ -78,12 +72,14 @@ public class RoomConfig : MonoBehaviour {
 	}
 	
 	public void selectRoom() {
-		selectionMarker.renderer.enabled = true;
 		selected = true;
 	}
 	
 	public void deselectRoom() {
-		selectionMarker.renderer.enabled = false;
 		selected = false;
+	}
+	
+	public void removeRoom() {
+		DestroyImmediate(gameObject);
 	}
 }

@@ -42,6 +42,11 @@ public class FloorBuilder : EditorWindow {
         if(GUILayout.Button("Set Selection to Walls")) {
 			setWalls(Selection.gameObjects, 2);
 		}
+		
+        if(GUILayout.Button("Remove Selection")) {
+			removeRooms(Selection.gameObjects);
+		}
+				
 	}
 	
 	public void generateLevel(Vector2 floorSize) {
@@ -53,8 +58,7 @@ public class FloorBuilder : EditorWindow {
 			for(z = 0; z < floorSize.y; z++) {
 				GameObject newRoom = Instantiate(floorPrefab, new Vector3(x * 10.0f, 0.0f, z * -10.0f), Quaternion.identity) as GameObject;
 				rooms[x,z] = newRoom.transform;
-				RoomConfig roomConfig = newRoom.GetComponent<RoomConfig>(); 
-				roomConfig.status();
+				newRoom.name = "Room " + x + ", " + z;
 				newRoom.transform.parent = newFloor.transform;
 			}
 		}
@@ -67,13 +71,24 @@ public class FloorBuilder : EditorWindow {
 		}
 	}
 	
+	public void removeRooms(GameObject[] currentSelection) {
+		foreach (GameObject selectedObject in currentSelection) {
+			if (selectedObject) {
+				selectedObject.SendMessageUpwards("removeRoom", SendMessageOptions.DontRequireReceiver);
+			}
+		}
+	}
+	
 	public void setWalls(GameObject[] currentSelection, int wallType) {
+
 		RoomConfig[] currentRooms = FindObjectsOfType(typeof(RoomConfig)) as RoomConfig[];
 		foreach (GameObject currentlySelected in currentSelection) {
 			currentlySelected.SendMessageUpwards("selectRoom", SendMessageOptions.DontRequireReceiver);
 		}
 		foreach (RoomConfig room in currentRooms) {
-			if (room.selected) room.setWallBySelection(wallType);
+			if (room.selected) {
+				room.setWallBySelection(wallType);
+			}
 		}
 		foreach (RoomConfig room in currentRooms) {
 			room.SendMessageUpwards("deselectRoom", SendMessageOptions.DontRequireReceiver);

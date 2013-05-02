@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour {
 	
 	Transform enemyObj;
 	
-	public enum Activity { Dead, Patrolling, Looking, OnBreak, Chasing, Shooting, Investigating, Responding }
+	public enum Activity { Dead,  Stunned, Patrolling, Looking, OnBreak, Chasing, Shooting, Investigating, HeadingToControlRoom }
 	public Activity currentActivity = Activity.Patrolling;
 	
 	EnemyController enemyController;
@@ -19,34 +19,50 @@ public class EnemyAI : MonoBehaviour {
 	public bool readyToFire;
 	Vector3 lastKnownPos;
 	
+	private bool skipStartBehavior;
 	public bool startOnGuard;
 	
 	public float lookingTimer;
 	float alertLevel;
+	
+	float stunTimer;
 
 	void Start () {
 		Events.Listen(gameObject, "GuardRadio");  
 		enemyController = GetComponent<EnemyController>();
 		enemyAnimator = GetComponent<EnemyAnimator>();
+		if (!enemyAnimator) print ("ERROR: No enemy animator"); 
+
 		navAgent = GetComponent<NavMeshAgent>();
-		if (startOnGuard) {
-			lookAround();
-		} else {
-			patrol();
+		if (!skipStartBehavior) {
+			if (startOnGuard) {
+				lookAround();
+			} else {
+				patrol();
+			}
 		}
 	}
 
-	
+	void forceSetUp() {
+		skipStartBehavior = true;
+		enemyController = GetComponent<EnemyController>();
+		enemyAnimator = GetComponent<EnemyAnimator>();		
+	}
 	
 	void Update () {
 		if (currentActivity == Activity.Dead) {
 			return;
 		}
+		if (currentActivity == Activity.Stunned) {
+			stunTimer -= Time.deltaTime;
+			if (stunTimer < 0) revive();
+			return;
+		}
 		
-		if (alertLevel > 0) alertLevel -= Time.deltaTime;
+		if (alertLevel > 0) alertLevel -= Time.deltaTime * 0.25f;
 		
 		float targetRange = (transform.position - enemyController.player.position).magnitude;
-		if (targetRange < 2.0f) {
+		if (targetRange < 2.0f && enemyController.canSeeTarget()) {
 			spotPlayer();
 		}
 
@@ -89,7 +105,6 @@ public class EnemyAI : MonoBehaviour {
 							lookAround();
 						} else {
 							enemyController.runTo(lastKnownPos);
-
 						}
 					}
 				}
@@ -105,6 +120,14 @@ public class EnemyAI : MonoBehaviour {
 					if (currDistance < 0.25) {
 						lookAround();
 					}
+				}
+			break;
+			
+			case Activity.HeadingToControlRoom :
+				if (!navAgent.hasPath) {
+					GameObject newGuard = enemyController.controlRoom.spawnEnemy("Guard");
+					newGuard.GetComponent<EnemyAI>().investigate(lastKnownPos);
+					lookAround();
 				}
 			break;
 		}	
@@ -123,7 +146,9 @@ public class EnemyAI : MonoBehaviour {
 	}
 	
 	public void investigate(Vector3 alertPos) {
+		if (!enemyAnimator) forceSetUp();
 		if (currentActivity == Activity.Dead) return;
+		if (enemyAnimator) enemyAnimator.stopAnims();
 		currentActivity = Activity.Investigating;
 		lastKnownPos = alertPos;
 		enemyController.runTo(lastKnownPos);
@@ -142,10 +167,8 @@ public class EnemyAI : MonoBehaviour {
 		print ("HeardSomething " + alertLevel);
 		if (currentActivity == Activity.Dead) return;
 		
-		alertLevel++;
-		
-		if (volume > 4.0f) investigate(soundPos);
-		
+		alertLevel += volume;
+				
 		if (currentActivity == Activity.Patrolling) lookAround();
 			
 		if (currentActivity == Activity.Looking && alertLevel > 3.0f) investigate(soundPos);
@@ -155,11 +178,26 @@ public class EnemyAI : MonoBehaviour {
 		if (currentActivity == Activity.Dead) return;
 		readyToFire = false;
 		currentActivity = Activity.Patrolling;
+		gotoRoom();
 	}
 	
 	public void spotPlayer() {
 		if (currentActivity == Activity.Dead) return;
+		
+		lastKnownPos = enemyController.player.position;
+
+		if (!enemyController.weapon) {
+			raiseAlarm();
+			return;
+		}
 		currentActivity = Activity.Chasing;
+	}
+	
+	public void raiseAlarm() {		
+		enemyAnimator.stopAnims();
+
+		currentActivity = Activity.HeadingToControlRoom;
+		enemyController.runTo(enemyController.controlRoom.transform.position);
 	}
 	
 	public void GuardRadio(Events.Notification notification) {
@@ -182,6 +220,10 @@ public class EnemyAI : MonoBehaviour {
 	public void die() {
 		currentActivity = Activity.Dead;
 		
+	}
+	public void stunned(float stunTime) {
+		currentActivity = Activity.Stunned;
+		stunTimer = stunTime;
 	}
 	public void revive() {
 		currentActivity = Activity.Looking;

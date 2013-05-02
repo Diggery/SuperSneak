@@ -34,7 +34,8 @@ public class BombThrower : MonoBehaviour {
 			int layer1 = LayerMask.NameToLayer("PlayerRagDoll"); 
 			int layer2 = LayerMask.NameToLayer("EnemyRagDoll"); 
 			int layer3 = LayerMask.NameToLayer("Player"); 
-			int layermask = ~((1 << layer1) | (1 << layer2) | (1 << layer3));
+			int layer4 = LayerMask.NameToLayer("AreaOfEffect"); 
+			int layermask = ~((1 << layer1) | (1 << layer2) | (1 << layer3) | (1 << layer4));
 			
 			RaycastHit hit;
 			

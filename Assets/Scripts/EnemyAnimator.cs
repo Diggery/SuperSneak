@@ -6,42 +6,54 @@ public class EnemyAnimator : MonoBehaviour {
 
 	EnemyController enemyController;
 	EnemyAI enemyAI;
-	Transform guardModel;
+	Transform model;
+	Transform upperBody;
 		
 	
-	public void setUp(Transform newGuardModel) {
-		guardModel = newGuardModel;
+	public void setUp(Transform newModel, Transform newUpperBody) {
+		model = newModel;
+		upperBody = newUpperBody;
 		enemyController = GetComponent<EnemyController>();
 		enemyAI = GetComponent<EnemyAI>();
 		
-		Transform torso = guardModel.Find("Guard_Skeleton/Root/UpperBody");
-		if (!torso) print ("ERROR: cant find torso");
 		
-		guardModel.animation["Idle01"].wrapMode = WrapMode.Once;
-		guardModel.animation["Idle01"].layer = 1;
+		if (model.animation["Idle01"]) {
+			model.animation["Idle01"].wrapMode = WrapMode.Once;
+			model.animation["Idle01"].layer = 1;
+		}
 		
-		guardModel.animation["Walk"].wrapMode = WrapMode.Once;
-		guardModel.animation["Walk"].layer = 1;
-		guardModel.animation["Walk"].speed = 0.75f;
-		
-		guardModel.animation["Run"].wrapMode = WrapMode.Once;
-		guardModel.animation["Run"].layer = 1;
-		guardModel.animation["Run"].speed = 1.25f;
-		
-		guardModel.animation["LookAround"].wrapMode = WrapMode.Once;
-		guardModel.animation["LookAround"].layer = 2;
-		
-		guardModel.animation["GetUp"].wrapMode = WrapMode.Once;
-		guardModel.animation["GetUp"].layer = 2;
-		
-		guardModel.animation["PullGun"].wrapMode = WrapMode.ClampForever;
-		guardModel.animation["PullGun"].layer = 2;
-        guardModel.animation["PullGun"].AddMixingTransform(torso);		
+		if (model.animation["Walk"]) {
+			model.animation["Walk"].wrapMode = WrapMode.Once;
+			model.animation["Walk"].layer = 1;
+			model.animation["Walk"].speed = 0.75f;
+		}
+			
+		if (model.animation["Run"]) {
+			model.animation["Run"].wrapMode = WrapMode.Once;
+			model.animation["Run"].layer = 1;
+			model.animation["Run"].speed = 1.25f;
+		}
+			
+		if (model.animation["LookAround"]) {
+			model.animation["LookAround"].wrapMode = WrapMode.Once;
+			model.animation["LookAround"].layer = 2;
+		}
+			
+		if (model.animation["GetUp"]) {
+			model.animation["GetUp"].wrapMode = WrapMode.Once;
+			model.animation["GetUp"].layer = 2;
+		}
+			
+		if (model.animation["PullGun"]) {
+			model.animation["PullGun"].wrapMode = WrapMode.ClampForever;
+			model.animation["PullGun"].layer = 2;
+	        model.animation["PullGun"].AddMixingTransform(upperBody);
+		}
 	}
 
 	
 	void Update () {
-		if (enemyAI.currentActivity == EnemyAI.Activity.Dead) {
+		if (enemyAI.currentActivity == EnemyAI.Activity.Dead || enemyAI.currentActivity == EnemyAI.Activity.Stunned) {
 			return;
 		}
 		
@@ -53,33 +65,33 @@ public class EnemyAnimator : MonoBehaviour {
 
 		if (enemyController.isMoving()) {
 			if (enemyController.isRunning) { 
-				if (!guardModel.animation.IsPlaying("Run")) guardModel.animation.CrossFade("Run", 0.1f, PlayMode.StopSameLayer);
+				if (!model.animation.IsPlaying("Run")) model.animation.CrossFade("Run", 0.1f, PlayMode.StopSameLayer);
 			} else {
-				if (!guardModel.animation.IsPlaying("Walk")) guardModel.animation.CrossFade("Walk", 0.1f, PlayMode.StopSameLayer);
+				if (!model.animation.IsPlaying("Walk")) model.animation.CrossFade("Walk", 0.1f, PlayMode.StopSameLayer);
 			}
 		} else {
-			if (!guardModel.animation.IsPlaying("Idle01")) guardModel.animation.CrossFade("Idle01", 0.1f, PlayMode.StopSameLayer);
+			if (!model.animation.IsPlaying("Idle01")) model.animation.CrossFade("Idle01", 0.1f, PlayMode.StopSameLayer);
 		}
 	}
 	public void stopAnims() {
-		guardModel.animation.Stop();
+		model.animation.Stop();
 	}	
 		
 	public void playAimAnim() {
-		if (guardModel.animation.IsPlaying("PullGun")) return;
-		guardModel.animation.CrossFade("PullGun", 0.1f, PlayMode.StopSameLayer);
+		if (model.animation.IsPlaying("PullGun")) return;
+		model.animation.CrossFade("PullGun", 0.1f, PlayMode.StopSameLayer);
 	}
 	
 	public void stopAiming() {
-		guardModel.animation.Stop("PullGun");	
+		model.animation.Stop("PullGun");	
 	}
 	
 	public float playLookAroundAnim() {
-		guardModel.animation.CrossFade("LookAround", 0.1f, PlayMode.StopSameLayer);
-		return guardModel.animation["LookAround"].length;
+		model.animation.CrossFade("LookAround", 0.1f, PlayMode.StopSameLayer);
+		return model.animation["LookAround"].length;
 	}	
 	public float playGetUpAnim() {
-		guardModel.animation.CrossFade("GetUp", 0.1f, PlayMode.StopSameLayer);
-		return guardModel.animation["GetUp"].length;
+		model.animation.CrossFade("GetUp", 0.1f, PlayMode.StopSameLayer);
+		return model.animation["GetUp"].length;
 	}
 }

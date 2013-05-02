@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour {
 	RagDollController ragDoll;
 
 	public void setUp (Transform thiefHead, RagDollController thiefRagDoll, BombThrower newBombThrower) {
-		//head = thiefHead;
 		ragDoll = thiefRagDoll;
 		playerBombThrower = newBombThrower;
 		characterController = GetComponent<CharacterController>();

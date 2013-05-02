@@ -6,7 +6,7 @@ public enum EnemyTypes { Guard, Captain, Enforcer, Boss}
 
 public class EnemyController : MonoBehaviour {
 	[HideInInspector]
-	public Transform breakRoom;
+	public ControlRoom controlRoom;
 	
 	public Transform weapon; 
 	public GameObject bullet;
@@ -55,26 +55,28 @@ public class EnemyController : MonoBehaviour {
 	float headTimer;
 	float headOffset;
 	
-	public void setUp(Transform newHead, Transform newWeapon, RagDollController newRagdoll, Transform[] newAccessories) {
+	public void setUp(Transform newHead, RagDollController newRagdoll, Transform[] newAccessories) {
 		head = newHead;
-		weapon = newWeapon;
 		ragDoll = newRagdoll;
 		accessories = newAccessories;
 		navAgent = GetComponent<NavMeshAgent>();
 		player = GameObject.FindWithTag ("Player").transform;
-		breakRoom = GameObject.Find ("BreakRoom").transform;
-		enemyManager = breakRoom.GetComponent<EnemyManager>();
+		GameObject controlRoomObj = GameObject.Find ("ControlRoom");
+		controlRoom = controlRoomObj.GetComponent<ControlRoom>();
+		enemyManager = controlRoom.GetComponent<EnemyManager>();
+		
 		walkSpeed = enemyManager.getWalkSpeed(EnemyType);
 		runSpeed = enemyManager.getRunSpeed(EnemyType);
 		enemyAI = GetComponent<EnemyAI>();
+		enemyAnimator = GetComponent<EnemyAnimator>();
+		startWalking();
+		Events.Listen(gameObject, "SoundEvents");  
+	}
+	
+	public void addWeapon(Transform newWeapon) {
+		weapon = newWeapon;
 		Weapon weaponScript = weapon.gameObject.AddComponent<Weapon>();
 		weaponScript.setUpWeapon(bullet, coolDown, spinUp);
-		enemyAnimator = GetComponent<EnemyAnimator>();
-		
-		startWalking();
-		
-		Events.Listen(gameObject, "SoundEvents");  
-
 	}
 
 	
@@ -207,6 +209,21 @@ public class EnemyController : MonoBehaviour {
 		currentHealth -= amount;
 		if (currentHealth < 0) die(origin);
 	}
+	
+	public void gassed() {
+		if (enemyAI.currentActivity == EnemyAI.Activity.Stunned) return;
+		enemyAI.stunned(7);
+		startWalking();
+		enemyAnimator.stopAnims();
+		navAgent.Stop();
+		ragDoll.enableRagDoll(Vector3.zero);
+		foreach (Transform accessory in accessories) {
+			accessory.parent = null;
+			accessory.gameObject.AddComponent<Rigidbody>();
+			accessory.gameObject.AddComponent<BoxCollider>();
+		}
+		accessories = new Transform[0];
+	}	
 	
 	public void die(Vector3 origin) {
 		enemyAI.die();

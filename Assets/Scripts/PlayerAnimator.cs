@@ -165,7 +165,7 @@ public class PlayerAnimator : MonoBehaviour {
 	}
 	
 	public float playOpenCrateAnim(Vector3 cratePos) {
-		headingOverride = cratePos;
+		headingOverride = transform.position - cratePos;
 		currentState = AnimState.OpeningCrate;
 		playerModel.animation.CrossFade("OpenCrate", 0.05f, PlayMode.StopSameLayer);
 		return playerModel.animation["OpenCrate"].length;
