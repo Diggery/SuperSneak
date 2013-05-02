@@ -208,6 +208,8 @@ public class EnemyController : MonoBehaviour {
 	public void addDamage(float amount, Vector3 origin) {
 		currentHealth -= amount;
 		if (currentHealth < 0) die(origin);
+		
+		
 	}
 	
 	public void gassed() {
