@@ -16,7 +16,7 @@ public class BombEffectGas : MonoBehaviour {
 		Events.Send(gameObject, "SoundEvents", soundEventData);
 
 		gasCloud = Instantiate(gasCloudParticles, transform.position, Quaternion.Euler(-90, 0, 0)) as GameObject;
-		ParticleSystem gasPorticles = gasCloud.GetComponent<ParticleSystem>();
+		//ParticleSystem gasPorticles = gasCloud.GetComponent<ParticleSystem>();
 		gasJet = Instantiate(gasJetParticles, transform.position, Quaternion.Euler(-90, 0, 0)) as GameObject;
 		
 		rigidbody.drag = 2;
