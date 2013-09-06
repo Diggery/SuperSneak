@@ -218,13 +218,13 @@ public class LevelController : MonoSingleton<LevelController>
 			crateController.AddItem("Flash");
 			break;
 		case 8 :
-			crateController.AddItem("HighEX");
-			crateController.AddItem("HighEX");
-			crateController.AddItem("HighEX");
+			crateController.AddItem("HighEx");
+			crateController.AddItem("HighEx");
+			crateController.AddItem("HighEx");
 			break;
 		case 9 :
 			crateController.AddItem("Gas");
-			crateController.AddItem("HighEX");
+			crateController.AddItem("HighEx");
 			crateController.AddItem("Flash");
 			crateController.AddItem("Smoke");
 			break;

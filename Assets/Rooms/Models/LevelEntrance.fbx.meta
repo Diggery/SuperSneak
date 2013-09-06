@@ -4,10 +4,12 @@ ModelImporter:
   fileIDToRecycleName:
     4300000: polySurface24
     4300002: polySurface23
+    4300004: Entrance
+    4300006: EntranceTop
   serializedVersion: 10
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 1
     materialSearch: 1
   animations:
     generateAnimations: 3
@@ -54,7 +56,7 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
-    polySurface23:
+    EntranceTop:
       data:
         first: 1
         second: a0860100

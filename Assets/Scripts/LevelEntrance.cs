@@ -11,6 +11,14 @@ public class LevelEntrance : MonoBehaviour {
 		GameObject player = Instantiate(playerPrefab, entrance.position, entrance.rotation) as GameObject;	
 		player.name = "Player";
 		
+		Transform entranceTop = transform.Find("EntranceTop");
+		Transform closeEntrance = transform.Find("CloseEntrance");
+		
+		FadeTrigger fadeTrigger = entranceTop.gameObject.AddComponent<FadeTrigger>();
+		TriggerRelay closeTrigger = closeEntrance.gameObject.AddComponent<TriggerRelay>();
+		closeTrigger.target = fadeTrigger;
+		closeTrigger.setTo = false;
+		
 		Invoke("CreateCamera", 1);
 	}
 	
