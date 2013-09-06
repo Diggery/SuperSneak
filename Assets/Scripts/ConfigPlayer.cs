@@ -47,9 +47,9 @@ public class ConfigPlayer : MonoBehaviour {
 		if (!thiefUpperTorso) Debug.Log("ERROR: Can't Find Player Torso");	
 
 		
-		playerAnimator.setUp(thiefObj, thiefUpperBody);
-		playerController.setUp(thiefHead, playerRagDoll, playerBombThrower);
-		playerBombThrower.setUp(thiefRightHand, playerAnimator, playerController, bombTargetPrefab);
+		playerAnimator.SetUp(thiefObj, thiefUpperBody);
+		playerController.SetUp(thiefHead, playerRagDoll, playerBombThrower);
+		playerBombThrower.SetUp(thiefRightHand, playerAnimator, playerController, bombTargetPrefab);
 		
 		setUpData.layerName = "PlayerRagDoll";
 		setUpData.rootTransform = thiefObj.Find("Thief_Skeleton/Root");

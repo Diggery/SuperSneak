@@ -26,7 +26,7 @@ public class Pathfinding2D : MonoBehaviour
         if (Path.Count > 0)
         {
 
-            Vector3 ignoreZ = new Vector3(Path[0].x, Path[0].y, transform.position.z);
+           // Vector3 ignoreZ = new Vector3(Path[0].x, Path[0].y, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, Path[0], Time.deltaTime * 30F);
             if (Vector3.Distance(transform.position, Path[0]) < 0.4F)
             {

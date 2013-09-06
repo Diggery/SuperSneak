@@ -12,7 +12,7 @@ public class SimpleAI : Pathfinding
 
 	void Update () 
     {
-	    Move();
+	   // Move();
 	}
 
     IEnumerator FindPlayer()

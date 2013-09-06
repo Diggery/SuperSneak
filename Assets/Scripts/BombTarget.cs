@@ -23,7 +23,8 @@ public class BombTarget : MonoBehaviour {
 	}
 	
 	void Update() {
-		
+		if (!Camera.main) return;
+			
 		float heading = Util.getDirection(transform, Camera.main.transform);
 		transform.eulerAngles = new Vector3(0.0f, heading, 0.0f);
 		

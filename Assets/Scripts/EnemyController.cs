@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour {
 	[HideInInspector]
 	public Transform player;
 	
-	NavMeshAgent navAgent;
+	PathMover pathMover;
 	EnemyAnimator enemyAnimator;
 	
 	[HideInInspector]
@@ -37,9 +37,9 @@ public class EnemyController : MonoBehaviour {
 	
 	[HideInInspector]
 	public bool isRunning;
-	float walkSpeed;
-	float runSpeed;
-	float turnSpeed = 180;
+	public float walkSpeed;
+	public float runSpeed;
+	public float turnSpeed = 180;
 	float currentSpeed;
 	Vector3 lastMovePos;
 	float actualSpeed;
@@ -59,14 +59,11 @@ public class EnemyController : MonoBehaviour {
 		head = newHead;
 		ragDoll = newRagdoll;
 		accessories = newAccessories;
-		navAgent = GetComponent<NavMeshAgent>();
+		pathMover = GetComponent<PathMover>();
 		player = GameObject.FindWithTag ("Player").transform;
 		GameObject controlRoomObj = GameObject.Find ("ControlRoom");
-		controlRoom = controlRoomObj.GetComponent<ControlRoom>();
-		enemyManager = controlRoom.GetComponent<EnemyManager>();
+		if (controlRoomObj) controlRoom = controlRoomObj.GetComponent<ControlRoom>();
 		
-		walkSpeed = enemyManager.getWalkSpeed(EnemyType);
-		runSpeed = enemyManager.getRunSpeed(EnemyType);
 		enemyAI = GetComponent<EnemyAI>();
 		enemyAnimator = GetComponent<EnemyAnimator>();
 		startWalking();
@@ -85,7 +82,7 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	void Update () {
-	
+			
 		if (Input.GetKeyUp(KeyCode.B)) {
 			die(transform.position);	
 		} 	
@@ -98,7 +95,8 @@ public class EnemyController : MonoBehaviour {
 		} else {
 			currentSpeed = Mathf.Lerp (currentSpeed, speedGoal, Time.deltaTime * 2);
 		}
-		navAgent.speed = currentSpeed;
+		pathMover.speed = currentSpeed;
+		pathMover.turnSpeed = turnSpeed;
 	}
 	
 	void LateUpdate () {
@@ -138,8 +136,14 @@ public class EnemyController : MonoBehaviour {
 		move(newLoc);
 	}
 
-	public void move (Vector3 newTarget) {
-		if (navAgent) navAgent.SetDestination(new Vector3(newTarget.x, 0.0f, newTarget.z));
+	public bool move(Vector3 newTarget) {
+		if (pathMover) {
+			if (!pathMover.SetDestination(new Vector3(newTarget.x, 0.0f, newTarget.z))) {
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	public void spotPlayer (Transform target) {
@@ -166,7 +170,7 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void alert(Vector3 alertPos) {
-		enemyManager.alert(alertPos);	
+		if (enemyManager) enemyManager.alert(alertPos);	
 	}
 	
 	public EnemyAI.Activity getCurrentActivity () {
@@ -217,7 +221,7 @@ public class EnemyController : MonoBehaviour {
 		enemyAI.stunned(7);
 		startWalking();
 		enemyAnimator.stopAnims();
-		navAgent.Stop();
+		pathMover.Stop();
 		ragDoll.enableRagDoll(Vector3.zero);
 		foreach (Transform accessory in accessories) {
 			accessory.parent = null;
@@ -231,7 +235,7 @@ public class EnemyController : MonoBehaviour {
 		enemyAI.die();
 		startWalking();
 		enemyAnimator.stopAnims();
-		navAgent.Stop();
+		pathMover.Stop();
 		Vector3 deathForce = (transform.position - origin).normalized + new Vector3(0.0f, 0.5f, 0.0f);
 		deathForce *= 100;
 		ragDoll.enableRagDoll(deathForce);

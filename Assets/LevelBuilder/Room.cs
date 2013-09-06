@@ -9,6 +9,7 @@ public class Room {
 	public Room child1, child2;
 	private LevelController level;
 	public bool placeHolder;
+	public bool guardRoom;
 	public int customType;
 	public int roomsToEntrance;
 
@@ -30,21 +31,18 @@ public class Room {
 		return false;
 	}
 	
-	public bool HasChildren()
-	{
+	public bool HasChildren() {
 		return NumChildren() > 0;
 	}
 	
-	public int NumChildren()
-	{
+	public int NumChildren() {
 		int n = 0;
 		if (child1 != null) n++;
 		if (child2 != null) n++;
 		return n;
 	}
 	
-	public int NumExits()
-	{
+	public int NumExits() {
 		int n = 0;
 		if (parent != null) n++;
 		if (child1 != null) n++;
@@ -54,14 +52,14 @@ public class Room {
 		
 	public void GenerateChildren() {
 		if (parent != null && NumChildren() == 0) {
-			if (Random.value < 0.3f && level.numberCustomRoom01 < level.maxCustomRoom01) {
-				if (CustomRoom.convertToCustom01(this)) return;
+			if (Random.value < 0.3f && level.numberCustomRoomA < level.maxCustomRoomA) {
+				if (CustomRoom.convertToCustomA(this)) return;
 			}
-			if (Random.value < 0.3f && level.numberCustomRoom02 < level.maxCustomRoom02) {
-				if (CustomRoom.convertToCustom02(this)) return;
+			if (Random.value < 0.3f && level.numberCustomRoomB < level.maxCustomRoomB) {
+				if (CustomRoom.convertToCustomB(this)) return;
 			}
-			if (Random.value < 0.3f && level.numberCustomRoom03 < level.maxCustomRoom03) {
-				if (CustomRoom.convertToCustom03(this)) return;
+			if (Random.value < 0.3f && level.numberCustomRoomC < level.maxCustomRoomC) {
+				if (CustomRoom.convertToCustomC(this)) return;
 			}
 		}
 		if (NumChildren() == 2) return;
@@ -203,7 +201,6 @@ public class Room {
 			n++;
         }
 		roomsToEntrance = n;
-		Debug.Log (roomsToEntrance);
 		return n;
 	}
 						
@@ -216,5 +213,8 @@ public class Room {
 		if (direction == -1) Debug.Log (this.parent.name + " has is no parent");
 		return direction;
 	}
-
+	
+	public void SetToGuardRoom() {
+		guardRoom = true;
+	}
 }

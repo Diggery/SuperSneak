@@ -3,7 +3,7 @@ using System.Collections;
 
 static public class CustomRoom {
 	
-	static public bool convertToCustom01(Room targetRoom) {
+	static public bool convertToCustomA(Room targetRoom) {
 		
 		LevelController level = LevelController.instance;
 		
@@ -23,7 +23,7 @@ static public class CustomRoom {
 		
 		//there is space, so convert to a custom room
 		targetRoom.customType = 1;
-		level.numberCustomRoom01++;
+		level.numberCustomRoomA++;
 		
 		// add a placeholder because its a 2 squares
 		targetRoom.child1 = targetRoom.AddPlaceHolder(heading);
@@ -38,7 +38,7 @@ static public class CustomRoom {
 		return true;
 	}
 	
-	static public bool convertToCustom02(Room targetRoom) {
+	static public bool convertToCustomB(Room targetRoom) {
 		LevelController level = LevelController.instance;
 		
 		//test to see if there is space
@@ -88,7 +88,7 @@ static public class CustomRoom {
 		
 		//there is space, so convert to a custom room
 		targetRoom.customType = 2;
-		level.numberCustomRoom02++;
+		level.numberCustomRoomB++;
 				
 		// add a placeholders because its a 4 squares
 		targetRoom.child1 = targetRoom.AddPlaceHolder(heading); 
@@ -110,7 +110,7 @@ static public class CustomRoom {
 		return true;
 	}
 	
-	static public bool convertToCustom03(Room targetRoom) {
+	static public bool convertToCustomC(Room targetRoom) {
 		LevelController level = LevelController.instance;
 		
 		//test to see if there is space
@@ -148,7 +148,7 @@ static public class CustomRoom {
 		
 		//there is space, so convert to a custom room
 		targetRoom.customType = 3;
-		level.numberCustomRoom03++;
+		level.numberCustomRoomC++;
 				
 		// add a placeholders because its a 4 squares
 		targetRoom.child1 = targetRoom.AddPlaceHolder(heading); 

@@ -13,7 +13,7 @@ public class BombThrower : MonoBehaviour {
 		
 	float throwingDistance = 8;
 	
-	public void setUp (Transform rightHandObj, PlayerAnimator newPlayerAnimator, PlayerController newPlayerController, Transform bombTargetPrefab) {
+	public void SetUp (Transform rightHandObj, PlayerAnimator newPlayerAnimator, PlayerController newPlayerController, Transform bombTargetPrefab) {
 		rightHand = rightHandObj;
 		playerAnimator = newPlayerAnimator;
 		playerController = newPlayerController;

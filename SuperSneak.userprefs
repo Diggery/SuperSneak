@@ -1,21 +1,30 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BombEffectGas.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/RoomConfig.cs">
     <Files>
-      <File FileName="Assets/Scripts/BombEffectGas.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/BombFuse.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/BombEffectHiEx.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/AreaOfEffect.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/BombThrower.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ControlRoom.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyAI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyAnimator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ParticleKiller.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/IKSolver.cs" Line="46" Column="29" />
-      <File FileName="Assets/Scripts/IKLegController.cs" Line="18" Column="1" />
-      <File FileName="Assets/Scripts/IKFeetController.cs" Line="45" Column="4" />
+      <File FileName="Assets/Scripts/LevelBuilder.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/RoomConfig.cs" Line="16" Column="2" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="LevelBuilder" expanded="True" />
+              <Node name="Pathfinding" expanded="True">
+                <Node name="Scenes" expanded="True">
+                  <Node name="Scripts" expanded="True" />
+                </Node>
+                <Node name="Scripts" expanded="True" />
+              </Node>
+              <Node name="Scripts" expanded="True">
+                <Node name="RoomConfig.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

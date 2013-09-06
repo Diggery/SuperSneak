@@ -28,9 +28,11 @@ public class UIThumbsticks : MonoBehaviour {
 	public bool rightTouched;	
 	Vector3 homeOffset;	
 	Vector3 leftPosGoal;	
-	Vector3 rightPosGoal;	
+	Vector3 rightPosGoal;
 	
-	void Start () {
+	bool setUp =  false;
+	
+	public void SetUp () {
 	
 		GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 		if (playerObj) playerController = playerObj.GetComponent<PlayerController>();
@@ -64,11 +66,15 @@ public class UIThumbsticks : MonoBehaviour {
 		
 		Transform inventoryPos = UIThumbsticksObj.Find("LowerRight/Inventory");
 		inventory = GetComponent<InventoryController>();
-		inventory.setUp(inventoryPos, cashDisplay);
-
+		inventory.SetUp(inventoryPos, cashDisplay);
+		
+		setUp = true;
 	}
 	
 	void Update () {
+		
+		if (!setUp) return;
+		
 		float transAmount;
 		if (onScreen) {
 			if (transTimer < 1.0f) {

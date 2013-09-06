@@ -31,8 +31,10 @@ public class InventoryController : MonoBehaviour {
 	float scrollOffset = 0.0f;
 	public float inventoryTimeOut;
 	float inventoryTimer;
+	
+	bool setUp = false;
 
-	public void setUp (Transform invPos, UICashDisplay newCashBox) {
+	public void SetUp (Transform invPos, UICashDisplay newCashBox) {
 		inventoryPos = invPos;
 		cashDisplay = newCashBox;
 		cashDisplay.setUp(cashFieldsPrefab);
@@ -50,9 +52,18 @@ public class InventoryController : MonoBehaviour {
 		PlayerController playerController = player.GetComponent<PlayerController>();
 		playerController.setInventory(this);
 		
+		
+		addItem("Cash");
+		addItem("Jewels");
+		addItem("Gas");
+		
+		setUp = true;
+		
 	}
 	
 	void Update () {
+		if (!setUp) return;
+		
 		if (!lockList) {
 			positionList();
 			positionCash();

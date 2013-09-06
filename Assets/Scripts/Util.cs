@@ -24,6 +24,15 @@ static public class Util : object {
 		}
 		return direction;
     }
+    static public float getDirection(Vector3 vec3Point1, Vector3 vec3Point2) {
+		Vector2 point1 = new Vector2(vec3Point1.x, vec3Point1.z);
+		Vector2 point2 = new Vector2(vec3Point2.x, vec3Point2.z);
+		float direction = Vector2.Angle(Vector2.up, (point2-point1));
+		if (point1.x > point2.x) {
+			direction = 360 - direction;
+		}
+		return direction;
+    }
     static public float getDirection(Vector2 point1, Vector2 point2) {
 		float direction = Vector2.Angle(Vector2.up, (point2-point1));
 		if (point1.x > point2.x) {

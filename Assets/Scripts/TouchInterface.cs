@@ -19,7 +19,7 @@ public class TouchInterface : MonoBehaviour {
 	float swipeDistance = 30.0f;
 	
 	void Start() {
-		touchManager = GameObject.Find("TouchControl").GetComponent<TouchManager>();
+		touchManager = GetComponent<TouchManager>();
 		
 	}
 	

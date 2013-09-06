@@ -25,12 +25,13 @@ public class PlayerController : MonoBehaviour {
 	
 	Transform head;
 	RagDollController ragDoll;
-
-	public void setUp (Transform thiefHead, RagDollController thiefRagDoll, BombThrower newBombThrower) {
+	
+	public void SetUp (Transform thiefHead, RagDollController thiefRagDoll, BombThrower newBombThrower) {
 		ragDoll = thiefRagDoll;
 		playerBombThrower = newBombThrower;
 		characterController = GetComponent<CharacterController>();
 		playerAnimator = GetComponent<PlayerAnimator>();
+		
 	}
 
 	void Update () {
@@ -121,11 +122,11 @@ public class PlayerController : MonoBehaviour {
 	}
 		
 	public void leftInput(Vector3 newInput) {
-		currentLeftInput = new Vector3(-newInput.x, newInput.z, newInput.y);
+		currentLeftInput = new Vector3(newInput.x, newInput.z, -newInput.y);
 	}
 	
 	public void rightInput(Vector3 newInput) {
-		currentRightInput = new Vector3(-newInput.x, newInput.z, newInput.y);
+		currentRightInput = new Vector3(newInput.x, newInput.z, -newInput.y);
 	}
 
 	public void setLeftInputOff() {

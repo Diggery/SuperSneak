@@ -144,7 +144,8 @@ public class ViewShapeDrawer : MonoBehaviour {
 			
 			int layer1 = LayerMask.NameToLayer("PlayerRagDoll"); 
 			int layer2 = LayerMask.NameToLayer("EnemyRagDoll"); 
-			int layermask = ~((1 << layer1) | (1 << layer2));
+			int layer3 = LayerMask.NameToLayer("Obstacle"); 
+			int layermask = ~((1 << layer1) | (1 << layer2) | (1 << layer3));
 			
 			if (Physics.Linecast (worldInnerPos, worldOuterPos, out hit, layermask)) {
 				outerPos = transform.InverseTransformPoint(hit.point);

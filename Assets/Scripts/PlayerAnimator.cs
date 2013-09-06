@@ -12,7 +12,7 @@ public class PlayerAnimator : MonoBehaviour {
 	Transform playerModel;
 	PlayerController playerController;
 
-	public void setUp (Transform thiefObj, Transform upperBody) {
+	public void SetUp (Transform thiefObj, Transform upperBody) {
 		playerModel = thiefObj;
 		playerModel.animation.Stop();
 		playerController = GetComponent<PlayerController>();

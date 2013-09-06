@@ -11,8 +11,8 @@ public class EnemyAI : MonoBehaviour {
 	
 	EnemyController enemyController;
 	EnemyAnimator enemyAnimator;
-	NavMeshAgent navAgent;
 	
+	PathMover pathMover;
 	
 	bool canSeeTarget;
 	[HideInInspector]
@@ -31,9 +31,9 @@ public class EnemyAI : MonoBehaviour {
 		Events.Listen(gameObject, "GuardRadio");  
 		enemyController = GetComponent<EnemyController>();
 		enemyAnimator = GetComponent<EnemyAnimator>();
+		pathMover = GetComponent<PathMover>();
 		if (!enemyAnimator) print ("ERROR: No enemy animator"); 
 
-		navAgent = GetComponent<NavMeshAgent>();
 		if (!skipStartBehavior) {
 			if (startOnGuard) {
 				lookAround();
@@ -68,7 +68,7 @@ public class EnemyAI : MonoBehaviour {
 
 		switch (currentActivity) {
 			case Activity.Patrolling :
-				if (!navAgent.hasPath) gotoRoom();
+				if (!pathMover.HasPath()) gotoRoom();
 					
 			break;
 			
@@ -85,7 +85,7 @@ public class EnemyAI : MonoBehaviour {
 				
 				if (enemyController.canSeeTarget()) {
 					lastKnownPos = enemyController.player.position;
-					if (navAgent.hasPath) navAgent.ResetPath();
+					if (pathMover.HasPath()) pathMover.Stop();
 					enemyController.faceTarget(lastKnownPos);
 								
 					if (targetRange > 5) {
@@ -99,7 +99,7 @@ public class EnemyAI : MonoBehaviour {
 					} 
 				} else {
 					readyToFire = false;
-					if (!navAgent.hasPath) {
+					if (!pathMover.HasPath()) {
 						float currDistance = (transform.position - lastKnownPos).sqrMagnitude;
 						if (currDistance < 0.25) {
 							lookAround();
@@ -115,7 +115,7 @@ public class EnemyAI : MonoBehaviour {
 			break;
 			
 			case Activity.Investigating :
-				if (!navAgent.hasPath) {
+				if (!pathMover.HasPath()) {
 					float currDistance = (transform.position - lastKnownPos).sqrMagnitude;
 					if (currDistance < 0.25) {
 						lookAround();
@@ -124,7 +124,7 @@ public class EnemyAI : MonoBehaviour {
 			break;
 			
 			case Activity.HeadingToControlRoom :
-				if (!navAgent.hasPath) {
+				if (!pathMover.HasPath()) {
 					GameObject newGuard = enemyController.controlRoom.spawnEnemy("Guard");
 					newGuard.GetComponent<EnemyAI>().investigate(lastKnownPos);
 					lookAround();
@@ -137,7 +137,10 @@ public class EnemyAI : MonoBehaviour {
 		if (currentActivity == Activity.Dead) return;
 		GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
 		int roomIndex = Random.Range(0, rooms.Length);
-		enemyController.move(rooms[roomIndex].transform.position);
+
+		if (!enemyController.move(rooms[roomIndex].transform.position)) {
+			//print (rooms[roomIndex].transform.position + " is a bad location");
+		}
 	}
 	
 	public void chase(Transform target) {
@@ -156,7 +159,7 @@ public class EnemyAI : MonoBehaviour {
 	
 	public void lookAround() {
 		if (currentActivity == Activity.Dead) return;
-		navAgent.Stop();
+		pathMover.Stop();
 		readyToFire = false;
 		currentActivity = Activity.Looking; 
 		lookingTimer = enemyAnimator.playLookAroundAnim();

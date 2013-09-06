@@ -12,43 +12,46 @@ public class CrateController : MonoBehaviour {
 	InventoryController inventory;
 	public AnimationCurve transCurve;
 
-	
 	public GameObject itemPrefab;
 
 	void Start () {
-		Transform inventoryObj = Camera.main.transform.Find("UI");
-		inventory = inventoryObj.GetComponent<InventoryController>();
-		if (!inventory) Debug.Log("ERROR: crate cant find inventory");
+
 		midPoint = transform.Find ("Box/MidPoint");
-		
 		
 		//if crate is empty, add a random amount of cash and jewels
 		if (contents.Count < 1) {
-			
 			for (int i = 0; i < Random.Range(3,10); i++) {
 				if (Random.value < 0.5f) {
 					contents.Add("Cash");
 				} else {
 					contents.Add("Jewel");
 				}
-				
 			}
-			
 		}
 	}
 	
-	void Update () {
+	void GetInventory() {
+		Transform inventoryObj = Camera.main.transform.Find("UI");
+		inventory = inventoryObj.GetComponent<InventoryController>();
+		if (!inventory) Debug.Log("ERROR: crate cant find inventory");		
+	}
 	
+	public void AddItem(string itemType) {
+		contents.Add(itemType);	
 	}
 	
 	IEnumerator openCrate() {
+		if (!inventory) GetInventory();
+		
 		animation.Play("Open");
 		opened = true;
 		
 		yield return new WaitForSeconds(animation["Open"].length);
 		
 		for (int i = 0; i < contents.Count; i++) {
-			GameObject addeditem = Instantiate(inventory.getItemPrefab(contents[i]), transform.position, Quaternion.identity) as GameObject;
+			GameObject itemObj = inventory.getItemPrefab(contents[i]);
+			if (!itemObj) Debug.Log(contents[i] + " is not a item");
+			GameObject addeditem = Instantiate(itemObj, transform.position, Quaternion.identity) as GameObject;
 			addeditem.transform.name = contents[i];
 			Transform itemEndPoint = inventory.getInventoryPos(contents[i]);
 			addeditem.AddComponent<AddInventoryItem>().setUp(transform, midPoint, itemEndPoint, playerController, transCurve);
