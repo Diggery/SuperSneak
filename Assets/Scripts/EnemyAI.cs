@@ -19,8 +19,6 @@ public class EnemyAI : MonoBehaviour {
 	public bool readyToFire;
 	Vector3 lastKnownPos;
 	
-	private bool skipStartBehavior;
-	public bool startOnGuard;
 	
 	public float lookingTimer;
 	float alertLevel;
@@ -34,17 +32,9 @@ public class EnemyAI : MonoBehaviour {
 		pathMover = GetComponent<PathMover>();
 		if (!enemyAnimator) print ("ERROR: No enemy animator"); 
 
-		if (!skipStartBehavior) {
-			if (startOnGuard) {
-				lookAround();
-			} else {
-				patrol();
-			}
-		}
 	}
 
 	void forceSetUp() {
-		skipStartBehavior = true;
 		enemyController = GetComponent<EnemyController>();
 		enemyAnimator = GetComponent<EnemyAnimator>();		
 	}
@@ -116,17 +106,14 @@ public class EnemyAI : MonoBehaviour {
 			
 			case Activity.Investigating :
 				if (!pathMover.HasPath()) {
-					float currDistance = (transform.position - lastKnownPos).sqrMagnitude;
-					if (currDistance < 0.25) {
-						lookAround();
-					}
+					lookAround();
 				}
 			break;
 			
 			case Activity.HeadingToControlRoom :
 				if (!pathMover.HasPath()) {
-					GameObject newGuard = enemyController.controlRoom.spawnEnemy("Guard");
-					newGuard.GetComponent<EnemyAI>().investigate(lastKnownPos);
+					GameObject guardRoom = GameObject.FindWithTag("GuardRoom");
+					guardRoom.GetComponent<ControlRoom>().QueueEnemy("Guard");
 					lookAround();
 				}
 			break;
@@ -174,7 +161,7 @@ public class EnemyAI : MonoBehaviour {
 				
 		if (currentActivity == Activity.Patrolling) lookAround();
 			
-		if (currentActivity == Activity.Looking && alertLevel > 3.0f) investigate(soundPos);
+		if (currentActivity == Activity.Looking && alertLevel > 2.0f) investigate(soundPos);
 	}
 	
 	public void patrol() {
@@ -200,7 +187,8 @@ public class EnemyAI : MonoBehaviour {
 		enemyAnimator.stopAnims();
 
 		currentActivity = Activity.HeadingToControlRoom;
-		enemyController.runTo(enemyController.controlRoom.transform.position);
+		GameObject guardRoom = GameObject.FindWithTag("GuardRoom");
+		enemyController.runTo(guardRoom.transform.position);
 	}
 	
 	public void GuardRadio(Events.Notification notification) {

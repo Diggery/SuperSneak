@@ -35,6 +35,7 @@ public class Room {
 		return NumChildren() > 0;
 	}
 	
+	
 	public int NumChildren() {
 		int n = 0;
 		if (child1 != null) n++;
@@ -51,14 +52,15 @@ public class Room {
 	}
 		
 	public void GenerateChildren() {
+		int numberOfRooms = level.getNumberOfRooms();
 		if (parent != null && NumChildren() == 0) {
 			if (Random.value < 0.3f && level.numberCustomRoomA < level.maxCustomRoomA) {
 				if (CustomRoom.convertToCustomA(this)) return;
 			}
-			if (Random.value < 0.3f && level.numberCustomRoomB < level.maxCustomRoomB) {
+			if (numberOfRooms > 5 && Random.value < 0.3f && level.numberCustomRoomB < level.maxCustomRoomB) {
 				if (CustomRoom.convertToCustomB(this)) return;
 			}
-			if (Random.value < 0.3f && level.numberCustomRoomC < level.maxCustomRoomC) {
+			if (numberOfRooms > 5 && Random.value < 0.3f && level.numberCustomRoomC < level.maxCustomRoomC) {
 				if (CustomRoom.convertToCustomC(this)) return;
 			}
 		}

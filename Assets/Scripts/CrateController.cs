@@ -13,6 +13,9 @@ public class CrateController : MonoBehaviour {
 	public AnimationCurve transCurve;
 
 	public GameObject itemPrefab;
+	
+	Transform miniMapDot;
+	Transform miniMapDotOpened;
 
 	void Start () {
 
@@ -28,6 +31,11 @@ public class CrateController : MonoBehaviour {
 				}
 			}
 		}
+		
+		// switch the chests minimap dot
+		miniMapDot = transform.Find("MiniMap");
+		miniMapDotOpened = transform.Find("MiniMapOpened");
+
 	}
 	
 	void GetInventory() {
@@ -57,6 +65,8 @@ public class CrateController : MonoBehaviour {
 			addeditem.AddComponent<AddInventoryItem>().setUp(transform, midPoint, itemEndPoint, playerController, transCurve);
 			yield return new WaitForSeconds(0.1f);
 		}
+		miniMapDot.renderer.enabled = false;
+		miniMapDotOpened.renderer.enabled = true;
 	}
 	
     void OnTriggerEnter(Collider other) {

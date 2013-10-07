@@ -5,6 +5,7 @@ public class LevelEntrance : MonoBehaviour {
 	
 	public GameObject playerPrefab;
 	public GameObject cameraPrefab;
+	public GameObject miniMapPrefab;
 	public Transform entrance;
 
 	void Start () {
@@ -24,6 +25,8 @@ public class LevelEntrance : MonoBehaviour {
 	
 	void CreateCamera() {
 		GameObject camera = Instantiate(cameraPrefab, entrance.position, entrance.rotation) as GameObject;
+		Instantiate(miniMapPrefab, Vector3.zero, Quaternion.identity);
+		
 		camera.GetComponent<CameraControl>().SetUp();
 		camera.AddComponent<TouchInterface>();
 		camera.AddComponent<TouchManager>();

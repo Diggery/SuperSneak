@@ -6,6 +6,9 @@ public class PathMover : Pathfinding {
 	public float speed;
 	public float turnSpeed;
 	public float distanceThreshold = 0.3f;
+	
+	public float coolDown = 0.5f;
+	float coolDownTimer = 0.0f;
 			
 	CharacterController characterController;
 
@@ -15,6 +18,7 @@ public class PathMover : Pathfinding {
 	}
 	
 	void Update () {
+		if (coolDownTimer > 0) coolDownTimer -= Time.deltaTime;
 
         if (Path.Count > 0) {
 			Vector3 nextPath = Path[0];
@@ -39,8 +43,10 @@ public class PathMover : Pathfinding {
 	}
 	
 	public bool SetDestination(Vector3 newDestination) {
+		if (coolDownTimer > 0) return false;
 		
 		FindPath(transform.position, newDestination);
+		coolDownTimer = coolDown + Random.value * 0.1f;
 		return HasPath();
 	}
 	

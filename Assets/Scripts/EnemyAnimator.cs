@@ -87,8 +87,9 @@ public class EnemyAnimator : MonoBehaviour {
 	}
 	
 	public float playLookAroundAnim() {
-		model.animation.CrossFade("LookAround", 0.1f, PlayMode.StopSameLayer);
-		return model.animation["LookAround"].length;
+		string animName = "LookAround";
+		model.animation.CrossFade(animName, 0.1f, PlayMode.StopSameLayer);
+		return model.animation[animName].length;
 	}	
 	public float playGetUpAnim() {
 		model.animation.CrossFade("GetUp", 0.1f, PlayMode.StopSameLayer);

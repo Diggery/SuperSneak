@@ -160,7 +160,7 @@ public class LevelController : MonoSingleton<LevelController>
 	void AddGuardRoom() {
 		foreach (Room room in rooms) {
 			if (room != null) {
-				if (!room.HasChildren() && !room.placeHolder && room.getHeadingDirection() == 0) {
+				if (!room.IsFirstNode() && !room.HasChildren() && !room.placeHolder && room.getHeadingDirection() == 0) {
 					Debug.Log(room.name + "is the guard room");
 					room.SetToGuardRoom();
 					break;
@@ -171,8 +171,10 @@ public class LevelController : MonoSingleton<LevelController>
 	
 	public GameObject AddCrate(GameRoom gameRoom, Transform location) {
 		
+		int depth = gameRoom.room.NumRoomsToEntrance();
+		
 		//chance for adding a crate
-		if (Random.value > 0.5f) return null;
+		if (Random.value < 0.5f) return null;
 		
 		//make sure we dont have too many crates
 		if (numberCrates >= maxCrates) return null;
@@ -184,7 +186,8 @@ public class LevelController : MonoSingleton<LevelController>
 		
 		CrateController crateController = newCrate.GetComponent<CrateController>();
 		int itemSelection = Random.Range(0, 10);
-		
+		if (depth > 10) itemSelection += 2;
+		if (depth > 15) itemSelection += 5;
 		switch (itemSelection) {
 		case 0 :
 			crateController.AddItem("Cash");
@@ -229,6 +232,20 @@ public class LevelController : MonoSingleton<LevelController>
 			crateController.AddItem("Smoke");
 			break;
 		default :
+			crateController.AddItem("Jewel");
+			crateController.AddItem("Jewel");
+			crateController.AddItem("Jewel");
+			crateController.AddItem("Jewel");
+			crateController.AddItem("Jewel");
+			crateController.AddItem("Cash");
+			crateController.AddItem("Cash");
+			crateController.AddItem("Cash");
+			crateController.AddItem("Cash");
+			crateController.AddItem("Cash");
+			crateController.AddItem("Gas");
+			crateController.AddItem("HighEx");
+			crateController.AddItem("Flash");
+			crateController.AddItem("Smoke");
 			break;
 		}
 		return newCrate;

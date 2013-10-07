@@ -29,6 +29,15 @@ ModelImporter:
     4300048: Slot4
     4300050: Cash
     4300052: UpperRight
+    4300054: UpperLeft
+    4300056: MiniMapFrame
+    4300058: polySurface1
+    4300060: polySurface2
+    4300062: polySurface3
+    4300064: ZoomHandle
+    4300066: Centered
+    4300068: FreeLook
+    4300070: Resize
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -86,6 +95,50 @@ ModelImporter:
       data:
         first: 33
         second: ba5a3200
+    Centered:
+      data:
+        first: 1
+        second: d2860100
+      data:
+        first: 4
+        second: b21a0600
+      data:
+        first: 23
+        second: 86182300
+      data:
+        first: 33
+        second: c65a3200
+    FrameLowerLeft:
+      data:
+        first: 1
+        second: c2860100
+      data:
+        first: 4
+        second: a21a0600
+      data:
+        first: 137
+        second: a00bd100
+    FrameLowerRight:
+      data:
+        first: 1
+        second: c8860100
+      data:
+        first: 4
+        second: a81a0600
+    FrameUpperLeft:
+      data:
+        first: 1
+        second: c6860100
+      data:
+        first: 4
+        second: a61a0600
+    FrameUpperRight:
+      data:
+        first: 1
+        second: c4860100
+      data:
+        first: 4
+        second: a41a0600
     Inventory:
       data:
         first: 1
@@ -145,6 +198,26 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
+    MiniMapFrame:
+      data:
+        first: 1
+        second: cc860100
+      data:
+        first: 4
+        second: ac1a0600
+    Resize:
+      data:
+        first: 1
+        second: d0860100
+      data:
+        first: 4
+        second: b01a0600
+      data:
+        first: 23
+        second: 82182300
+      data:
+        first: 33
+        second: c25a3200
     RightActiveRing:
       data:
         first: 1
@@ -262,6 +335,19 @@ ModelImporter:
       data:
         first: 33
         second: b85a3200
+    UpperLeft:
+      data:
+        first: 1
+        second: c0860100
+      data:
+        first: 4
+        second: a01a0600
+      data:
+        first: 23
+        second: 7e182300
+      data:
+        first: 33
+        second: be5a3200
     UpperRight:
       data:
         first: 1
@@ -275,3 +361,16 @@ ModelImporter:
       data:
         first: 33
         second: bc5a3200
+    ZoomHandle:
+      data:
+        first: 1
+        second: ce860100
+      data:
+        first: 4
+        second: ae1a0600
+      data:
+        first: 23
+        second: 80182300
+      data:
+        first: 33
+        second: c05a3200

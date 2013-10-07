@@ -10,8 +10,8 @@ public class ControlRoom : MonoBehaviour {
 	public int MaxEnemies = 10;
 	public int currentEnemies;
 	public float spawnCoolDown = 3.0f;
-	float spawnTimer = 0.0f;
-	int spawnQueue = 0;
+	public float spawnTimer = 0.0f;
+	public List<string> spawnQueue;
 	
 	Hashtable characterPrefabs;
 	
@@ -21,49 +21,47 @@ public class ControlRoom : MonoBehaviour {
 		foreach (GameObject enemy in enemyTypes) {
 			characterPrefabs[enemy.name] = enemy;
 		}
+		spawnTimer = -1.0f;
 		
-		//spawnEnemy("Guard");
+		Invoke("SpawnPartrol", 5);
 		
-		spawnTimer = 3.0f;
 	}
 	
 	void Update() {
-		if (spawnTimer > 0.0f) 	spawnTimer -= Time.deltaTime;
-		if (spawnTimer < 0.0f && currentEnemies < MaxEnemies) spawnEnemy("Guard");
+		if (spawnQueue.Count > 0) 	{
+			spawnTimer -= Time.deltaTime;
+			if (spawnTimer < 0.0f) SpawnEnemyFromQueue();
+		}
 	}
 	
-	public GameObject spawnEnemy(string type) {
+	public void SpawnPartrol() {
+		QueueEnemy("Guard");
+		QueueEnemy("Janitor");
+	}
+	
+	public void QueueEnemy(string type) {
+		spawnQueue.Add(type);
+		print (spawnQueue[0] + " is queued");
+	}
+
+	
+	public GameObject SpawnEnemyFromQueue() {
 		
 		
-		if (currentEnemies >= MaxEnemies) {
-			spawnQueue++;
+		if (currentEnemies > MaxEnemies) {
+			spawnTimer = spawnCoolDown;
 			return null;
 		}
-		if (spawnTimer > 0.0f) {
-			spawnQueue++;
-			return null;
-		}
 		
-		GameObject newEnemy;
-		
+		print ("Spawning a " + spawnQueue[0]);
+				
 		Transform entrance = entrances[Random.Range(0, entrances.Count)];
 		
-		GameObject prefab = (GameObject)characterPrefabs[type];
-		newEnemy = Instantiate(prefab, entrance.position, entrance.rotation) as GameObject;
+		GameObject prefab = (GameObject)characterPrefabs[spawnQueue[0]];
+		GameObject newEnemy = Instantiate(prefab, entrance.position, entrance.rotation) as GameObject;
 		currentEnemies++;
-		spawnQueue--;
+		spawnQueue.RemoveAt(0);
 		spawnTimer = spawnCoolDown;
 		return newEnemy;
-		
-//		
-//		switch (type) {
-//		case "Guard" :
-//			newEnemy = Instantiate(characterPrefabs["Guard"], entrance.position, entrance.rotation);
-//			break;
-//		default :
-//			newEnemy = Instantiate(guardPrefab, entrance.position, entrance.rotation);
-//			break;
-//			
-//		}
 	}
 }

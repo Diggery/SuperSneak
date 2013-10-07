@@ -1,0 +1,8 @@
+fileFormatVersion: 2
+guid: 261662b93f3334f4b9641d40cc2c14c5
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - miniMapPrefab: {fileID: 100000, guid: acc446290839c404da9551143d472dcb, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}

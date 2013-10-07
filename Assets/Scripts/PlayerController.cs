@@ -27,10 +27,17 @@ public class PlayerController : MonoBehaviour {
 	RagDollController ragDoll;
 	
 	public void SetUp (Transform thiefHead, RagDollController thiefRagDoll, BombThrower newBombThrower) {
+
 		ragDoll = thiefRagDoll;
 		playerBombThrower = newBombThrower;
 		characterController = GetComponent<CharacterController>();
 		playerAnimator = GetComponent<PlayerAnimator>();
+		
+		Transform miniMapDot = transform.Find("MiniMapUnit");
+		if (miniMapDot) {
+			miniMapDot.renderer.material.color = Color.yellow;
+			miniMapDot.renderer.material.renderQueue = 3500;
+		}
 		
 	}
 

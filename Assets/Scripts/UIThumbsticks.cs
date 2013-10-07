@@ -12,6 +12,7 @@ public class UIThumbsticks : MonoBehaviour {
 	
 	Transform lowerLeft;
 	Transform lowerRight;
+	Transform upperLeft;
 	Transform upperRight;
 	
 	Transform leftThumb;
@@ -47,7 +48,12 @@ public class UIThumbsticks : MonoBehaviour {
 	
 		lowerRight = UIThumbsticksObj.Find("LowerRight");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerRight);
-	
+		
+		upperLeft = UIThumbsticksObj.Find("UpperLeft");
+		Camera.main.transform.GetComponent<UIManager>().lockToEdge(upperLeft);
+		MiniMapDisplay miniMapDisplay = upperLeft.gameObject.AddComponent<MiniMapDisplay>();
+		miniMapDisplay.InitMiniMap();
+			
 		upperRight = UIThumbsticksObj.Find("UpperRight");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(upperRight);
 		

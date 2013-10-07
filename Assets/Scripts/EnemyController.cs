@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public enum EnemyTypes { Guard, Captain, Enforcer, Boss}
+public enum EnemyTypes { Guard, Janitor, Captain, Enforcer, Boss}
 
 
 public class EnemyController : MonoBehaviour {
@@ -55,6 +55,7 @@ public class EnemyController : MonoBehaviour {
 	float headTimer;
 	float headOffset;
 	
+	
 	public void setUp(Transform newHead, RagDollController newRagdoll, Transform[] newAccessories) {
 		head = newHead;
 		ragDoll = newRagdoll;
@@ -68,6 +69,24 @@ public class EnemyController : MonoBehaviour {
 		enemyAnimator = GetComponent<EnemyAnimator>();
 		startWalking();
 		Events.Listen(gameObject, "SoundEvents");  
+		
+		
+		//color the minimap dot
+		Transform miniMapDot = transform.Find("MiniMapUnit");
+		if (miniMapDot) {
+			switch (EnemyType) {
+			case EnemyTypes.Guard :
+				miniMapDot.renderer.material.color = Color.red;
+				break;
+			case EnemyTypes.Janitor :
+				miniMapDot.renderer.material.color = Color.cyan;
+				break;
+			default :
+				miniMapDot.renderer.material.color = Color.black;
+				break;
+			}
+			miniMapDot.renderer.material.renderQueue = 3000 + Random.Range(1, 500);
+		}
 	}
 	
 	public void addWeapon(Transform newWeapon) {
@@ -157,12 +176,12 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void startWalking() {
-		speedGoal = walkSpeed;
+		speedGoal = walkSpeed + (Random.value - 0.5f);
 		isRunning = false;
 	}	
 	public void startRunning() {
 		isRunning = true;
-		speedGoal = runSpeed;
+		speedGoal = runSpeed + (Random.value - 0.5f);
 	}
 	
 	public void investigate (Vector3 alertPos) {
