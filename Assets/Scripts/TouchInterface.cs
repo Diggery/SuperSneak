@@ -5,13 +5,13 @@ public class TouchInterface : MonoBehaviour {
 
 	TouchManager touchManager;
 			
-	Vector3 touchPosition ;
+	Vector3[] touchPosition = new Vector3[10];
 	
-	Vector2 touchDistance;
-	float touchTime;
-	bool gestureArmed;
+	Vector2[] touchDistance = new Vector2[10];
+	float[] touchTime = new float[10];
+	bool[] gestureArmed = new bool[10];
 	
-	Transform startTarget;
+	Transform[] startTarget = new Transform[10];
 	
 	float tapTime = 0.25f;
 	float gestureTime = 0.25f;
@@ -24,41 +24,47 @@ public class TouchInterface : MonoBehaviour {
 	}
 	
 	void Update() {
+		
+		UIManager debugUI = Camera.main.gameObject.GetComponent<UIManager>();
+		
+		
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		Vector3 lastTouchPosition = Vector3.zero;
 		Vector2 touchDelta = Vector2.zero;
-		
-		if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer) {
+		int touchId = 9;
 
-			lastTouchPosition = touchPosition;
-			touchPosition = Input.mousePosition;
-			touchDelta.x = touchPosition.x - lastTouchPosition.x;
-			touchDelta.y = touchPosition.y - lastTouchPosition.y;
-			touchPosition.z = Camera.main.transform.position.z;
+		
+		if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
+
+			lastTouchPosition = touchPosition[touchId];
+			touchPosition[touchId] = Input.mousePosition;
+			touchDelta.x = touchPosition[touchId].x - lastTouchPosition.x;
+			touchDelta.y = touchPosition[touchId].y - lastTouchPosition.y;
+			touchPosition[touchId].z = Camera.main.transform.position.z;
 			
 			
 			if (Input.GetMouseButtonDown(0)) {
 				touchDelta = Vector2.zero;
-				touchDistance = Vector2.zero;
-				touchTime = 0;
+				touchDistance[touchId] = Vector2.zero;
+				touchTime[touchId] = 0;
 				Physics.Raycast(ray, out hit);
-				touchManager.touchDown(hit.transform, touchPosition);
-				startTarget = hit.transform;
-				gestureArmed = true;
+				touchManager.touchDown(hit.transform, touchPosition[touchId], touchId);
+				startTarget[touchId] = hit.transform;
+				gestureArmed[touchId] = true;
 			}
 		
 			if (Input.GetMouseButton(0)) {
 				Physics.Raycast(ray, out hit);
-				touchManager.touchDrag(touchDelta, touchDistance, touchPosition, hit.transform, startTarget);
-				touchDistance += touchDelta;
-				touchTime += Time.deltaTime;
-				if (gestureArmed) {
-					if (touchTime > longTouchTime) {
-						if (startTarget == hit.transform) {
-							touchManager.longTouched(startTarget);
+				touchManager.touchDrag(touchDelta, touchDistance[touchId], touchPosition[touchId], hit.transform, startTarget[touchId], touchId);
+				touchDistance[touchId] += touchDelta;
+				touchTime[touchId] += GameTime.unpausedDeltaTime;
+				if (gestureArmed[touchId]) {
+					if (touchTime[touchId] > longTouchTime) {
+						if (startTarget[touchId] == hit.transform) {
+							touchManager.longTouched(startTarget[touchId], touchId);
 						}
-						gestureArmed = false;
+						gestureArmed[touchId] = false;
 					}
 				}
 		
@@ -67,110 +73,121 @@ public class TouchInterface : MonoBehaviour {
 			if (Input.GetMouseButtonUp(0)) {
 				Physics.Raycast(ray, out hit);
 				//print("touchUp");
-				touchManager.touchUp(hit.transform, startTarget, touchPosition, normalizedDistance(touchDistance), touchTime);
-				if (touchDistance.x < -swipeDistance && gestureArmed) {
-					touchManager.swipeLeft(touchTime, startTarget, hit.transform);
+				touchManager.touchUp(hit.transform, startTarget[touchId], touchPosition[touchId], normalizedDistance(touchDistance[touchId]), touchTime[touchId], touchId);
+				if (touchDistance[touchId].x < -swipeDistance && gestureArmed[touchId]) {
+					touchManager.swipeLeft(touchTime[touchId], startTarget[touchId], hit.transform, touchId);
 				}
-				if (touchDistance.x > swipeDistance && gestureArmed) {
-					touchManager.swipeRight(touchTime, startTarget, hit.transform);
+				if (touchDistance[touchId].x > swipeDistance && gestureArmed[touchId]) {
+					touchManager.swipeRight(touchTime[touchId], startTarget[touchId], hit.transform, touchId);
 				}
-				if (touchDistance.y < -swipeDistance && gestureArmed) {
-					touchManager.swipeDown(touchTime, startTarget, hit.transform);
+				if (touchDistance[touchId].y < -swipeDistance && gestureArmed[touchId]) {
+					touchManager.swipeDown(touchTime[touchId], startTarget[touchId], hit.transform, touchId);
 				}
-				if (touchDistance.y > swipeDistance && gestureArmed) {
-					touchManager.swipeUp(touchTime, startTarget, hit.transform);
+				if (touchDistance[touchId].y > swipeDistance && gestureArmed[touchId]) {
+					touchManager.swipeUp(touchTime[touchId], startTarget[touchId], hit.transform, touchId);
 				}
-				startTarget = null;
-				if (touchTime < tapTime) {
-					touchManager.tap(hit.transform, touchPosition);
+				startTarget[touchId] = null;
+				if (touchTime[touchId] < tapTime) {
+					touchManager.tap(hit.transform, touchPosition[touchId], touchId);
 				}
-				gestureArmed = false;
+				gestureArmed[touchId] = false;
 	
 			}	
 	
-		} else {
+		}
+		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) {
 	
 			Touch[] touchInput = Input.touches;
+			
+					debugUI.debugString = "Touches are " + touchInput.Length;
+			
 		
-			if (touchInput.Length > 0) {	
-				Touch touch = touchInput[0];
+			for (int i = 0; i < touchInput.Length; i++) {
+				
+				if (i > 9) {
+					touchId = 9;
+				} else {
+					touchId = i;
+				}
+				
+				Touch touch = touchInput[touchId];
 				ray = Camera.main.ScreenPointToRay(touch.position);
 		
-				lastTouchPosition = touchPosition;
-				touchPosition = touch.position;
+				lastTouchPosition = touchPosition[touchId];
+				touchPosition[touchId] = touch.position;
 	
-				touchDelta.x = touchPosition.x - lastTouchPosition.x;
-				touchDelta.y = touchPosition.y - lastTouchPosition.y;
-				touchPosition.z = Camera.main.transform.position.z;
+				touchDelta.x = touchPosition[touchId].x - lastTouchPosition.x;
+				touchDelta.y = touchPosition[touchId].y - lastTouchPosition.y;
+				touchPosition[touchId].z = Camera.main.transform.position.z;
 					
 		
 				if (touch.phase == TouchPhase.Began) {	
 					touchDelta = Vector2.zero;
-					touchDistance = Vector2.zero;
-					touchTime = 0;
+					touchDistance[touchId] = Vector2.zero;
+					touchTime[touchId] = 0;
 					Physics.Raycast(ray, out hit);
-					touchManager.touchDown(hit.transform, touchPosition);
-					startTarget = hit.transform;
-					gestureArmed = true;
+					touchManager.touchDown(hit.transform, touchPosition[touchId], touchId);
+					startTarget[touchId] = hit.transform;
+					gestureArmed[touchId] = true;
 				}
 			
 				if (touchInput.Length > 0) {
 					Physics.Raycast(ray, out hit);
-					touchManager.touchDrag(touchDelta, touchDistance, touchPosition, hit.transform, startTarget);
-					touchDistance += touchDelta;
-					touchTime += Time.deltaTime;
+					touchManager.touchDrag(touchDelta, touchDistance[touchId], touchPosition[touchId], hit.transform, startTarget[touchId], touchId);
+					touchDistance[touchId] += touchDelta;
+					touchTime[touchId] += GameTime.unpausedDeltaTime;
 					
-					if (gestureArmed) {
-						if (touchTime > gestureTime) {
-							if (startTarget == hit.transform && (touchDistance.x + touchDistance.y) < 5) {
-								touchManager.longTouched(startTarget);
-								gestureArmed = false;
+					if (gestureArmed[touchId]) {
+						if (touchTime[touchId] > gestureTime) {
+							if (startTarget[touchId] == hit.transform && (touchDistance[touchId].x + touchDistance[touchId].y) < 5) {
+								touchManager.longTouched(startTarget[touchId], touchId);
+								gestureArmed[touchId] = false;
 							} else {
-								touchManager.longTouched(null);
+								touchManager.longTouched(null, touchId);
 							}
-							gestureArmed = false;
+							gestureArmed[touchId] = false;
 						}
 					}
 				}
 					
 				if (touch.phase == TouchPhase.Ended) {	
 					Physics.Raycast(ray, out hit);
-					touchManager.touchUp(hit.transform, startTarget, touchPosition, touchDistance, touchTime);
+					touchManager.touchUp(hit.transform, startTarget[touchId], touchPosition[touchId], touchDistance[touchId], touchTime[touchId], touchId);
 	
-					if (gestureArmed) {
-						touchManager.tap(hit.transform, touchPosition);
-						if (touchDistance.x < -swipeDistance) {
+					if (gestureArmed[touchId]) {
+						touchManager.tap(hit.transform, touchPosition[touchId], touchId);
+						if (touchDistance[touchId].x < -swipeDistance) {
 							
 							if (touchInput.Length > 2) {
 							//	touchManager.sweepLeft();
 								return;	
 							}
-							touchManager.swipeLeft(touchTime, startTarget, hit.transform);
+							touchManager.swipeLeft(touchTime[touchId], startTarget[touchId], hit.transform, touchId);
 						}
-						if (touchDistance.x > swipeDistance) {
+						if (touchDistance[touchId].x > swipeDistance) {
 							if (touchInput.Length > 2) {
 							//	touchManager.sweepRight();
 								return;	
 							}
-							touchManager.swipeRight(touchTime, startTarget, hit.transform);
+							touchManager.swipeRight(touchTime[touchId], startTarget[touchId], hit.transform, touchId);
 						}
-						if (touchDistance.y < -swipeDistance) {
+						if (touchDistance[touchId].y < -swipeDistance) {
 							if (touchInput.Length > 2) {
 						//		touchManager.sweepDown();
 								return;	
 							}						
-							touchManager.swipeDown(touchTime, startTarget, hit.transform);
+							touchManager.swipeDown(touchTime[touchId], startTarget[touchId], hit.transform, touchId);
 						}
-						if (touchDistance.y > swipeDistance) {
+						if (touchDistance[touchId].y > swipeDistance) {
 							if (touchInput.Length > 2) {
 							//	touchManager.sweepUp();
 								return;	
 							}						
-							touchManager.swipeUp(touchTime, startTarget, hit.transform);
+							touchManager.swipeUp(touchTime[touchId], startTarget[touchId], hit.transform, touchId);
 						}
 					}
-					startTarget = null;
-					gestureArmed = false;
+					startTarget[touchId] = null;
+					gestureArmed[touchId] = false;
 				}
 			}
 		}

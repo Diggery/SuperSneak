@@ -35,9 +35,7 @@ public class MiniMapControl : MonoBehaviour {
 			trackingTarget = GameObject.Find ("Player");
 			CenterMiniMap();
 		}
-		
-		Vector3 camPos = Vector3.zero;
-		
+				
 		if (tracking && trackingTarget) {
 			camPosGoal = new Vector3(trackingTarget.transform.position.x, 0.0f, trackingTarget.transform.position.z);
 		}

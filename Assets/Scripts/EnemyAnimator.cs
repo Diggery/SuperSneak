@@ -58,9 +58,9 @@ public class EnemyAnimator : MonoBehaviour {
 		}
 		
 		if (enemyAI.readyToFire) {
-			playAimAnim();
+			PlayAimAnim();
 		} else {
-			stopAiming();
+			StopAiming();
 		}
 
 		if (enemyController.isMoving()) {
@@ -73,25 +73,29 @@ public class EnemyAnimator : MonoBehaviour {
 			if (!model.animation.IsPlaying("Idle01")) model.animation.CrossFade("Idle01", 0.1f, PlayMode.StopSameLayer);
 		}
 	}
-	public void stopAnims() {
+	public void StopAnims() {
 		model.animation.Stop();
 	}	
 		
-	public void playAimAnim() {
+	public void PlayAimAnim() {
 		if (model.animation.IsPlaying("PullGun")) return;
 		model.animation.CrossFade("PullGun", 0.1f, PlayMode.StopSameLayer);
 	}
 	
-	public void stopAiming() {
+	public void StopAiming() {
 		model.animation.Stop("PullGun");	
 	}
 	
-	public float playLookAroundAnim() {
+	public float PlayLookAroundAnim() {
 		string animName = "LookAround";
 		model.animation.CrossFade(animName, 0.1f, PlayMode.StopSameLayer);
 		return model.animation[animName].length;
 	}	
-	public float playGetUpAnim() {
+	public float PlayGetUpAnim() {
+		model.animation.CrossFade("GetUp", 0.1f, PlayMode.StopSameLayer);
+		return model.animation["GetUp"].length;
+	}
+	public float PlayStunnedAnim() {
 		model.animation.CrossFade("GetUp", 0.1f, PlayMode.StopSameLayer);
 		return model.animation["GetUp"].length;
 	}

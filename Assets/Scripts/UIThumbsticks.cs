@@ -14,6 +14,7 @@ public class UIThumbsticks : MonoBehaviour {
 	Transform lowerRight;
 	Transform upperLeft;
 	Transform upperRight;
+	Transform lowerCenter;
 	
 	Transform leftThumb;
 	Transform rightAnchor;
@@ -53,7 +54,10 @@ public class UIThumbsticks : MonoBehaviour {
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(upperLeft);
 		MiniMapDisplay miniMapDisplay = upperLeft.gameObject.AddComponent<MiniMapDisplay>();
 		miniMapDisplay.InitMiniMap();
-			
+
+		lowerCenter = UIThumbsticksObj.Find("LowerCenter");
+		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerCenter);					
+		
 		upperRight = UIThumbsticksObj.Find("UpperRight");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(upperRight);
 		
@@ -73,6 +77,10 @@ public class UIThumbsticks : MonoBehaviour {
 		Transform inventoryPos = UIThumbsticksObj.Find("LowerRight/Inventory");
 		inventory = GetComponent<InventoryController>();
 		inventory.SetUp(inventoryPos, cashDisplay);
+		
+		//Transform centerSliderPos = UIThumbsticksObj.Find("LowerCenter/Inventory");
+		///inventory = GetComponent<InventoryController>();
+		//inventory.SetUp(inventoryPos, cashDisplay);
 		
 		setUp = true;
 	}
@@ -125,15 +133,12 @@ public class UIThumbsticks : MonoBehaviour {
 		}
 		
 		
-		//Vector3 rightAnchorGoal;
 		if (inventory.currentItems.Count < 1 && !rightTouched) {
-			//rightAnchorGoal = rightAnchorHome + new Vector3(0.0f, -0.2f, 0.0f);
 			if (stickTimer < 1) stickTimer += Time.deltaTime;
 		} else {
-			//rightAnchorGoal = rightAnchorHome;
 			if (stickTimer > 0) stickTimer -= Time.deltaTime;
-
 		}
+		
 		rightAnchor.localPosition = rightAnchorHome + new Vector3(0.0f, stickCurve.Evaluate(stickTimer) * -0.5f, 0.0f);
 		
 		playerController.leftInput(leftThumb.localPosition * 10.0f);

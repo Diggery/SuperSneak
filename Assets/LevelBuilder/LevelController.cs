@@ -24,7 +24,7 @@ public class LevelController : MonoSingleton<LevelController>
 	
 	// Number of crates
 	public int maxCrates;
-	int numberCrates;
+	int numberOfCrates;
 	
 	// Room structure
 	public Room[,] rooms;
@@ -99,6 +99,11 @@ public class LevelController : MonoSingleton<LevelController>
 		
 		// Generate childrens
 		firstRoom.AddChild(0).GenerateChildren();
+		
+		//Start up the game control
+		GameObject gameControlObj = GameObject.Find ("GameControl");
+		gameControlObj.GetComponent<GameControl>().Init();
+
 	}
 	
 	void GenerateGameRooms() {
@@ -146,7 +151,7 @@ public class LevelController : MonoSingleton<LevelController>
 		} 
 		return roomCount;
 	}
-	
+
 	public void resetLevel() {
 		Debug.Log("Resetting Level");
 		Destroy(levelContainer);
@@ -169,6 +174,10 @@ public class LevelController : MonoSingleton<LevelController>
 		}
 	}
 	
+	public int getNumberOfCrates() {
+		return numberOfCrates;
+	}	
+		
 	public GameObject AddCrate(GameRoom gameRoom, Transform location) {
 		
 		int depth = gameRoom.room.NumRoomsToEntrance();
@@ -177,10 +186,10 @@ public class LevelController : MonoSingleton<LevelController>
 		if (Random.value < 0.5f) return null;
 		
 		//make sure we dont have too many crates
-		if (numberCrates >= maxCrates) return null;
+		if (numberOfCrates >= maxCrates) return null;
 		
 		// ok, add one
-		numberCrates++;
+		numberOfCrates++;
 		int crateSelection = Random.Range(0, cratePrefabs.Length);
 		GameObject newCrate = Instantiate(cratePrefabs[crateSelection], location.position, location.rotation) as GameObject;
 		

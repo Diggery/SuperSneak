@@ -38,6 +38,9 @@ ModelImporter:
     4300066: Centered
     4300068: FreeLook
     4300070: Resize
+    4300072: LowerCenter
+    4300074: CenterSlider
+    4300076: CenterThumb
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -95,6 +98,32 @@ ModelImporter:
       data:
         first: 33
         second: ba5a3200
+    CenterSlider:
+      data:
+        first: 1
+        second: d6860100
+      data:
+        first: 4
+        second: b61a0600
+      data:
+        first: 23
+        second: 88182300
+      data:
+        first: 33
+        second: c85a3200
+    CenterThumb:
+      data:
+        first: 1
+        second: d4860100
+      data:
+        first: 4
+        second: b41a0600
+      data:
+        first: 23
+        second: 84182300
+      data:
+        first: 33
+        second: c45a3200
     Centered:
       data:
         first: 1
@@ -172,6 +201,19 @@ ModelImporter:
       data:
         first: 33
         second: a45a3200
+    LowerCenter:
+      data:
+        first: 1
+        second: d8860100
+      data:
+        first: 4
+        second: b81a0600
+      data:
+        first: 23
+        second: 8a182300
+      data:
+        first: 33
+        second: ca5a3200
     LowerLeft:
       data:
         first: 1

@@ -16,6 +16,8 @@ public class CrateController : MonoBehaviour {
 	
 	Transform miniMapDot;
 	Transform miniMapDotOpened;
+	
+	GameControl gameControl;
 
 	void Start () {
 
@@ -35,6 +37,9 @@ public class CrateController : MonoBehaviour {
 		// switch the chests minimap dot
 		miniMapDot = transform.Find("MiniMap");
 		miniMapDotOpened = transform.Find("MiniMapOpened");
+		
+		GameObject gameControlObj = GameObject.Find ("GameControl");
+		gameControl = gameControlObj.GetComponent<GameControl>();
 
 	}
 	
@@ -67,6 +72,8 @@ public class CrateController : MonoBehaviour {
 		}
 		miniMapDot.renderer.enabled = false;
 		miniMapDotOpened.renderer.enabled = true;
+		gameControl.CrateOpened();
+
 	}
 	
     void OnTriggerEnter(Collider other) {

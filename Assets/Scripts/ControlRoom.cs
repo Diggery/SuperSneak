@@ -15,6 +15,8 @@ public class ControlRoom : MonoBehaviour {
 	
 	Hashtable characterPrefabs;
 	
+	bool poweredOn;
+	
 	void Start() {
 		//load up the enemy hashtable
 		characterPrefabs = new Hashtable();
@@ -22,6 +24,8 @@ public class ControlRoom : MonoBehaviour {
 			characterPrefabs[enemy.name] = enemy;
 		}
 		spawnTimer = -1.0f;
+		
+		TurnOn();
 		
 		Invoke("SpawnPartrol", 5);
 		
@@ -45,8 +49,17 @@ public class ControlRoom : MonoBehaviour {
 	}
 
 	
+	public void ShutDown() {
+		poweredOn = false;
+	}
+	
+	public void TurnOn() {
+		poweredOn = true;
+	}	
+	
 	public GameObject SpawnEnemyFromQueue() {
 		
+		if (!poweredOn) return null;
 		
 		if (currentEnemies > MaxEnemies) {
 			spawnTimer = spawnCoolDown;

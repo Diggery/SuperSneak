@@ -138,7 +138,7 @@ public class EnemyAI : MonoBehaviour {
 	public void investigate(Vector3 alertPos) {
 		if (!enemyAnimator) forceSetUp();
 		if (currentActivity == Activity.Dead) return;
-		if (enemyAnimator) enemyAnimator.stopAnims();
+		if (enemyAnimator) enemyAnimator.StopAnims();
 		currentActivity = Activity.Investigating;
 		lastKnownPos = alertPos;
 		enemyController.runTo(lastKnownPos);
@@ -149,7 +149,7 @@ public class EnemyAI : MonoBehaviour {
 		pathMover.Stop();
 		readyToFire = false;
 		currentActivity = Activity.Looking; 
-		lookingTimer = enemyAnimator.playLookAroundAnim();
+		lookingTimer = enemyAnimator.PlayLookAroundAnim();
 		enemyController.startWalking();
 	}
 	
@@ -171,6 +171,7 @@ public class EnemyAI : MonoBehaviour {
 		gotoRoom();
 	}
 	
+	
 	public void spotPlayer() {
 		if (currentActivity == Activity.Dead) return;
 		
@@ -184,7 +185,7 @@ public class EnemyAI : MonoBehaviour {
 	}
 	
 	public void raiseAlarm() {		
-		enemyAnimator.stopAnims();
+		enemyAnimator.StopAnims();
 
 		currentActivity = Activity.HeadingToControlRoom;
 		GameObject guardRoom = GameObject.FindWithTag("GuardRoom");
@@ -212,7 +213,7 @@ public class EnemyAI : MonoBehaviour {
 		currentActivity = Activity.Dead;
 		
 	}
-	public void stunned(float stunTime) {
+	public void Stunned(float stunTime) {
 		currentActivity = Activity.Stunned;
 		stunTimer = stunTime;
 	}

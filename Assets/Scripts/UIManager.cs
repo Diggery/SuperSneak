@@ -5,6 +5,8 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
 	public float UIScale;
+	public TextMesh debugText;
+	public string debugString;
 	
 	
 	void Start () {
@@ -12,6 +14,7 @@ public class UIManager : MonoBehaviour {
 	}
 	
 	void Update () {
+		debugText.text = debugString;
 	
 	}
 	
@@ -58,7 +61,7 @@ public class UIManager : MonoBehaviour {
 				
 		}
 		
-		//move stick into position
+		//move element into position
 		newElement.position = Camera.main.ScreenToWorldPoint(new Vector3 (screenX, screenY, Camera.main.nearClipPlane + 1));
 		newElement.rotation = Camera.main.transform.rotation;
 		newElement.Rotate(0.0f, 180.0f, 0.0f);

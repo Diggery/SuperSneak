@@ -237,23 +237,18 @@ public class EnemyController : MonoBehaviour {
 	
 	public void gassed() {
 		if (enemyAI.currentActivity == EnemyAI.Activity.Stunned) return;
-		enemyAI.stunned(7);
+		enemyAI.Stunned(7);
 		startWalking();
-		enemyAnimator.stopAnims();
+		enemyAnimator.StopAnims();
+		enemyAnimator.PlayStunnedAnim();
 		pathMover.Stop();
-		ragDoll.enableRagDoll(Vector3.zero);
-		foreach (Transform accessory in accessories) {
-			accessory.parent = null;
-			accessory.gameObject.AddComponent<Rigidbody>();
-			accessory.gameObject.AddComponent<BoxCollider>();
-		}
-		accessories = new Transform[0];
+
 	}	
 	
 	public void die(Vector3 origin) {
 		enemyAI.die();
 		startWalking();
-		enemyAnimator.stopAnims();
+		enemyAnimator.StopAnims();
 		pathMover.Stop();
 		Vector3 deathForce = (transform.position - origin).normalized + new Vector3(0.0f, 0.5f, 0.0f);
 		deathForce *= 100;
@@ -267,12 +262,14 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void revive() {
-		ragDoll.disableRagDoll();
-		Vector3 ragDollPos = ragDoll.getRagDollPos();
-		ragDoll.resetRagDollPos();
-		transform.position = new Vector3(ragDollPos.x, 0.0f, ragDollPos.z);
-		Invoke ("rebootAI", enemyAnimator.playGetUpAnim());
+		Invoke ("rebootAI", enemyAnimator.PlayGetUpAnim());
 	}
+	
+	public void StandDown() {
+		print ("Standing Down");
+		startWalking();
+		enemyAI.patrol();
+	}	
 	
 	public void rebootAI() {
 		enemyAI.revive();

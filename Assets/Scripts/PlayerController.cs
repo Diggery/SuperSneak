@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 	
 	Transform head;
 	RagDollController ragDoll;
+	GameControl gameControl;
 	
 	public void SetUp (Transform thiefHead, RagDollController thiefRagDoll, BombThrower newBombThrower) {
 
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour {
 			miniMapDot.renderer.material.color = Color.yellow;
 			miniMapDot.renderer.material.renderQueue = 3500;
 		}
+		GameObject gameControlObj = GameObject.Find ("GameControl");
+		gameControl = gameControlObj.GetComponent<GameControl>();		
 		
 	}
 
@@ -99,6 +102,7 @@ public class PlayerController : MonoBehaviour {
 		playerAnimator.die(origin);
 		
 		Destroy(GetComponent<CharacterController>());
+		gameControl.PlayerIsDead();
 		
 	}
 	

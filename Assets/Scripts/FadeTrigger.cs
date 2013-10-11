@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FadeTrigger : MonoBehaviour {
 	
-	bool triggered;
+	public bool triggered;
 	
 	Transform target;
 	

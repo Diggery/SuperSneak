@@ -7,6 +7,9 @@ public class LevelEntrance : MonoBehaviour {
 	public GameObject cameraPrefab;
 	public GameObject miniMapPrefab;
 	public Transform entrance;
+	FadeTrigger entranceRoof;
+	GameControl gameControl;
+
 
 	void Start () {
 		GameObject player = Instantiate(playerPrefab, entrance.position, entrance.rotation) as GameObject;	
@@ -15,10 +18,13 @@ public class LevelEntrance : MonoBehaviour {
 		Transform entranceTop = transform.Find("EntranceTop");
 		Transform closeEntrance = transform.Find("CloseEntrance");
 		
-		FadeTrigger fadeTrigger = entranceTop.gameObject.AddComponent<FadeTrigger>();
+		entranceRoof = entranceTop.gameObject.AddComponent<FadeTrigger>();
 		TriggerRelay closeTrigger = closeEntrance.gameObject.AddComponent<TriggerRelay>();
-		closeTrigger.target = fadeTrigger;
+		closeTrigger.target = entranceRoof;
 		closeTrigger.setTo = false;
+		
+		GameObject gameControlObj = GameObject.Find ("GameControl");
+		gameControl = gameControlObj.GetComponent<GameControl>();		
 		
 		Invoke("CreateCamera", 1);
 	}
@@ -31,5 +37,11 @@ public class LevelEntrance : MonoBehaviour {
 		camera.AddComponent<TouchInterface>();
 		camera.AddComponent<TouchManager>();
 		camera.AddComponent<KeyboardControl>();
+	}
+	
+	void Update() {
+		if (!entranceRoof.triggered && gameControl.LevelComplete()) {
+			print ("Exiting Level");
+		}
 	}
 }
