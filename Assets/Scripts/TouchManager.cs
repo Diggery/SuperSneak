@@ -95,7 +95,15 @@ public class TouchManager : MonoBehaviour {
 	
 	}
 	
+	public void sweepLeft() {
+	
+	}
+	
 	public void swipeRight(float touchTime, Transform startTarget, Transform endTarget, int touchId) {
+	
+	}
+	
+	public void sweepRight() {
 	
 	}
 	
@@ -103,8 +111,16 @@ public class TouchManager : MonoBehaviour {
 	
 	}
 	
+	public void sweepDown() {
+		
+	}
+	
 	public void swipeUp(float touchTime, Transform startTarget, Transform endTarget, int touchId) {
 	
+	}
+	
+	public void sweepUp() {
+		
 	}
 	
 	public void longTouched(Transform touchTarget, int touchId) {
@@ -113,6 +129,7 @@ public class TouchManager : MonoBehaviour {
 	}
 	
 	public void backPressed() {
+		Events.Send(gameObject, "KeysPressed", "Back");		
 	}
 	
 	public void menuPressed() {

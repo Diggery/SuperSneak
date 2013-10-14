@@ -26,7 +26,7 @@ public class LevelEntrance : MonoBehaviour {
 		GameObject gameControlObj = GameObject.Find ("GameControl");
 		gameControl = gameControlObj.GetComponent<GameControl>();		
 		
-		Invoke("CreateCamera", 1);
+		Invoke("CreateCamera", 0.01f);
 	}
 	
 	void CreateCamera() {
@@ -34,14 +34,12 @@ public class LevelEntrance : MonoBehaviour {
 		Instantiate(miniMapPrefab, Vector3.zero, Quaternion.identity);
 		
 		camera.GetComponent<CameraControl>().SetUp();
-		camera.AddComponent<TouchInterface>();
-		camera.AddComponent<TouchManager>();
 		camera.AddComponent<KeyboardControl>();
 	}
 	
 	void Update() {
 		if (!entranceRoof.triggered && gameControl.LevelComplete()) {
-			print ("Exiting Level");
+			gameControl.LeaveLevel();
 		}
 	}
 }

@@ -5,27 +5,25 @@ public class GameControl : MonoBehaviour {
 	
 	LevelController levelController; 
 	
-	
 	int cratesOpened;
 	bool allCratesOpened;
-
-	public void Init () {
-		levelController = LevelController.instance;
-
-	}
 	
-	void Update () {
+	public int currentSeed;
+	
+	void Awake () {
+    	DontDestroyOnLoad (transform.gameObject);
+		Events.Listen(gameObject, "KeysPressed"); 
+	}
+
+	public void CrateOpened() {
+		print("CrateOpened");
 		
+		cratesOpened++;
+		if (!levelController) levelController = LevelController.instance;
 		if (!allCratesOpened && levelController.getNumberOfCrates() <= cratesOpened) {
 			print("All Crates Gone");
 			allCratesOpened = true;
-		}
-	
-	}
-	
-	public void CrateOpened() {
-		print("CrateOpened");
-		cratesOpened++;
+		}		
 	}	
 	
 	public bool LevelComplete() {
@@ -45,4 +43,19 @@ public class GameControl : MonoBehaviour {
 		}
 		
 	}
+	
+	public int GetSeed() {
+		return currentSeed;	
+	}
+	
+	public void KeysPressed(Events.Notification notification) {
+		string key = (string)notification.data;
+		if (key == "Back") Application.LoadLevel("MainMenu");
+	}
+	
+	public void LeaveLevel() {
+		Application.LoadLevel("MainMenu");
+		
+	}
+	
 }

@@ -52,9 +52,10 @@ public class EnemyAI : MonoBehaviour {
 		if (alertLevel > 0) alertLevel -= Time.deltaTime * 0.25f;
 		
 		float targetRange = (transform.position - enemyController.player.position).magnitude;
-		if (targetRange < 2.0f && enemyController.canSeeTarget()) {
-			spotPlayer();
-		}
+		
+		//if he is right next to me, just spot him
+		if (targetRange < 2.0f && enemyController.canSeeTarget()) spotPlayer();
+		
 
 		switch (currentActivity) {
 			case Activity.Patrolling :
@@ -82,7 +83,7 @@ public class EnemyAI : MonoBehaviour {
 						enemyController.approachTarget(lastKnownPos);
 					}
 				
-					if (targetRange < 20) {
+					if (targetRange < 15) {
 						Vector3 fireTarget = new Vector3(enemyController.player.position.x, 1.5f, enemyController.player.position.z);
 						BroadcastMessage("fire", fireTarget);
 						readyToFire = true;

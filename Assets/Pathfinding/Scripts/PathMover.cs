@@ -33,7 +33,7 @@ public class PathMover : Pathfinding {
 			}
 			
 			moveDirection = moveDirection.normalized * speed * Time.deltaTime;
-			characterController.Move(moveDirection); 
+			if (characterController.enabled) characterController.Move(moveDirection); 
 			
             if ((transform.position- nextPath).sqrMagnitude < distanceThreshold) {
                 Path.RemoveAt(0);

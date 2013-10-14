@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BombFuse : MonoBehaviour {
 	
-	public float fuseTime = 3;
+	public float fuseTime = 1;
 	float timer = 0.0f;
 	SphereCollider collision;
 	bool dud = false;

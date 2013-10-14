@@ -52,8 +52,11 @@ public class LevelController : MonoSingleton<LevelController>
 	
 	public GameObject[] cratePrefabs;
 	
+	//seed offset for retries on bad levels
+	int seedOffset;
+	
 	public override void Init () {
-		
+				
 		// get the pathfinder so we can set it up
 		GameObject pathFinderObj = GameObject.Find("Pathfinder");
 		pathFinder = pathFinderObj.GetComponent<Pathfinder>();
@@ -64,8 +67,10 @@ public class LevelController : MonoSingleton<LevelController>
 		//create a game object to stick all the rooms in
 		levelContainer = new GameObject("LevelContainer");
 		
-		//fill out the matrix for the rooms with a raondom seed
-		GenerateLevel(Random.Range(0,100));
+		//fill out the matrix for the rooms with a seed
+		GameObject gameControlObj = GameObject.Find ("GameControl");
+		Random.seed = gameControlObj.GetComponent<GameControl>().GetSeed() + seedOffset;
+		GenerateLevel();
 		
 		print (getNumberOfRooms() + " rooms built");
 		
@@ -83,9 +88,9 @@ public class LevelController : MonoSingleton<LevelController>
 
 	}
 	
-	public void GenerateLevel(int newSeed) {
+	public void GenerateLevel() {
 		
-		Random.seed = newSeed;
+
 		//Debug.Log("Generation with seed " + newSeed);
 		
 		// Create room structure
@@ -100,10 +105,6 @@ public class LevelController : MonoSingleton<LevelController>
 		// Generate childrens
 		firstRoom.AddChild(0).GenerateChildren();
 		
-		//Start up the game control
-		GameObject gameControlObj = GameObject.Find ("GameControl");
-		gameControlObj.GetComponent<GameControl>().Init();
-
 	}
 	
 	void GenerateGameRooms() {
@@ -153,6 +154,7 @@ public class LevelController : MonoSingleton<LevelController>
 	}
 
 	public void resetLevel() {
+		seedOffset++;
 		Debug.Log("Resetting Level");
 		Destroy(levelContainer);
 		levelContainer = null;
@@ -165,7 +167,7 @@ public class LevelController : MonoSingleton<LevelController>
 	void AddGuardRoom() {
 		foreach (Room room in rooms) {
 			if (room != null) {
-				if (!room.IsFirstNode() && !room.HasChildren() && !room.placeHolder && room.getHeadingDirection() == 0) {
+				if (!room.IsFirstNode() && !room.HasChildren() && !room.placeHolder) {
 					Debug.Log(room.name + "is the guard room");
 					room.SetToGuardRoom();
 					break;

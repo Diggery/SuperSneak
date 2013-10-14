@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour {
 	
 	PathMover pathMover;
 	EnemyAnimator enemyAnimator;
+	CharacterController characterController;
 	
 	[HideInInspector]
 	public EnemyManager enemyManager;
@@ -67,6 +68,7 @@ public class EnemyController : MonoBehaviour {
 		
 		enemyAI = GetComponent<EnemyAI>();
 		enemyAnimator = GetComponent<EnemyAnimator>();
+		characterController = GetComponent<CharacterController>();
 		startWalking();
 		Events.Listen(gameObject, "SoundEvents");  
 		
@@ -110,7 +112,7 @@ public class EnemyController : MonoBehaviour {
 		} 
 		
 		if (enemyAI.currentActivity == EnemyAI.Activity.Dead) {
-			currentSpeed = 0;
+			return;
 		} else {
 			currentSpeed = Mathf.Lerp (currentSpeed, speedGoal, Time.deltaTime * 2);
 		}
@@ -142,7 +144,8 @@ public class EnemyController : MonoBehaviour {
 	public void approachTarget(Vector3 target) {
 		if (isRunning) startWalking();
 		Vector3 targetPos = new Vector3(target.x, 0, target.z);
-		transform.position = Vector3.MoveTowards(transform.position, targetPos, walkSpeed * Time.deltaTime);
+		characterController.Move(targetPos * walkSpeed * Time.deltaTime);
+		//transform.position = Vector3.MoveTowards(transform.position, targetPos, walkSpeed * Time.deltaTime);
 	}
 	
 	public void walkTo(Vector3 newLoc) {
@@ -198,8 +201,8 @@ public class EnemyController : MonoBehaviour {
 	
 	public bool canSeeTarget() {
 		RaycastHit hit;
-		Vector3 startPos = new Vector3 (transform.position.x, 1.5f, transform.position.z);
-		Vector3 endPos = new Vector3 (player.position.x, 1.5f, player.position.z);
+		Vector3 startPos = new Vector3 (transform.position.x, 0.5f, transform.position.z);
+		Vector3 endPos = new Vector3 (player.position.x, 0.5f, player.position.z);
 				
 		int layer1 = LayerMask.NameToLayer("Default"); // default
 		int layer2 = LayerMask.NameToLayer("Player"); // player
@@ -248,6 +251,7 @@ public class EnemyController : MonoBehaviour {
 	public void die(Vector3 origin) {
 		enemyAI.die();
 		startWalking();
+		characterController.enabled = false;
 		enemyAnimator.StopAnims();
 		pathMover.Stop();
 		Vector3 deathForce = (transform.position - origin).normalized + new Vector3(0.0f, 0.5f, 0.0f);

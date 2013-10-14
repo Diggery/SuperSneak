@@ -5,23 +5,13 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
 	public float UIScale;
-	public TextMesh debugText;
-	public string debugString;
-	
 	
 	void Start () {
 	
 	}
-	
-	void Update () {
-		debugText.text = debugString;
-	
-	}
-	
+
 	public void lockToEdge(Transform newElement) {
-		
-		//find the new pos
-		
+				
 		float screenX;
 		float screenY;
 			

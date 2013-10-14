@@ -55,7 +55,9 @@ public class InventoryController : MonoBehaviour {
 		
 		addItem("Cash");
 		addItem("Jewels");
-		addItem("Gas");
+		addItem("HighEx");
+		addItem("HighEx");
+		addItem("HighEx");
 		
 		setUp = true;
 		

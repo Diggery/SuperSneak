@@ -39,7 +39,6 @@ public class ControlRoom : MonoBehaviour {
 	}
 	
 	public void SpawnPartrol() {
-		QueueEnemy("Guard");
 		QueueEnemy("Janitor");
 	}
 	
