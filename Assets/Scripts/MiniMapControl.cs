@@ -42,7 +42,7 @@ public class MiniMapControl : MonoBehaviour {
 		
 		camPosGoal.y = Mathf.Lerp(zoomRange.x, zoomRange.y, zoomLevel);
 		
-		miniMapCamera.transform.localPosition = Vector3.Lerp(miniMapCamera.transform.localPosition, camPosGoal, GameTime.unpausedDeltaTime * 5);
+		miniMapCamera.transform.localPosition = Vector3.Lerp(miniMapCamera.transform.localPosition, camPosGoal, GameTime.deltaTime * 5);
 	
 	}
 	

@@ -128,7 +128,7 @@ public class TouchInterface : MonoBehaviour {
 		
 				touchManager.touchDrag(touchDelta, touchDistance[touchId], touchPosition[touchId], hit.transform, startTarget[touchId], touchId);
 				touchDistance[touchId] += touchDelta;
-				touchTime[touchId] += GameTime.unpausedDeltaTime;
+				touchTime[touchId] += GameTime.deltaTime;
 				
 				
 				// test for longtouch

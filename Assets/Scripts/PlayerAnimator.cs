@@ -57,8 +57,6 @@ public class PlayerAnimator : MonoBehaviour {
 		ThrowBombEvent.functionName = "throwBomb";
 		ThrowBombEvent.time = 0.25f;
 		playerModel.animation["Throw"].clip.AddEvent(ThrowBombEvent);	
-		
-				
 	}
 	
 	void Update () {
@@ -98,6 +96,14 @@ public class PlayerAnimator : MonoBehaviour {
 		
 		float animSpeed = playerController.currentSpeed * 0.3f;
 		
+		if (playerController.shootInputOn) {
+			float shootHeading = Util.getDirection(-playerController.currentShootInput);	
+			float moveHeading = Util.getDirection(playerController.currentDirection);
+			
+			if (Mathf.Abs(shootHeading - moveHeading) > 90) animSpeed = -animSpeed;
+		
+		}
+		
 		playerModel.animation["Run"].speed = animSpeed;
 		playerModel.animation["Walk"].speed = animSpeed;
 		
@@ -106,16 +112,24 @@ public class PlayerAnimator : MonoBehaviour {
 			if (currentState == AnimState.OpeningCrate) {
 				heading = Quaternion.Euler(0, Util.getDirection(headingOverride) - 180, 0);
 			} else {
-				heading = Quaternion.Euler(0, Util.getDirection(playerController.currentDirection), 0);
+				// if the player is trying to shoot rotate towards that, otherise head the direction of running
+				if (playerController.shootInputOn) {
+					heading = Quaternion.Euler(0, Util.getDirection(-playerController.currentShootInput), 0);
+				} else {
+					heading = Quaternion.Euler(0, Util.getDirection(playerController.currentDirection), 0);
+				}
 			}
+			
 			transform.rotation = Quaternion.Lerp(transform.rotation, heading, Time.deltaTime * 8.0f);
 		}
 	}
 	
 	void selectState() {
 		if (currentState != AnimState.Idle && playerController.currentSpeed < 0.1f) playIdleAnim();
-		if (playerController.leftInputOn) {
-			if (playerController.currentSpeed > 0.1f && playerController.currentSpeed < 3.0f) playSneakAnim();
+		if (playerController.moveInputOn) {
+			if (playerController.currentSpeed > 0.1f && 
+				playerController.currentSpeed < 3.0f ||
+				playerController.shootInputOn) playSneakAnim();
 			if (playerController.currentSpeed > 3.0f) playRunAnim();
 		}
 	}

@@ -67,7 +67,7 @@ public class MiniMapDisplay : MonoBehaviour {
 	void Update () {
 		
 		if (transTimer < 1.0f) {
-			transTimer = Mathf.Clamp01(transTimer + (GameTime.unpausedDeltaTime * 3));
+			transTimer = Mathf.Clamp01(transTimer + (GameTime.deltaTime * 3));
 		
 			float lerpAmount = miniMapControl.transitionCurve.Evaluate(transTimer);
 			

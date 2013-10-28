@@ -43,6 +43,11 @@ public class ViewShapeDrawer : MonoBehaviour {
 	
 	void LateUpdate() {
 		
+		if (enemyController.IsDisabled()) {
+			renderer.enabled = false;
+			return;
+		}
+		
 		if (!head && enemyController) head = enemyController.getHead();
 		
 		float heading = head.eulerAngles.y;

@@ -8,6 +8,7 @@ public class InventoryController : MonoBehaviour {
 	
 	[System.Serializable]
 	public class ItemTypes {	
+		public InventoryItem.ItemTypes type;
 		public string name;
 		public Texture texture;
 		public GameObject prefab;
@@ -55,9 +56,11 @@ public class InventoryController : MonoBehaviour {
 		
 		addItem("Cash");
 		addItem("Jewels");
+		addItem("Flash");
+		addItem("Gas");
 		addItem("HighEx");
-		addItem("HighEx");
-		addItem("HighEx");
+		addItem("Smoke");
+		addItem("Laser");
 		
 		setUp = true;
 		
@@ -162,6 +165,7 @@ public class InventoryController : MonoBehaviour {
 				newItem.transform.localScale = Vector3.one;
 				InventoryItem newInventoryItem = newItem.GetComponent<InventoryItem>();
 				newInventoryItem.setUp(this);
+				newInventoryItem.setType(itemType.type);
 				newInventoryItem.setName(itemType.name);
 				newInventoryItem.setTexture(itemType.texture);
 				newInventoryItem.setPrefab(itemType.prefab);
@@ -188,6 +192,10 @@ public class InventoryController : MonoBehaviour {
 		} else {
 			usedItem.removeCount();
 		}
+	}
+	
+	public InventoryItem.ItemTypes GetSelectedItemType() {
+		return currentItems[0].itemType;
 	}
 	
 	public GameObject getBomb() {

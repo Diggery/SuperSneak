@@ -12,7 +12,7 @@ public class BombEffectGas : MonoBehaviour {
 	GameObject areaOfEffect;
 	
 	public void explode() {
-		Vector4 soundEventData = new Vector4(transform.position.x, transform.position.y, transform.position.z, 5.0f);
+		Vector4 soundEventData = new Vector4(transform.position.x, transform.position.y, transform.position.z, 1.0f);
 		Events.Send(gameObject, "SoundEvents", soundEventData);
 
 		gasCloud = Instantiate(gasCloudParticles, transform.position, Quaternion.Euler(-90, 0, 0)) as GameObject;
@@ -28,7 +28,8 @@ public class BombEffectGas : MonoBehaviour {
 		SphereCollider collision = areaOfEffect.AddComponent<SphereCollider>();
 		collision.isTrigger = true;
 		collision.radius = blastRadius;
-		areaOfEffect.AddComponent<AreaOfEffect>();
+		AreaOfEffect effect = areaOfEffect.AddComponent<AreaOfEffect>();
+		effect.SetEffect ("Gassed");
 		collision.isTrigger = true;
 		
 	}

@@ -56,14 +56,12 @@ public class EnemyAnimator : MonoBehaviour {
 		if (enemyAI.currentActivity == EnemyAI.Activity.Dead || enemyAI.currentActivity == EnemyAI.Activity.Stunned) {
 			return;
 		}
-		
-		if (enemyAI.readyToFire) {
-			PlayAimAnim();
-		} else {
-			StopAiming();
-		}
-
 		if (enemyController.isMoving()) {
+			
+			if (enemyAI.currentActivity == EnemyAI.Activity.Blinded) {
+				
+			}
+			
 			if (enemyController.isRunning) { 
 				if (!model.animation.IsPlaying("Run")) model.animation.CrossFade("Run", 0.1f, PlayMode.StopSameLayer);
 			} else {
@@ -72,6 +70,14 @@ public class EnemyAnimator : MonoBehaviour {
 		} else {
 			if (!model.animation.IsPlaying("Idle01")) model.animation.CrossFade("Idle01", 0.1f, PlayMode.StopSameLayer);
 		}
+	}
+	
+	public void Fire() {
+		PlayAimAnim();
+	}
+	
+	public void StopFiring() {
+		StopAiming();
 	}
 	public void StopAnims() {
 		model.animation.Stop();

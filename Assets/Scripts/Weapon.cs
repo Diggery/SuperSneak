@@ -45,7 +45,12 @@ public class Weapon : MonoBehaviour {
 
 	}
 	
-	public void fire(Vector3 target) {
+	public void FireWild(Vector3 target) {
+		print ("Shooting wild");
+		Fire(target + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)));
+	}
+	
+	public void Fire(Vector3 target) {
 		switch (currentState) {
 			case WeaponState.Off :
 				currentState = WeaponState.WarmingUp;
@@ -64,5 +69,8 @@ public class Weapon : MonoBehaviour {
 			break;
 		
 		}
+	}
+	public void StopFiring() {
+		currentState = WeaponState.Off;
 	}
 }

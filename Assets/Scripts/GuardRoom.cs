@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ControlRoom : MonoBehaviour {
+public class GuardRoom : MonoBehaviour {
 	
 	public List<Transform> entrances;
 	public List<GameObject> enemyTypes;
@@ -29,6 +29,7 @@ public class ControlRoom : MonoBehaviour {
 		
 		Invoke("SpawnPartrol", 5);
 		
+		Events.Listen(gameObject, "SoundEvents");  
 	}
 	
 	void Update() {
@@ -39,7 +40,7 @@ public class ControlRoom : MonoBehaviour {
 	}
 	
 	public void SpawnPartrol() {
-		QueueEnemy("Janitor");
+		QueueEnemy("Guard");
 	}
 	
 	public void QueueEnemy(string type) {
@@ -55,6 +56,19 @@ public class ControlRoom : MonoBehaviour {
 	public void TurnOn() {
 		poweredOn = true;
 	}	
+	
+	public IEnumerator SoundEvents(Events.Notification notification) {
+		Vector4 soundData = (Vector4)notification.data;
+		Vector3 soundPos = new Vector3(soundData.x, soundData.y, soundData.z);
+		float volume = soundData.w;
+		yield return new WaitForSeconds(1);
+		
+		if (volume >= 5.0f) {
+			GameObject responder = ForceSpawnEnemy("Guard");
+			responder.GetComponent<EnemyController>().investigate(soundPos);
+		}		
+	}
+	
 	
 	public GameObject SpawnEnemyFromQueue() {
 		
@@ -73,6 +87,15 @@ public class ControlRoom : MonoBehaviour {
 		GameObject newEnemy = Instantiate(prefab, entrance.position, entrance.rotation) as GameObject;
 		currentEnemies++;
 		spawnQueue.RemoveAt(0);
+		spawnTimer = spawnCoolDown;
+		return newEnemy;
+	}
+	
+	public GameObject ForceSpawnEnemy(string enemyType) {
+		currentEnemies++;
+		GameObject prefab = (GameObject)characterPrefabs[enemyType];
+		Transform entrance = entrances[Random.Range(0, entrances.Count)];
+		GameObject newEnemy = Instantiate(prefab, entrance.position, entrance.rotation) as GameObject;
 		spawnTimer = spawnCoolDown;
 		return newEnemy;
 	}

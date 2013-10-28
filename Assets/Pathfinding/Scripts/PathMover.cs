@@ -43,7 +43,10 @@ public class PathMover : Pathfinding {
 	}
 	
 	public bool SetDestination(Vector3 newDestination) {
-		if (coolDownTimer > 0) return false;
+		if (coolDownTimer > 0) {
+			print ("still cooling down");
+			return false;
+		}
 		
 		FindPath(transform.position, newDestination);
 		coolDownTimer = coolDown + Random.value * 0.1f;

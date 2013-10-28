@@ -19,7 +19,7 @@ public class GameTime : MonoBehaviour {
 		}
 	}
 	
-	public static float unpausedDeltaTime { 
+	public static float deltaTime { 
 		get { 
 			if (!theGameTime) {
 				Initialize();

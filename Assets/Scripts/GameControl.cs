@@ -34,12 +34,20 @@ public class GameControl : MonoBehaviour {
 		print("Game Over");
 		
 		GameObject guardRoom = GameObject.FindGameObjectWithTag("GuardRoom");
-		guardRoom.GetComponent<ControlRoom>().ShutDown();
+		guardRoom.GetComponent<GuardRoom>().ShutDown();
 		
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		
+		GameObject killer = FindClosestEnemy(player.transform.position);
+				
 		GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
 		foreach (GameObject enemy in allEnemies) {
-			EnemyController controller = enemy.GetComponent<EnemyController>();
-			controller.StandDown();
+			if (enemy == killer) {
+				enemy.GetComponent<EnemyController>().LookAtDeadPlayer();
+			} else {
+				EnemyController controller = enemy.GetComponent<EnemyController>();
+				controller.StandDown();
+			}
 		}
 		
 	}
@@ -47,7 +55,10 @@ public class GameControl : MonoBehaviour {
 	public int GetSeed() {
 		return currentSeed;	
 	}
-	
+	public void SetSeed(int newSeed) {
+		currentSeed = newSeed;	
+	}
+		
 	public void KeysPressed(Events.Notification notification) {
 		string key = (string)notification.data;
 		if (key == "Back") Application.LoadLevel("MainMenu");
@@ -57,5 +68,21 @@ public class GameControl : MonoBehaviour {
 		Application.LoadLevel("MainMenu");
 		
 	}
+	
+    GameObject FindClosestEnemy(Vector3 point) {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        foreach (GameObject go in gos) {
+            Vector3 diff = go.transform.position - point;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance) {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest;
+    }
 	
 }

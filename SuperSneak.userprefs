@@ -1,10 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/InventoryItem.cs">
     <Files>
-      <File FileName="Assets/Scripts/BombFuse.cs" Line="6" Column="27" />
       <File FileName="Assets/Scripts/EnemyController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameControl.cs" Line="9" Column="23" />
+      <File FileName="Assets/Scripts/UIThumbsticks.cs" Line="73" Column="111" />
+      <File FileName="Assets/Scripts/UIShootStickBehavior.cs" Line="35" Column="1" />
+      <File FileName="Assets/Scripts/PlayerAnimator.cs" Line="6" Column="1" />
+      <File FileName="Assets/Scripts/InventoryController.cs" Line="195" Column="1" />
+      <File FileName="Assets/Scripts/InventoryItem.cs" Line="8" Column="38" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,9 +15,18 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="LevelBuilder" expanded="True" />
-              <Node name="Scripts" expanded="True">
-                <Node name="GameControl.cs" selected="True" />
+              <Node name="Pathfinding" expanded="True">
+                <Node name="Scripts" expanded="True" />
               </Node>
+              <Node name="Scripts" expanded="True">
+                <Node name="InventoryItem.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True" />
+          <Node name="Assembly-CSharp-firstpass" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Plugins" expanded="True" />
             </Node>
           </Node>
         </State>

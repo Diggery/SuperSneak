@@ -7,6 +7,7 @@ public class BombFuse : MonoBehaviour {
 	float timer = 0.0f;
 	SphereCollider collision;
 	bool dud = false;
+	bool primed = false;
 
 	void Start () {
 		collision = GetComponent<SphereCollider>();
@@ -16,7 +17,7 @@ public class BombFuse : MonoBehaviour {
 		if (dud) return;
 		if (rigidbody.useGravity) timer += Time.deltaTime;
 		if (!collision.enabled && timer >  0.25f) collision.enabled = true;
-		if (timer > fuseTime) detonate();
+		if (timer > fuseTime && primed) detonate();
 	
 	}
 	
@@ -27,6 +28,8 @@ public class BombFuse : MonoBehaviour {
 	}
 	
     void OnCollisionEnter(Collision collision) {
+		primed = true;
+		timer = 0.0f;
 		if (dud) return;
 		if (collision.transform.tag == "Enemy") detonate();
 	}

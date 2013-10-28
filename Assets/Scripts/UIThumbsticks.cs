@@ -16,21 +16,26 @@ public class UIThumbsticks : MonoBehaviour {
 	Transform upperRight;
 	Transform lowerCenter;
 	
-	Transform leftThumb;
-	Transform rightAnchor;
-	Vector3 rightAnchorHome;
+	Transform moveThumb;
+	public bool moveTouched;	
+	Vector3 movePosGoal;	
+	
+	Transform throwAnchor;
+	Transform throwThumb;
+	public bool throwTouched;	
+	Vector3 throwPosGoal;
+	
+	Transform shootAnchor;
+	Transform shootThumb;
+	public bool shootTouched;	
+	Vector3 shootPosGoal;
+	
 	public AnimationCurve stickCurve;
-	float stickTimer;
-	Transform rightThumb;
 	
 	PlayerController playerController;
-	InventoryController inventory;
+	public InventoryController inventory;
 	
-	public bool leftTouched;	
-	public bool rightTouched;	
 	Vector3 homeOffset;	
-	Vector3 leftPosGoal;	
-	Vector3 rightPosGoal;
 	
 	bool setUp =  false;
 	
@@ -64,16 +69,21 @@ public class UIThumbsticks : MonoBehaviour {
 		Transform cashBox = UIThumbsticksObj.Find("UpperRight/Cash");
 		UICashDisplay cashDisplay = cashBox.gameObject.AddComponent<UICashDisplay>();
 		
-		leftThumb = UIThumbsticksObj.Find("LowerLeft/LeftAnchor/LeftThumb");
-		leftThumb.gameObject.AddComponent<UIElement>().setTarget(gameObject);
+		moveThumb = UIThumbsticksObj.Find("LowerLeft/MoveAnchor/MoveThumb");
+		moveThumb.gameObject.AddComponent<UIElement>().setTarget(gameObject);
 		
-		rightAnchor = UIThumbsticksObj.Find("LowerRight/RightAnchor");
-		rightAnchorHome = rightAnchor.localPosition;
+		throwThumb = UIThumbsticksObj.Find("LowerRight/ThrowAnchor/ThrowThumb");
+		throwThumb.gameObject.AddComponent<UIElement>().setTarget(gameObject);
 		
-		rightThumb = UIThumbsticksObj.Find("LowerRight/RightAnchor/RightThumb");
-		rightThumb.gameObject.AddComponent<UIElement>().setTarget(gameObject);
-		rightThumb.parent.gameObject.AddComponent<UIBombStickBehavior>().setUp(this, rightThumb);
+		throwAnchor = UIThumbsticksObj.Find("LowerRight/ThrowAnchor");
+		throwAnchor.gameObject.AddComponent<UIBombStickBehavior>().setUp(this, throwThumb, throwAnchor.localPosition);
 		
+		shootThumb = UIThumbsticksObj.Find("LowerRight/ShootAnchor/ShootThumb");
+		shootThumb.gameObject.AddComponent<UIElement>().setTarget(gameObject);
+		
+		shootAnchor = UIThumbsticksObj.Find("LowerRight/ShootAnchor");
+		shootAnchor.gameObject.AddComponent<UIShootStickBehavior>().setUp(this, shootThumb, shootAnchor.localPosition);
+				
 		Transform inventoryPos = UIThumbsticksObj.Find("LowerRight/Inventory");
 		inventory = GetComponent<InventoryController>();
 		inventory.SetUp(inventoryPos, cashDisplay);
@@ -116,72 +126,80 @@ public class UIThumbsticks : MonoBehaviour {
 			}
 		}
 		
-		if (leftTouched) {
-			leftThumb.localPosition = Vector3.Lerp(leftThumb.localPosition, leftPosGoal, Time.deltaTime * 10.0f);
-			leftThumb.localScale = Vector3.Lerp(leftThumb.localScale, new Vector3(1.2f, 1.2f, 1.2f), Time.deltaTime * 10.0f);
+		if (moveTouched) {
+			moveThumb.localPosition = Vector3.Lerp(moveThumb.localPosition, movePosGoal, Time.deltaTime * 10.0f);
+			moveThumb.localScale = Vector3.Lerp(moveThumb.localScale, new Vector3(1.2f, 1.2f, 1.2f), Time.deltaTime * 10.0f);
 		} else {
-			leftThumb.localPosition = Vector3.Lerp(leftThumb.localPosition, Vector3.zero, Time.deltaTime * 10.0f);
-			leftThumb.localScale = Vector3.Lerp(leftThumb.localScale, Vector3.one, Time.deltaTime * 10.0f);
+			moveThumb.localPosition = Vector3.Lerp(moveThumb.localPosition, Vector3.zero, Time.deltaTime * 10.0f);
+			moveThumb.localScale = Vector3.Lerp(moveThumb.localScale, Vector3.one, Time.deltaTime * 10.0f);
 		}
 		
-		if (rightTouched) {
-			rightThumb.localPosition = Vector3.Lerp(rightThumb.localPosition, rightPosGoal, Time.deltaTime * 10.0f);
-			rightThumb.localScale = Vector3.Lerp(rightThumb.localScale, new Vector3(1.2f, 1.2f, 1.2f), Time.deltaTime * 10.0f);
+		if (throwTouched) {
+			throwThumb.localPosition = Vector3.Lerp(throwThumb.localPosition, throwPosGoal, Time.deltaTime * 10.0f);
+			throwThumb.localScale = Vector3.Lerp(throwThumb.localScale, new Vector3(1.2f, 1.2f, 1.2f), Time.deltaTime * 10.0f);
 		} else {
-			rightThumb.localPosition = Vector3.Lerp(rightThumb.localPosition, Vector3.zero, Time.deltaTime * 10.0f);
-			rightThumb.localScale = Vector3.Lerp(rightThumb.localScale, Vector3.one, Time.deltaTime * 10.0f);
+			throwThumb.localPosition = Vector3.Lerp(throwThumb.localPosition, Vector3.zero, Time.deltaTime * 10.0f);
+			throwThumb.localScale = Vector3.Lerp(throwThumb.localScale, Vector3.one, Time.deltaTime * 10.0f);
 		}
 		
-		
-		if (inventory.currentItems.Count < 1 && !rightTouched) {
-			if (stickTimer < 1) stickTimer += Time.deltaTime;
+		if (shootTouched) {
+			shootThumb.localPosition = Vector3.Lerp(shootThumb.localPosition, shootPosGoal, Time.deltaTime * 10.0f);
+			shootThumb.localScale = Vector3.Lerp(shootThumb.localScale, new Vector3(1.2f, 1.2f, 1.2f), Time.deltaTime * 10.0f);
 		} else {
-			if (stickTimer > 0) stickTimer -= Time.deltaTime;
-		}
-		
-		rightAnchor.localPosition = rightAnchorHome + new Vector3(0.0f, stickCurve.Evaluate(stickTimer) * -0.5f, 0.0f);
-		
-		playerController.leftInput(leftThumb.localPosition * 10.0f);
-		playerController.rightInput(rightThumb.localPosition * 10.0f);
+			shootThumb.localPosition = Vector3.Lerp(shootThumb.localPosition, Vector3.zero, Time.deltaTime * 10.0f);
+			shootThumb.localScale = Vector3.Lerp(shootThumb.localScale, Vector3.one, Time.deltaTime * 10.0f);
+		}		
+		playerController.moveInput(moveThumb.localPosition * 10.0f);
+		playerController.throwInput(throwThumb.localPosition * 10.0f);
+		playerController.shootInput(shootThumb.localPosition * 10.0f);
 	}
 	
 	public void touchDown(TouchManager.TouchDownEvent touchEvent) {
 		inventory.closeInventory();
 		
-		if (touchEvent.touchTarget.name.Equals("LeftThumb")) {
-			leftTouched = true;
-			playerController.setLeftInputOn();
+		if (touchEvent.touchTarget.name.Equals("MoveThumb")) {
+			moveTouched = true;
+			playerController.setMoveInputOn();
 		}
-		if (touchEvent.touchTarget.name.Equals("RightThumb")) {
-			rightTouched = true;
-			playerController.setRightInputOn();
+		if (touchEvent.touchTarget.name.Equals("ThrowThumb")) {
+			throwTouched = true;
+			playerController.setThrowInputOn();
 		}
-			
+		
+		if (touchEvent.touchTarget.name.Equals("ShootThumb")) {
+			shootTouched = true;
+			playerController.setShootInputOn();
+		}			
 		
 	}
 	
 	public void drag(TouchManager.TouchDragEvent touchEvent) {
 		Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3 (touchEvent.touchPosition.x, touchEvent.touchPosition.y, Camera.main.nearClipPlane + 1.0f));
-		if (touchEvent.startTarget.name.Equals("LeftThumb")) 
-			leftPosGoal = Vector3.ClampMagnitude(leftThumb.parent.InverseTransformPoint(worldPos), 0.1f);
+		if (touchEvent.startTarget.name.Equals("MoveThumb")) 
+			movePosGoal = Vector3.ClampMagnitude(moveThumb.parent.InverseTransformPoint(worldPos), 0.1f);
 		
-		if (touchEvent.startTarget.name.Equals("RightThumb")) 
-			rightPosGoal = Vector3.ClampMagnitude(rightThumb.parent.InverseTransformPoint(worldPos), 0.1f);
+		if (touchEvent.startTarget.name.Equals("ThrowThumb")) 
+			throwPosGoal = Vector3.ClampMagnitude(throwThumb.parent.InverseTransformPoint(worldPos), 0.1f);
 		
+		if (touchEvent.startTarget.name.Equals("ShootThumb")) 
+			shootPosGoal = Vector3.ClampMagnitude(shootThumb.parent.InverseTransformPoint(worldPos), 0.1f);
 		
 	}
 		
 	public void touchUp(TouchManager.TouchUpEvent touchEvent) {
 
-		if (touchEvent.startTarget.name.Equals("LeftThumb")) {
-			leftTouched = false;
-			playerController.setLeftInputOff();
+		if (touchEvent.startTarget.name.Equals("MoveThumb")) {
+			moveTouched = false;
+			playerController.setMoveInputOff();
 		}
-		if (touchEvent.startTarget.name.Equals("RightThumb")) {
-			rightTouched = false;
-			playerController.setRightInputOff();
+		if (touchEvent.startTarget.name.Equals("ThrowThumb")) {
+			throwTouched = false;
+			playerController.setThrowInputOff();
 		}		
-	
+		if (touchEvent.startTarget.name.Equals("ShootThumb")) {
+			shootTouched = false;
+			playerController.setShootInputOff();
+		}		
 	}
 	
 	

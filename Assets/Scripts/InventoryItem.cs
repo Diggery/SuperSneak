@@ -3,7 +3,10 @@ using System.Collections;
 
 public class InventoryItem : MonoBehaviour {
 	
-	public string type;
+	//public string type;
+	
+	public enum ItemTypes { None, Thrown, Projectile} 
+	public ItemTypes itemType = ItemTypes.Thrown;
 	
 	Transform itemGraphic;
 	Transform itemCount;
@@ -14,6 +17,7 @@ public class InventoryItem : MonoBehaviour {
 	Vector3 posGoal;
 	Vector3 scaleGoal;
 	bool dying;
+	
 	
 	InventoryController inventory;
 	
@@ -46,8 +50,16 @@ public class InventoryItem : MonoBehaviour {
 
 	public void setScaleGoal(Vector3 newScale) {
 		scaleGoal = newScale;
-	}		
+	}
 	
+	public void setType(ItemTypes newType) {
+		itemType = newType;
+	}
+	
+	public ItemTypes getType() {
+		return itemType;
+	}
+		
 	public void setName(string newName) {
 		itemName.GetComponent<TextMesh>().text = newName;
 	}

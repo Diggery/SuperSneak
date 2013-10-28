@@ -40,12 +40,12 @@ public class KeyboardControl : MonoBehaviour {
 		// if the vector is big enough, send the input, 
 		if (inputVector.sqrMagnitude > 0.1) {
 			usingKeys = true;
-			playerController.setLeftInputOn();
-			playerController.leftInput(inputVector);
+			playerController.setMoveInputOn();
+			playerController.moveInput(inputVector);
 		} else {
 			if (usingKeys) {
 				usingKeys = false;	
-				playerController.setLeftInputOff();
+				playerController.setMoveInputOff();
 			}
 
 		}

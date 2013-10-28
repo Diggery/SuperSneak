@@ -41,6 +41,19 @@ ModelImporter:
     4300072: LowerCenter
     4300074: CenterSlider
     4300076: CenterThumb
+    4300078: RightThrow
+    4300080: RightShoot
+    4300082: RightThumb
+    4300084: RightThrowThumb
+    4300086: RightShootThumb
+    4300088: ThrowAnchor
+    4300090: ThrowProgressRing
+    4300092: ThrowThumb
+    4300094: ThrowActiveRing
+    4300096: ShootAnchor
+    4300098: ShootThumb
+    4300100: MoveAnchor
+    4300102: MoveThumb
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -175,32 +188,6 @@ ModelImporter:
       data:
         first: 4
         second: aa1a0600
-    LeftAnchor:
-      data:
-        first: 1
-        second: ac860100
-      data:
-        first: 4
-        second: 8c1a0600
-      data:
-        first: 23
-        second: 6a182300
-      data:
-        first: 33
-        second: aa5a3200
-    LeftThumb:
-      data:
-        first: 1
-        second: a4860100
-      data:
-        first: 4
-        second: 841a0600
-      data:
-        first: 23
-        second: 64182300
-      data:
-        first: 33
-        second: a45a3200
     LowerCenter:
       data:
         first: 1
@@ -247,6 +234,32 @@ ModelImporter:
       data:
         first: 4
         second: ac1a0600
+    MoveAnchor:
+      data:
+        first: 1
+        second: a4860100
+      data:
+        first: 4
+        second: 841a0600
+      data:
+        first: 23
+        second: 64182300
+      data:
+        first: 33
+        second: a45a3200
+    MoveThumb:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+      data:
+        first: 23
+        second: 6a182300
+      data:
+        first: 33
+        second: aa5a3200
     Resize:
       data:
         first: 1
@@ -260,20 +273,7 @@ ModelImporter:
       data:
         first: 33
         second: c25a3200
-    RightActiveRing:
-      data:
-        first: 1
-        second: b0860100
-      data:
-        first: 4
-        second: 901a0600
-      data:
-        first: 23
-        second: 6e182300
-      data:
-        first: 33
-        second: ae5a3200
-    RightAnchor:
+    ShootAnchor:
       data:
         first: 1
         second: a6860100
@@ -286,20 +286,7 @@ ModelImporter:
       data:
         first: 33
         second: a65a3200
-    RightProgressRing:
-      data:
-        first: 1
-        second: ae860100
-      data:
-        first: 4
-        second: 8e1a0600
-      data:
-        first: 23
-        second: 6c182300
-      data:
-        first: 33
-        second: ac5a3200
-    RightThumb:
+    ShootThumb:
       data:
         first: 1
         second: a0860100
@@ -377,6 +364,58 @@ ModelImporter:
       data:
         first: 33
         second: b85a3200
+    ThrowActiveRing:
+      data:
+        first: 1
+        second: ae860100
+      data:
+        first: 4
+        second: 8e1a0600
+      data:
+        first: 23
+        second: 6c182300
+      data:
+        first: 33
+        second: ac5a3200
+    ThrowAnchor:
+      data:
+        first: 1
+        second: dc860100
+      data:
+        first: 4
+        second: bc1a0600
+      data:
+        first: 23
+        second: 8e182300
+      data:
+        first: 33
+        second: ce5a3200
+    ThrowProgressRing:
+      data:
+        first: 1
+        second: da860100
+      data:
+        first: 4
+        second: ba1a0600
+      data:
+        first: 23
+        second: 8c182300
+      data:
+        first: 33
+        second: cc5a3200
+    ThrowThumb:
+      data:
+        first: 1
+        second: b0860100
+      data:
+        first: 4
+        second: 901a0600
+      data:
+        first: 23
+        second: 6e182300
+      data:
+        first: 33
+        second: ae5a3200
     UpperLeft:
       data:
         first: 1

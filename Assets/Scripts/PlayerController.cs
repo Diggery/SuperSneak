@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour {
 	public BombThrower playerBombThrower;
 	public InventoryController inventory;
 	
-	public bool leftInputOn;
-	public Vector3 currentLeftInput;
-	public bool rightInputOn;
-	public Vector3 currentRightInput;
-
+	public bool moveInputOn;
+	public Vector3 currentMoveInput;
+	public bool throwInputOn;
+	public Vector3 currentThrowInput;
+	public bool shootInputOn;
+	public Vector3 currentShootInput;
+	
 	float runSpeed = 4.0f;
 	float walkSpeed = 2.0f;
 	
@@ -48,15 +50,16 @@ public class PlayerController : MonoBehaviour {
 		if (dead) return;
 		
 		Vector3 moveVector = Vector3.zero;
-		float movePower = currentLeftInput.magnitude;
+		float movePower = currentMoveInput.magnitude;
 		
 		if (movePower > 0.05f){
-			currentDirection = Camera.main.transform.parent.TransformDirection(currentLeftInput); 
+			currentDirection = Camera.main.transform.parent.TransformDirection(currentMoveInput); 
 			moveVector = currentDirection.normalized;
-			if (movePower > 0.5) {
-				moveVector *= runSpeed;
-			} else {
+			
+			if (movePower < 0.5 || shootInputOn) {
 				moveVector *= walkSpeed;
+			} else {
+				moveVector *= runSpeed;
 			}
 			
 		} else {
@@ -104,6 +107,12 @@ public class PlayerController : MonoBehaviour {
 		Destroy(GetComponent<CharacterController>());
 		gameControl.PlayerIsDead();
 		
+
+	}
+	
+	public bool IsDead() {
+		return dead;	
+		
 	}
 	
 	public void setInventory(InventoryController newInventory) {
@@ -122,41 +131,53 @@ public class PlayerController : MonoBehaviour {
 		inventory.unlockList();
 	}
 	
-	public void setLeftInputOn() {
-		leftInputOn = true;
+	public void setMoveInputOn() {
+		moveInputOn = true;
 	}
 	
-	public void setRightInputOn() {
-		rightInputOn = true;
+	public void setThrowInputOn() {
+		throwInputOn = true;
 		playerAnimator.playReadyBombAnim();
 		playerBombThrower.resetBombTarget();
 	}
-		
-	public void leftInput(Vector3 newInput) {
-		currentLeftInput = new Vector3(newInput.x, newInput.z, -newInput.y);
+	
+	public void setShootInputOn() {
+		shootInputOn = true;
+	}	
+	
+	public void moveInput(Vector3 newInput) {
+		currentMoveInput = new Vector3(newInput.x, newInput.z, -newInput.y);
 	}
 	
-	public void rightInput(Vector3 newInput) {
-		currentRightInput = new Vector3(newInput.x, newInput.z, -newInput.y);
+	public void throwInput(Vector3 newInput) {
+		currentThrowInput = new Vector3(newInput.x, newInput.z, -newInput.y);
+	}
+	
+	public void shootInput(Vector3 newInput) {
+		currentShootInput = new Vector3(newInput.x, newInput.z, -newInput.y);
 	}
 
-	public void setLeftInputOff() {
-		leftInputOn = false;
+	public void setMoveInputOff() {
+		moveInputOn = false;
 	}
 	
-	public void setRightInputOff() {
-		if (currentRightInput.sqrMagnitude < 0.04f || !playerBombThrower.getBomb()) {
+	public void setThrowInputOff() {
+		if (currentThrowInput.sqrMagnitude < 0.04f || !playerBombThrower.getBomb()) {
 			playerAnimator.playPutAwayBombAnim();
 			return;
 		}
 		
-		if (rightInputOn) {
+		if (throwInputOn) {
 			playerAnimator.playThrowBombAnim();
 		}
-		rightInputOn = false;
+		throwInputOn = false;
 	}
-	
+	public void setShootInputOff() {
+		shootInputOn = false;
+	}	
 	public void openCrate(Vector3 cratePos) {
 		playerAnimator.playOpenCrateAnim(cratePos);
 	}
+	
+
 }

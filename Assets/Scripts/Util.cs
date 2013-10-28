@@ -75,5 +75,19 @@ static public class Util : object {
 
 		return hoursString + minutesString + ":" + secondsString;
  	}
+	
+	static public bool CanSeeEachOther(Transform unit1, Transform unit2) {
+		RaycastHit hit;
+		Vector3 startPos = new Vector3 (unit1.position.x, 0.5f, unit1.position.z);
+		Vector3 endPos = new Vector3 (unit2.position.x, 0.5f, unit2.position.z);
+				
+		int layer1 = LayerMask.NameToLayer("Default"); // default
+		int layermask = (1 << layer1);
+		
+		if (Physics.Linecast(startPos, endPos, out hit, layermask)) {
+			return false;
+		} 
+		return true;
+	}
  	
 }

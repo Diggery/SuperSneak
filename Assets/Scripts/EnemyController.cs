@@ -6,7 +6,7 @@ public enum EnemyTypes { Guard, Janitor, Captain, Enforcer, Boss}
 
 public class EnemyController : MonoBehaviour {
 	[HideInInspector]
-	public ControlRoom controlRoom;
+	public GuardRoom guardRoom;
 	
 	public Transform weapon; 
 	public GameObject bullet;
@@ -35,6 +35,7 @@ public class EnemyController : MonoBehaviour {
 	public float moveTimer;
 	
 	public bool looking;
+	float badVision;
 	
 	[HideInInspector]
 	public bool isRunning;
@@ -45,7 +46,8 @@ public class EnemyController : MonoBehaviour {
 	Vector3 lastMovePos;
 	float actualSpeed;
 	float speedGoal;
-	float hearingRange = 10;
+	public float hearingRange = 10;
+	public float shootingRange = 10;
 	
 	public float currentHealth;
 	public float maxHealth;
@@ -63,8 +65,8 @@ public class EnemyController : MonoBehaviour {
 		accessories = newAccessories;
 		pathMover = GetComponent<PathMover>();
 		player = GameObject.FindWithTag ("Player").transform;
-		GameObject controlRoomObj = GameObject.Find ("ControlRoom");
-		if (controlRoomObj) controlRoom = controlRoomObj.GetComponent<ControlRoom>();
+		GameObject guardRoomObj = GameObject.FindWithTag("GuardRoom");
+		if (guardRoomObj) guardRoom = guardRoomObj.GetComponent<GuardRoom>();
 		
 		enemyAI = GetComponent<EnemyAI>();
 		enemyAnimator = GetComponent<EnemyAnimator>();
@@ -111,6 +113,10 @@ public class EnemyController : MonoBehaviour {
 			revive();	
 		} 
 		
+		if (badVision > 0.0f) {
+			badVision -= Time.deltaTime;	
+		}
+		
 		if (enemyAI.currentActivity == EnemyAI.Activity.Dead) {
 			return;
 		} else {
@@ -142,9 +148,9 @@ public class EnemyController : MonoBehaviour {
 		transform.Rotate(0, turnAmount * Time.deltaTime, 0);
 	}
 	public void approachTarget(Vector3 target) {
-		if (isRunning) startWalking();
 		Vector3 targetPos = new Vector3(target.x, 0, target.z);
-		characterController.Move(targetPos * walkSpeed * Time.deltaTime);
+		Vector3 moveVector = (transform.position - targetPos).normalized;
+		characterController.Move(-moveVector * walkSpeed * Time.deltaTime);
 		//transform.position = Vector3.MoveTowards(transform.position, targetPos, walkSpeed * Time.deltaTime);
 	}
 	
@@ -159,6 +165,8 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	public bool move(Vector3 newTarget) {
+		if (IsDisabled()) return false;
+
 		if (pathMover) {
 			if (!pathMover.SetDestination(new Vector3(newTarget.x, 0.0f, newTarget.z))) {
 				return false;
@@ -169,6 +177,8 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void spotPlayer (Transform target) {
+		if (IsDisabled()) return;
+
 		Events.Send(gameObject, "GuardRadio", "Spotted");
 		enemyAI.spotPlayer();	
 		currentSpeed = runSpeed * 0.5f;
@@ -178,6 +188,21 @@ public class EnemyController : MonoBehaviour {
 		return player.position;	
 	}
 	
+	public bool IsPlayerDead() {
+		return player.GetComponent<PlayerController>().IsDead();	
+	}
+	
+	public bool IsDisabled() {
+		EnemyAI.Activity currentActivity = getCurrentActivity();
+		
+		if (currentActivity == EnemyAI.Activity.Dead ||
+			currentActivity == EnemyAI.Activity.Blinded ||
+			currentActivity == EnemyAI.Activity.Stunned ) {
+			return true;
+		}	
+		return false;
+	}
+		
 	public void startWalking() {
 		speedGoal = walkSpeed + (Random.value - 0.5f);
 		isRunning = false;
@@ -188,7 +213,15 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void investigate (Vector3 alertPos) {
+		if (IsDisabled()) return;
 		if (enemyAI.currentActivity != EnemyAI.Activity.Chasing) enemyAI.investigate(alertPos);
+	}
+	
+	public void LookAtDeadPlayer() {
+		if (IsDisabled()) return;
+		print ("looking at dead player");
+		enemyAI.investigate(getPlayerPosition());
+
 	}
 	
 	public void alert(Vector3 alertPos) {
@@ -238,14 +271,35 @@ public class EnemyController : MonoBehaviour {
 		
 	}
 	
-	public void gassed() {
-		if (enemyAI.currentActivity == EnemyAI.Activity.Stunned) return;
+	public void Gassed() {
+		if (IsDisabled()) return;
 		enemyAI.Stunned(7);
 		startWalking();
 		enemyAnimator.StopAnims();
 		enemyAnimator.PlayStunnedAnim();
 		pathMover.Stop();
-
+	}	
+	
+	public void Blinded(float duration) {
+		if (IsDisabled()) return;
+		enemyAI.Blind(duration);
+		startWalking();
+		enemyAnimator.StopAnims();
+		pathMover.Stop();
+	}		
+	
+	public void Smoked() {
+		badVision = 10;
+	}
+	
+	public bool IsVisionBad() {
+		if (badVision > 0) return true;
+		return false;
+	}
+	
+	public bool IsBlinded() {
+		if (enemyAI.currentActivity == EnemyAI.Activity.Blinded) return true;
+		return false;
 	}	
 	
 	public void die(Vector3 origin) {
@@ -270,6 +324,7 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	public void StandDown() {
+		
 		print ("Standing Down");
 		startWalking();
 		enemyAI.patrol();

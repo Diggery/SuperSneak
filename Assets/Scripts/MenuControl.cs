@@ -1,10 +1,18 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class MenuControl : MonoBehaviour {
+	
+	public GameObject gameControlPrefab;
+	GameControl gameControl;
 
 	void Start () {
-	
+		GameObject gameControlObj = GameObject.Find ("GameControl");
+		if (!gameControlObj) gameControlObj = Instantiate(gameControlPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		gameControlObj.name = "GameControl";
+		
+		gameControl = gameControlObj.GetComponent<GameControl>();
 	}
 	
 	void Update () {
@@ -13,6 +21,8 @@ public class MenuControl : MonoBehaviour {
 	
 	
 	public void ItemTapped(string itemName) {
-		if (itemName == "LoadLevel") Application.LoadLevel("MainScene");
+		//gameControl.SetSeed(Convert.ToInt(itemName));
+		gameControl.SetSeed(Int32.Parse(itemName));
+		Application.LoadLevel("MainScene");
 	}
 }

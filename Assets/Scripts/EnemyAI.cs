@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour {
 	
 	Transform enemyObj;
 	
-	public enum Activity { Dead,  Stunned, Patrolling, Looking, OnBreak, Chasing, Shooting, Investigating, HeadingToControlRoom }
+	public enum Activity { Dead,  Stunned, Blinded, Patrolling, Looking, OnBreak, Chasing, Shooting, Investigating, HeadingToGuardRoom }
 	public Activity currentActivity = Activity.Patrolling;
 	
 	EnemyController enemyController;
@@ -16,14 +16,18 @@ public class EnemyAI : MonoBehaviour {
 	
 	bool canSeeTarget;
 	[HideInInspector]
+	public bool aggressive;
 	public bool readyToFire;
 	Vector3 lastKnownPos;
 	
 	
 	public float lookingTimer;
+	public float warningTime = 3;
+	public float warningTimer = 3;
 	float alertLevel;
 	
 	float stunTimer;
+	float blindTimer;
 
 	void Start () {
 		Events.Listen(gameObject, "GuardRadio");  
@@ -43,11 +47,7 @@ public class EnemyAI : MonoBehaviour {
 		if (currentActivity == Activity.Dead) {
 			return;
 		}
-		if (currentActivity == Activity.Stunned) {
-			stunTimer -= Time.deltaTime;
-			if (stunTimer < 0) revive();
-			return;
-		}
+
 		
 		if (alertLevel > 0) alertLevel -= Time.deltaTime * 0.25f;
 		
@@ -83,16 +83,36 @@ public class EnemyAI : MonoBehaviour {
 						enemyController.approachTarget(lastKnownPos);
 					}
 				
-					if (targetRange < 15) {
-						Vector3 fireTarget = new Vector3(enemyController.player.position.x, 1.5f, enemyController.player.position.z);
-						BroadcastMessage("fire", fireTarget);
-						readyToFire = true;
-					} 
+					if (targetRange < enemyController.shootingRange) {
+						if (enemyController.isRunning) enemyController.startWalking();
+
+						if (!aggressive && !readyToFire) {
+							warningTimer -= Time.deltaTime;
+							if (warningTimer < 0) {
+								readyToFire = true;
+								aggressive = true;
+								warningTimer = warningTime;
+							}
+						} else {
+						
+							Vector3 fireTarget = new Vector3(enemyController.player.position.x, 1.5f, enemyController.player.position.z);
+							Vector3 fireOffset = Vector3.zero;
+							if (enemyController.IsVisionBad()) 
+								fireOffset = new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(-1.0f, 1.0f), Random.Range(-3.0f, 3.0f));
+							BroadcastMessage("Fire", fireTarget + fireOffset);
+						}
+					} else {
+						if (!enemyController.isRunning) enemyController.startRunning();
+					}	
 				} else {
+					if (readyToFire) {
 					readyToFire = false;
+					BroadcastMessage("StopFiring");
+					}
 					if (!pathMover.HasPath()) {
 						float currDistance = (transform.position - lastKnownPos).sqrMagnitude;
 						if (currDistance < 0.25) {
+							BroadcastMessage("StopFiring");
 							lookAround();
 						} else {
 							enemyController.runTo(lastKnownPos);
@@ -107,14 +127,27 @@ public class EnemyAI : MonoBehaviour {
 			
 			case Activity.Investigating :
 				if (!pathMover.HasPath()) {
+					//if (playerController.IsDead()) 
 					lookAround();
 				}
 			break;
 			
-			case Activity.HeadingToControlRoom :
+			case Activity.Stunned :
+				stunTimer -= Time.deltaTime;
+			
+				if (stunTimer < 0) lookAround();
+			break;
+			
+			case Activity.Blinded :
+				blindTimer -= Time.deltaTime;
+			
+				if (blindTimer < 0) lookAround();
+			break;
+						
+			case Activity.HeadingToGuardRoom :
 				if (!pathMover.HasPath()) {
 					GameObject guardRoom = GameObject.FindWithTag("GuardRoom");
-					guardRoom.GetComponent<ControlRoom>().QueueEnemy("Guard");
+					guardRoom.GetComponent<GuardRoom>().QueueEnemy("Guard");
 					lookAround();
 				}
 			break;
@@ -127,7 +160,7 @@ public class EnemyAI : MonoBehaviour {
 		int roomIndex = Random.Range(0, rooms.Length);
 
 		if (!enemyController.move(rooms[roomIndex].transform.position)) {
-			//print (rooms[roomIndex].transform.position + " is a bad location");
+			print (rooms[roomIndex].transform.position + " is a bad location");
 		}
 	}
 	
@@ -147,6 +180,7 @@ public class EnemyAI : MonoBehaviour {
 	
 	public void lookAround() {
 		if (currentActivity == Activity.Dead) return;
+		BroadcastMessage("StopFiring");
 		pathMover.Stop();
 		readyToFire = false;
 		currentActivity = Activity.Looking; 
@@ -155,7 +189,7 @@ public class EnemyAI : MonoBehaviour {
 	}
 	
 	public void heardSomething(Vector3 soundPos, float volume) {
-		print ("HeardSomething " + alertLevel);
+		//print ("HeardSomething " + alertLevel);
 		if (currentActivity == Activity.Dead) return;
 		
 		alertLevel += volume;
@@ -167,7 +201,9 @@ public class EnemyAI : MonoBehaviour {
 	
 	public void patrol() {
 		if (currentActivity == Activity.Dead) return;
+		BroadcastMessage("StopFiring");
 		readyToFire = false;
+		aggressive = false;
 		currentActivity = Activity.Patrolling;
 		gotoRoom();
 	}
@@ -175,6 +211,8 @@ public class EnemyAI : MonoBehaviour {
 	
 	public void spotPlayer() {
 		if (currentActivity == Activity.Dead) return;
+		if (currentActivity == Activity.Stunned) return;
+		if (currentActivity == Activity.Blinded) return;
 		
 		lastKnownPos = enemyController.player.position;
 
@@ -188,7 +226,7 @@ public class EnemyAI : MonoBehaviour {
 	public void raiseAlarm() {		
 		enemyAnimator.StopAnims();
 
-		currentActivity = Activity.HeadingToControlRoom;
+		currentActivity = Activity.HeadingToGuardRoom;
 		GameObject guardRoom = GameObject.FindWithTag("GuardRoom");
 		enemyController.runTo(guardRoom.transform.position);
 	}
@@ -218,9 +256,21 @@ public class EnemyAI : MonoBehaviour {
 		currentActivity = Activity.Stunned;
 		stunTimer = stunTime;
 	}
+	public void Blind(float blindTime) {
+		currentActivity = Activity.Blinded;
+		blindTimer = blindTime;
+	}
 	public void revive() {
+		BroadcastMessage("StopFiring");
 		currentActivity = Activity.Looking;
 		lookingTimer = 3.0f;
+	}
+	public void OnCollisionEnter(Collision collision) {
+			print (collision.transform.tag);	
+		if (collision.transform.tag == "Wall") {
+			print ("HittingWall");	
+		}
+		
 	}
 
 }

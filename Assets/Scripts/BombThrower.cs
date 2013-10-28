@@ -22,20 +22,22 @@ public class BombThrower : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (playerController.rightInputOn) {
-			if (playerController.currentRightInput.sqrMagnitude < 0.04f) {
+		if (playerController.throwInputOn) {
+			if (playerController.currentThrowInput.sqrMagnitude < 0.04f) {
 				bombTarget.targetTooClose();
 			} else {
 				bombTarget.targetOn();
 			}
-			Vector3 input = playerController.currentRightInput * throwingDistance;
+			Vector3 input = playerController.currentThrowInput * throwingDistance;
 			Vector3 targetPosGoal = transform.position + Camera.main.transform.parent.TransformDirection(input);
 			
+
 			int layer1 = LayerMask.NameToLayer("PlayerRagDoll"); 
 			int layer2 = LayerMask.NameToLayer("EnemyRagDoll"); 
 			int layer3 = LayerMask.NameToLayer("Player"); 
 			int layer4 = LayerMask.NameToLayer("AreaOfEffect"); 
-			int layermask = ~((1 << layer1) | (1 << layer2) | (1 << layer3) | (1 << layer4));
+			int layer5 = LayerMask.NameToLayer("Obstacle"); 
+			int layermask = ~((1 << layer1) | (1 << layer2) | (1 << layer3) | (1 << layer4) | (1 << layer5));
 			
 			RaycastHit hit;
 			
