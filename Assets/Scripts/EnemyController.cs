@@ -281,6 +281,7 @@ public class EnemyController : MonoBehaviour {
 	}	
 	
 	public void Blinded(float duration) {
+		if (IsBlinded()) enemyAI.Blind(duration);
 		if (IsDisabled()) return;
 		enemyAI.Blind(duration);
 		startWalking();

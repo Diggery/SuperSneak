@@ -205,6 +205,11 @@ public class InventoryController : MonoBehaviour {
 		return item;
 	}
 	
+	public InventoryItem GetItemProperties() {
+		if (currentItems.Count < 1) return null;
+		return currentItems[0];
+	}
+	
 	public void moveItemToSelected(InventoryItem selectedItem) {
 		currentItems.Remove(selectedItem);
 		currentItems.Insert(0, selectedItem);

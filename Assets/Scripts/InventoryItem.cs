@@ -2,9 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class InventoryItem : MonoBehaviour {
-	
-	//public string type;
-	
+		
 	public enum ItemTypes { None, Thrown, Projectile} 
 	public ItemTypes itemType = ItemTypes.Thrown;
 	

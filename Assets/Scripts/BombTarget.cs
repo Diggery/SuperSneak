@@ -75,7 +75,7 @@ public class BombTarget : MonoBehaviour {
 	
 	public void targetOff() {
 		noBombObj.renderer.enabled = false;
-		//bombTargetObj.renderer.enabled = false;	
+		bombTargetObj.renderer.enabled = false;	
 		targetOverlayObj.renderer.enabled = false;		
 		bombArc.renderer.enabled = false;
 	}	

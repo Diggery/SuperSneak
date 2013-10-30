@@ -8,6 +8,8 @@ public class ConfigPlayer : MonoBehaviour {
 	BombThrower playerBombThrower;
 	public Transform bombTargetPrefab;
 	
+	public WristWeapon wristWeaponPrefab;
+	
 	public Transform playerPrefab; 
 	Transform thiefObj; 
 	
@@ -46,10 +48,13 @@ public class ConfigPlayer : MonoBehaviour {
 		Transform thiefUpperTorso = thiefObj.Find ("Thief_Skeleton/Root/UpperBody/Spine1/Spine2");
 		if (!thiefUpperTorso) Debug.Log("ERROR: Can't Find Player Torso");	
 
+		WristWeapon wristWeapon = Instantiate(wristWeaponPrefab, thiefRightHand.position, thiefRightHand.rotation) as WristWeapon;
+		wristWeapon.SetUp(thiefRightHand);
 		
 		playerAnimator.SetUp(thiefObj, thiefUpperBody);
-		playerController.SetUp(thiefHead, playerRagDoll, playerBombThrower);
+		playerController.SetUp(thiefHead, playerRagDoll, playerBombThrower, wristWeapon);
 		playerBombThrower.SetUp(thiefRightHand, playerAnimator, playerController, bombTargetPrefab);
+		
 		
 		setUpData.layerName = "PlayerRagDoll";
 		setUpData.rootTransform = thiefObj.Find("Thief_Skeleton/Root");

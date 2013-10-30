@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
 	
 	CharacterController characterController;
 	PlayerAnimator playerAnimator;
+	public WristWeapon wristWeapon;
 	public BombThrower playerBombThrower;
 	public InventoryController inventory;
 	
@@ -29,10 +30,11 @@ public class PlayerController : MonoBehaviour {
 	RagDollController ragDoll;
 	GameControl gameControl;
 	
-	public void SetUp (Transform thiefHead, RagDollController thiefRagDoll, BombThrower newBombThrower) {
+	public void SetUp (Transform thiefHead, RagDollController thiefRagDoll, BombThrower newBombThrower, WristWeapon newWristWeapon) {
 
 		ragDoll = thiefRagDoll;
 		playerBombThrower = newBombThrower;
+		wristWeapon = newWristWeapon;
 		characterController = GetComponent<CharacterController>();
 		playerAnimator = GetComponent<PlayerAnimator>();
 		
@@ -77,7 +79,8 @@ public class PlayerController : MonoBehaviour {
 		currentSpeed = newSpeed;
 		
 		//regen health
-		currentHealth = Mathf.Clamp(currentHealth + Time.deltaTime * 0.5f, 0, maxHealth);	
+		currentHealth = Mathf.Clamp(currentHealth + Time.deltaTime * 0.5f, 0, maxHealth);
+		
 	}
 	
 	public void addExpDamage(Vector4 expData) {
@@ -143,6 +146,12 @@ public class PlayerController : MonoBehaviour {
 	
 	public void setShootInputOn() {
 		shootInputOn = true;
+		playerAnimator.playShootWeaponAnim();
+		InventoryItem currentItem = inventory.GetItemProperties();
+		if (!currentItem) Debug.Log ("ERROR: no items");
+		if (currentItem.itemType != InventoryItem.ItemTypes.Projectile) Debug.Log ("ERROR: current item not a projectile weapon");
+		wristWeapon.Fire(currentItem.getName());
+		
 	}	
 	
 	public void moveInput(Vector3 newInput) {
@@ -163,7 +172,8 @@ public class PlayerController : MonoBehaviour {
 	
 	public void setThrowInputOff() {
 		if (currentThrowInput.sqrMagnitude < 0.04f || !playerBombThrower.getBomb()) {
-			playerAnimator.playPutAwayBombAnim();
+			playerAnimator.playPutAwayItemAnim();
+			throwInputOn = false;
 			return;
 		}
 		
@@ -172,9 +182,15 @@ public class PlayerController : MonoBehaviour {
 		}
 		throwInputOn = false;
 	}
+	
 	public void setShootInputOff() {
 		shootInputOn = false;
+		playerAnimator.playPutAwayItemAnim();
+		if (!moveInputOn) currentDirection = -currentShootInput; 
+		wristWeapon.StopFiring();
+
 	}	
+	
 	public void openCrate(Vector3 cratePos) {
 		playerAnimator.playOpenCrateAnim(cratePos);
 	}
