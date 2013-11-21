@@ -89,5 +89,38 @@ static public class Util : object {
 		} 
 		return true;
 	}
+	
+	static public float EaseInOutSine(float t) {
+		return -0.5f * (Mathf.Cos(Mathf.PI*t) - 1.0f);
+	}
+	
+	static public float EaseInOutQuart(float t) { 
+		t = t / 0.5f;
+		if (t < 1.0f) return 1.0f/2.0f*t*t*t*t;
+		t = t - 2.0f;
+		return -0.5f * (t*t*t*t - 2.0f);
+	}
+	
+	static public float EaseInOutQuad(float t) { 
+		t = t * 0.5f;
+		if (t < 1.0f) return 1.0f/2.0f*t*t;
+		t = t - 1.0f;
+		return -1.0f * t *(t-2.0f);
+	}
+			
+	static public float EaseOutQuad(float t) {  
+	
+		return -1.0f * t *(t-2.0f);
+	}
+	
+    static public void SetVertColors(Transform target, Color newColor) {
+        Mesh mesh = target.GetComponent<MeshFilter>().mesh;
+        Vector3[] vertices = mesh.vertices;
+        Color[] colors = new Color[vertices.Length];
+
+		for(int i = 0; i < colors.Length; i++) colors[i] = newColor;
+		
+		mesh.colors = colors;
+    }
  	
 }

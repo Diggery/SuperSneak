@@ -69,6 +69,7 @@ public class LevelController : MonoSingleton<LevelController>
 		
 		//fill out the matrix for the rooms with a seed
 		GameObject gameControlObj = GameObject.Find ("GameControl");
+		print (gameControlObj.GetComponent<GameControl>().GetSeed() + seedOffset);
 		Random.seed = gameControlObj.GetComponent<GameControl>().GetSeed() + seedOffset;
 		GenerateLevel();
 		

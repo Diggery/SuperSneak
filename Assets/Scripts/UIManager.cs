@@ -4,7 +4,7 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour {
 
-	public float UIScale;
+	public float UIScale = 0.1f;
 	
 	void Start () {
 	

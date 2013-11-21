@@ -21,8 +21,6 @@ public class MenuControl : MonoBehaviour {
 	
 	
 	public void ItemTapped(string itemName) {
-		//gameControl.SetSeed(Convert.ToInt(itemName));
-		gameControl.SetSeed(Int32.Parse(itemName));
-		Application.LoadLevel("MainScene");
+		Application.LoadLevel("MapScreen");
 	}
 }

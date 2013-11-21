@@ -8,6 +8,7 @@ public class GameControl : MonoBehaviour {
 	int cratesOpened;
 	bool allCratesOpened;
 	
+	public int gameMapSeed = 1;
 	public int currentSeed;
 	
 	void Awake () {
@@ -52,6 +53,10 @@ public class GameControl : MonoBehaviour {
 		
 	}
 	
+	public int GetGameMapSeed() {
+		return gameMapSeed;	
+	}	
+	
 	public int GetSeed() {
 		return currentSeed;	
 	}
@@ -62,6 +67,12 @@ public class GameControl : MonoBehaviour {
 	public void KeysPressed(Events.Notification notification) {
 		string key = (string)notification.data;
 		if (key == "Back") Application.LoadLevel("MainMenu");
+	}
+	
+	public void LaunchLevel(int newSeed) {
+		SetSeed(newSeed);
+		print ("launching level " + newSeed);
+		Application.LoadLevel("GameLevel");
 	}
 	
 	public void LeaveLevel() {

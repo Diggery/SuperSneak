@@ -10,8 +10,11 @@
               <Node name="Pathfinding" expanded="True">
                 <Node name="Scripts" expanded="True" />
               </Node>
+              <Node name="Resources" expanded="True" />
               <Node name="Scripts" expanded="True">
-                <Node name="InventoryController.cs" selected="True" />
+                <Node name="MapScreen" expanded="True">
+                  <Node name="MapTextBox.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -19,6 +22,7 @@
           <Node name="Assembly-CSharp-firstpass" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Plugins" expanded="True" />
+              <Node name="Resources" expanded="True" />
             </Node>
           </Node>
         </State>

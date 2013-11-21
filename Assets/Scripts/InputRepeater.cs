@@ -20,7 +20,14 @@ public class InputRepeater : MonoBehaviour {
 		inputTarget.SendMessage("drag", touchEvent, SendMessageOptions.DontRequireReceiver);
 	}
 
-	
+	public void touchUp(TouchManager.TouchUpEvent touchEvent) {
+		if (touchEvent.startTarget != transform) return;
+		Transform inputTarget = target ? target : transform.root;
+		
+		inputTarget.SendMessage("touchUp", touchEvent, SendMessageOptions.DontRequireReceiver);
+	}
+
+		
 	public void SetTarget(Transform newTarget) {
 		target = newTarget;
 	}	
