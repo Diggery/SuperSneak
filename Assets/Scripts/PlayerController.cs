@@ -195,5 +195,8 @@ public class PlayerController : MonoBehaviour {
 		playerAnimator.playOpenCrateAnim(cratePos);
 	}
 	
-
+	public void HackServer(Vector3 serverPos) {
+		playerAnimator.playHackServerAnim(serverPos);
+	}
+	
 }

@@ -17,17 +17,14 @@ public class MapTextBox : MonoBehaviour {
 
 	void Start () {
 		textBoxText = transform.Find("TextBoxText");
-		SetText("Testing", 10);
-		transform.parent = textPos;
-		transform.localPosition = Vector3.zero;
-		transform.localRotation = Quaternion.AngleAxis(180, Vector3.up);
-	
+		textBoxText.renderer.material.renderQueue = 4000;
+		//transform.localPosition = new Vector3(0.3f, 0.0f, 0.0f);
+		//transform.localRotation = Quaternion.AngleAxis(180, Vector3.up);
 	}
 	
 	void Update () {
 		Vector3 startScale = new Vector3(0.1f, 0.5f, 1.0f);
-		Vector3 endScale = new Vector3(0.55f, 0.55f, 0.55f);
-		//Vector3 endScale = new Vector3(1.0f, 1.0f, 1.0f);
+		Vector3 endScale = new Vector3(1.0f, 1.0f, 1.0f);
 		
 		if (textBoxOpen) {
 			transitionTimer = Mathf.Clamp01(transitionTimer + Time.deltaTime * 2);

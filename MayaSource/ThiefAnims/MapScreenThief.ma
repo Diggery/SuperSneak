@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: MapScreenThief.ma
-//Last modified: Thu, Nov 14, 2013 06:42:02 PM
+//Last modified: Sat, Dec 07, 2013 09:25:52 PM
 //Codeset: UTF-8
 file -rdi 1 -ns "Thief" -rfn "ThiefRN" "/Users/kdx347/Unity/SuperSneak/MayaSource/Rigs/Thief/Thief.mb";
 file -r -ns "Thief" -dr 1 -rfn "ThiefRN" "/Users/kdx347/Unity/SuperSneak/MayaSource/Rigs/Thief/Thief.mb";
@@ -15,14 +15,14 @@ fileInfo "cutIdentifier" "201207040330-835994";
 fileInfo "osv" "Mac OS X 10.7.5";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 0.29037985026063873 1.9054250683359233 2.8003916254716601 ;
-	setAttr ".r" -type "double3" -11.138352723282555 -357.80000000025001 7.2112595012266786e-16 ;
+	setAttr ".t" -type "double3" -0.1023868102407802 1.8040291451755539 2.7567510290382189 ;
+	setAttr ".r" -type "double3" -1.5383527232825935 -364.20000000024743 1.2457496615357578e-17 ;
 	setAttr ".rp" -type "double3" -5.5511151231257827e-17 -1.1102230246251563e-16 4.4408920985006262e-16 ;
 	setAttr ".rpt" -type "double3" -6.4351886570103417e-17 1.5968214710033296e-16 -1.4971431010032544e-18 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 3.4319431572811632;
+	setAttr ".coi" 3.4319431572811641;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -62,7 +62,7 @@ createNode transform -s -n "side";
 	setAttr ".t" -type "double3" 100.11760999636708 1.560242804228009 0.12552338315187278 ;
 	setAttr ".r" -type "double3" 0 89.999999999999986 0 ;
 	setAttr ".rp" -type "double3" 0 3.0814879110195774e-33 -1.4210854715202004e-14 ;
-	setAttr ".rpt" -type "double3" -9.1258123148082597e-15 -2.9770505737474786e-15 3.1554436208840479e-30 ;
+	setAttr ".rpt" -type "double3" -9.1258123148082597e-15 -2.9770505737474786e-15 3.1554436208840493e-30 ;
 createNode camera -s -n "sideShape" -p "side";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
@@ -112,10 +112,10 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "                -imagePlane 0\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 0\n                -shadows 0\n                $editorName;\nmodelEditor -e -viewSelected 0 $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"top\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"wireframe\" \n"
 		+ "            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 1\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 16384\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -rendererName \"base_OpenGL_Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n"
 		+ "            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 0\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n"
-		+ "            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 0\n            -shadows 0\n            $editorName;\nmodelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"camera1\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n"
+		+ "            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 0\n            -shadows 0\n            $editorName;\nmodelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"side\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n"
 		+ "                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 1\n                -activeComponentsXray 0\n                -displayTextures 1\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 16384\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -rendererName \"base_OpenGL_Renderer\" \n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 256 256 \n                -bumpResolution 512 512 \n"
 		+ "                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 0\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n"
-		+ "                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 0\n                -shadows 0\n                $editorName;\nmodelEditor -e -viewSelected 0 $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"camera1\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n"
+		+ "                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 0\n                -shadows 0\n                $editorName;\nmodelEditor -e -viewSelected 0 $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"side\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n"
 		+ "            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 1\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 16384\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -rendererName \"base_OpenGL_Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n"
 		+ "            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 0\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -dimensions 1\n"
 		+ "            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 0\n            -shadows 0\n            $editorName;\nmodelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"front\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n"
@@ -134,8 +134,8 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "                -ignoreDagHierarchy 0\n                -expandConnections 0\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 1\n                -showLeafs 1\n                -showNumericAttrsOnly 0\n                -highlightActive 1\n                -autoSelectNewObjects 0\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 0\n                -setFilter \"defaultSetFilter\" \n                -showSetMembers 1\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n"
 		+ "                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 0\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 0\n            -showConnected 1\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 0\n            -showPublishedAsConnected 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n"
 		+ "            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n"
-		+ "            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"graphEditor\" -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n"
-		+ "                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n"
+		+ "            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\tif ($useSceneConfig) {\n\t\toutlinerPanel -e -to $panelName;\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"graphEditor\" -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n"
+		+ "                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n"
 		+ "                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n            animCurveEditor -e \n                -displayKeys 1\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 1\n                -displayInfinities 0\n                -autoFit 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showResults \"off\" \n                -showBufferCurves \"off\" \n                -smoothness \"fine\" \n                -resultSamples 1.25\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -stackedCurves 0\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -displayNormalized 0\n"
 		+ "                -preSelectionHighlight 0\n                -constrainDrag 0\n                -classicMode 1\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n"
 		+ "                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n"
@@ -604,7 +604,7 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        setFocus `paneLayout -q -p1 $gMainPane`;\n        sceneUIReplacement -deleteRemaining;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 1 -size 50 -divisions 1 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
-	setAttr ".b" -type "string" "playbackOptions -min 0 -max 30 -ast 0 -aet 60 ";
+	setAttr ".b" -type "string" "playbackOptions -min 0 -max 400 -ast 0 -aet 400 ";
 	setAttr ".st" 6;
 createNode lambert -n "Mat_WolfMan";
 	setAttr ".ic" -type "float3" 0.56115055 0.56115055 0.56115055 ;
@@ -823,7 +823,7 @@ createNode hyperLayout -n "hyperLayout15";
 	setAttr ".ihi" 0;
 	setAttr ".anf" yes;
 createNode reference -n "ThiefRN";
-	setAttr -s 130 ".phl";
+	setAttr -s 200 ".phl";
 	setAttr ".phl[1]" 0;
 	setAttr ".phl[2]" 0;
 	setAttr ".phl[3]" 0;
@@ -954,25 +954,129 @@ createNode reference -n "ThiefRN";
 	setAttr ".phl[128]" 0;
 	setAttr ".phl[129]" 0;
 	setAttr ".phl[130]" 0;
+	setAttr ".phl[131]" 0;
+	setAttr ".phl[132]" 0;
+	setAttr ".phl[133]" 0;
+	setAttr ".phl[134]" 0;
+	setAttr ".phl[135]" 0;
+	setAttr ".phl[136]" 0;
+	setAttr ".phl[137]" 0;
+	setAttr ".phl[138]" 0;
+	setAttr ".phl[139]" 0;
+	setAttr ".phl[140]" 0;
+	setAttr ".phl[141]" 0;
+	setAttr ".phl[142]" 0;
+	setAttr ".phl[143]" 0;
+	setAttr ".phl[144]" 0;
+	setAttr ".phl[145]" 0;
+	setAttr ".phl[146]" 0;
+	setAttr ".phl[147]" 0;
+	setAttr ".phl[148]" 0;
+	setAttr ".phl[149]" 0;
+	setAttr ".phl[150]" 0;
+	setAttr ".phl[151]" 0;
+	setAttr ".phl[152]" 0;
+	setAttr ".phl[153]" 0;
+	setAttr ".phl[154]" 0;
+	setAttr ".phl[155]" 0;
+	setAttr ".phl[156]" 0;
+	setAttr ".phl[157]" 0;
+	setAttr ".phl[158]" 0;
+	setAttr ".phl[159]" 0;
+	setAttr ".phl[160]" 0;
+	setAttr ".phl[161]" 0;
+	setAttr ".phl[162]" 0;
+	setAttr ".phl[163]" 0;
+	setAttr ".phl[164]" 0;
+	setAttr ".phl[165]" 0;
+	setAttr ".phl[166]" 0;
+	setAttr ".phl[167]" 0;
+	setAttr ".phl[168]" 0;
+	setAttr ".phl[169]" 0;
+	setAttr ".phl[170]" 0;
+	setAttr ".phl[171]" 0;
+	setAttr ".phl[172]" 0;
+	setAttr ".phl[173]" 0;
+	setAttr ".phl[174]" 0;
+	setAttr ".phl[175]" 0;
+	setAttr ".phl[176]" 0;
+	setAttr ".phl[177]" 0;
+	setAttr ".phl[178]" 0;
+	setAttr ".phl[179]" 0;
+	setAttr ".phl[180]" 0;
+	setAttr ".phl[181]" 0;
+	setAttr ".phl[182]" 0;
+	setAttr ".phl[183]" 0;
+	setAttr ".phl[184]" 0;
+	setAttr ".phl[185]" 0;
+	setAttr ".phl[186]" 0;
+	setAttr ".phl[187]" 0;
+	setAttr ".phl[188]" 0;
+	setAttr ".phl[189]" 0;
+	setAttr ".phl[190]" 0;
+	setAttr ".phl[191]" 0;
+	setAttr ".phl[192]" 0;
+	setAttr ".phl[193]" 0;
+	setAttr ".phl[194]" 0;
+	setAttr ".phl[195]" 0;
+	setAttr ".phl[196]" 0;
+	setAttr ".phl[197]" 0;
+	setAttr ".phl[198]" 0;
+	setAttr ".phl[199]" 0;
+	setAttr ".phl[200]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"ThiefRN"
 		"ThiefRN" 0
-		"ThiefRN" 143
-		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso" 
-		"rotate" " -type \"double3\" 0 0 0"
-		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso" 
+		"ThiefRN" 230
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root" "translate" " -type \"double3\" 0 0 0"
+		
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root" "translateX" " -av"
+		
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips" 
+		"translate" " -type \"double3\" 0 0 0"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips" 
+		"translateX" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips" 
+		"translateY" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips" 
+		"rotate" " -type \"double3\" 0 16.637352 0"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips" 
 		"rotateY" " -av"
 		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso" 
+		"rotate" " -type \"double3\" 3.009105 -8.147964 -5.403281"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso" 
 		"rotateX" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso" 
+		"rotateY" " -av"
 		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso" 
 		"rotateZ" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck" 
+		"rotate" " -type \"double3\" 0 0 0"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck" 
+		"rotateY" " -av"
 		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head" 
-		"rotate" " -type \"double3\" 13.422915 -20.550883 -6.754345"
+		"rotate" " -type \"double3\" 4.72363 -17.726245 -1.404461"
 		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head" 
 		"rotateX" " -av"
 		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head" 
 		"rotateY" " -av"
 		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head" 
+		"rotateZ" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
+		"translate" " -type \"double3\" 0.433438 -0.328486 0"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
+		"translateX" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
+		"translateY" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
+		"translateZ" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
+		"rotate" " -type \"double3\" 8.945553 39.098849 61.416248"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
+		"rotateX" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
+		"rotateY" " -av"
+		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
 		"rotateZ" " -av"
 		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand" 
 		"rotatePivot" " -type \"double3\" -0.907631 1.319382 -0.0997434"
@@ -983,811 +1087,1460 @@ createNode reference -n "ThiefRN";
 		2 "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand" 
 		"scalePivot" " -type \"double3\" 0.907631 1.31938 -0.0997434"
 		2 "Thief:Layer_Geometry" "displayType" " 2"
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.translateX" 
 		"ThiefRN.placeHolderList[1]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.translateY" 
 		"ThiefRN.placeHolderList[2]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.translateZ" 
 		"ThiefRN.placeHolderList[3]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.visibility" 
 		"ThiefRN.placeHolderList[4]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.rotateX" 
 		"ThiefRN.placeHolderList[5]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.rotateY" 
 		"ThiefRN.placeHolderList[6]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.rotateZ" 
 		"ThiefRN.placeHolderList[7]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.scaleX" 
 		"ThiefRN.placeHolderList[8]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.scaleY" 
 		"ThiefRN.placeHolderList[9]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root.scaleZ" 
 		"ThiefRN.placeHolderList[10]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.rotateX" 
 		"ThiefRN.placeHolderList[11]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.rotateY" 
 		"ThiefRN.placeHolderList[12]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.rotateZ" 
 		"ThiefRN.placeHolderList[13]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.translateX" 
 		"ThiefRN.placeHolderList[14]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.translateY" 
 		"ThiefRN.placeHolderList[15]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.translateZ" 
 		"ThiefRN.placeHolderList[16]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.visibility" 
 		"ThiefRN.placeHolderList[17]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.scaleX" 
 		"ThiefRN.placeHolderList[18]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.scaleY" 
 		"ThiefRN.placeHolderList[19]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips.scaleZ" 
 		"ThiefRN.placeHolderList[20]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.translateX" 
 		"ThiefRN.placeHolderList[21]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.translateY" 
 		"ThiefRN.placeHolderList[22]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.translateZ" 
 		"ThiefRN.placeHolderList[23]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.rotateY" 
 		"ThiefRN.placeHolderList[24]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.rotateX" 
 		"ThiefRN.placeHolderList[25]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.rotateZ" 
 		"ThiefRN.placeHolderList[26]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.scaleX" 
 		"ThiefRN.placeHolderList[27]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.scaleY" 
 		"ThiefRN.placeHolderList[28]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.scaleZ" 
 		"ThiefRN.placeHolderList[29]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection.visibility" 
 		"ThiefRN.placeHolderList[30]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.translateX" 
 		"ThiefRN.placeHolderList[31]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.translateY" 
 		"ThiefRN.placeHolderList[32]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.translateZ" 
 		"ThiefRN.placeHolderList[33]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.rotateX" 
 		"ThiefRN.placeHolderList[34]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.rotateY" 
 		"ThiefRN.placeHolderList[35]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.rotateZ" 
 		"ThiefRN.placeHolderList[36]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.scaleX" 
 		"ThiefRN.placeHolderList[37]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.scaleY" 
 		"ThiefRN.placeHolderList[38]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.scaleZ" 
 		"ThiefRN.placeHolderList[39]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso.visibility" 
 		"ThiefRN.placeHolderList[40]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.translateX" 
 		"ThiefRN.placeHolderList[41]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.translateY" 
 		"ThiefRN.placeHolderList[42]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.translateZ" 
 		"ThiefRN.placeHolderList[43]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.rotateX" 
 		"ThiefRN.placeHolderList[44]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.rotateY" 
 		"ThiefRN.placeHolderList[45]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.rotateZ" 
 		"ThiefRN.placeHolderList[46]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.scaleX" 
 		"ThiefRN.placeHolderList[47]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.scaleY" 
 		"ThiefRN.placeHolderList[48]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.scaleZ" 
 		"ThiefRN.placeHolderList[49]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_RightArm.visibility" 
 		"ThiefRN.placeHolderList[50]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.translateX" 
 		"ThiefRN.placeHolderList[51]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.translateY" 
 		"ThiefRN.placeHolderList[52]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.translateZ" 
 		"ThiefRN.placeHolderList[53]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.rotateX" 
 		"ThiefRN.placeHolderList[54]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.rotateY" 
 		"ThiefRN.placeHolderList[55]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.rotateZ" 
 		"ThiefRN.placeHolderList[56]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.scaleX" 
 		"ThiefRN.placeHolderList[57]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.scaleY" 
 		"ThiefRN.placeHolderList[58]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.scaleZ" 
 		"ThiefRN.placeHolderList[59]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_LeftArm.visibility" 
 		"ThiefRN.placeHolderList[60]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.translateX" 
 		"ThiefRN.placeHolderList[61]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.translateY" 
 		"ThiefRN.placeHolderList[62]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.translateZ" 
 		"ThiefRN.placeHolderList[63]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.rotateX" 
 		"ThiefRN.placeHolderList[64]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.rotateY" 
 		"ThiefRN.placeHolderList[65]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.rotateZ" 
 		"ThiefRN.placeHolderList[66]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.scaleX" 
 		"ThiefRN.placeHolderList[67]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.scaleY" 
 		"ThiefRN.placeHolderList[68]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.scaleZ" 
 		"ThiefRN.placeHolderList[69]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck.visibility" 
 		"ThiefRN.placeHolderList[70]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.translateX" 
 		"ThiefRN.placeHolderList[71]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.translateY" 
 		"ThiefRN.placeHolderList[72]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.translateZ" 
 		"ThiefRN.placeHolderList[73]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.rotateX" 
 		"ThiefRN.placeHolderList[74]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.rotateY" 
 		"ThiefRN.placeHolderList[75]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.rotateZ" 
 		"ThiefRN.placeHolderList[76]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.scaleX" 
 		"ThiefRN.placeHolderList[77]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.scaleY" 
 		"ThiefRN.placeHolderList[78]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.scaleZ" 
 		"ThiefRN.placeHolderList[79]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_MidSection|Thief:Control_Torso|Thief:Control_Neck|Thief:Control_Head.visibility" 
 		"ThiefRN.placeHolderList[80]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.rotateX" 
 		"ThiefRN.placeHolderList[81]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.rotateY" 
 		"ThiefRN.placeHolderList[82]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.rotateZ" 
 		"ThiefRN.placeHolderList[83]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.translateX" 
 		"ThiefRN.placeHolderList[84]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.translateY" 
 		"ThiefRN.placeHolderList[85]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.translateZ" 
 		"ThiefRN.placeHolderList[86]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.scaleX" 
 		"ThiefRN.placeHolderList[87]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.scaleY" 
 		"ThiefRN.placeHolderList[88]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.scaleZ" 
 		"ThiefRN.placeHolderList[89]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand.visibility" 
 		"ThiefRN.placeHolderList[90]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.rotateX" 
 		"ThiefRN.placeHolderList[91]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.rotateY" 
 		"ThiefRN.placeHolderList[92]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.rotateZ" 
 		"ThiefRN.placeHolderList[93]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.visibility" 
 		"ThiefRN.placeHolderList[94]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.translateX" 
 		"ThiefRN.placeHolderList[95]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.translateY" 
 		"ThiefRN.placeHolderList[96]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.translateZ" 
 		"ThiefRN.placeHolderList[97]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.scaleX" 
 		"ThiefRN.placeHolderList[98]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.scaleY" 
 		"ThiefRN.placeHolderList[99]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightFingers.scaleZ" 
 		"ThiefRN.placeHolderList[100]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.translateX" 
 		"ThiefRN.placeHolderList[101]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.translateY" 
 		"ThiefRN.placeHolderList[102]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.translateZ" 
 		"ThiefRN.placeHolderList[103]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.rotateX" 
 		"ThiefRN.placeHolderList[104]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.rotateY" 
 		"ThiefRN.placeHolderList[105]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.rotateZ" 
 		"ThiefRN.placeHolderList[106]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.visibility" 
 		"ThiefRN.placeHolderList[107]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.scaleX" 
 		"ThiefRN.placeHolderList[108]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.scaleY" 
 		"ThiefRN.placeHolderList[109]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_RightHand|Thief:Control_RightElbow.scaleZ" 
 		"ThiefRN.placeHolderList[110]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.rotateZ" 
 		"ThiefRN.placeHolderList[111]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.rotateX" 
 		"ThiefRN.placeHolderList[112]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.rotateY" 
 		"ThiefRN.placeHolderList[113]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.translateX" 
 		"ThiefRN.placeHolderList[114]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.translateZ" 
 		"ThiefRN.placeHolderList[115]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.translateY" 
 		"ThiefRN.placeHolderList[116]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.scaleX" 
 		"ThiefRN.placeHolderList[117]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.scaleY" 
 		"ThiefRN.placeHolderList[118]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.scaleZ" 
 		"ThiefRN.placeHolderList[119]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.scaleZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand.visibility" 
 		"ThiefRN.placeHolderList[120]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.rotateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.translateX" 
 		"ThiefRN.placeHolderList[121]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.rotateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.translateY" 
 		"ThiefRN.placeHolderList[122]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.rotateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.translateZ" 
 		"ThiefRN.placeHolderList[123]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.visibility" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.rotateX" 
 		"ThiefRN.placeHolderList[124]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.translateX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.rotateY" 
 		"ThiefRN.placeHolderList[125]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.translateY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.rotateZ" 
 		"ThiefRN.placeHolderList[126]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.translateZ" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.visibility" 
 		"ThiefRN.placeHolderList[127]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.scaleX" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.scaleX" 
 		"ThiefRN.placeHolderList[128]" ""
-		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.scaleY" 
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.scaleY" 
 		"ThiefRN.placeHolderList[129]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftElbow.scaleZ" 
+		"ThiefRN.placeHolderList[130]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.rotateX" 
+		"ThiefRN.placeHolderList[131]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.rotateY" 
+		"ThiefRN.placeHolderList[132]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.rotateZ" 
+		"ThiefRN.placeHolderList[133]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.visibility" 
+		"ThiefRN.placeHolderList[134]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.translateX" 
+		"ThiefRN.placeHolderList[135]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.translateY" 
+		"ThiefRN.placeHolderList[136]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.translateZ" 
+		"ThiefRN.placeHolderList[137]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.scaleX" 
+		"ThiefRN.placeHolderList[138]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.scaleY" 
+		"ThiefRN.placeHolderList[139]" ""
 		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_Hips|Thief:Control_LeftHand|Thief:Control_LeftFingers.scaleZ" 
-		"ThiefRN.placeHolderList[130]" "";
+		"ThiefRN.placeHolderList[140]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.rotateX" 
+		"ThiefRN.placeHolderList[141]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.rotateY" 
+		"ThiefRN.placeHolderList[142]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.rotateZ" 
+		"ThiefRN.placeHolderList[143]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.translateX" 
+		"ThiefRN.placeHolderList[144]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.translateY" 
+		"ThiefRN.placeHolderList[145]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.translateZ" 
+		"ThiefRN.placeHolderList[146]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.scaleX" 
+		"ThiefRN.placeHolderList[147]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.scaleY" 
+		"ThiefRN.placeHolderList[148]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.scaleZ" 
+		"ThiefRN.placeHolderList[149]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot.visibility" 
+		"ThiefRN.placeHolderList[150]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.rotateX" 
+		"ThiefRN.placeHolderList[151]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.rotateY" 
+		"ThiefRN.placeHolderList[152]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.rotateZ" 
+		"ThiefRN.placeHolderList[153]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.visibility" 
+		"ThiefRN.placeHolderList[154]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.translateX" 
+		"ThiefRN.placeHolderList[155]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.translateY" 
+		"ThiefRN.placeHolderList[156]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.translateZ" 
+		"ThiefRN.placeHolderList[157]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.scaleX" 
+		"ThiefRN.placeHolderList[158]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.scaleY" 
+		"ThiefRN.placeHolderList[159]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftToes.scaleZ" 
+		"ThiefRN.placeHolderList[160]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.translateX" 
+		"ThiefRN.placeHolderList[161]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.translateY" 
+		"ThiefRN.placeHolderList[162]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.translateZ" 
+		"ThiefRN.placeHolderList[163]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.visibility" 
+		"ThiefRN.placeHolderList[164]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.rotateX" 
+		"ThiefRN.placeHolderList[165]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.rotateY" 
+		"ThiefRN.placeHolderList[166]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.rotateZ" 
+		"ThiefRN.placeHolderList[167]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.scaleX" 
+		"ThiefRN.placeHolderList[168]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.scaleY" 
+		"ThiefRN.placeHolderList[169]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_LeftFoot|Thief:Control_LeftKnee.scaleZ" 
+		"ThiefRN.placeHolderList[170]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.rotateX" 
+		"ThiefRN.placeHolderList[171]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.rotateY" 
+		"ThiefRN.placeHolderList[172]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.rotateZ" 
+		"ThiefRN.placeHolderList[173]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.translateX" 
+		"ThiefRN.placeHolderList[174]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.translateY" 
+		"ThiefRN.placeHolderList[175]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.translateZ" 
+		"ThiefRN.placeHolderList[176]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.scaleX" 
+		"ThiefRN.placeHolderList[177]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.scaleY" 
+		"ThiefRN.placeHolderList[178]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.scaleZ" 
+		"ThiefRN.placeHolderList[179]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot.visibility" 
+		"ThiefRN.placeHolderList[180]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.rotateX" 
+		"ThiefRN.placeHolderList[181]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.rotateY" 
+		"ThiefRN.placeHolderList[182]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.rotateZ" 
+		"ThiefRN.placeHolderList[183]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.visibility" 
+		"ThiefRN.placeHolderList[184]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.translateX" 
+		"ThiefRN.placeHolderList[185]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.translateY" 
+		"ThiefRN.placeHolderList[186]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.translateZ" 
+		"ThiefRN.placeHolderList[187]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.scaleX" 
+		"ThiefRN.placeHolderList[188]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.scaleY" 
+		"ThiefRN.placeHolderList[189]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightToes.scaleZ" 
+		"ThiefRN.placeHolderList[190]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.translateX" 
+		"ThiefRN.placeHolderList[191]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.translateY" 
+		"ThiefRN.placeHolderList[192]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.translateZ" 
+		"ThiefRN.placeHolderList[193]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.visibility" 
+		"ThiefRN.placeHolderList[194]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.rotateX" 
+		"ThiefRN.placeHolderList[195]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.rotateY" 
+		"ThiefRN.placeHolderList[196]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.rotateZ" 
+		"ThiefRN.placeHolderList[197]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.scaleX" 
+		"ThiefRN.placeHolderList[198]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.scaleY" 
+		"ThiefRN.placeHolderList[199]" ""
+		5 4 "ThiefRN" "|Thief:Thief|Thief:Thief_Control|Thief:Control_Root|Thief:Control_RightFoot|Thief:Control_RightKnee.scaleZ" 
+		"ThiefRN.placeHolderList[200]" "";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode animCurveTA -n "Thief:Control_Hips_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_Hips_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 16.637351639412131 30 16.637351639412131;
+	setAttr -s 3 ".ktv[0:2]"  0 68.706548174889818 40 16.637351639412131
+		 70 16.637351639412131;
 createNode animCurveTA -n "Thief:Control_Hips_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_LeftHand_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 57.047393675569872 30 57.047393675569872;
+	setAttr -s 2 ".ktv[0:1]"  40 57.047393675569872 70 57.047393675569872;
 createNode animCurveTA -n "Thief:Control_LeftHand_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 -14.797608272788281 30 -14.797608272788281;
+	setAttr -s 2 ".ktv[0:1]"  40 -14.797608272788281 70 -14.797608272788281;
 createNode animCurveTA -n "Thief:Control_LeftHand_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 -103.36608430168423 30 -103.36608430168423;
+	setAttr -s 2 ".ktv[0:1]"  40 -103.36608430168424 70 -103.36608430168424;
 createNode animCurveTA -n "Thief:Control_LeftElbow_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_LeftElbow_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_LeftElbow_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_LeftFingers_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_LeftFingers_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_LeftFingers_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_MidSection_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 -6.5842021363588836 30 -6.5842021363588836;
+	setAttr -s 2 ".ktv[0:1]"  40 -6.5842021363588836 70 -6.5842021363588836;
 createNode animCurveTA -n "Thief:Control_MidSection_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 7.65999459636833 30 7.65999459636833;
+	setAttr -s 2 ".ktv[0:1]"  40 7.65999459636833 70 7.65999459636833;
 createNode animCurveTA -n "Thief:Control_MidSection_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 5.1242615952415278 30 5.1242615952415278;
+	setAttr -s 2 ".ktv[0:1]"  40 5.1242615952415278 70 5.1242615952415278;
 createNode animCurveTA -n "Thief:Control_Torso_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 15 0.70041919394524832 30 0;
+	setAttr -s 10 ".ktv[0:9]"  20 6.0331685002157824 40 3.0091050459255273
+		 70 3.0517536672415697 90 3.0091050459255273 180 0.35476614008183216 190 1.637226131205574
+		 260 1.637226131205574 270 1.637226131205574 330 3.0091050459255273 340 3.0091050459255273;
+	setAttr -s 10 ".kit[1:9]"  1 1 1 18 18 18 18 1 
+		1;
+	setAttr -s 10 ".kot[1:9]"  1 1 1 18 18 18 18 1 
+		1;
+	setAttr -s 10 ".kix[1:9]"  1 1 1 1 1 1 1 1 1;
+	setAttr -s 10 ".kiy[1:9]"  0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[1:9]"  1 1 1 1 1 1 1 1 1;
+	setAttr -s 10 ".koy[1:9]"  0 0 0 0 0 0 0 0 0;
 createNode animCurveTA -n "Thief:Control_Torso_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 15 -9.3515200391107332 30 0;
+	setAttr -s 11 ".ktv[0:10]"  20 10.7199920051082 40 -8.1479636028219939
+		 70 -12.555965895598629 90 -8.1479636028219939 100 -7.6384697968298658 180 -5.6581259777798731
+		 190 -1.6694605517246672 260 -2.1765076021085732 270 -2.1992729392789943 330 -8.1479636028219939
+		 340 -8.1479636028219939;
+	setAttr -s 11 ".kit[1:10]"  1 1 1 18 18 18 18 18 
+		1 1;
+	setAttr -s 11 ".kot[1:10]"  1 1 1 18 18 18 18 18 
+		1 1;
+	setAttr -s 11 ".kix[1:10]"  1 1 1 0.99989515542984009 0.99939757585525513 
+		1 0.99999397993087769 0.99999368190765381 1 1;
+	setAttr -s 11 ".kiy[1:10]"  0 0 0 0.014483769424259663 0.034705366939306259 
+		0 -0.0034675933420658112 -0.0035759513266384602 0 0;
+	setAttr -s 11 ".kox[1:10]"  1 1 1 0.99989515542984009 0.99939757585525513 
+		1 0.99999403953552246 0.99999368190765381 1 1;
+	setAttr -s 11 ".koy[1:10]"  0 0 0 0.014483768492937088 0.034705366939306259 
+		0 -0.0034675933420658112 -0.0035759515594691038 0 0;
 createNode animCurveTA -n "Thief:Control_Torso_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 15 -4.4035235774716499 30 0;
+	setAttr -s 10 ".ktv[0:9]"  20 1.4667691661790043 40 -5.4032808699445622
+		 70 -5.6404445933939424 90 -5.4032808699445622 180 -1.6051090300224109 190 -3.7214813360560992
+		 260 -3.7214813360560992 270 -3.7214813360560992 330 -5.4032808699445622 340 -5.4032808699445622;
+	setAttr -s 10 ".kit[1:9]"  1 1 1 18 18 18 18 1 
+		1;
+	setAttr -s 10 ".kot[1:9]"  1 1 1 18 18 18 18 1 
+		1;
+	setAttr -s 10 ".kix[1:9]"  1 1 1 1 1 1 1 1 1;
+	setAttr -s 10 ".kiy[1:9]"  0 0 0 0 0 0 0 0 0;
+	setAttr -s 10 ".kox[1:9]"  1 1 1 1 1 1 1 1 1;
+	setAttr -s 10 ".koy[1:9]"  0 0 0 0 0 0 0 0 0;
 createNode animCurveTA -n "Thief:Control_LeftArm_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_LeftArm_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_LeftArm_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_Neck_rotateX";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 3 ".ktv[0:2]"  40 0 45 0 70 0;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTA -n "Thief:Control_Neck_rotateY";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 3 ".ktv[0:2]"  40 0 45 0 70 0;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTA -n "Thief:Control_Neck_rotateZ";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 3 ".ktv[0:2]"  40 0 45 0 70 0;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTA -n "Thief:Control_Head_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 13.422915049723468 15 6.6027360569209019
-		 30 13.422915049723468;
+	setAttr -s 20 ".ktv[0:19]"  0 2.2495396424464786 20 15.157308636144595
+		 35 5.8254421856394139 40 4.7236299976323384 50 1.7573870633907067 59 4.636069876514159
+		 80 4.636069876514159 85 13.422915049723468 90 5.1114095739863581 100 3.3092210705736607
+		 120 3.3092210705736607 130 0.20067596010994354 175 0.20067596010994354 184 3.9403701257911083
+		 200 5.6340726848893006 260 0.9790677866787697 270 2.157937618964739 310 2.157937618964739
+		 330 2.62081177844895 340 4.7236299976323384;
+	setAttr -s 20 ".kit[2:19]"  1 18 18 18 1 1 18 18 
+		18 18 18 18 18 18 18 1 1 1;
+	setAttr -s 20 ".kot[2:19]"  1 18 18 18 1 1 18 18 
+		18 18 18 18 18 18 18 1 1 1;
+	setAttr -s 20 ".kix[2:19]"  1 0.99006766080856323 1 1 0.98511135578155518 
+		1 0.96218883991241455 1 1 1 1 0.99358737468719482 1 1 1 0.99994796514511108 1 0.99006766080856323;
+	setAttr -s 20 ".kiy[2:19]"  0 -0.14059150218963623 0 0 0.17191760241985321 
+		0 -0.27238333225250244 0 0 0 0 0.11306710541248322 0 0 0 0.010199476033449173 0 -0.14059150218963623;
+	setAttr -s 20 ".kox[2:19]"  1 0.99006772041320801 1 1 0.9851112961769104 
+		1 0.96218883991241455 1 1 1 1 0.99358731508255005 1 1 1 0.99994802474975586 1 0.99006772041320801;
+	setAttr -s 20 ".koy[2:19]"  0 -0.14059151709079742 0 0 0.17191757261753082 
+		0 -0.27238333225250244 0 0 0 0 0.11306709796190262 0 0 0 0.010199476033449173 0 -0.14059151709079742;
 createNode animCurveTA -n "Thief:Control_Head_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 -20.550882887683052 15 -5.3956371052210486
-		 30 -20.550882887683052;
+	setAttr -s 20 ".ktv[0:19]"  0 1.742677859588545 20 21.351045556485769
+		 35 -9.9661908947471911 40 -17.726245079943126 50 -15.673033787996449 59 8.9532516592856091
+		 80 8.9532516592856091 85 -20.550882887683052 90 -30.182933821801388 100 -27.89755182029927
+		 120 -27.89755182029927 130 -11.545524906600004 175 -11.545524906600004 184 3.0555576953801165
+		 200 21.014286282319961 260 16.358411219252691 270 -17.687324643210861 310 -17.687324643210861
+		 330 -19.111259079302641 340 -17.726245079943126;
+	setAttr -s 20 ".kit[2:19]"  1 18 18 18 1 1 18 18 
+		18 18 18 18 18 18 18 1 1 1;
+	setAttr -s 20 ".kot[2:19]"  1 18 18 18 1 1 18 18 
+		18 18 18 18 18 18 18 1 1 1;
+	setAttr -s 20 ".kix[2:19]"  1 1 0.95172607898712158 1 1 1 1 1 1 1 1 
+		0.82618385553359985 1 0.99265313148498535 1 1 1 1;
+	setAttr -s 20 ".kiy[2:19]"  0 0 0.30694857239723206 0 0 0 0 0 0 0 0 
+		0.56340068578720093 0 -0.12099498510360718 0 0 0 0;
+	setAttr -s 20 ".kox[2:19]"  1 1 0.95172613859176636 1 1 1 1 1 1 1 1 
+		0.82618379592895508 1 0.99265307188034058 1 1 1 1;
+	setAttr -s 20 ".koy[2:19]"  0 0 0.30694857239723206 0 0 0 0 0 0 0 0 
+		0.56340062618255615 0 -0.12099497020244598 0 0 0 0;
 createNode animCurveTA -n "Thief:Control_Head_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 -6.7543451114149251 15 -2.7218221369654523
-		 30 -6.7543451114149251;
+	setAttr -s 20 ".ktv[0:19]"  0 -5.8164885023644137 20 6.0829114854911221
+		 35 -2.2422982519385051 40 -1.4044609390932978 50 -1.7004589923870921 59 -1.6784432232853623
+		 80 -1.6784432232853623 85 -6.7543451114149251 90 -10.356773398051462 100 -9.6853830349510446
+		 120 -9.6853830349510446 130 -1.8509608523443628 175 -1.8509608523443628 184 -5.8175952614453044
+		 200 -3.7677264272178759 260 -4.113202278572742 270 -3.8852592500838692 310 -3.8852592500838692
+		 330 -2.8639185992136098 340 -1.4044609390932978;
+	setAttr -s 20 ".kit[2:19]"  1 18 18 18 1 1 18 18 
+		18 18 18 18 18 18 18 1 1 1;
+	setAttr -s 20 ".kot[2:19]"  1 18 18 18 1 1 18 18 
+		18 18 18 18 18 18 18 1 1 1;
+	setAttr -s 20 ".kix[2:19]"  1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0.99985390901565552 
+		1 1;
+	setAttr -s 20 ".kiy[2:19]"  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.01709132082760334 
+		0 0;
+	setAttr -s 20 ".kox[2:19]"  1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0.99985396862030029 
+		1 1;
+	setAttr -s 20 ".koy[2:19]"  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.017091322690248489 
+		0 0;
 createNode animCurveTA -n "Thief:Control_RightArm_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_RightArm_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_RightArm_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_RightHand_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 8.9455530069795959 30 8.9455530069795959;
+	setAttr -s 3 ".ktv[0:2]"  20 71.552532625889384 40 8.9455530069795959
+		 70 8.9455530069795959;
 createNode animCurveTA -n "Thief:Control_RightHand_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 39.098849362159228 30 39.098849362159228;
+	setAttr -s 3 ".ktv[0:2]"  20 56.205665303666365 40 39.098849362159235
+		 70 39.098849362159235;
 createNode animCurveTA -n "Thief:Control_RightHand_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 61.416248308362199 30 61.416248308362199;
+	setAttr -s 3 ".ktv[0:2]"  20 102.90761711686326 40 61.416248308362199
+		 70 61.416248308362199;
 createNode animCurveTA -n "Thief:Control_RightElbow_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_RightElbow_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_RightElbow_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_RightFingers_rotateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_RightFingers_rotateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTA -n "Thief:Control_RightFingers_rotateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_Hips_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_Hips_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 3 ".ktv[0:2]"  0 0.5612602654132326 40 0 70 0;
 createNode animCurveTL -n "Thief:Control_Hips_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 5 ".ktv[0:4]"  10 0.017719100133591681 20 -0.046183819692626089
+		 30 0.024241213882053001 40 0 70 0;
 createNode animCurveTL -n "Thief:Control_Hips_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_Hips_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_Hips_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_Hips_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_MidSection_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_MidSection_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_MidSection_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_MidSection_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_MidSection_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_MidSection_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_MidSection_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_Torso_visibility";
-	setAttr ".tan" 9;
+	setAttr ".tan" 5;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
-	setAttr -s 2 ".kot[0:1]"  5 5;
+	setAttr -s 7 ".ktv[0:6]"  40 1 70 1 90 1 180 1 260 1 270 1 340 1;
+	setAttr -s 7 ".kit[0:6]"  9 1 1 9 9 9 1;
+	setAttr -s 7 ".kix[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".kiy[1:6]"  0 0 0 0 0 0;
 createNode animCurveTL -n "Thief:Control_Torso_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 7 ".ktv[0:6]"  40 0 70 0 90 0 180 0 260 0 270 0 340 0;
+	setAttr -s 7 ".kit[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kot[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kix[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".kiy[1:6]"  0 0 0 0 0 0;
+	setAttr -s 7 ".kox[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".koy[1:6]"  0 0 0 0 0 0;
 createNode animCurveTL -n "Thief:Control_Torso_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 7 ".ktv[0:6]"  40 0 70 0 90 0 180 0 260 0 270 0 340 0;
+	setAttr -s 7 ".kit[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kot[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kix[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".kiy[1:6]"  0 0 0 0 0 0;
+	setAttr -s 7 ".kox[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".koy[1:6]"  0 0 0 0 0 0;
 createNode animCurveTL -n "Thief:Control_Torso_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 7 ".ktv[0:6]"  40 0 70 0 90 0 180 0 260 0 270 0 340 0;
+	setAttr -s 7 ".kit[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kot[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kix[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".kiy[1:6]"  0 0 0 0 0 0;
+	setAttr -s 7 ".kox[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".koy[1:6]"  0 0 0 0 0 0;
 createNode animCurveTU -n "Thief:Control_Torso_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 7 ".ktv[0:6]"  40 1 70 1 90 1 180 1 260 1 270 1 340 1;
+	setAttr -s 7 ".kit[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kot[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kix[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".kiy[1:6]"  0 0 0 0 0 0;
+	setAttr -s 7 ".kox[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".koy[1:6]"  0 0 0 0 0 0;
 createNode animCurveTU -n "Thief:Control_Torso_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 7 ".ktv[0:6]"  40 1 70 1 90 1 180 1 260 1 270 1 340 1;
+	setAttr -s 7 ".kit[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kot[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kix[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".kiy[1:6]"  0 0 0 0 0 0;
+	setAttr -s 7 ".kox[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".koy[1:6]"  0 0 0 0 0 0;
 createNode animCurveTU -n "Thief:Control_Torso_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 7 ".ktv[0:6]"  40 1 70 1 90 1 180 1 260 1 270 1 340 1;
+	setAttr -s 7 ".kit[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kot[1:6]"  1 1 18 18 18 1;
+	setAttr -s 7 ".kix[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".kiy[1:6]"  0 0 0 0 0 0;
+	setAttr -s 7 ".kox[1:6]"  1 1 1 1 1 1;
+	setAttr -s 7 ".koy[1:6]"  0 0 0 0 0 0;
 createNode animCurveTU -n "Thief:Control_RightArm_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_RightArm_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_RightArm_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_RightArm_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_RightArm_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightArm_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightArm_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftArm_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_LeftArm_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_LeftArm_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_LeftArm_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_LeftArm_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftArm_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftArm_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_Neck_visibility";
-	setAttr ".tan" 9;
+	setAttr ".tan" 5;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
-	setAttr -s 2 ".kot[0:1]"  5 5;
+	setAttr -s 3 ".ktv[0:2]"  40 1 45 1 70 1;
+	setAttr -s 3 ".kit[0:2]"  9 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
 createNode animCurveTL -n "Thief:Control_Neck_translateX";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 3 ".ktv[0:2]"  40 0 45 0 70 0;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTL -n "Thief:Control_Neck_translateY";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 3 ".ktv[0:2]"  40 0 45 0 70 0;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTL -n "Thief:Control_Neck_translateZ";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 3 ".ktv[0:2]"  40 0 45 0 70 0;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTU -n "Thief:Control_Neck_scaleX";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 3 ".ktv[0:2]"  40 1 45 1 70 1;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTU -n "Thief:Control_Neck_scaleY";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 3 ".ktv[0:2]"  40 1 45 1 70 1;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTU -n "Thief:Control_Neck_scaleZ";
-	setAttr ".tan" 18;
+	setAttr ".tan" 1;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 3 ".ktv[0:2]"  40 1 45 1 70 1;
+	setAttr -s 3 ".kit[0:2]"  18 1 1;
+	setAttr -s 3 ".kot[0:2]"  18 1 1;
+	setAttr -s 3 ".kix[1:2]"  1 1;
+	setAttr -s 3 ".kiy[1:2]"  0 0;
+	setAttr -s 3 ".kox[1:2]"  1 1;
+	setAttr -s 3 ".koy[1:2]"  0 0;
 createNode animCurveTU -n "Thief:Control_Head_visibility";
-	setAttr ".tan" 9;
+	setAttr ".tan" 5;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
-	setAttr -s 2 ".kot[0:1]"  5 5;
+	setAttr -s 5 ".ktv[0:4]"  40 1 85 1 120 1 175 1 340 1;
+	setAttr -s 5 ".kit[0:4]"  9 1 9 9 1;
+	setAttr -s 5 ".kix[1:4]"  1 1 1 1;
+	setAttr -s 5 ".kiy[1:4]"  0 0 0 0;
 createNode animCurveTL -n "Thief:Control_Head_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 5 ".ktv[0:4]"  40 0 85 0 120 0 175 0 340 0;
+	setAttr -s 5 ".kit[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kot[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kix[1:4]"  1 1 1 1;
+	setAttr -s 5 ".kiy[1:4]"  0 0 0 0;
+	setAttr -s 5 ".kox[1:4]"  1 1 1 1;
+	setAttr -s 5 ".koy[1:4]"  0 0 0 0;
 createNode animCurveTL -n "Thief:Control_Head_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 5 ".ktv[0:4]"  40 0 85 0 120 0 175 0 340 0;
+	setAttr -s 5 ".kit[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kot[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kix[1:4]"  1 1 1 1;
+	setAttr -s 5 ".kiy[1:4]"  0 0 0 0;
+	setAttr -s 5 ".kox[1:4]"  1 1 1 1;
+	setAttr -s 5 ".koy[1:4]"  0 0 0 0;
 createNode animCurveTL -n "Thief:Control_Head_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 5 ".ktv[0:4]"  40 0 85 0 120 0 175 0 340 0;
+	setAttr -s 5 ".kit[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kot[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kix[1:4]"  1 1 1 1;
+	setAttr -s 5 ".kiy[1:4]"  0 0 0 0;
+	setAttr -s 5 ".kox[1:4]"  1 1 1 1;
+	setAttr -s 5 ".koy[1:4]"  0 0 0 0;
 createNode animCurveTU -n "Thief:Control_Head_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 5 ".ktv[0:4]"  40 1 85 1 120 1 175 1 340 1;
+	setAttr -s 5 ".kit[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kot[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kix[1:4]"  1 1 1 1;
+	setAttr -s 5 ".kiy[1:4]"  0 0 0 0;
+	setAttr -s 5 ".kox[1:4]"  1 1 1 1;
+	setAttr -s 5 ".koy[1:4]"  0 0 0 0;
 createNode animCurveTU -n "Thief:Control_Head_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 5 ".ktv[0:4]"  40 1 85 1 120 1 175 1 340 1;
+	setAttr -s 5 ".kit[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kot[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kix[1:4]"  1 1 1 1;
+	setAttr -s 5 ".kiy[1:4]"  0 0 0 0;
+	setAttr -s 5 ".kox[1:4]"  1 1 1 1;
+	setAttr -s 5 ".koy[1:4]"  0 0 0 0;
 createNode animCurveTU -n "Thief:Control_Head_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 5 ".ktv[0:4]"  40 1 85 1 120 1 175 1 340 1;
+	setAttr -s 5 ".kit[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kot[1:4]"  1 18 18 1;
+	setAttr -s 5 ".kix[1:4]"  1 1 1 1;
+	setAttr -s 5 ".kiy[1:4]"  0 0 0 0;
+	setAttr -s 5 ".kox[1:4]"  1 1 1 1;
+	setAttr -s 5 ".koy[1:4]"  0 0 0 0;
 createNode animCurveTU -n "Thief:Control_RightHand_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_RightHand_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0.43343787314717724 30 0.43343787314717724;
+	setAttr -s 3 ".ktv[0:2]"  20 0.76364545679782347 40 0.4334378731471773
+		 70 0.4334378731471773;
 createNode animCurveTL -n "Thief:Control_RightHand_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 -0.3284856413148376 30 -0.3284856413148376;
+	setAttr -s 3 ".ktv[0:2]"  20 -0.34890445708965157 40 -0.3284856413148376
+		 70 -0.3284856413148376;
 createNode animCurveTL -n "Thief:Control_RightHand_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 -5.5511151231257827e-17 30 -5.5511151231257827e-17;
+	setAttr -s 3 ".ktv[0:2]"  20 0.3556651549297748 40 0 70 0;
 createNode animCurveTU -n "Thief:Control_RightHand_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightHand_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightHand_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightFingers_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_RightFingers_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_RightFingers_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_RightFingers_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_RightFingers_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightFingers_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightFingers_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightElbow_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_RightElbow_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_RightElbow_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_RightElbow_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_RightElbow_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightElbow_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_RightElbow_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftHand_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_LeftHand_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 -0.50616082778108318 30 -0.50616082778108318;
+	setAttr -s 2 ".ktv[0:1]"  40 -0.50616082778108318 70 -0.50616082778108318;
 createNode animCurveTL -n "Thief:Control_LeftHand_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 -0.26649760907302111 30 -0.26649760907302111;
+	setAttr -s 2 ".ktv[0:1]"  40 -0.26649760907302111 70 -0.26649760907302111;
 createNode animCurveTL -n "Thief:Control_LeftHand_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 2.7755575615628914e-17 30 2.7755575615628914e-17;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_LeftHand_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftHand_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftHand_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftElbow_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_LeftElbow_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_LeftElbow_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_LeftElbow_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_LeftElbow_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftElbow_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftElbow_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftFingers_visibility";
 	setAttr ".tan" 9;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 	setAttr -s 2 ".kot[0:1]"  5 5;
 createNode animCurveTL -n "Thief:Control_LeftFingers_translateX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_LeftFingers_translateY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTL -n "Thief:Control_LeftFingers_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 0 30 0;
+	setAttr -s 2 ".ktv[0:1]"  40 0 70 0;
 createNode animCurveTU -n "Thief:Control_LeftFingers_scaleX";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftFingers_scaleY";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
 createNode animCurveTU -n "Thief:Control_LeftFingers_scaleZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
-	setAttr -s 2 ".ktv[0:1]"  0 1 30 1;
+	setAttr -s 2 ".ktv[0:1]"  40 1 70 1;
+createNode animCurveTU -n "Thief:Control_Root_visibility";
+	setAttr ".tan" 9;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTL -n "Thief:Control_Root_translateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 2 ".ktv[0:1]"  0 -1.1390880147637512 40 0;
+createNode animCurveTL -n "Thief:Control_Root_translateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_Root_translateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_Root_rotateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_Root_rotateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_Root_rotateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTU -n "Thief:Control_Root_scaleX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_Root_scaleY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_Root_scaleZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftFoot_visibility";
+	setAttr ".tan" 9;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTL -n "Thief:Control_LeftFoot_translateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_LeftFoot_translateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_LeftFoot_translateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftFoot_rotateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftFoot_rotateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftFoot_rotateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTU -n "Thief:Control_LeftFoot_scaleX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftFoot_scaleY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftFoot_scaleZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftToes_visibility";
+	setAttr ".tan" 9;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTL -n "Thief:Control_LeftToes_translateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_LeftToes_translateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_LeftToes_translateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftToes_rotateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftToes_rotateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftToes_rotateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTU -n "Thief:Control_LeftToes_scaleX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftToes_scaleY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftToes_scaleZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftKnee_visibility";
+	setAttr ".tan" 9;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTL -n "Thief:Control_LeftKnee_translateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0.25;
+createNode animCurveTL -n "Thief:Control_LeftKnee_translateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_LeftKnee_translateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftKnee_rotateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftKnee_rotateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_LeftKnee_rotateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTU -n "Thief:Control_LeftKnee_scaleX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftKnee_scaleY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_LeftKnee_scaleZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightFoot_visibility";
+	setAttr ".tan" 9;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTL -n "Thief:Control_RightFoot_translateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_RightFoot_translateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_RightFoot_translateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightFoot_rotateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightFoot_rotateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightFoot_rotateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTU -n "Thief:Control_RightFoot_scaleX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightFoot_scaleY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightFoot_scaleZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightToes_visibility";
+	setAttr ".tan" 9;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTL -n "Thief:Control_RightToes_translateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_RightToes_translateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_RightToes_translateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightToes_rotateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightToes_rotateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightToes_rotateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTU -n "Thief:Control_RightToes_scaleX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightToes_scaleY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightToes_scaleZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightKnee_visibility";
+	setAttr ".tan" 9;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+	setAttr ".kot[0]"  5;
+createNode animCurveTL -n "Thief:Control_RightKnee_translateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 -0.25;
+createNode animCurveTL -n "Thief:Control_RightKnee_translateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTL -n "Thief:Control_RightKnee_translateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightKnee_rotateX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightKnee_rotateY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTA -n "Thief:Control_RightKnee_rotateZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 0;
+createNode animCurveTU -n "Thief:Control_RightKnee_scaleX";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightKnee_scaleY";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
+createNode animCurveTU -n "Thief:Control_RightKnee_scaleZ";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr ".ktv[0]"  40 1;
 select -ne :time1;
 	setAttr -av -k on ".cch";
 	setAttr -cb on ".ihi";
 	setAttr -av -k on ".nds";
 	setAttr -cb on ".bnm";
-	setAttr -k on ".o" 30;
-	setAttr -av ".unw" 30;
+	setAttr -k on ".o" 40;
+	setAttr -av ".unw" 40;
 select -ne :renderPartition;
 	setAttr -k on ".cch";
 	setAttr -cb on ".ihi";
@@ -1999,137 +2752,206 @@ select -ne :ikSystem;
 	setAttr -k on ".bnm";
 	setAttr -av ".gsn";
 	setAttr -k on ".gsv";
-	setAttr -s 2 ".sol";
-connectAttr "Thief:Control_Hips_rotateY.o" "ThiefRN.phl[1]";
-connectAttr "Thief:Control_Hips_rotateX.o" "ThiefRN.phl[2]";
-connectAttr "Thief:Control_Hips_rotateZ.o" "ThiefRN.phl[3]";
-connectAttr "Thief:Control_Hips_translateX.o" "ThiefRN.phl[4]";
-connectAttr "Thief:Control_Hips_translateY.o" "ThiefRN.phl[5]";
-connectAttr "Thief:Control_Hips_translateZ.o" "ThiefRN.phl[6]";
-connectAttr "Thief:Control_Hips_visibility.o" "ThiefRN.phl[7]";
-connectAttr "Thief:Control_Hips_scaleX.o" "ThiefRN.phl[8]";
-connectAttr "Thief:Control_Hips_scaleY.o" "ThiefRN.phl[9]";
-connectAttr "Thief:Control_Hips_scaleZ.o" "ThiefRN.phl[10]";
-connectAttr "Thief:Control_MidSection_translateX.o" "ThiefRN.phl[11]";
-connectAttr "Thief:Control_MidSection_translateY.o" "ThiefRN.phl[12]";
-connectAttr "Thief:Control_MidSection_translateZ.o" "ThiefRN.phl[13]";
-connectAttr "Thief:Control_MidSection_rotateY.o" "ThiefRN.phl[14]";
-connectAttr "Thief:Control_MidSection_rotateX.o" "ThiefRN.phl[15]";
-connectAttr "Thief:Control_MidSection_rotateZ.o" "ThiefRN.phl[16]";
-connectAttr "Thief:Control_MidSection_scaleX.o" "ThiefRN.phl[17]";
-connectAttr "Thief:Control_MidSection_scaleY.o" "ThiefRN.phl[18]";
-connectAttr "Thief:Control_MidSection_scaleZ.o" "ThiefRN.phl[19]";
-connectAttr "Thief:Control_MidSection_visibility.o" "ThiefRN.phl[20]";
-connectAttr "Thief:Control_Torso_translateX.o" "ThiefRN.phl[21]";
-connectAttr "Thief:Control_Torso_translateY.o" "ThiefRN.phl[22]";
-connectAttr "Thief:Control_Torso_translateZ.o" "ThiefRN.phl[23]";
-connectAttr "Thief:Control_Torso_rotateY.o" "ThiefRN.phl[24]";
-connectAttr "Thief:Control_Torso_rotateX.o" "ThiefRN.phl[25]";
-connectAttr "Thief:Control_Torso_rotateZ.o" "ThiefRN.phl[26]";
-connectAttr "Thief:Control_Torso_scaleX.o" "ThiefRN.phl[27]";
-connectAttr "Thief:Control_Torso_scaleY.o" "ThiefRN.phl[28]";
-connectAttr "Thief:Control_Torso_scaleZ.o" "ThiefRN.phl[29]";
-connectAttr "Thief:Control_Torso_visibility.o" "ThiefRN.phl[30]";
-connectAttr "Thief:Control_RightArm_translateX.o" "ThiefRN.phl[31]";
-connectAttr "Thief:Control_RightArm_translateY.o" "ThiefRN.phl[32]";
-connectAttr "Thief:Control_RightArm_translateZ.o" "ThiefRN.phl[33]";
-connectAttr "Thief:Control_RightArm_rotateX.o" "ThiefRN.phl[34]";
-connectAttr "Thief:Control_RightArm_rotateY.o" "ThiefRN.phl[35]";
-connectAttr "Thief:Control_RightArm_rotateZ.o" "ThiefRN.phl[36]";
-connectAttr "Thief:Control_RightArm_scaleX.o" "ThiefRN.phl[37]";
-connectAttr "Thief:Control_RightArm_scaleY.o" "ThiefRN.phl[38]";
-connectAttr "Thief:Control_RightArm_scaleZ.o" "ThiefRN.phl[39]";
-connectAttr "Thief:Control_RightArm_visibility.o" "ThiefRN.phl[40]";
-connectAttr "Thief:Control_LeftArm_translateX.o" "ThiefRN.phl[41]";
-connectAttr "Thief:Control_LeftArm_translateY.o" "ThiefRN.phl[42]";
-connectAttr "Thief:Control_LeftArm_translateZ.o" "ThiefRN.phl[43]";
-connectAttr "Thief:Control_LeftArm_rotateX.o" "ThiefRN.phl[44]";
-connectAttr "Thief:Control_LeftArm_rotateY.o" "ThiefRN.phl[45]";
-connectAttr "Thief:Control_LeftArm_rotateZ.o" "ThiefRN.phl[46]";
-connectAttr "Thief:Control_LeftArm_scaleX.o" "ThiefRN.phl[47]";
-connectAttr "Thief:Control_LeftArm_scaleY.o" "ThiefRN.phl[48]";
-connectAttr "Thief:Control_LeftArm_scaleZ.o" "ThiefRN.phl[49]";
-connectAttr "Thief:Control_LeftArm_visibility.o" "ThiefRN.phl[50]";
-connectAttr "Thief:Control_Neck_translateX.o" "ThiefRN.phl[51]";
-connectAttr "Thief:Control_Neck_translateY.o" "ThiefRN.phl[52]";
-connectAttr "Thief:Control_Neck_translateZ.o" "ThiefRN.phl[53]";
-connectAttr "Thief:Control_Neck_rotateX.o" "ThiefRN.phl[54]";
-connectAttr "Thief:Control_Neck_rotateY.o" "ThiefRN.phl[55]";
-connectAttr "Thief:Control_Neck_rotateZ.o" "ThiefRN.phl[56]";
-connectAttr "Thief:Control_Neck_scaleX.o" "ThiefRN.phl[57]";
-connectAttr "Thief:Control_Neck_scaleY.o" "ThiefRN.phl[58]";
-connectAttr "Thief:Control_Neck_scaleZ.o" "ThiefRN.phl[59]";
-connectAttr "Thief:Control_Neck_visibility.o" "ThiefRN.phl[60]";
-connectAttr "Thief:Control_Head_translateX.o" "ThiefRN.phl[61]";
-connectAttr "Thief:Control_Head_translateY.o" "ThiefRN.phl[62]";
-connectAttr "Thief:Control_Head_translateZ.o" "ThiefRN.phl[63]";
-connectAttr "Thief:Control_Head_rotateX.o" "ThiefRN.phl[64]";
-connectAttr "Thief:Control_Head_rotateY.o" "ThiefRN.phl[65]";
-connectAttr "Thief:Control_Head_rotateZ.o" "ThiefRN.phl[66]";
-connectAttr "Thief:Control_Head_scaleX.o" "ThiefRN.phl[67]";
-connectAttr "Thief:Control_Head_scaleY.o" "ThiefRN.phl[68]";
-connectAttr "Thief:Control_Head_scaleZ.o" "ThiefRN.phl[69]";
-connectAttr "Thief:Control_Head_visibility.o" "ThiefRN.phl[70]";
-connectAttr "Thief:Control_RightHand_rotateX.o" "ThiefRN.phl[71]";
-connectAttr "Thief:Control_RightHand_rotateY.o" "ThiefRN.phl[72]";
-connectAttr "Thief:Control_RightHand_rotateZ.o" "ThiefRN.phl[73]";
-connectAttr "Thief:Control_RightHand_translateX.o" "ThiefRN.phl[74]";
-connectAttr "Thief:Control_RightHand_translateZ.o" "ThiefRN.phl[75]";
-connectAttr "Thief:Control_RightHand_translateY.o" "ThiefRN.phl[76]";
-connectAttr "Thief:Control_RightHand_scaleX.o" "ThiefRN.phl[77]";
-connectAttr "Thief:Control_RightHand_scaleY.o" "ThiefRN.phl[78]";
-connectAttr "Thief:Control_RightHand_scaleZ.o" "ThiefRN.phl[79]";
-connectAttr "Thief:Control_RightHand_visibility.o" "ThiefRN.phl[80]";
-connectAttr "Thief:Control_RightFingers_rotateX.o" "ThiefRN.phl[81]";
-connectAttr "Thief:Control_RightFingers_rotateY.o" "ThiefRN.phl[82]";
-connectAttr "Thief:Control_RightFingers_rotateZ.o" "ThiefRN.phl[83]";
-connectAttr "Thief:Control_RightFingers_visibility.o" "ThiefRN.phl[84]";
-connectAttr "Thief:Control_RightFingers_translateX.o" "ThiefRN.phl[85]";
-connectAttr "Thief:Control_RightFingers_translateY.o" "ThiefRN.phl[86]";
-connectAttr "Thief:Control_RightFingers_translateZ.o" "ThiefRN.phl[87]";
-connectAttr "Thief:Control_RightFingers_scaleX.o" "ThiefRN.phl[88]";
-connectAttr "Thief:Control_RightFingers_scaleY.o" "ThiefRN.phl[89]";
-connectAttr "Thief:Control_RightFingers_scaleZ.o" "ThiefRN.phl[90]";
-connectAttr "Thief:Control_RightElbow_translateX.o" "ThiefRN.phl[91]";
-connectAttr "Thief:Control_RightElbow_translateY.o" "ThiefRN.phl[92]";
-connectAttr "Thief:Control_RightElbow_translateZ.o" "ThiefRN.phl[93]";
-connectAttr "Thief:Control_RightElbow_rotateX.o" "ThiefRN.phl[94]";
-connectAttr "Thief:Control_RightElbow_rotateY.o" "ThiefRN.phl[95]";
-connectAttr "Thief:Control_RightElbow_rotateZ.o" "ThiefRN.phl[96]";
-connectAttr "Thief:Control_RightElbow_visibility.o" "ThiefRN.phl[97]";
-connectAttr "Thief:Control_RightElbow_scaleX.o" "ThiefRN.phl[98]";
-connectAttr "Thief:Control_RightElbow_scaleY.o" "ThiefRN.phl[99]";
-connectAttr "Thief:Control_RightElbow_scaleZ.o" "ThiefRN.phl[100]";
-connectAttr "Thief:Control_LeftHand_rotateZ.o" "ThiefRN.phl[101]";
-connectAttr "Thief:Control_LeftHand_rotateX.o" "ThiefRN.phl[102]";
-connectAttr "Thief:Control_LeftHand_rotateY.o" "ThiefRN.phl[103]";
-connectAttr "Thief:Control_LeftHand_translateX.o" "ThiefRN.phl[104]";
-connectAttr "Thief:Control_LeftHand_translateZ.o" "ThiefRN.phl[105]";
-connectAttr "Thief:Control_LeftHand_translateY.o" "ThiefRN.phl[106]";
-connectAttr "Thief:Control_LeftHand_scaleX.o" "ThiefRN.phl[107]";
-connectAttr "Thief:Control_LeftHand_scaleY.o" "ThiefRN.phl[108]";
-connectAttr "Thief:Control_LeftHand_scaleZ.o" "ThiefRN.phl[109]";
-connectAttr "Thief:Control_LeftHand_visibility.o" "ThiefRN.phl[110]";
-connectAttr "Thief:Control_LeftElbow_translateX.o" "ThiefRN.phl[111]";
-connectAttr "Thief:Control_LeftElbow_translateY.o" "ThiefRN.phl[112]";
-connectAttr "Thief:Control_LeftElbow_translateZ.o" "ThiefRN.phl[113]";
-connectAttr "Thief:Control_LeftElbow_rotateX.o" "ThiefRN.phl[114]";
-connectAttr "Thief:Control_LeftElbow_rotateY.o" "ThiefRN.phl[115]";
-connectAttr "Thief:Control_LeftElbow_rotateZ.o" "ThiefRN.phl[116]";
-connectAttr "Thief:Control_LeftElbow_visibility.o" "ThiefRN.phl[117]";
-connectAttr "Thief:Control_LeftElbow_scaleX.o" "ThiefRN.phl[118]";
-connectAttr "Thief:Control_LeftElbow_scaleY.o" "ThiefRN.phl[119]";
-connectAttr "Thief:Control_LeftElbow_scaleZ.o" "ThiefRN.phl[120]";
-connectAttr "Thief:Control_LeftFingers_rotateX.o" "ThiefRN.phl[121]";
-connectAttr "Thief:Control_LeftFingers_rotateY.o" "ThiefRN.phl[122]";
-connectAttr "Thief:Control_LeftFingers_rotateZ.o" "ThiefRN.phl[123]";
-connectAttr "Thief:Control_LeftFingers_visibility.o" "ThiefRN.phl[124]";
-connectAttr "Thief:Control_LeftFingers_translateX.o" "ThiefRN.phl[125]";
-connectAttr "Thief:Control_LeftFingers_translateY.o" "ThiefRN.phl[126]";
-connectAttr "Thief:Control_LeftFingers_translateZ.o" "ThiefRN.phl[127]";
-connectAttr "Thief:Control_LeftFingers_scaleX.o" "ThiefRN.phl[128]";
-connectAttr "Thief:Control_LeftFingers_scaleY.o" "ThiefRN.phl[129]";
-connectAttr "Thief:Control_LeftFingers_scaleZ.o" "ThiefRN.phl[130]";
+connectAttr "Thief:Control_Root_translateX.o" "ThiefRN.phl[1]";
+connectAttr "Thief:Control_Root_translateY.o" "ThiefRN.phl[2]";
+connectAttr "Thief:Control_Root_translateZ.o" "ThiefRN.phl[3]";
+connectAttr "Thief:Control_Root_visibility.o" "ThiefRN.phl[4]";
+connectAttr "Thief:Control_Root_rotateX.o" "ThiefRN.phl[5]";
+connectAttr "Thief:Control_Root_rotateY.o" "ThiefRN.phl[6]";
+connectAttr "Thief:Control_Root_rotateZ.o" "ThiefRN.phl[7]";
+connectAttr "Thief:Control_Root_scaleX.o" "ThiefRN.phl[8]";
+connectAttr "Thief:Control_Root_scaleY.o" "ThiefRN.phl[9]";
+connectAttr "Thief:Control_Root_scaleZ.o" "ThiefRN.phl[10]";
+connectAttr "Thief:Control_Hips_rotateX.o" "ThiefRN.phl[11]";
+connectAttr "Thief:Control_Hips_rotateY.o" "ThiefRN.phl[12]";
+connectAttr "Thief:Control_Hips_rotateZ.o" "ThiefRN.phl[13]";
+connectAttr "Thief:Control_Hips_translateX.o" "ThiefRN.phl[14]";
+connectAttr "Thief:Control_Hips_translateY.o" "ThiefRN.phl[15]";
+connectAttr "Thief:Control_Hips_translateZ.o" "ThiefRN.phl[16]";
+connectAttr "Thief:Control_Hips_visibility.o" "ThiefRN.phl[17]";
+connectAttr "Thief:Control_Hips_scaleX.o" "ThiefRN.phl[18]";
+connectAttr "Thief:Control_Hips_scaleY.o" "ThiefRN.phl[19]";
+connectAttr "Thief:Control_Hips_scaleZ.o" "ThiefRN.phl[20]";
+connectAttr "Thief:Control_MidSection_translateX.o" "ThiefRN.phl[21]";
+connectAttr "Thief:Control_MidSection_translateY.o" "ThiefRN.phl[22]";
+connectAttr "Thief:Control_MidSection_translateZ.o" "ThiefRN.phl[23]";
+connectAttr "Thief:Control_MidSection_rotateY.o" "ThiefRN.phl[24]";
+connectAttr "Thief:Control_MidSection_rotateX.o" "ThiefRN.phl[25]";
+connectAttr "Thief:Control_MidSection_rotateZ.o" "ThiefRN.phl[26]";
+connectAttr "Thief:Control_MidSection_scaleX.o" "ThiefRN.phl[27]";
+connectAttr "Thief:Control_MidSection_scaleY.o" "ThiefRN.phl[28]";
+connectAttr "Thief:Control_MidSection_scaleZ.o" "ThiefRN.phl[29]";
+connectAttr "Thief:Control_MidSection_visibility.o" "ThiefRN.phl[30]";
+connectAttr "Thief:Control_Torso_translateX.o" "ThiefRN.phl[31]";
+connectAttr "Thief:Control_Torso_translateY.o" "ThiefRN.phl[32]";
+connectAttr "Thief:Control_Torso_translateZ.o" "ThiefRN.phl[33]";
+connectAttr "Thief:Control_Torso_rotateX.o" "ThiefRN.phl[34]";
+connectAttr "Thief:Control_Torso_rotateY.o" "ThiefRN.phl[35]";
+connectAttr "Thief:Control_Torso_rotateZ.o" "ThiefRN.phl[36]";
+connectAttr "Thief:Control_Torso_scaleX.o" "ThiefRN.phl[37]";
+connectAttr "Thief:Control_Torso_scaleY.o" "ThiefRN.phl[38]";
+connectAttr "Thief:Control_Torso_scaleZ.o" "ThiefRN.phl[39]";
+connectAttr "Thief:Control_Torso_visibility.o" "ThiefRN.phl[40]";
+connectAttr "Thief:Control_RightArm_translateX.o" "ThiefRN.phl[41]";
+connectAttr "Thief:Control_RightArm_translateY.o" "ThiefRN.phl[42]";
+connectAttr "Thief:Control_RightArm_translateZ.o" "ThiefRN.phl[43]";
+connectAttr "Thief:Control_RightArm_rotateX.o" "ThiefRN.phl[44]";
+connectAttr "Thief:Control_RightArm_rotateY.o" "ThiefRN.phl[45]";
+connectAttr "Thief:Control_RightArm_rotateZ.o" "ThiefRN.phl[46]";
+connectAttr "Thief:Control_RightArm_scaleX.o" "ThiefRN.phl[47]";
+connectAttr "Thief:Control_RightArm_scaleY.o" "ThiefRN.phl[48]";
+connectAttr "Thief:Control_RightArm_scaleZ.o" "ThiefRN.phl[49]";
+connectAttr "Thief:Control_RightArm_visibility.o" "ThiefRN.phl[50]";
+connectAttr "Thief:Control_LeftArm_translateX.o" "ThiefRN.phl[51]";
+connectAttr "Thief:Control_LeftArm_translateY.o" "ThiefRN.phl[52]";
+connectAttr "Thief:Control_LeftArm_translateZ.o" "ThiefRN.phl[53]";
+connectAttr "Thief:Control_LeftArm_rotateX.o" "ThiefRN.phl[54]";
+connectAttr "Thief:Control_LeftArm_rotateY.o" "ThiefRN.phl[55]";
+connectAttr "Thief:Control_LeftArm_rotateZ.o" "ThiefRN.phl[56]";
+connectAttr "Thief:Control_LeftArm_scaleX.o" "ThiefRN.phl[57]";
+connectAttr "Thief:Control_LeftArm_scaleY.o" "ThiefRN.phl[58]";
+connectAttr "Thief:Control_LeftArm_scaleZ.o" "ThiefRN.phl[59]";
+connectAttr "Thief:Control_LeftArm_visibility.o" "ThiefRN.phl[60]";
+connectAttr "Thief:Control_Neck_translateX.o" "ThiefRN.phl[61]";
+connectAttr "Thief:Control_Neck_translateY.o" "ThiefRN.phl[62]";
+connectAttr "Thief:Control_Neck_translateZ.o" "ThiefRN.phl[63]";
+connectAttr "Thief:Control_Neck_rotateX.o" "ThiefRN.phl[64]";
+connectAttr "Thief:Control_Neck_rotateY.o" "ThiefRN.phl[65]";
+connectAttr "Thief:Control_Neck_rotateZ.o" "ThiefRN.phl[66]";
+connectAttr "Thief:Control_Neck_scaleX.o" "ThiefRN.phl[67]";
+connectAttr "Thief:Control_Neck_scaleY.o" "ThiefRN.phl[68]";
+connectAttr "Thief:Control_Neck_scaleZ.o" "ThiefRN.phl[69]";
+connectAttr "Thief:Control_Neck_visibility.o" "ThiefRN.phl[70]";
+connectAttr "Thief:Control_Head_translateX.o" "ThiefRN.phl[71]";
+connectAttr "Thief:Control_Head_translateY.o" "ThiefRN.phl[72]";
+connectAttr "Thief:Control_Head_translateZ.o" "ThiefRN.phl[73]";
+connectAttr "Thief:Control_Head_rotateX.o" "ThiefRN.phl[74]";
+connectAttr "Thief:Control_Head_rotateY.o" "ThiefRN.phl[75]";
+connectAttr "Thief:Control_Head_rotateZ.o" "ThiefRN.phl[76]";
+connectAttr "Thief:Control_Head_scaleX.o" "ThiefRN.phl[77]";
+connectAttr "Thief:Control_Head_scaleY.o" "ThiefRN.phl[78]";
+connectAttr "Thief:Control_Head_scaleZ.o" "ThiefRN.phl[79]";
+connectAttr "Thief:Control_Head_visibility.o" "ThiefRN.phl[80]";
+connectAttr "Thief:Control_RightHand_rotateX.o" "ThiefRN.phl[81]";
+connectAttr "Thief:Control_RightHand_rotateY.o" "ThiefRN.phl[82]";
+connectAttr "Thief:Control_RightHand_rotateZ.o" "ThiefRN.phl[83]";
+connectAttr "Thief:Control_RightHand_translateX.o" "ThiefRN.phl[84]";
+connectAttr "Thief:Control_RightHand_translateY.o" "ThiefRN.phl[85]";
+connectAttr "Thief:Control_RightHand_translateZ.o" "ThiefRN.phl[86]";
+connectAttr "Thief:Control_RightHand_scaleX.o" "ThiefRN.phl[87]";
+connectAttr "Thief:Control_RightHand_scaleY.o" "ThiefRN.phl[88]";
+connectAttr "Thief:Control_RightHand_scaleZ.o" "ThiefRN.phl[89]";
+connectAttr "Thief:Control_RightHand_visibility.o" "ThiefRN.phl[90]";
+connectAttr "Thief:Control_RightFingers_rotateX.o" "ThiefRN.phl[91]";
+connectAttr "Thief:Control_RightFingers_rotateY.o" "ThiefRN.phl[92]";
+connectAttr "Thief:Control_RightFingers_rotateZ.o" "ThiefRN.phl[93]";
+connectAttr "Thief:Control_RightFingers_visibility.o" "ThiefRN.phl[94]";
+connectAttr "Thief:Control_RightFingers_translateX.o" "ThiefRN.phl[95]";
+connectAttr "Thief:Control_RightFingers_translateY.o" "ThiefRN.phl[96]";
+connectAttr "Thief:Control_RightFingers_translateZ.o" "ThiefRN.phl[97]";
+connectAttr "Thief:Control_RightFingers_scaleX.o" "ThiefRN.phl[98]";
+connectAttr "Thief:Control_RightFingers_scaleY.o" "ThiefRN.phl[99]";
+connectAttr "Thief:Control_RightFingers_scaleZ.o" "ThiefRN.phl[100]";
+connectAttr "Thief:Control_RightElbow_translateX.o" "ThiefRN.phl[101]";
+connectAttr "Thief:Control_RightElbow_translateY.o" "ThiefRN.phl[102]";
+connectAttr "Thief:Control_RightElbow_translateZ.o" "ThiefRN.phl[103]";
+connectAttr "Thief:Control_RightElbow_rotateX.o" "ThiefRN.phl[104]";
+connectAttr "Thief:Control_RightElbow_rotateY.o" "ThiefRN.phl[105]";
+connectAttr "Thief:Control_RightElbow_rotateZ.o" "ThiefRN.phl[106]";
+connectAttr "Thief:Control_RightElbow_visibility.o" "ThiefRN.phl[107]";
+connectAttr "Thief:Control_RightElbow_scaleX.o" "ThiefRN.phl[108]";
+connectAttr "Thief:Control_RightElbow_scaleY.o" "ThiefRN.phl[109]";
+connectAttr "Thief:Control_RightElbow_scaleZ.o" "ThiefRN.phl[110]";
+connectAttr "Thief:Control_LeftHand_rotateZ.o" "ThiefRN.phl[111]";
+connectAttr "Thief:Control_LeftHand_rotateX.o" "ThiefRN.phl[112]";
+connectAttr "Thief:Control_LeftHand_rotateY.o" "ThiefRN.phl[113]";
+connectAttr "Thief:Control_LeftHand_translateX.o" "ThiefRN.phl[114]";
+connectAttr "Thief:Control_LeftHand_translateZ.o" "ThiefRN.phl[115]";
+connectAttr "Thief:Control_LeftHand_translateY.o" "ThiefRN.phl[116]";
+connectAttr "Thief:Control_LeftHand_scaleX.o" "ThiefRN.phl[117]";
+connectAttr "Thief:Control_LeftHand_scaleY.o" "ThiefRN.phl[118]";
+connectAttr "Thief:Control_LeftHand_scaleZ.o" "ThiefRN.phl[119]";
+connectAttr "Thief:Control_LeftHand_visibility.o" "ThiefRN.phl[120]";
+connectAttr "Thief:Control_LeftElbow_translateX.o" "ThiefRN.phl[121]";
+connectAttr "Thief:Control_LeftElbow_translateY.o" "ThiefRN.phl[122]";
+connectAttr "Thief:Control_LeftElbow_translateZ.o" "ThiefRN.phl[123]";
+connectAttr "Thief:Control_LeftElbow_rotateX.o" "ThiefRN.phl[124]";
+connectAttr "Thief:Control_LeftElbow_rotateY.o" "ThiefRN.phl[125]";
+connectAttr "Thief:Control_LeftElbow_rotateZ.o" "ThiefRN.phl[126]";
+connectAttr "Thief:Control_LeftElbow_visibility.o" "ThiefRN.phl[127]";
+connectAttr "Thief:Control_LeftElbow_scaleX.o" "ThiefRN.phl[128]";
+connectAttr "Thief:Control_LeftElbow_scaleY.o" "ThiefRN.phl[129]";
+connectAttr "Thief:Control_LeftElbow_scaleZ.o" "ThiefRN.phl[130]";
+connectAttr "Thief:Control_LeftFingers_rotateX.o" "ThiefRN.phl[131]";
+connectAttr "Thief:Control_LeftFingers_rotateY.o" "ThiefRN.phl[132]";
+connectAttr "Thief:Control_LeftFingers_rotateZ.o" "ThiefRN.phl[133]";
+connectAttr "Thief:Control_LeftFingers_visibility.o" "ThiefRN.phl[134]";
+connectAttr "Thief:Control_LeftFingers_translateX.o" "ThiefRN.phl[135]";
+connectAttr "Thief:Control_LeftFingers_translateY.o" "ThiefRN.phl[136]";
+connectAttr "Thief:Control_LeftFingers_translateZ.o" "ThiefRN.phl[137]";
+connectAttr "Thief:Control_LeftFingers_scaleX.o" "ThiefRN.phl[138]";
+connectAttr "Thief:Control_LeftFingers_scaleY.o" "ThiefRN.phl[139]";
+connectAttr "Thief:Control_LeftFingers_scaleZ.o" "ThiefRN.phl[140]";
+connectAttr "Thief:Control_LeftFoot_rotateX.o" "ThiefRN.phl[141]";
+connectAttr "Thief:Control_LeftFoot_rotateY.o" "ThiefRN.phl[142]";
+connectAttr "Thief:Control_LeftFoot_rotateZ.o" "ThiefRN.phl[143]";
+connectAttr "Thief:Control_LeftFoot_translateX.o" "ThiefRN.phl[144]";
+connectAttr "Thief:Control_LeftFoot_translateY.o" "ThiefRN.phl[145]";
+connectAttr "Thief:Control_LeftFoot_translateZ.o" "ThiefRN.phl[146]";
+connectAttr "Thief:Control_LeftFoot_scaleX.o" "ThiefRN.phl[147]";
+connectAttr "Thief:Control_LeftFoot_scaleY.o" "ThiefRN.phl[148]";
+connectAttr "Thief:Control_LeftFoot_scaleZ.o" "ThiefRN.phl[149]";
+connectAttr "Thief:Control_LeftFoot_visibility.o" "ThiefRN.phl[150]";
+connectAttr "Thief:Control_LeftToes_rotateX.o" "ThiefRN.phl[151]";
+connectAttr "Thief:Control_LeftToes_rotateY.o" "ThiefRN.phl[152]";
+connectAttr "Thief:Control_LeftToes_rotateZ.o" "ThiefRN.phl[153]";
+connectAttr "Thief:Control_LeftToes_visibility.o" "ThiefRN.phl[154]";
+connectAttr "Thief:Control_LeftToes_translateX.o" "ThiefRN.phl[155]";
+connectAttr "Thief:Control_LeftToes_translateY.o" "ThiefRN.phl[156]";
+connectAttr "Thief:Control_LeftToes_translateZ.o" "ThiefRN.phl[157]";
+connectAttr "Thief:Control_LeftToes_scaleX.o" "ThiefRN.phl[158]";
+connectAttr "Thief:Control_LeftToes_scaleY.o" "ThiefRN.phl[159]";
+connectAttr "Thief:Control_LeftToes_scaleZ.o" "ThiefRN.phl[160]";
+connectAttr "Thief:Control_LeftKnee_translateX.o" "ThiefRN.phl[161]";
+connectAttr "Thief:Control_LeftKnee_translateY.o" "ThiefRN.phl[162]";
+connectAttr "Thief:Control_LeftKnee_translateZ.o" "ThiefRN.phl[163]";
+connectAttr "Thief:Control_LeftKnee_visibility.o" "ThiefRN.phl[164]";
+connectAttr "Thief:Control_LeftKnee_rotateX.o" "ThiefRN.phl[165]";
+connectAttr "Thief:Control_LeftKnee_rotateY.o" "ThiefRN.phl[166]";
+connectAttr "Thief:Control_LeftKnee_rotateZ.o" "ThiefRN.phl[167]";
+connectAttr "Thief:Control_LeftKnee_scaleX.o" "ThiefRN.phl[168]";
+connectAttr "Thief:Control_LeftKnee_scaleY.o" "ThiefRN.phl[169]";
+connectAttr "Thief:Control_LeftKnee_scaleZ.o" "ThiefRN.phl[170]";
+connectAttr "Thief:Control_RightFoot_rotateX.o" "ThiefRN.phl[171]";
+connectAttr "Thief:Control_RightFoot_rotateY.o" "ThiefRN.phl[172]";
+connectAttr "Thief:Control_RightFoot_rotateZ.o" "ThiefRN.phl[173]";
+connectAttr "Thief:Control_RightFoot_translateX.o" "ThiefRN.phl[174]";
+connectAttr "Thief:Control_RightFoot_translateY.o" "ThiefRN.phl[175]";
+connectAttr "Thief:Control_RightFoot_translateZ.o" "ThiefRN.phl[176]";
+connectAttr "Thief:Control_RightFoot_scaleX.o" "ThiefRN.phl[177]";
+connectAttr "Thief:Control_RightFoot_scaleY.o" "ThiefRN.phl[178]";
+connectAttr "Thief:Control_RightFoot_scaleZ.o" "ThiefRN.phl[179]";
+connectAttr "Thief:Control_RightFoot_visibility.o" "ThiefRN.phl[180]";
+connectAttr "Thief:Control_RightToes_rotateX.o" "ThiefRN.phl[181]";
+connectAttr "Thief:Control_RightToes_rotateY.o" "ThiefRN.phl[182]";
+connectAttr "Thief:Control_RightToes_rotateZ.o" "ThiefRN.phl[183]";
+connectAttr "Thief:Control_RightToes_visibility.o" "ThiefRN.phl[184]";
+connectAttr "Thief:Control_RightToes_translateX.o" "ThiefRN.phl[185]";
+connectAttr "Thief:Control_RightToes_translateY.o" "ThiefRN.phl[186]";
+connectAttr "Thief:Control_RightToes_translateZ.o" "ThiefRN.phl[187]";
+connectAttr "Thief:Control_RightToes_scaleX.o" "ThiefRN.phl[188]";
+connectAttr "Thief:Control_RightToes_scaleY.o" "ThiefRN.phl[189]";
+connectAttr "Thief:Control_RightToes_scaleZ.o" "ThiefRN.phl[190]";
+connectAttr "Thief:Control_RightKnee_translateX.o" "ThiefRN.phl[191]";
+connectAttr "Thief:Control_RightKnee_translateY.o" "ThiefRN.phl[192]";
+connectAttr "Thief:Control_RightKnee_translateZ.o" "ThiefRN.phl[193]";
+connectAttr "Thief:Control_RightKnee_visibility.o" "ThiefRN.phl[194]";
+connectAttr "Thief:Control_RightKnee_rotateX.o" "ThiefRN.phl[195]";
+connectAttr "Thief:Control_RightKnee_rotateY.o" "ThiefRN.phl[196]";
+connectAttr "Thief:Control_RightKnee_rotateZ.o" "ThiefRN.phl[197]";
+connectAttr "Thief:Control_RightKnee_scaleX.o" "ThiefRN.phl[198]";
+connectAttr "Thief:Control_RightKnee_scaleY.o" "ThiefRN.phl[199]";
+connectAttr "Thief:Control_RightKnee_scaleZ.o" "ThiefRN.phl[200]";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" "lambert2SG.message" ":defaultLightSet.message";

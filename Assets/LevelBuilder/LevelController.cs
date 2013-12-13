@@ -48,12 +48,15 @@ public class LevelController : MonoSingleton<LevelController>
 	public GameObject[] Room_CustomB;
 	public GameObject[] Room_CustomC;
 	public GameObject[] Room_CustomD;
+	public GameObject[] Room_ServerRoom;
 	public GameObject[] Room_GuardRoom;
 	
 	public GameObject[] cratePrefabs;
 	
 	//seed offset for retries on bad levels
 	int seedOffset;
+	
+	int failedLevels = 0;
 	
 	public override void Init () {
 				
@@ -69,21 +72,31 @@ public class LevelController : MonoSingleton<LevelController>
 		
 		//fill out the matrix for the rooms with a seed
 		GameObject gameControlObj = GameObject.Find ("GameControl");
-		print (gameControlObj.GetComponent<GameControl>().GetSeed() + seedOffset);
 		Random.seed = gameControlObj.GetComponent<GameControl>().GetSeed() + seedOffset;
 		GenerateLevel();
 		
 		print (getNumberOfRooms() + " rooms built");
-		
-		//reset if there are too few rooms
-		if (getNumberOfRooms() < 6) {
-			resetLevel();
-			return;
-		}
+
+		//add a guard room
+		AddServerRoom();
 		
 		//add a guard room
 		AddGuardRoom();
-		
+				
+		//reset if the level sucks
+		if (getNumberOfRooms() < 6 || //too few rooms
+			!hasServerRoom() || //no server room
+			!hasGuardRoom()) { //no guard room
+			failedLevels++;
+			if (failedLevels > 5) {
+				Debug.Log("Failed too many times trying to build a level");	
+			}
+			resetLevel();
+			return;
+		} else {
+			failedLevels = 0;	
+		}
+
 		//add art for the rooms
 		GenerateGameRooms();
 
@@ -153,6 +166,20 @@ public class LevelController : MonoSingleton<LevelController>
 		} 
 		return roomCount;
 	}
+	
+	public bool hasServerRoom() {
+		foreach (Room room in rooms) {
+			if (room.serverRoom) return true;
+		} 
+		return false;
+	}
+	
+	public bool hasGuardRoom() {
+		foreach (Room room in rooms) {
+			if (room.guardRoom) return true;
+		} 
+		return false;
+	}
 
 	public void resetLevel() {
 		seedOffset++;
@@ -164,12 +191,23 @@ public class LevelController : MonoSingleton<LevelController>
 		numberCustomRoomC = 0;
 		Init();
 	}
+
+	
+	void AddServerRoom() {
+		foreach (Room room in rooms) {
+			if (room != null) {
+				if (!room.IsFirstNode() && !room.HasChildren() && !room.placeHolder&& !room.guardRoom) {
+					room.SetToServerRoom();
+					break;
+				}
+			}
+		}
+	}
 	
 	void AddGuardRoom() {
 		foreach (Room room in rooms) {
 			if (room != null) {
-				if (!room.IsFirstNode() && !room.HasChildren() && !room.placeHolder) {
-					Debug.Log(room.name + "is the guard room");
+				if (!room.IsFirstNode() && !room.HasChildren() && !room.placeHolder && !room.serverRoom) {
 					room.SetToGuardRoom();
 					break;
 				}

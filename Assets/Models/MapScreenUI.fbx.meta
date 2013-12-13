@@ -13,6 +13,7 @@ ModelImporter:
     4300016: LowerRight
     4300018: GreenMarker
     4300020: RedMarker
+    4300022: RenderView
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -83,13 +84,6 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
-    LowerLeft1:
-      data:
-        first: 1
-        second: ac860100
-      data:
-        first: 4
-        second: 8c1a0600
     LowerRight:
       data:
         first: 1
@@ -116,6 +110,19 @@ ModelImporter:
       data:
         first: 33
         second: aa5a3200
+    RenderView:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+      data:
+        first: 23
+        second: 6e182300
+      data:
+        first: 33
+        second: ae5a3200
     TextBox:
       data:
         first: 1

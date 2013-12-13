@@ -45,7 +45,6 @@ public class GuardRoom : MonoBehaviour {
 	
 	public void QueueEnemy(string type) {
 		spawnQueue.Add(type);
-		print (spawnQueue[0] + " is queued");
 	}
 
 	
@@ -78,9 +77,7 @@ public class GuardRoom : MonoBehaviour {
 			spawnTimer = spawnCoolDown;
 			return null;
 		}
-		
-		print ("Spawning a " + spawnQueue[0]);
-				
+						
 		Transform entrance = entrances[Random.Range(0, entrances.Count)];
 		
 		GameObject prefab = (GameObject)characterPrefabs[spawnQueue[0]];

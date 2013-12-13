@@ -7,6 +7,12 @@ public class MapUI : MonoBehaviour {
 	Transform lowerLeft;
 	Transform upperRight;
 	Transform lowerRight;
+
+	Transform playerName;
+	Transform playerScore;
+
+	Transform enemyName;
+	Transform enemyScore;
 	
 	MapControl mapControl;
 
@@ -21,19 +27,21 @@ public class MapUI : MonoBehaviour {
 
 		upperLeft = transform.Find("UpperLeft");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(upperLeft);
-
-		lowerLeft = transform.Find("LowerLeft");
-		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerLeft);
-
+		
 		upperRight = transform.Find("UpperRight");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(upperRight);
+		upperRight.gameObject.AddComponent<InputRepeater>().SetTarget(mapControl.transform);
 		
+		lowerLeft = transform.Find("LowerLeft");
+		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerLeft);
+		Transform playerName = lowerLeft.Find("PlayerName");
+		Transform playerScore = lowerLeft.Find("PlayerScore");
+
 		lowerRight = transform.Find("LowerRight");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerRight);
+		Transform enemyName = lowerRight.Find("EnemyName");
+		Transform enemyScore = lowerRight.Find("EnemyScore");
 		
-	}
-	
-	void Update () {
-	
+		mapControl.InitScoreboard(playerName, playerScore, enemyName, enemyScore);
 	}
 }

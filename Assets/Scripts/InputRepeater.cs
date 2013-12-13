@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InputRepeater : MonoBehaviour {
 	
-	Transform target;
+	public Transform target;
 	
 
 	public void tap(TouchManager.TapEvent touchEvent) {

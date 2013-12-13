@@ -80,7 +80,8 @@ public class GameRoom : MonoBehaviour {
 				prefabRotation = 180;				
 			}
 			
-			//override is it is a guard room
+			//override is it is a special room
+			if (room.serverRoom) prefabSet = level.Room_ServerRoom;
 			if (room.guardRoom) prefabSet = level.Room_GuardRoom;
 			
 			break;

@@ -10,6 +10,8 @@ public class MapLine : MonoBehaviour {
 	Transform startDot;
 	Transform endDot;
 	
+	bool selected;
+	
 	public Color playerColor = Color.green;
 	public Color enemyColor = Color.red;
 	public Color noneColor = new Color(25.0f/256, 30.0f/256, 40.0f/256, 1.0f);
@@ -51,6 +53,7 @@ public class MapLine : MonoBehaviour {
 				newStartColor = noneColor;
 				break;
 			}
+			if (selected) newStartColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 			
 			Color transStartColor = Color.Lerp(lastStartColor, newStartColor, timer);
 			
@@ -75,7 +78,9 @@ public class MapLine : MonoBehaviour {
 			default :
 				newStartColor = noneColor;
 				break;
-			}			
+			}
+			if (selected) newEndColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+
 			Color transEndColor = Color.Lerp(lastEndColor, newEndColor, timer);
 			SetColors(transStartColor, transEndColor);
 			
@@ -111,6 +116,15 @@ public class MapLine : MonoBehaviour {
 		startStatus = startDot.GetComponent<MapDot>().GetStatus();
 		endStatus = endDot.GetComponent<MapDot>().GetStatus();
 		timer = 0.0f;
+	}
+	
+	public void SelectLine() {
+		selected = true;
+		timer = 0.0f;
+	}
+	public void UnSelectLine() {
+		selected = false;
+		SetOwners();
 	}
 	
     void SetColors(Color startColor, Color endColor) {

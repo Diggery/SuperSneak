@@ -38,8 +38,14 @@ public class LevelEntrance : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (!entranceRoof.triggered && gameControl.LevelComplete()) {
+		if (!entranceRoof.triggered && gameControl.IsLevelComplete()) {
+			gameControl.currentLevelPassed = true;
 			gameControl.LeaveLevel();
 		}
+		if (Input.GetKeyUp(KeyCode.L)) {
+			gameControl.allCratesOpened = true;
+		}
 	}
+	
+
 }

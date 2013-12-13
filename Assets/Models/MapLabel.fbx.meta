@@ -4,6 +4,12 @@ ModelImporter:
   fileIDToRecycleName:
     4300000: MapLabel
     4300002: LightOrbit
+    4300004: Tag
+    4300006: Action3
+    4300008: Action4
+    4300010: Label
+    4300012: Action1
+    4300014: Action2
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -48,20 +54,20 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
-    LightOrbit:
+    Action1:
       data:
         first: 1
-        second: a2860100
+        second: a6860100
       data:
         first: 4
-        second: 821a0600
+        second: 861a0600
       data:
         first: 23
-        second: 60182300
+        second: 64182300
       data:
         first: 33
-        second: a05a3200
-    MapLabel:
+        second: a45a3200
+    Action2:
       data:
         first: 1
         second: a4860100
@@ -74,3 +80,16 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
+    Label:
+      data:
+        first: 1
+        second: a2860100
+      data:
+        first: 4
+        second: 821a0600
+      data:
+        first: 23
+        second: 60182300
+      data:
+        first: 33
+        second: a05a3200

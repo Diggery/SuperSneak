@@ -8,7 +8,7 @@ public class MapCameraControl : MonoBehaviour {
 	Transform mapCamera;
 	public float scollSpeed = 0.1f;
 	
-	Vector3 posGoal;
+	Vector3 posGoal = new Vector3(-10.0f, 0.0f, 0.0f);
 	float rotGoal;
 	
 	Transform focusTarget;
@@ -41,6 +41,7 @@ public class MapCameraControl : MonoBehaviour {
 		posGoal.y = 0.0f;
 		focusTarget = newTarget;
 	}
+	
 	public void ClearTarget() {
 		focusTarget = null;
 		posGoal.z = 0.0f;

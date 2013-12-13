@@ -21,6 +21,9 @@ public class MenuControl : MonoBehaviour {
 	
 	
 	public void ItemTapped(string itemName) {
-		Application.LoadLevel("MapScreen");
+		gameControl.currentLevel = "Menu";
+		gameControl.LoadNewLevel("MapScreen", 1);	
+		gameControl.ShowDialogText("Hold on", 3, 0.75f, false);
+
 	}
 }

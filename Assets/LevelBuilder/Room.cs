@@ -9,6 +9,7 @@ public class Room {
 	public Room child1, child2;
 	private LevelController level;
 	public bool placeHolder;
+	public bool serverRoom;
 	public bool guardRoom;
 	public int customType;
 	public int roomsToEntrance;
@@ -54,13 +55,13 @@ public class Room {
 	public void GenerateChildren() {
 		int numberOfRooms = level.getNumberOfRooms();
 		if (parent != null && NumChildren() == 0) {
-			if (Random.value < 0.3f && level.numberCustomRoomA < level.maxCustomRoomA) {
+			if (Random.value < 0.2f && level.numberCustomRoomA < level.maxCustomRoomA) {
 				if (CustomRoom.convertToCustomA(this)) return;
 			}
-			if (numberOfRooms > 5 && Random.value < 0.3f && level.numberCustomRoomB < level.maxCustomRoomB) {
+			if (numberOfRooms > 5 && Random.value < 0.2f && level.numberCustomRoomB < level.maxCustomRoomB) {
 				if (CustomRoom.convertToCustomB(this)) return;
 			}
-			if (numberOfRooms > 5 && Random.value < 0.3f && level.numberCustomRoomC < level.maxCustomRoomC) {
+			if (numberOfRooms > 5 && Random.value < 0.2f && level.numberCustomRoomC < level.maxCustomRoomC) {
 				if (CustomRoom.convertToCustomC(this)) return;
 			}
 		}
@@ -216,7 +217,12 @@ public class Room {
 		return direction;
 	}
 	
+	public 	void SetToServerRoom() {
+		serverRoom = true;
+	}
+	
 	public void SetToGuardRoom() {
 		guardRoom = true;
 	}
+
 }

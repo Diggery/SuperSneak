@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerAnimator : MonoBehaviour {
 	
-	public enum AnimState { Idle, Sneaking, Running, Stunned, Dead, OpeningCrate } 
+	public enum AnimState { Idle, Sneaking, Running, Stunned, Dead, OpeningCrate, HackingServer } 
 	public AnimState currentState = AnimState.Idle;
 
 	float lookDirection;
@@ -22,6 +22,8 @@ public class PlayerAnimator : MonoBehaviour {
 
 		playerModel.animation["OpenCrate"].wrapMode = WrapMode.Once;
 		playerModel.animation["OpenCrate"].layer = 1;
+		playerModel.animation["HackServer"].wrapMode = WrapMode.Once;
+		playerModel.animation["HackServer"].layer = 1;
 
 		playerModel.animation["Walk"].wrapMode = WrapMode.Loop;
 		playerModel.animation["Walk"].layer = 1;	
@@ -71,6 +73,8 @@ public class PlayerAnimator : MonoBehaviour {
 
 		} else if (currentState == AnimState.OpeningCrate) {
 			if (!playerModel.animation.IsPlaying("OpenCrate")) selectState();
+		} else if (currentState == AnimState.HackingServer) {
+			if (!playerModel.animation.IsPlaying("HackServer")) selectState();
 		} else {
 			selectState();
 		}
@@ -113,7 +117,7 @@ public class PlayerAnimator : MonoBehaviour {
 		
 		if (currentState != AnimState.Dead && currentState != AnimState.Stunned) {
 			Quaternion heading;
-			if (currentState == AnimState.OpeningCrate) {
+			if (currentState == AnimState.OpeningCrate || currentState == AnimState.HackingServer) {
 				heading = Quaternion.Euler(0, Util.getDirection(headingOverride) - 180, 0);
 			} else {
 				// if the player is trying to shoot rotate towards that, otherise head the direction of running
@@ -140,6 +144,7 @@ public class PlayerAnimator : MonoBehaviour {
 	
 	public bool isStopped() {
 		if (currentState == AnimState.OpeningCrate ||
+			currentState == AnimState.HackingServer ||
 			currentState == AnimState.Dead ||
 			currentState == AnimState.Stunned) {
 			return true;
@@ -193,4 +198,10 @@ public class PlayerAnimator : MonoBehaviour {
 		playerModel.animation.CrossFade("OpenCrate", 0.05f, PlayMode.StopSameLayer);
 		return playerModel.animation["OpenCrate"].length;
 	}
+	public float playHackServerAnim(Vector3 serverPos) {
+		headingOverride = transform.position - serverPos;
+		currentState = AnimState.HackingServer;
+		playerModel.animation.CrossFade("HackServer", 0.05f, PlayMode.StopSameLayer);
+		return playerModel.animation["HackServer"].length;
+	}	
 }

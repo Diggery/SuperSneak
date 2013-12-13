@@ -7,14 +7,8 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="LevelBuilder" expanded="True" />
-              <Node name="Pathfinding" expanded="True">
-                <Node name="Scripts" expanded="True" />
-              </Node>
-              <Node name="Resources" expanded="True" />
               <Node name="Scripts" expanded="True">
-                <Node name="MapScreen" expanded="True">
-                  <Node name="MapTextBox.cs" selected="True" />
-                </Node>
+                <Node name="CrateController.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -25,6 +19,9 @@
               <Node name="Resources" expanded="True" />
             </Node>
           </Node>
+          <Node name="Assembly-UnityScript" expanded="True" />
+          <Node name="Assembly-UnityScript-Editor-firstpass" expanded="True" />
+          <Node name="Assembly-UnityScript-firstpass" expanded="True" />
         </State>
       </Pad>
     </Pads>

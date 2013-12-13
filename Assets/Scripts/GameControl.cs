@@ -6,10 +6,19 @@ public class GameControl : MonoBehaviour {
 	LevelController levelController; 
 	
 	int cratesOpened;
-	bool allCratesOpened;
+	public bool allCratesOpened;
+	public bool serverHacked;
 	
 	public int gameMapSeed = 1;
-	public int currentSeed;
+	int currentSeed;
+	string levelToLoad;
+	
+	public string currentLevel;
+	public bool currentLevelPassed;
+
+	
+	public GameObject dialogBoxPrefab;
+	DialogControl dialogBox;
 	
 	void Awake () {
     	DontDestroyOnLoad (transform.gameObject);
@@ -27,8 +36,13 @@ public class GameControl : MonoBehaviour {
 		}		
 	}	
 	
-	public bool LevelComplete() {
+	public bool IsLevelComplete() {
 		return allCratesOpened;
+	}
+	
+	public void ServerHacked() {
+		print("SERVER IS HACKED");
+		serverHacked = true;
 	}	
 		
 	public void PlayerIsDead() {
@@ -50,7 +64,20 @@ public class GameControl : MonoBehaviour {
 				controller.StandDown();
 			}
 		}
+		currentLevelPassed = false;
+		Invoke ("ReturnToMap", 5);
+	}
+	
+	void Update() {
+		if (Input.GetKeyUp(KeyCode.X)) {
+			GameLoadSave.DeleteAll();
+		}		
+	}
+	
+	public void ReturnToMap() {
+		LoadNewLevel("MapScreen", 1);
 		
+		ShowDialogText("Opening Map Screen...", 3, 0.25f, false);
 	}
 	
 	public int GetGameMapSeed() {
@@ -61,23 +88,37 @@ public class GameControl : MonoBehaviour {
 		return currentSeed;	
 	}
 	public void SetSeed(int newSeed) {
-		currentSeed = newSeed;	
+		currentSeed = newSeed;
+		print ("currentSeed is set to " + currentSeed);
 	}
 		
 	public void KeysPressed(Events.Notification notification) {
 		string key = (string)notification.data;
-		if (key == "Back") Application.LoadLevel("MainMenu");
+		if (key == "Back") LoadNewLevel("MainMenu", 1);
+
+		ShowDialogText("Returning to Menu...", 3, 0.25f, false);
+
 	}
 	
-	public void LaunchLevel(int newSeed) {
-		SetSeed(newSeed);
-		print ("launching level " + newSeed);
-		Application.LoadLevel("GameLevel");
+	public void LaunchLevelFromSeed(int newSeed) {
+		SetSeed(Mathf.Abs(newSeed));
+		LoadNewLevel("GameLevel", 1);
+		ShowDialogText("Traveling to Location...", 3, 0.25f, false);
+	}
+	
+	public void LaunchLevelFromMap(Transform selectedDot) {
+		
+		currentLevel = selectedDot.name;
+		currentLevelPassed = false;
+		float seed = (selectedDot.position.x * 1000) + (selectedDot.position.z * 100) ;
+		int seedAsInt = Mathf.CeilToInt(seed);
+		LaunchLevelFromSeed(seedAsInt);
 	}
 	
 	public void LeaveLevel() {
-		Application.LoadLevel("MainMenu");
-		
+		allCratesOpened = false;
+		currentLevelPassed = IsLevelComplete();
+		ReturnToMap();
 	}
 	
     GameObject FindClosestEnemy(Vector3 point) {
@@ -96,4 +137,28 @@ public class GameControl : MonoBehaviour {
         return closest;
     }
 	
+	public void ShowDialogText(string text, float delay, float scale, bool tappable) {
+		if (!dialogBox) {
+			GameObject dialogBoxObj = Instantiate(dialogBoxPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			dialogBox = dialogBoxObj.GetComponent<DialogControl>();
+			dialogBox.transform.parent = Camera.main.transform;
+			dialogBox.Init();
+		}
+		dialogBox.SetText(text, delay, scale, tappable);
+	}
+	
+	public void LoadNewLevel(string levelname, float delay) {
+		levelToLoad = levelname;
+		Invoke("DoLoad", delay);	
+	}
+	
+	public void DoLoad() {
+		if (levelToLoad.Equals("empty")) return;
+		Application.LoadLevel(levelToLoad);	
+		levelToLoad = "empty";
+	}
+	
+	public void OnApplicationQuit() {
+		GameLoadSave.SaveAll();
+	}
 }

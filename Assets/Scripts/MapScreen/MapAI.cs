@@ -9,24 +9,22 @@ public class MapAI : MonoBehaviour {
 
 	public void StartTurn(MapControl newMapControl) {
 		mapControl = newMapControl;
-		mapControl.DisplayMessage("AI is ready", 2);
-		Invoke("SelectPoint", 1);
-	}
-			
-    void SelectPoint() {
+		mapControl.DisplayMessage("The enemy has made\nan move", 3);
 		capturePoint = CaptureFromLeadPoint();
 		Camera.main.transform.parent.GetComponent<MapCameraControl>().SetFocus(capturePoint);
-		mapControl.DisplayMessage("Point is selected", 2);
-		Invoke("CapturePoint", 2);
+		Invoke("CapturePoint", 3);
 	}
-	
+
 	void CapturePoint() {
 		capturePoint.GetComponent<MapDot>().EnemyCapture();
-		mapControl.DisplayMessage("Point is Captured", 2);
-		Invoke("EndTurn", 2);
+		string locName = capturePoint.GetComponent<MapDot>().GetName();
+		mapControl.DisplayMessage(locName + " has been\ncaptured by the enemy!", 2);
+		Invoke("EndTurn", 3);
 		
     }	
 	void EndTurn() {
+		mapControl.DisplayMessage("Now you can choose.", 2);
+
 		mapControl.StartPlayersTurn();
 	}
 	

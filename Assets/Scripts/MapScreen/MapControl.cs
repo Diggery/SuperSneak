@@ -21,17 +21,19 @@ public class MapControl : MonoBehaviour {
 	GameControl gameControl;
 	
 	MapTextBox mapTextBox;
+
+	Transform portraitThief;
 	
 	List<string> locationNameList = new List<string>();
 	
 	bool playersTurn;
+	
 	
 	public bool IsPlayersTurn() {
 		return playersTurn;
 	}
 	
 	public void StartPlayersTurn() {
-		print ("Players Turn");
 		playersTurn = true;
 	}	
 	
@@ -68,11 +70,10 @@ public class MapControl : MonoBehaviour {
 			for (int z = zOffset; z < length; z += interval) {
 				if (Random.value < density) {
 					point = Instantiate(dotPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-					point.transform.name = "Point " + x + ", " + z;
+					point.transform.name = "Point-" + x + "-" + z;
 					Vector3 randomOffset = new Vector3(Random.Range(-0.25f, 0.25f), 0, Random.Range(-0.25f, 0.25f));
 					Vector3 centerOffset = new Vector3(-(float) width * 0.5f, 0, -(float)length * 0.5f);
 					point.transform.parent = transform;
-					point.AddComponent<SphereCollider>();
 					point.transform.localPosition = new Vector3(x, 0, z) + randomOffset + centerOffset;
 					point.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 					points.Add(point.transform);
@@ -85,7 +86,45 @@ public class MapControl : MonoBehaviour {
 		ConnectBases();
 		SetUpConnections();
 		SetSpecialNodes();
-		GetComponent<MapAI>().StartTurn(this);
+
+		string nextStep = gameControl.currentLevel.Equals("Menu") ? "MapIntro" : "AddResults";
+
+		Invoke (nextStep, 2);
+		
+		portraitThief = GameObject.Find ("MapScreenThief").transform;
+		portraitThief.animation.Play("Intro");
+		Invoke ("playPortraitLoop", portraitThief.animation["Intro"].length);
+	}
+	
+	public void playPortraitLoop() {
+		portraitThief.animation.Play("Loop");
+	}
+	
+	public void MapIntro() {
+		DisplayMessage("Select a location\nto capture", 5);	
+		StartPlayersTurn();
+	}
+
+	
+	public void AddResults() {
+		Transform lastDotObj = transform.Find(gameControl.currentLevel);
+		if (!lastDotObj) print ("ERROR: no point called " + gameControl.currentLevel );
+		
+		Camera.main.transform.parent.GetComponent<MapCameraControl>().SetFocus(lastDotObj);
+		
+		string locName = lastDotObj.GetComponent<MapDot>().GetName();
+		
+		if (gameControl.currentLevelPassed) {
+			DisplayMessage("We captured " + locName, 5);	
+			lastDotObj.GetComponent<MapDot>().PlayerCapture();
+		} else {
+			DisplayMessage("We failed to capture\n" + locName, 3);	
+		}
+		Invoke("ResultsDone", 4);	
+	}
+	
+	void ResultsDone() {
+		GetComponent<MapAI>().StartTurn(this);	
 	}
 	
 	public List<Transform> GetPoints() {
@@ -140,7 +179,6 @@ public class MapControl : MonoBehaviour {
 	
 	void ConnectBases() {
 		int connections = width / 3;
-		print (connections + " stops to the end");
 		Transform lastPoint = GetPlayerBase();
 		for (int i = 0; i < connections; i++) {
 			Transform newPoint = FindPointToTheRight(lastPoint, 5);
@@ -254,9 +292,8 @@ public class MapControl : MonoBehaviour {
 
 	
 	public void LaunchLevel(Transform dotPressed) {
-		float seed = (dotPressed.position.x * 1000) + (dotPressed.position.z * 100) ;
-		int seedAsInt = Mathf.CeilToInt(seed);
-		gameControl.LaunchLevel(seedAsInt);
+
+		gameControl.LaunchLevelFromMap(dotPressed);
 	}
 	
 	public void SelectDot(MapDot dot) {
@@ -296,6 +333,10 @@ public class MapControl : MonoBehaviour {
 	public void tap(TouchManager.TapEvent touchEvent) {
 		if (!playersTurn) return;
 		foreach(Transform point in points) point.SendMessage("UnSelect");
+		if (touchEvent.touchTarget.name.Equals("UpperRight")) {
+			gameControl.LoadNewLevel("MainMenu", 1);	
+			gameControl.ShowDialogText("Returning to Menu...", 3, 0.25f, false);
+		}
 	}
 	
 	public void drag(TouchManager.TouchDragEvent touchEvent) {
@@ -306,5 +347,13 @@ public class MapControl : MonoBehaviour {
 	public void touchUp(TouchManager.TouchUpEvent touchEvent) {
 		if (!playersTurn) return;
 		cameraControl.touchUp(touchEvent);
+	}
+	
+	public void InitScoreboard(Transform playerName, Transform playerScore, Transform enemyName, Transform enemyScore) {
+		playerName.renderer.material.renderQueue = 4100;
+		playerScore.renderer.material.renderQueue = 4100;
+		enemyName.renderer.material.renderQueue = 4100;
+		enemyScore.renderer.material.renderQueue = 4100;
+		
 	}
 }
