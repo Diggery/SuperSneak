@@ -37,12 +37,18 @@ public class GameControl : MonoBehaviour {
 	}	
 	
 	public bool IsLevelComplete() {
-		return allCratesOpened;
+		return serverHacked;
 	}
 	
 	public void ServerHacked() {
 		print("SERVER IS HACKED");
 		serverHacked = true;
+
+		GameObject[] servers = GameObject.FindGameObjectsWithTag("Server");
+		
+		foreach (GameObject server in servers) {
+			server.GetComponent<ServerControl>().Hacked();
+		}
 	}	
 		
 	public void PlayerIsDead() {
@@ -69,9 +75,7 @@ public class GameControl : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (Input.GetKeyUp(KeyCode.X)) {
-			GameLoadSave.DeleteAll();
-		}		
+		
 	}
 	
 	public void ReturnToMap() {

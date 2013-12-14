@@ -29,14 +29,20 @@ public class ServerControl : MonoBehaviour {
 	IEnumerator HackServer() {
 		
 	//	animation.Play("HackServer");
-		hacked = true;
 		
 		yield return new WaitForSeconds(1);//animation["HackServer"].length);
 		
 	//	miniMapDot.renderer.enabled = false;
 	//	miniMapDotHacked.renderer.enabled = true;
 		gameControl.ServerHacked();
+		Hacked();
 
+	}
+	
+	public void Hacked() {
+		if (hacked) return;
+		hacked = true;
+		print (transform.name + " is hacked");
 	}
 	
     void OnTriggerEnter(Collider other) {

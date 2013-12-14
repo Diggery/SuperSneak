@@ -1,6 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TriggerRelay.cs">
+    <Files>
+      <File FileName="Assets/Scripts/LevelExit.cs" Line="10" Column="1" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LevelEntrance.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TriggerRelay.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -8,7 +15,8 @@
             <Node name="Assets" expanded="True">
               <Node name="LevelBuilder" expanded="True" />
               <Node name="Scripts" expanded="True">
-                <Node name="CrateController.cs" selected="True" />
+                <Node name="MapScreen" expanded="True" />
+                <Node name="TriggerRelay.cs" selected="True" />
               </Node>
             </Node>
           </Node>
