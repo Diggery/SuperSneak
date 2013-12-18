@@ -335,7 +335,7 @@ public class MapControl : MonoBehaviour {
 		foreach(Transform point in points) point.SendMessage("UnSelect");
 		if (touchEvent.touchTarget.name.Equals("UpperRight")) {
 			gameControl.LoadNewLevel("MainMenu", 1);	
-			gameControl.ShowDialogText("Returning to Menu...", 3, 0.25f, false);
+			gameControl.ShowDialogText("Returning to Menu...", 3, 0.25f);
 		}
 	}
 	

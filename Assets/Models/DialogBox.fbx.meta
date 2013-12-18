@@ -4,6 +4,7 @@ ModelImporter:
   fileIDToRecycleName:
     4300000: Dialog
     4300002: OKButton
+    4300004: CancelButton
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -54,6 +55,19 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
+    CancelButton:
+      data:
+        first: 1
+        second: a4860100
+      data:
+        first: 4
+        second: 841a0600
+      data:
+        first: 23
+        second: 64182300
+      data:
+        first: 33
+        second: a45a3200
     OKButton:
       data:
         first: 1
