@@ -22,7 +22,8 @@ public class GameControl : MonoBehaviour {
 	
 	void Awake () {
     	DontDestroyOnLoad (transform.gameObject);
-		Events.Listen(gameObject, "KeysPressed"); 
+		Events.Listen(gameObject, "KeysPressed");
+		gameMapSeed = GameLoadSave.GetGameMapSeed();
 	}
 
 	public void CrateOpened() {
@@ -81,9 +82,14 @@ public class GameControl : MonoBehaviour {
 	public void ReturnToMap() {
 		LoadNewLevel("MapScreen", 1);
 		
-		ShowDialogText("Opening Map Screen...", 3, 0.25f);
+		OpenInfoBox("Opening Map Screen...", 3, 0.25f);
 	}
 	
+	public void CreateGameMapSeed() {
+		gameMapSeed = Random.Range(1, 100);
+		GameLoadSave.SetGameMapSeed(gameMapSeed);
+	}	
+		
 	public int GetGameMapSeed() {
 		return gameMapSeed;	
 	}	
@@ -100,14 +106,14 @@ public class GameControl : MonoBehaviour {
 		string key = (string)notification.data;
 		if (key == "Back") LoadNewLevel("MainMenu", 1);
 
-		ShowDialogText("Returning to Menu...", 3, 0.25f);
+		OpenInfoBox("Returning to Menu...", 3, 0.25f);
 
 	}
 	
 	public void LaunchLevelFromSeed(int newSeed) {
 		SetSeed(Mathf.Abs(newSeed));
 		LoadNewLevel("GameLevel", 1);
-		ShowDialogText("Traveling to Location...", 3, 0.25f);
+		OpenInfoBox("Traveling to Location...", 3, 0.25f);
 	}
 	
 	public void LaunchLevelFromMap(Transform selectedDot) {
@@ -141,21 +147,29 @@ public class GameControl : MonoBehaviour {
         return closest;
     }
 	
-	public void ShowDialogText(string text, float delay, float scale) {
-		ShowDialogText(text, delay, scale, null, "none");
+	void CreateDialog() {
+		GameObject dialogBoxObj = Instantiate(dialogBoxPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		dialogBox = dialogBoxObj.GetComponent<DialogControl>();
+		dialogBox.transform.parent = Camera.main.transform;
+		dialogBox.Init();
 	}
+	
+	public void OpenInfoBox(string text, float delay, float scale) {
+		if (!dialogBox) CreateDialog();
+		dialogBox.OpenInfoBox(text, delay, scale);
+	}
+	
+	public void OpenMessageBox(string text, float delay, float scale, DialogControl.DialogDelegate result) {
+		if (!dialogBox) CreateDialog();
+		dialogBox.OpenMessageBox(text, delay, scale, result);
+	}
+	
+	public void OpenConfirmationBox(string text, float delay, float scale, DialogControl.DialogDelegate result) {
+		if (!dialogBox) CreateDialog();
+		dialogBox.OpenConfirmationBox(text, delay, scale, result);
+	}
+	
 
-	
-	public void ShowDialogText(string text, float delay, float scale, Transform target, string function) {
-		if (!dialogBox) {
-			GameObject dialogBoxObj = Instantiate(dialogBoxPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-			dialogBox = dialogBoxObj.GetComponent<DialogControl>();
-			dialogBox.transform.parent = Camera.main.transform;
-			dialogBox.Init();
-		}
-		dialogBox.SetText(text, delay, scale, target, function);
-	}
-	
 	public void LoadNewLevel(string levelname, float delay) {
 		levelToLoad = levelname;
 		Invoke("DoLoad", delay);	

@@ -169,6 +169,10 @@ public class LevelController : MonoSingleton<LevelController>
 	
 	public bool hasServerRoom() {
 		foreach (Room room in rooms) {
+			if (room == null) {
+				//Debug.Log("Error: room is null");
+				return false;
+			}
 			if (room.serverRoom) return true;
 		} 
 		return false;
@@ -176,6 +180,10 @@ public class LevelController : MonoSingleton<LevelController>
 	
 	public bool hasGuardRoom() {
 		foreach (Room room in rooms) {
+			if (room == null) {
+				//Debug.Log("Error: room is null");
+				return false;
+			}
 			if (room.guardRoom) return true;
 		} 
 		return false;

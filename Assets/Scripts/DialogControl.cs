@@ -14,8 +14,8 @@ public class DialogControl : MonoBehaviour {
 	TextMesh dialogText;
 	bool tapToDismiss;
 	float scaleOffset;
-	Transform functionTarget;
-	string functionToCall;
+	DialogDelegate dialogDelegate;
+
 	
 	public Vector3 startScale;
 	public Vector3 endScale;
@@ -57,9 +57,8 @@ public class DialogControl : MonoBehaviour {
 
 	}
 
-
-	
 	void CloseBox() {
+		print ("Closing");
 		transform.localScale = startScale;
 		dialogBox.renderer.material.color = Color.clear;
 		dialogText.renderer.material.color = Color.clear;
@@ -69,16 +68,51 @@ public class DialogControl : MonoBehaviour {
 		dialogBox.renderer.enabled = false;
 		dialogText.renderer.enabled = false;		
 		okButton.renderer.enabled = false;		
-		cancelButton.renderer.enabled = false;		
-		functionTarget = null;
-		functionToCall = "none";
+		cancelButton.renderer.enabled = false;
+		okButton.GetComponent<BoxCollider>().enabled = false;			
+		cancelButton.GetComponent<BoxCollider>().enabled = false;	
 	}
 	
-	public void SetText(string newText, float newDelay, float newScale) {
-		SetText(newText, newDelay, newScale, null, "none");
-	}	
+	public delegate void DialogDelegate(string result);
 	
-	public void SetText(string newText, float newDelay, float newScale, Transform target, string function) {
+
+	public void OpenInfoBox(string newText, float newDelay, float newScale) {
+		scaleOffset = newScale;
+		collision.enabled = true;
+		dialogBox.renderer.enabled = true;
+		dialogText.renderer.enabled = true;
+		opened = true;
+		timer = 0.01f;
+		dialogText.text = newText;
+		delay = newDelay;		
+		okButton.GetComponent<BoxCollider>().enabled = false;			
+		okButton.renderer.enabled = false;
+		cancelButton.GetComponent<BoxCollider>().enabled = false;
+		cancelButton.renderer.enabled = false;
+		dialogText.transform.localPosition = new Vector3(0.0f, 0.1f, 0.0f);
+	}
+
+	public void OpenMessageBox(string newText, float newDelay, float newScale, DialogDelegate resultFunction) {
+		scaleOffset = newScale;
+		collision.enabled = true;
+		dialogBox.renderer.enabled = true;
+		dialogText.renderer.enabled = true;
+		opened = true;
+		timer = 0.01f;
+		dialogText.text = newText;
+		delay = newDelay;	
+		if (resultFunction != null) {
+			dialogText.transform.localPosition = new Vector3(0.0f, 0.15f, 0.0f);
+			tapToDismiss = false;
+			dialogDelegate = resultFunction;
+			okButton.renderer.enabled = true;
+			cancelButton.renderer.enabled = false;
+			okButton.GetComponent<BoxCollider>().enabled = true;			
+			cancelButton.GetComponent<BoxCollider>().enabled = false;	
+		}
+	}
+
+	public void OpenConfirmationBox(string newText, float newDelay, float newScale, DialogDelegate resultFunction) {
 		scaleOffset = newScale;
 		collision.enabled = true;
 		dialogBox.renderer.enabled = true;
@@ -87,45 +121,31 @@ public class DialogControl : MonoBehaviour {
 		timer = 0.01f;
 		dialogText.text = newText;
 		delay = newDelay;
-		if (target) {
-			if (function.Equals("Done")) { 		
-				tapToDismiss = true;
-				functionTarget = target;
-				functionToCall = "Done";
-				okButton.renderer.enabled = true;
-				okButton.GetComponent<BoxCollider>().enabled = true;
-			} else {
-				tapToDismiss = true;
-				functionTarget = target;
-				functionToCall = function;
-				okButton.renderer.enabled = true;
-				cancelButton.renderer.enabled = true;
-				okButton.GetComponent<BoxCollider>().enabled = true;				
-				okButton.GetComponent<BoxCollider>().enabled = true;				
-			}
-			
-		} else {
-			tapToDismiss = false;
-			okButton.renderer.enabled = false;
-			cancelButton.renderer.enabled = false;
-			okButton.GetComponent<BoxCollider>().enabled = false;			
-			cancelButton.GetComponent<BoxCollider>().enabled = false;			
+		if (resultFunction != null) {
+			dialogText.transform.localPosition = new Vector3(0.0f, 0.15f, 0.0f);
+			tapToDismiss = true;
+			dialogDelegate = resultFunction;
+			okButton.renderer.enabled = true;
+			cancelButton.renderer.enabled = true;
+			okButton.GetComponent<BoxCollider>().enabled = true;				
+			cancelButton.GetComponent<BoxCollider>().enabled = true;				
 		}
 	}
+	
 	
 	public void tap(TouchManager.TapEvent touchEvent) {
 		if (touchEvent.touchTarget.name.Equals("OKButton")) {
 			if (tapToDismiss && timer > 0.5f) {
 				opened = false;
 				timer = Mathf.Clamp(timer, 0.0f, 0.5f);
-				functionTarget.SendMessage(functionToCall + "OK");
+				if (dialogDelegate != null)  dialogDelegate("Ok");
 			}			
 		}
 		if (touchEvent.touchTarget.name.Equals("CancelButton")) {
 			if (tapToDismiss && timer > 0.5f) {
 				opened = false;
 				timer = Mathf.Clamp(timer, 0.0f, 0.5f);
-				functionTarget.SendMessage(functionToCall + "Cancel");
+				if (dialogDelegate != null)  dialogDelegate("Cancel");
 			}				
 		}
 	}

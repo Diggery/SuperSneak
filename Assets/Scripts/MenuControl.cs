@@ -6,6 +6,11 @@ public class MenuControl : MonoBehaviour {
 	
 	public GameObject gameControlPrefab;
 	GameControl gameControl;
+	
+	Transform newButton;
+	Transform continueButton;
+	Transform optionsButton;
+	Transform creditsButton;
 
 	void Start () {
 		GameObject gameControlObj = GameObject.Find ("GameControl");
@@ -14,10 +19,13 @@ public class MenuControl : MonoBehaviour {
 		
 		gameControl = gameControlObj.GetComponent<GameControl>();
 		
-		TextMesh[] items = gameObject.GetComponentsInChildren<TextMesh>();
+		newButton = transform.Find("NewGame");
+		continueButton = transform.Find("ContinueGame");
+		optionsButton = transform.Find("Options");
+		creditsButton = transform.Find("Credits");
 		
-		foreach (TextMesh label in items) {
-			label.transform.name = label.text;	
+		if (GameLoadSave.GetGameMapSeed() == -1) {
+			continueButton.renderer.enabled = false;
 		}
 	}
 	
@@ -28,25 +36,31 @@ public class MenuControl : MonoBehaviour {
 	
 	public void ItemTapped(string itemName) {
 		
-		if (itemName.Equals("Continue Game")) {
+		if (itemName.Equals("ContinueGame")) {
 			gameControl.currentLevel = "Menu";
 			gameControl.LoadNewLevel("MapScreen", 1);	
-			gameControl.ShowDialogText("Hold on", 3, 0.75f);
+			gameControl.OpenInfoBox("Hold on", 3, 0.3f);
 		}
-		if (itemName.Equals("New Game")) {
-			gameControl.ShowDialogText("Delete Game?\nAre you sure?", 100, 1.0f, transform, "NewGame");
+		if (itemName.Equals("NewGame")) {
+			gameControl.OpenConfirmationBox("This will overwrite\nyour current game?\nAre you sure?", 100, 0.3f, NewGame);
 		}
 	}
 	
-	public void NewGameOK() {
-		GameLoadSave.DeleteAll();
+	public void NewGame(string result) {
+		print (result);
+		if (result.Equals("Ok")) {
+			GameLoadSave.DeleteAll();
+			Invoke("StartNewGame", 0.1f);			
+		}
+		if (result.Equals("Cancel")) {
+			print ("Cancelling");
+		}
+	}
+	public void StartNewGame() {
+		gameControl.CreateGameMapSeed();
 		gameControl.currentLevel = "Menu";
 		gameControl.LoadNewLevel("MapScreen", 1);	
-		gameControl.ShowDialogText("Hold on", 3, 0.75f);
+		gameControl.OpenInfoBox("Hold on", 3, 0.3f);		
 	}
-	
-	public void NewGameCancel() {
-			print ("Cancel");
-		
-	}
+
 }

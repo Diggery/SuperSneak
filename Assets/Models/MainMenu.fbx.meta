@@ -1,0 +1,480 @@
+fileFormatVersion: 2
+guid: 6ab9602cfc2a94455a008f42276e95a2
+ModelImporter:
+  fileIDToRecycleName:
+    4300000: pPlane2
+    4300002: polySurface6
+    4300004: polySurface4
+    4300006: polySurface2
+    4300008: Thief:Thief_Body
+    7400000: Take 001 //// MainMenu
+  serializedVersion: 10
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    generateAnimations: 3
+    bakeSimulation: 0
+    splitAnimations: 1
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 1
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMesh: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  textMetaNamesToFileIDs:
+    //RootNode:
+      data:
+        first: 1
+        second: a0860100
+      data:
+        first: 4
+        second: 801a0600
+      data:
+        first: 111
+        second: 605fa900
+    MenuCamera:
+      data:
+        first: 1
+        second: 10870100
+      data:
+        first: 4
+        second: f01a0600
+    Thief:Control_Head:
+      data:
+        first: 1
+        second: f2860100
+      data:
+        first: 4
+        second: d21a0600
+    Thief:Control_Hips:
+      data:
+        first: 1
+        second: fe860100
+      data:
+        first: 4
+        second: de1a0600
+    Thief:Control_LeftArm:
+      data:
+        first: 1
+        second: f6860100
+      data:
+        first: 4
+        second: d61a0600
+    Thief:Control_LeftElbow:
+      data:
+        first: 1
+        second: e8860100
+      data:
+        first: 4
+        second: c81a0600
+    Thief:Control_LeftFingers:
+      data:
+        first: 1
+        second: e6860100
+      data:
+        first: 4
+        second: c61a0600
+    Thief:Control_LeftFoot:
+      data:
+        first: 1
+        second: e4860100
+      data:
+        first: 4
+        second: c41a0600
+    Thief:Control_LeftHand:
+      data:
+        first: 1
+        second: ea860100
+      data:
+        first: 4
+        second: ca1a0600
+    Thief:Control_LeftKnee:
+      data:
+        first: 1
+        second: e0860100
+      data:
+        first: 4
+        second: c01a0600
+    Thief:Control_LeftToes:
+      data:
+        first: 1
+        second: e2860100
+      data:
+        first: 4
+        second: c21a0600
+    Thief:Control_MidSection:
+      data:
+        first: 1
+        second: fc860100
+      data:
+        first: 4
+        second: dc1a0600
+    Thief:Control_Neck:
+      data:
+        first: 1
+        second: f4860100
+      data:
+        first: 4
+        second: d41a0600
+    Thief:Control_RightArm:
+      data:
+        first: 1
+        second: f8860100
+      data:
+        first: 4
+        second: d81a0600
+    Thief:Control_RightElbow:
+      data:
+        first: 1
+        second: ec860100
+      data:
+        first: 4
+        second: cc1a0600
+    Thief:Control_RightFingers:
+      data:
+        first: 1
+        second: ee860100
+      data:
+        first: 4
+        second: ce1a0600
+    Thief:Control_RightFoot:
+      data:
+        first: 1
+        second: de860100
+      data:
+        first: 4
+        second: be1a0600
+    Thief:Control_RightHand:
+      data:
+        first: 1
+        second: f0860100
+      data:
+        first: 4
+        second: d01a0600
+    Thief:Control_RightKnee:
+      data:
+        first: 1
+        second: da860100
+      data:
+        first: 4
+        second: ba1a0600
+    Thief:Control_RightToes:
+      data:
+        first: 1
+        second: dc860100
+      data:
+        first: 4
+        second: bc1a0600
+    Thief:Control_Root:
+      data:
+        first: 1
+        second: 00870100
+      data:
+        first: 4
+        second: e01a0600
+    Thief:Control_Torso:
+      data:
+        first: 1
+        second: fa860100
+      data:
+        first: 4
+        second: da1a0600
+    Thief:Head:
+      data:
+        first: 1
+        second: cc860100
+      data:
+        first: 4
+        second: ac1a0600
+    Thief:LeftAnkle:
+      data:
+        first: 1
+        second: b4860100
+      data:
+        first: 4
+        second: 941a0600
+    Thief:LeftElbow:
+      data:
+        first: 1
+        second: c8860100
+      data:
+        first: 4
+        second: a81a0600
+    Thief:LeftFingers:
+      data:
+        first: 1
+        second: c4860100
+      data:
+        first: 4
+        second: a41a0600
+    Thief:LeftHip:
+      data:
+        first: 1
+        second: b8860100
+      data:
+        first: 4
+        second: 981a0600
+    Thief:LeftKnee:
+      data:
+        first: 1
+        second: b6860100
+      data:
+        first: 4
+        second: 961a0600
+    Thief:LeftShoulder:
+      data:
+        first: 1
+        second: ca860100
+      data:
+        first: 4
+        second: aa1a0600
+    Thief:LeftToes:
+      data:
+        first: 1
+        second: b2860100
+      data:
+        first: 4
+        second: 921a0600
+    Thief:LeftWrist:
+      data:
+        first: 1
+        second: c6860100
+      data:
+        first: 4
+        second: a61a0600
+    Thief:LowerBody:
+      data:
+        first: 1
+        second: ba860100
+      data:
+        first: 4
+        second: 9a1a0600
+    Thief:Neck:
+      data:
+        first: 1
+        second: ce860100
+      data:
+        first: 4
+        second: ae1a0600
+    Thief:RightAnkle:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+    Thief:RightElbow:
+      data:
+        first: 1
+        second: c0860100
+      data:
+        first: 4
+        second: a01a0600
+    Thief:RightFingers:
+      data:
+        first: 1
+        second: bc860100
+      data:
+        first: 4
+        second: 9c1a0600
+    Thief:RightHip:
+      data:
+        first: 1
+        second: b0860100
+      data:
+        first: 4
+        second: 901a0600
+    Thief:RightKnee:
+      data:
+        first: 1
+        second: ae860100
+      data:
+        first: 4
+        second: 8e1a0600
+    Thief:RightShoulder:
+      data:
+        first: 1
+        second: c2860100
+      data:
+        first: 4
+        second: a21a0600
+    Thief:RightToes:
+      data:
+        first: 1
+        second: aa860100
+      data:
+        first: 4
+        second: 8a1a0600
+    Thief:RightWrist:
+      data:
+        first: 1
+        second: be860100
+      data:
+        first: 4
+        second: 9e1a0600
+    Thief:Root:
+      data:
+        first: 1
+        second: d6860100
+      data:
+        first: 4
+        second: b61a0600
+      data:
+        first: 137
+        second: a00bd100
+    Thief:Spine1:
+      data:
+        first: 1
+        second: d2860100
+      data:
+        first: 4
+        second: b21a0600
+    Thief:Spine2:
+      data:
+        first: 1
+        second: d0860100
+      data:
+        first: 4
+        second: b01a0600
+    Thief:Thief:
+      data:
+        first: 1
+        second: 08870100
+      data:
+        first: 4
+        second: e81a0600
+    Thief:Thief_Body:
+      data:
+        first: 1
+        second: 04870100
+      data:
+        first: 4
+        second: e41a0600
+    Thief:Thief_Control:
+      data:
+        first: 1
+        second: 02870100
+      data:
+        first: 4
+        second: e21a0600
+    Thief:Thief_Geometry:
+      data:
+        first: 1
+        second: 06870100
+      data:
+        first: 4
+        second: e61a0600
+    Thief:Thief_Skeleton:
+      data:
+        first: 1
+        second: d8860100
+      data:
+        first: 4
+        second: b81a0600
+    Thief:UpperBody:
+      data:
+        first: 1
+        second: d4860100
+      data:
+        first: 4
+        second: b41a0600
+    Thief:ikHandle1:
+      data:
+        first: 1
+        second: a8860100
+      data:
+        first: 4
+        second: 881a0600
+    Thief:ikHandle2:
+      data:
+        first: 1
+        second: a6860100
+      data:
+        first: 4
+        second: 861a0600
+    Thief:ikHandle3:
+      data:
+        first: 1
+        second: a4860100
+      data:
+        first: 4
+        second: 841a0600
+    Thief:ikHandle4:
+      data:
+        first: 1
+        second: a2860100
+      data:
+        first: 4
+        second: 821a0600
+    pPlane2:
+      data:
+        first: 1
+        second: 12870100
+      data:
+        first: 4
+        second: f21a0600
+      data:
+        first: 23
+        second: 66182300
+      data:
+        first: 33
+        second: a65a3200
+    polySurface2:
+      data:
+        first: 1
+        second: 0a870100
+      data:
+        first: 4
+        second: ea1a0600
+      data:
+        first: 23
+        second: 60182300
+      data:
+        first: 33
+        second: a05a3200
+    polySurface4:
+      data:
+        first: 1
+        second: 0c870100
+      data:
+        first: 4
+        second: ec1a0600
+      data:
+        first: 23
+        second: 62182300
+      data:
+        first: 33
+        second: a25a3200
+    polySurface6:
+      data:
+        first: 1
+        second: 0e870100
+      data:
+        first: 4
+        second: ee1a0600
+      data:
+        first: 23
+        second: 64182300
+      data:
+        first: 33
+        second: a45a3200
