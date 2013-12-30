@@ -44,6 +44,8 @@ namespace PreviewLabs
 				Deserialize();
 				
 				fileReader.Close();
+			} else {
+				Debug.Log("!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!No perist file!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!X!");
 			}
 		}
 		

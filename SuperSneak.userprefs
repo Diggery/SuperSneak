@@ -1,6 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TouchInterface.cs">
+    <Files>
+      <File FileName="Assets/Scripts/MenuSystem/MenuControl.cs" Line="50" Column="4" />
+      <File FileName="Assets/Scripts/TouchInterface.cs" Line="151" Column="20" />
+      <File FileName="Assets/Scripts/TouchManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UIThumbsticks.cs" Line="185" Column="37" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -8,11 +14,9 @@
             <Node name="Assets" expanded="True">
               <Node name="LevelBuilder" expanded="True" />
               <Node name="Scripts" expanded="True">
-                <Node name="MapScreen" expanded="True" />
+                <Node name="TouchInterface.cs" selected="True" />
               </Node>
-              <Node name="Shaders" expanded="True">
-                <Node name="Unlit-TransWithColor.shader" selected="True" />
-              </Node>
+              <Node name="Shaders" expanded="True" />
             </Node>
           </Node>
           <Node name="Assembly-CSharp-Editor" expanded="True" />

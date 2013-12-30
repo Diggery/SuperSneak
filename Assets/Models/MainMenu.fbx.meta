@@ -7,6 +7,10 @@ ModelImporter:
     4300004: polySurface4
     4300006: polySurface2
     4300008: Thief:Thief_Body
+    4300010: BackDrop
+    4300012: ContinueBackground
+    4300014: NewGameBackground
+    4300016: Logo
     7400000: Take 001 //// MainMenu
   serializedVersion: 10
   materials:
@@ -52,6 +56,45 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
+    BackDrop:
+      data:
+        first: 1
+        second: 0a870100
+      data:
+        first: 4
+        second: ea1a0600
+      data:
+        first: 23
+        second: 60182300
+      data:
+        first: 33
+        second: a05a3200
+    ContinueBackground:
+      data:
+        first: 1
+        second: 0e870100
+      data:
+        first: 4
+        second: ee1a0600
+      data:
+        first: 23
+        second: 64182300
+      data:
+        first: 33
+        second: a45a3200
+    Logo:
+      data:
+        first: 1
+        second: 12870100
+      data:
+        first: 4
+        second: f21a0600
+      data:
+        first: 23
+        second: 66182300
+      data:
+        first: 33
+        second: a65a3200
     MenuCamera:
       data:
         first: 1
@@ -59,6 +102,19 @@ ModelImporter:
       data:
         first: 4
         second: f01a0600
+    NewGameBackground:
+      data:
+        first: 1
+        second: 0c870100
+      data:
+        first: 4
+        second: ec1a0600
+      data:
+        first: 23
+        second: 62182300
+      data:
+        first: 33
+        second: a25a3200
     Thief:Control_Head:
       data:
         first: 1
@@ -426,55 +482,3 @@ ModelImporter:
       data:
         first: 4
         second: 821a0600
-    pPlane2:
-      data:
-        first: 1
-        second: 12870100
-      data:
-        first: 4
-        second: f21a0600
-      data:
-        first: 23
-        second: 66182300
-      data:
-        first: 33
-        second: a65a3200
-    polySurface2:
-      data:
-        first: 1
-        second: 0a870100
-      data:
-        first: 4
-        second: ea1a0600
-      data:
-        first: 23
-        second: 60182300
-      data:
-        first: 33
-        second: a05a3200
-    polySurface4:
-      data:
-        first: 1
-        second: 0c870100
-      data:
-        first: 4
-        second: ec1a0600
-      data:
-        first: 23
-        second: 62182300
-      data:
-        first: 33
-        second: a25a3200
-    polySurface6:
-      data:
-        first: 1
-        second: 0e870100
-      data:
-        first: 4
-        second: ee1a0600
-      data:
-        first: 23
-        second: 64182300
-      data:
-        first: 33
-        second: a45a3200

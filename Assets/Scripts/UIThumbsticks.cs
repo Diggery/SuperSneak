@@ -156,6 +156,7 @@ public class UIThumbsticks : MonoBehaviour {
 	
 	public void touchDown(TouchManager.TouchDownEvent touchEvent) {
 		inventory.closeInventory();
+			print ("moving");
 		
 		if (touchEvent.touchTarget.name.Equals("MoveThumb")) {
 			moveTouched = true;
