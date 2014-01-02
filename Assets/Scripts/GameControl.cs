@@ -27,22 +27,25 @@ public class GameControl : MonoBehaviour {
 	}
 
 	public void CrateOpened() {
-		print("CrateOpened");
-		
-		cratesOpened++;
 		if (!levelController) levelController = LevelController.instance;
-		if (!allCratesOpened && levelController.getNumberOfCrates() <= cratesOpened) {
+		cratesOpened++;
+		int totalCrates = levelController.getNumberOfCrates();
+		Vector2 crateStatus = new Vector2 (cratesOpened, totalCrates);
+		Events.Send(gameObject, "CrateOpened", crateStatus);
+		if (!allCratesOpened && totalCrates <= cratesOpened) {
 			print("All Crates Gone");
 			allCratesOpened = true;
 		}		
-	}	
-	
+	}
+
 	public bool IsLevelComplete() {
 		return serverHacked;
 	}
 	
 	public void ServerHacked() {
 		print("SERVER IS HACKED");
+		Events.Send(gameObject, "ServerStatus", "Hacked");
+
 		serverHacked = true;
 
 		GameObject[] servers = GameObject.FindGameObjectsWithTag("Server");

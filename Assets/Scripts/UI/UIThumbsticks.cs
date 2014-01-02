@@ -5,6 +5,7 @@ using System.Collections;
 public class UIThumbsticks : MonoBehaviour {
 	
 	public Transform UIThumbsticksPrefab;
+	public Transform UIStatusDisplayPrefab;
 	
 	public bool onScreen; 
 	float transTimer = 1.0f;
@@ -48,7 +49,8 @@ public class UIThumbsticks : MonoBehaviour {
 		
 		Transform UIThumbsticksObj = Instantiate(UIThumbsticksPrefab, transform.position, Quaternion.identity) as Transform;
 		UIThumbsticksObj.parent = transform;
-	
+		
+
 		lowerLeft = UIThumbsticksObj.Find("LowerLeft");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerLeft);
 	
@@ -61,8 +63,11 @@ public class UIThumbsticks : MonoBehaviour {
 		miniMapDisplay.InitMiniMap();
 
 		lowerCenter = UIThumbsticksObj.Find("LowerCenter");
-		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerCenter);					
+		Camera.main.transform.GetComponent<UIManager>().lockToEdge(lowerCenter);
 		
+		Transform UIStatusDisplayObj = Instantiate(UIStatusDisplayPrefab, lowerCenter.position, lowerCenter.rotation) as Transform;
+		UIStatusDisplayObj.parent = lowerCenter;
+	
 		upperRight = UIThumbsticksObj.Find("UpperRight");
 		Camera.main.transform.GetComponent<UIManager>().lockToEdge(upperRight);
 		

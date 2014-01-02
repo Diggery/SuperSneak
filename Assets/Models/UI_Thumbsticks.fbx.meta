@@ -54,6 +54,7 @@ ModelImporter:
     4300098: ShootThumb
     4300100: MoveAnchor
     4300102: MoveThumb
+    4300104: StatusDisplay
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -111,32 +112,6 @@ ModelImporter:
       data:
         first: 33
         second: ba5a3200
-    CenterSlider:
-      data:
-        first: 1
-        second: d6860100
-      data:
-        first: 4
-        second: b61a0600
-      data:
-        first: 23
-        second: 88182300
-      data:
-        first: 33
-        second: c85a3200
-    CenterThumb:
-      data:
-        first: 1
-        second: d4860100
-      data:
-        first: 4
-        second: b41a0600
-      data:
-        first: 23
-        second: 84182300
-      data:
-        first: 33
-        second: c45a3200
     Centered:
       data:
         first: 1
@@ -157,9 +132,6 @@ ModelImporter:
       data:
         first: 4
         second: a21a0600
-      data:
-        first: 137
-        second: a00bd100
     FrameLowerRight:
       data:
         first: 1
@@ -234,6 +206,9 @@ ModelImporter:
       data:
         first: 4
         second: ac1a0600
+      data:
+        first: 137
+        second: a00bd100
     MoveAnchor:
       data:
         first: 1
@@ -364,6 +339,19 @@ ModelImporter:
       data:
         first: 33
         second: b85a3200
+    StatusDisplay:
+      data:
+        first: 1
+        second: d4860100
+      data:
+        first: 4
+        second: b41a0600
+      data:
+        first: 23
+        second: 84182300
+      data:
+        first: 33
+        second: c45a3200
     ThrowActiveRing:
       data:
         first: 1

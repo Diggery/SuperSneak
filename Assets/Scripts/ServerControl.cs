@@ -29,6 +29,8 @@ public class ServerControl : MonoBehaviour {
 	IEnumerator HackServer() {
 		
 	//	animation.Play("HackServer");
+		Events.Send(gameObject, "ServerStatus", "Hacking");
+
 		
 		yield return new WaitForSeconds(1);//animation["HackServer"].length);
 		
