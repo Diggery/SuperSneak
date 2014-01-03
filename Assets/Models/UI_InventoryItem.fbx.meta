@@ -13,6 +13,7 @@ ModelImporter:
     4300016: NameField
     4300018: Background
     4300020: ItemGraphic
+    4300022: NameFieldActive
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -70,20 +71,6 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
-    Inventory:
-      data:
-        first: 1
-        second: a8860100
-      data:
-        first: 4
-        second: 881a0600
-    InventoryItem1:
-      data:
-        first: 1
-        second: a6860100
-      data:
-        first: 4
-        second: 861a0600
     ItemGraphic:
       data:
         first: 1
@@ -97,58 +84,6 @@ ModelImporter:
       data:
         first: 33
         second: a05a3200
-    LeftAnchor:
-      data:
-        first: 1
-        second: b6860100
-      data:
-        first: 4
-        second: 961a0600
-      data:
-        first: 23
-        second: 72182300
-      data:
-        first: 33
-        second: b25a3200
-    LeftThumb:
-      data:
-        first: 1
-        second: b4860100
-      data:
-        first: 4
-        second: 941a0600
-      data:
-        first: 23
-        second: 70182300
-      data:
-        first: 33
-        second: b05a3200
-    LowerLeft:
-      data:
-        first: 1
-        second: b8860100
-      data:
-        first: 4
-        second: 981a0600
-      data:
-        first: 23
-        second: 74182300
-      data:
-        first: 33
-        second: b45a3200
-    LowerRight:
-      data:
-        first: 1
-        second: b2860100
-      data:
-        first: 4
-        second: 921a0600
-      data:
-        first: 23
-        second: 6e182300
-      data:
-        first: 33
-        second: ae5a3200
     NameField:
       data:
         first: 1
@@ -162,55 +97,16 @@ ModelImporter:
       data:
         first: 33
         second: a45a3200
-    RightActiveRing:
+    NameFieldActive:
       data:
         first: 1
-        second: aa860100
+        second: a6860100
       data:
         first: 4
-        second: 8a1a0600
+        second: 861a0600
       data:
         first: 23
         second: 66182300
       data:
         first: 33
         second: a65a3200
-    RightAnchor:
-      data:
-        first: 1
-        second: b0860100
-      data:
-        first: 4
-        second: 901a0600
-      data:
-        first: 23
-        second: 6c182300
-      data:
-        first: 33
-        second: ac5a3200
-    RightProgressRing:
-      data:
-        first: 1
-        second: ae860100
-      data:
-        first: 4
-        second: 8e1a0600
-      data:
-        first: 23
-        second: 6a182300
-      data:
-        first: 33
-        second: aa5a3200
-    RightThumb:
-      data:
-        first: 1
-        second: ac860100
-      data:
-        first: 4
-        second: 8c1a0600
-      data:
-        first: 23
-        second: 68182300
-      data:
-        first: 33
-        second: a85a3200

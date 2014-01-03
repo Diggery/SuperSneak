@@ -9,6 +9,9 @@ public class InventoryItem : MonoBehaviour {
 	Transform itemGraphic;
 	Transform itemCount;
 	Transform itemName;
+	Transform nameField;
+	Transform nameFieldActive;
+	Transform background;
 	GameObject bombPrefab;
 	int currentCount;
 	float height;
@@ -23,10 +26,14 @@ public class InventoryItem : MonoBehaviour {
 		itemGraphic = transform.Find ("ItemGraphic");
 		itemCount = transform.Find ("NameField/ItemCount");
 		itemName = transform.Find ("NameField/ItemCount/ItemName");
+		nameField = transform.Find ("NameField");
+		nameFieldActive = transform.Find ("NameFieldActive");
+		background = transform.Find ("Background");
 		itemCount.renderer.material.renderQueue = 4000;
 		itemName.renderer.material.renderQueue = 4000;
 		inventory = newInventory;
 		height = GetComponent<BoxCollider>().size.y;
+		setUnselected();
 	}
 	
 	void Update() {
@@ -65,6 +72,23 @@ public class InventoryItem : MonoBehaviour {
 	public string getName() {
 		return itemName.GetComponent<TextMesh>().text;
 	}
+
+	public void setSelected() {
+		nameField.renderer.enabled = false;	
+		nameFieldActive.renderer.enabled = true;
+		Util.SetVertColors(itemGraphic, Color.white);
+		Util.SetVertColors(background, new Color(1.0f, 1.0f, 1.0f, 1.0f));
+		itemGraphic.localScale = Vector3.one;
+		itemName.renderer.material.color = Color.white;
+	}
+	public void setUnselected() {
+		nameField.renderer.enabled = true;	
+		nameFieldActive.renderer.enabled = false;			
+		Util.SetVertColors(itemGraphic, Color.gray);
+		Util.SetVertColors(background, new Color(1.0f, 1.0f, 1.0f, 0.5f));
+		itemGraphic.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+		itemName.renderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.75f);
+	}		
 	
 	public void setTexture(Texture newTexture) {
 		itemGraphic.renderer.material.mainTexture = newTexture;

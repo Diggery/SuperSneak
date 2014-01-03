@@ -31,6 +31,7 @@ public class MapDot : MonoBehaviour {
 	
 	bool selected;
 	bool isFortified;
+	bool canBeCaptured;
 	
 	public GameObject greenPowerUpFX;
 	public GameObject redPowerUpFX;
@@ -212,6 +213,7 @@ public class MapDot : MonoBehaviour {
 	}
 	
 	public void PowerDown() {
+		CanBeCaptured(false);
 		if (currentStatus == DotStatus.PlayerPowered) currentStatus = DotStatus.PlayerUnpowered;
 		if (currentStatus == DotStatus.EnemyPowered) currentStatus = DotStatus.EnemyUnpowered;
 		timer = 0.0f;
@@ -227,7 +229,10 @@ public class MapDot : MonoBehaviour {
 			if (!checkedList.Contains(this)) {
 				if (!IsPowered()) PowerUp();
 				checkedList.Add(this);
-				foreach (Transform dot in connectedPoints) dot.GetComponent<MapDot>().TransmitPlayerPower(checkedList);
+				foreach (Transform dot in connectedPoints) {
+					if (!dot.GetComponent<MapDot>().IsPlayerControlled()) dot.GetComponent<MapDot>().CanBeCaptured(true);
+					dot.GetComponent<MapDot>().TransmitPlayerPower(checkedList);
+				}
 			}
 		}
 	}
@@ -312,14 +317,31 @@ public class MapDot : MonoBehaviour {
 			line.UnSelectLine();	
 		}
 	}
-	
+
+	public void CanBeCaptured(bool capture) {
+		canBeCaptured = capture;
+		ShowRing();
+	}	
+
 	public void ShowRing() {
-		mapRing.renderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+		if (canBeCaptured) {
+			mapRing.renderer.material.color = new Color(0.25f, 1.0f, 0.25f, 0.75f);
+		} else {
+			mapRing.renderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.25f);
+		}
+		
 		mapRing.renderer.enabled = true;
 	}
+
 	public void HideRing() {
-		mapRing.renderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-		mapRing.renderer.enabled = false;
+		if (canBeCaptured) {
+			mapRing.renderer.material.color = new Color(0.25f, 1.0f, 0.25f, 0.25f);
+			mapRing.renderer.enabled = true;		
+		} else {
+			mapRing.renderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.25f);
+			mapRing.renderer.enabled = false;				
+		}
+
 	}
 		
 

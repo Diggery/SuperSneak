@@ -99,6 +99,7 @@ public class MapControl : MonoBehaviour {
 	
 	public void playPortraitLoop() {
 		portraitThief.animation.Play("Loop");
+		PowerPlayerDots();
 	}
 	
 	public void MapIntro() {

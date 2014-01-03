@@ -63,6 +63,7 @@ public class InventoryController : MonoBehaviour {
 		addItem("Laser");
 		
 		setUp = true;
+		if (currentItems.Count > 0) selectItem(currentItems[0]);
 		
 	}
 	
@@ -133,6 +134,8 @@ public class InventoryController : MonoBehaviour {
 	}	
 	
 	public void selectItem(InventoryItem selectedItem) {
+		foreach(InventoryItem item in currentItems) item.setUnselected();
+		selectedItem.setSelected();
 		moveItemToSelected(selectedItem);
 		closeInventory();
 	}

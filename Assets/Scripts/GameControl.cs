@@ -22,7 +22,6 @@ public class GameControl : MonoBehaviour {
     	DontDestroyOnLoad (transform.gameObject);
 		Events.Listen(gameObject, "KeysPressed");
 		gameMapSeed = GameLoadSave.GetGameMapSeed();
-		print (Application.persistentDataPath);
 	}
 
 	public void CrateOpened() {
