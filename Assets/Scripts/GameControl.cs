@@ -12,7 +12,7 @@ public class GameControl : MonoBehaviour {
 	string levelToLoad;
 	
 	public string currentLevel;
-	public bool currentLevelPassed;
+	public string currentLevelOutcome;
 
 	
 	public GameObject dialogBoxPrefab;
@@ -40,12 +40,7 @@ public class GameControl : MonoBehaviour {
 		return new Vector2 (cratesOpened, cratesTotal);		
 	}
 
-	public bool IsLevelComplete() {
-		return serverHacked;
-	}
-	
 	public void ServerHacked() {
-		print("SERVER IS HACKED");
 		Events.Send(gameObject, "ServerStatus", "Hacked");
 
 		serverHacked = true;
@@ -58,7 +53,6 @@ public class GameControl : MonoBehaviour {
 	}	
 		
 	public void PlayerIsDead() {
-		print("Game Over");
 		
 		GameObject guardRoom = GameObject.FindGameObjectWithTag("GuardRoom");
 		guardRoom.GetComponent<GuardRoom>().ShutDown();
@@ -76,7 +70,7 @@ public class GameControl : MonoBehaviour {
 				controller.StandDown();
 			}
 		}
-		currentLevelPassed = false;
+		currentLevelOutcome = "Failed";
 		Invoke ("ReturnToMap", 5);
 	}
 	
@@ -121,17 +115,29 @@ public class GameControl : MonoBehaviour {
 		OpenInfoBox("Traveling to Location...", 3, 0.25f);
 	}
 	
-	public void LaunchLevelFromMap(Transform selectedDot) {
+	public void LaunchLevelFromMap(Transform selectedDot, string mission) {
 		currentLevel = selectedDot.name;
-		currentLevelPassed = false;
+		currentLevelOutcome = mission;
 		float seed = (selectedDot.position.x * 1000) + (selectedDot.position.z * 100) ;
 		int seedAsInt = Mathf.CeilToInt(seed);
 		LaunchLevelFromSeed(seedAsInt);
 	}
 	
 	public void LeaveLevel() {
-		currentLevelPassed = IsLevelComplete();
-		
+		string missionGoal = currentLevelOutcome;
+		print ("attempting to " + missionGoal);
+		switch (missionGoal) {
+		case "Capture" :
+				if (serverHacked) currentLevelOutcome = "Captured";
+			break;
+		case "Hack" :
+				if (serverHacked) currentLevelOutcome = "Hacked";
+			break;
+		default :
+			currentLevelOutcome = "Failed";
+			break;
+		}
+			
 		//save crates
 		GameObject[] crates = GameObject.FindGameObjectsWithTag("Crate");
 		if (!levelController) levelController = LevelController.instance;

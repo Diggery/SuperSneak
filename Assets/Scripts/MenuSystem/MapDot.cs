@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class MapDot : MonoBehaviour {
 
-	public enum DotStatus { None, PlayerPowered, PlayerUnpowered, EnemyPowered, EnemyUnpowered, Depot }
+	public enum DotStatus { None, PlayerPowered, PlayerUnpowered, EnemyPowered, EnemyUnpowered, Depot, Hacked }
 	DotStatus currentStatus = DotStatus.None;
 
 	List<Transform> connectedPoints = new List<Transform>();
@@ -24,6 +24,7 @@ public class MapDot : MonoBehaviour {
 	public Color enemyColor;
 	public Color depotColor;
 	public Color noneColor;
+	public Color hackColor;
 	Color lastColor;
 	float timer = 0.0f;
 	
@@ -71,6 +72,9 @@ public class MapDot : MonoBehaviour {
 			case DotStatus.Depot :
 				newColor = depotColor;
 				break;
+			case DotStatus.Hacked :
+				newColor = hackColor;
+				break;
 			case DotStatus.None :
 				newColor = noneColor;
 				break;
@@ -98,6 +102,8 @@ public class MapDot : MonoBehaviour {
 		isFortified = true;
 	}
 	
+
+		
 	public bool IsEnemyBase() {
 		return isEnemyBase;
 	}
@@ -128,11 +134,22 @@ public class MapDot : MonoBehaviour {
 		currentStatus = DotStatus.Depot;
 		timer = 0.0f;		
 	}
-	
+
 	public bool IsDepot() {
 		if (currentStatus == DotStatus.Depot) return true;
 		return false;		
 	}
+	
+	public void SetAsHacked() {
+		currentStatus = DotStatus.Hacked;
+		timer = 0.0f;	
+		UnSelect();
+	}	
+	
+	public bool IsHacked() {
+		if (currentStatus == DotStatus.Hacked) return true;
+		return false;		
+	}	
 	
 	public bool IsEndPoint() {
 		if (connectedPoints.Count <= 1) {
@@ -261,7 +278,10 @@ public class MapDot : MonoBehaviour {
 			return;
 		}
 		
-
+		if (IsHacked()) {
+			label.SetAction1("Offline");	
+			return;
+		}
 		
 		if (IsConnectedToPlayer()) {
 			if (IsPlayerControlled()) {
@@ -297,12 +317,9 @@ public class MapDot : MonoBehaviour {
 		foreach (Transform dot in connectedPoints) {
 			dot.GetComponent<MapDot>().ShowRing();	
 		}
-
 		foreach (MapLine line in connectedLines) {
-			line.SelectLine();	
+			line.UpdateLine();	
 		}
-		
-		
 	}
 	
 	public void UnSelect() {
@@ -314,23 +331,26 @@ public class MapDot : MonoBehaviour {
 		}		
 
 		foreach (MapLine line in connectedLines) {
-			line.UnSelectLine();	
+			line.UpdateLine();	
 		}
+	}
+	
+	public bool IsSelected() {
+		return selected;
 	}
 
 	public void CanBeCaptured(bool capture) {
 		canBeCaptured = capture;
-		ShowRing();
 	}	
 
 	public void ShowRing() {
+		if (currentStatus == DotStatus.Hacked) return;
 		if (canBeCaptured) {
 			mapRing.renderer.material.color = new Color(0.25f, 1.0f, 0.25f, 0.75f);
 		} else {
 			mapRing.renderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.25f);
 		}
-		
-		mapRing.renderer.enabled = true;
+		if (currentStatus != DotStatus.Hacked) mapRing.renderer.enabled = true;
 	}
 
 	public void HideRing() {
@@ -341,11 +361,9 @@ public class MapDot : MonoBehaviour {
 			mapRing.renderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.25f);
 			mapRing.renderer.enabled = false;				
 		}
-
+		if (currentStatus == DotStatus.Hacked) mapRing.renderer.enabled = false;
 	}
-		
 
-		
 	public void tap(TouchManager.TapEvent touchEvent) {
 		if (touchEvent.touchTarget.tag == "MapAction") {
 			switch (touchEvent.touchTarget.name) {
@@ -358,11 +376,11 @@ public class MapDot : MonoBehaviour {
 				break;
 						
 			case "Capture Location" :
-				mapControl.LaunchLevel(transform);
+				mapControl.LaunchCaptureLevel(transform);
 				break;
 				
 			case "Install Hack" :
-				print ("Not Hooked UP");
+				mapControl.LaunchHackLevel(transform);
 				break;
 				
 			case "Gather Intel" :

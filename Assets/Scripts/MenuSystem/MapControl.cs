@@ -22,12 +22,16 @@ public class MapControl : MonoBehaviour {
 	GameControl gameControl;
 	
 	MapTextBox mapTextBox;
+	
+	Transform selectedDot;
 
 	Transform portraitThief;
 	
 	List<string> locationNameList = new List<string>();
 	
 	bool playersTurn;
+	
+	int hackCost = 10;
 	
 	
 	public bool IsPlayersTurn() {
@@ -116,12 +120,20 @@ public class MapControl : MonoBehaviour {
 		
 		string locName = lastDotObj.GetComponent<MapDot>().GetName();
 		
-		if (gameControl.currentLevelPassed) {
+		//Get Results
+		print ("results are: " + gameControl.currentLevelOutcome);
+		if (gameControl.currentLevelOutcome == "Captured") {
 			DisplayMessage("We captured " + locName, 5);	
 			lastDotObj.GetComponent<MapDot>().PlayerCapture();
+			
+		} else if (gameControl.currentLevelOutcome == "Hacked") {
+			DisplayMessage("We hacked " + locName + "\nfor 3 days", 5);	
+			lastDotObj.GetComponent<MapDot>().SetAsHacked();
+			
 		} else {
-			DisplayMessage("We failed to capture\n" + locName, 3);	
+			DisplayMessage("We have failed at\n" + locName, 3);	
 		}
+		
 		Invoke("ResultsDone", 4);	
 	}
 	
@@ -304,9 +316,28 @@ public class MapControl : MonoBehaviour {
 	}
 
 	
-	public void LaunchLevel(Transform dotPressed) {
-
-		gameControl.LaunchLevelFromMap(dotPressed);
+	public void LaunchCaptureLevel(Transform dotPressed) {
+		LaunchLevel(dotPressed, "Capture");
+	}
+	
+	public void LaunchHackLevel(Transform dotPressed) {
+		selectedDot = dotPressed;
+		DisplayMessage("A hack code costs $" + hackCost + "\nA successful install takes\nthe facility offline for days!", 5);	
+		gameControl.OpenConfirmationBox("Generate a hack code?", 100, 0.2f, HackConfirmed);
+	}
+	
+	public void HackConfirmed(string result) {
+		if (result.Equals("Ok")) {
+			LaunchLevel(selectedDot, "Hack");
+		}
+		if (result.Equals("Cancel")) {
+			print ("Cancelling");
+		}
+	}
+	
+	public void LaunchLevel(Transform dotPressed, string mission) {
+		gameControl.LaunchLevelFromMap(dotPressed, mission);
+		selectedDot = null;
 	}
 	
 	public void SelectDot(MapDot dot) {
@@ -317,7 +348,6 @@ public class MapControl : MonoBehaviour {
 	
 	public void PowerDots() {
 		foreach (Transform point in points) point.GetComponent<MapDot>().PowerDown();
-		print ("powering dot");
 		PowerPlayerDots();
 		PowerEnemyDots();
 	}
@@ -344,12 +374,12 @@ public class MapControl : MonoBehaviour {
 	}
 	
 	public void tap(TouchManager.TapEvent touchEvent) {
-		if (!playersTurn) return;
-		foreach(Transform point in points) point.SendMessage("UnSelect");
 		if (touchEvent.touchTarget.name.Equals("UpperRight")) {
 			gameControl.LoadNewLevel("MainMenu", 1);	
 			gameControl.OpenInfoBox("Returning to Menu...", 3, 0.25f);
 		}
+		if (!playersTurn) return;
+		foreach(Transform point in points) point.SendMessage("UnSelect");
 	}
 	
 	public void drag(TouchManager.TouchDragEvent touchEvent) {

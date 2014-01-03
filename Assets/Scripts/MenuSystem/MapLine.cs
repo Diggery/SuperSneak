@@ -9,12 +9,11 @@ public class MapLine : MonoBehaviour {
 	
 	Transform startDot;
 	Transform endDot;
-	
-	bool selected;
-	
-	public Color playerColor = Color.green;
-	public Color enemyColor = Color.red;
-	public Color noneColor = new Color(25.0f/256, 30.0f/256, 40.0f/256, 1.0f);
+		
+	public Color playerColor;
+	public Color enemyColor;
+	public Color hackedColor;
+	public Color noneColor;
 	
 	float timer = 0.0f;
 	Color lastStartColor;
@@ -23,14 +22,14 @@ public class MapLine : MonoBehaviour {
 	public void SetUp(Transform newStart, Transform newEnd) {
 		startDot = newStart;
 		endDot = newEnd;
-		lastStartColor = noneColor;
-		lastEndColor = noneColor;
-		timer = 0.0f;
+
+		SetOwners();
 	}
 	
 	void Update() {
 		if (timer < 1.0f) {
 			timer += GameTime.deltaTime;
+			
 			//get start color
 			Color newStartColor = Color.white;
 			switch (startStatus) {
@@ -46,6 +45,9 @@ public class MapLine : MonoBehaviour {
 			case MapDot.DotStatus.EnemyUnpowered :
 				newStartColor = enemyColor * 0.5f;
 				break;
+			case MapDot.DotStatus.Hacked :
+				newStartColor = hackedColor;
+				break;
 			case MapDot.DotStatus.None :
 				newStartColor = noneColor;
 				break;
@@ -53,9 +55,8 @@ public class MapLine : MonoBehaviour {
 				newStartColor = noneColor;
 				break;
 			}
-			if (selected) newStartColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+			if (startDot.GetComponent<MapDot>().IsSelected()) newStartColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 			
-			Color transStartColor = Color.Lerp(lastStartColor, newStartColor, timer);
 			
 			//get end color
 			Color newEndColor = Color.white;
@@ -72,15 +73,19 @@ public class MapLine : MonoBehaviour {
 			case MapDot.DotStatus.EnemyUnpowered :
 				newEndColor = enemyColor * 0.5f;;
 				break;
+			case MapDot.DotStatus.Hacked :
+				newEndColor = hackedColor;
+				break;
 			case MapDot.DotStatus.None :
 				newEndColor = noneColor;
 				break;
 			default :
-				newStartColor = noneColor;
+				newEndColor = noneColor;
 				break;
 			}
-			if (selected) newEndColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+			if (endDot.GetComponent<MapDot>().IsSelected()) newEndColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
+			Color transStartColor = Color.Lerp(lastStartColor, newStartColor, timer);
 			Color transEndColor = Color.Lerp(lastEndColor, newEndColor, timer);
 			SetColors(transStartColor, transEndColor);
 			
@@ -118,13 +123,10 @@ public class MapLine : MonoBehaviour {
 		timer = 0.0f;
 	}
 	
-	public void SelectLine() {
-		selected = true;
+	public void UpdateLine() {
 		timer = 0.0f;
-	}
-	public void UnSelectLine() {
-		selected = false;
 		SetOwners();
+
 	}
 	
     void SetColors(Color startColor, Color endColor) {

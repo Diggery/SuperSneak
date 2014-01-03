@@ -44,7 +44,6 @@ public class ServerControl : MonoBehaviour {
 	public void Hacked() {
 		if (hacked) return;
 		hacked = true;
-		print (transform.name + " is hacked");
 	}
 	
     void OnTriggerEnter(Collider other) {
