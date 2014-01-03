@@ -18,6 +18,7 @@ public class CrateController : MonoBehaviour {
 	Transform miniMapDotOpened;
 	
 	GameControl gameControl;
+	int levelId;
 
 	void Start () {
 
@@ -38,9 +39,24 @@ public class CrateController : MonoBehaviour {
 		miniMapDot = transform.Find("MiniMap");
 		miniMapDotOpened = transform.Find("MiniMapOpened");
 		
+		
+		//open the crate if it has been opened before
 		GameObject gameControlObj = GameObject.Find ("GameControl");
 		gameControl = gameControlObj.GetComponent<GameControl>();
-
+		GameObject levelControlObj = GameObject.Find ("LevelController");
+		LevelController levelControl = levelControlObj.GetComponent<LevelController>();
+		levelId	= levelControl.currentLevelSeed;
+		
+		if (GameLoadSave.IsCrateOpened(levelId, GetId())) StartOpened();
+		
+		
+//		string[] openCrates = levelData.Split(new char[] {','});
+//		foreach (string crate in openCrates) {
+//			if (crate.Equals(GetId().ToString())) {
+//				print ("crate " + crate + " should be open");
+//				
+//			}
+//		}
 	}
 	
 	void GetInventory() {
@@ -53,6 +69,18 @@ public class CrateController : MonoBehaviour {
 		contents.Add(itemType);	
 	}
 	
+	public bool IsOpened() {
+		return opened;	
+	}
+	
+	void StartOpened() {
+		opened = true;
+		animation.Play("Open");
+		miniMapDot.renderer.enabled = false;
+		miniMapDotOpened.renderer.enabled = true;
+		gameControl.CrateOpened();
+	}
+
 	IEnumerator openCrate() {
 		if (!inventory) GetInventory();
 		
@@ -76,8 +104,13 @@ public class CrateController : MonoBehaviour {
 
 	}
 	
+	public int GetId() {
+		float crateId = (transform.position.x * 1000) + (transform.position.z * 100);
+		return Mathf.CeilToInt(crateId);
+	}
+	
     void OnTriggerEnter(Collider other) {
-		if (!opened && other.transform.tag.Equals("Player")) {
+		if (!IsOpened() && other.transform.tag.Equals("Player")) {
 			playerController = other.transform.GetComponent<PlayerController>();
 			if (!playerController) Debug.Log("ERROR: crate cant find player");
 			playerController.openCrate(transform.position);

@@ -18,7 +18,6 @@ public class LevelExit : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		if (leaving) return;
-		print (other.transform.root.tag);
 		if (other.transform.root.tag.Equals("Player")) {
 			leaving = true;
 			entrance.LeaveLevel();

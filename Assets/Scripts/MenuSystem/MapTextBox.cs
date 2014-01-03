@@ -12,20 +12,19 @@ public class MapTextBox : MonoBehaviour {
 	float transitionTimer;
 	public AnimationCurve transitionCurve;
 	float openTimer;
+		
+	Vector3 startScale = new Vector3(0.1f, 0.25f, 1.0f);
+	Vector3 endScale = new Vector3(0.6f, 0.6f, 0.6f);	
 	
 	public Transform textPos;
 
 	void Start () {
 		textBoxText = transform.Find("TextBoxText");
 		textBoxText.renderer.material.renderQueue = 4000;
-		//transform.localPosition = new Vector3(0.3f, 0.0f, 0.0f);
-		//transform.localRotation = Quaternion.AngleAxis(180, Vector3.up);
 	}
 	
 	void Update () {
-		Vector3 startScale = new Vector3(0.1f, 0.5f, 1.0f);
-		Vector3 endScale = new Vector3(1.0f, 1.0f, 1.0f);
-		
+
 		if (textBoxOpen) {
 			transitionTimer = Mathf.Clamp01(transitionTimer + Time.deltaTime * 2);
 		} else {

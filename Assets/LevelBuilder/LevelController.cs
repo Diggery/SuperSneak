@@ -52,10 +52,14 @@ public class LevelController : MonoSingleton<LevelController>
 	public GameObject[] Room_GuardRoom;
 	
 	public GameObject[] cratePrefabs;
-	
+
+	//the seed this level is using
+	public int currentLevelSeed;
+
 	//seed offset for retries on bad levels
 	int seedOffset;
 	
+
 	int failedLevels = 0;
 	
 	public override void Init () {
@@ -72,11 +76,10 @@ public class LevelController : MonoSingleton<LevelController>
 		
 		//fill out the matrix for the rooms with a seed
 		GameObject gameControlObj = GameObject.Find ("GameControl");
-		Random.seed = gameControlObj.GetComponent<GameControl>().GetSeed() + seedOffset;
+		currentLevelSeed = gameControlObj.GetComponent<GameControl>().GetSeed();
+		Random.seed = currentLevelSeed + seedOffset;
 		GenerateLevel();
 		
-		print (getNumberOfRooms() + " rooms built");
-
 		//add a guard room
 		AddServerRoom();
 		
@@ -118,7 +121,6 @@ public class LevelController : MonoSingleton<LevelController>
 		
 		// Generate childrens
 		firstRoom.AddChild(0).GenerateChildren();
-		
 	}
 	
 	void GenerateGameRooms() {

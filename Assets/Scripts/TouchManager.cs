@@ -18,7 +18,6 @@ public class TouchManager : MonoBehaviour {
 	
 	public void touchDown(Transform touchTarget, Vector2 touchPosition) {
 		if (!touchTarget) return;
-		print ("touch down");
 		lastTouchDownPos = touchPosition;
 		touchTarget.BroadcastMessage("touchDown", new TouchDownEvent(touchTarget, touchPosition), SendMessageOptions.DontRequireReceiver);
 	}

@@ -58,7 +58,6 @@ public class DialogControl : MonoBehaviour {
 	}
 
 	void CloseBox() {
-		print ("Closing");
 		transform.localScale = startScale;
 		dialogBox.renderer.material.color = Color.clear;
 		dialogText.renderer.material.color = Color.clear;

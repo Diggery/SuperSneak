@@ -25,7 +25,7 @@ public class LevelEntrance : MonoBehaviour {
 		
 		GameObject gameControlObj = GameObject.Find ("GameControl");
 		gameControl = gameControlObj.GetComponent<GameControl>();		
-		
+
 		Invoke("CreateCamera", 0.01f);
 	}
 	
