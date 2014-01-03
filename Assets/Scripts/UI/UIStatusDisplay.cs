@@ -5,7 +5,7 @@ public class UIStatusDisplay : MonoBehaviour {
 	
 	public TextMesh crateCount;
 	public TextMesh severStatus;
-	int totalCrates; 
+	GameControl gameControl;
 
 	public void Start () {
 		Events.Listen(gameObject, "CrateOpened");
@@ -15,7 +15,12 @@ public class UIStatusDisplay : MonoBehaviour {
 		severStatus.renderer.material.renderQueue = 4000;
 		severStatus.renderer.material.color = Color.white;
 		severStatus.text = "Server: Secure";
-		crateCount.text = "no crates searched";
+		
+		
+		GameObject gameControlObj = GameObject.Find ("GameControl");
+		gameControl = gameControlObj.GetComponent<GameControl>();
+		Vector2 crateStatus = gameControl.GetCrateStatus();
+		crateCount.text = crateStatus.x + " of " + crateStatus.y + " crates searched";
 	}
 
 

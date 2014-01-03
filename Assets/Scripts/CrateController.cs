@@ -49,14 +49,6 @@ public class CrateController : MonoBehaviour {
 		
 		if (GameLoadSave.IsCrateOpened(levelId, GetId())) StartOpened();
 		
-		
-//		string[] openCrates = levelData.Split(new char[] {','});
-//		foreach (string crate in openCrates) {
-//			if (crate.Equals(GetId().ToString())) {
-//				print ("crate " + crate + " should be open");
-//				
-//			}
-//		}
 	}
 	
 	void GetInventory() {

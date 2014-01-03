@@ -5,7 +5,6 @@ public class GameControl : MonoBehaviour {
 	
 	LevelController levelController; 
 	
-	int cratesOpened;
 	public bool serverHacked;
 	
 	public int gameMapSeed = 1;
@@ -23,14 +22,23 @@ public class GameControl : MonoBehaviour {
     	DontDestroyOnLoad (transform.gameObject);
 		Events.Listen(gameObject, "KeysPressed");
 		gameMapSeed = GameLoadSave.GetGameMapSeed();
+		print (Application.persistentDataPath);
 	}
 
 	public void CrateOpened() {
-		if (!levelController) levelController = LevelController.instance;
-		cratesOpened++;
-		int totalCrates = levelController.getNumberOfCrates();
-		Vector2 crateStatus = new Vector2 (cratesOpened, totalCrates);
-		Events.Send(gameObject, "CrateOpened", crateStatus);
+
+		Events.Send(gameObject, "CrateOpened", GetCrateStatus());
+	}
+	
+	public Vector2 GetCrateStatus() {
+		int cratesOpened = 0;
+		int cratesTotal = 0;
+		GameObject[] crates = GameObject.FindGameObjectsWithTag("Crate");
+		foreach (GameObject crate in crates) {
+			if (crate.GetComponent<CrateController>().IsOpened()) cratesOpened++;
+			cratesTotal++;
+		}
+		return new Vector2 (cratesOpened, cratesTotal);		
 	}
 
 	public bool IsLevelComplete() {
@@ -132,7 +140,7 @@ public class GameControl : MonoBehaviour {
 			CrateController crateControl = crate.GetComponent<CrateController>();
 			if (crateControl.IsOpened()) {
 				int crateId = crateControl.GetId();
-				Debug.Log ("Saving crate " + crateId);
+				Debug.Log ("Saving crate " + levelController.currentLevelSeed + " - " + crateId);
 				GameLoadSave.SetOpenCrates(levelController.currentLevelSeed, crateId);
 			}
 		}
