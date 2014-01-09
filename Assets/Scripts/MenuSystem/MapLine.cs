@@ -31,7 +31,7 @@ public class MapLine : MonoBehaviour {
 			timer += GameTime.deltaTime;
 			
 			//get start color
-			Color newStartColor = Color.white;
+			Color newStartColor = Color.black;
 			switch (startStatus) {
 			case MapDot.DotStatus.PlayerPowered :
 				newStartColor = playerColor;
@@ -55,11 +55,12 @@ public class MapLine : MonoBehaviour {
 				newStartColor = noneColor;
 				break;
 			}
-			if (startDot.GetComponent<MapDot>().IsSelected()) newStartColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-			
+			if (startDot.GetComponent<MapDot>().IsSelected() && startStatus != MapDot.DotStatus.Hacked) {
+				newStartColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+			}			
 			
 			//get end color
-			Color newEndColor = Color.white;
+			Color newEndColor = Color.black;
 			switch (endStatus) {
 			case MapDot.DotStatus.PlayerPowered :
 				newEndColor = playerColor;
@@ -83,7 +84,9 @@ public class MapLine : MonoBehaviour {
 				newEndColor = noneColor;
 				break;
 			}
-			if (endDot.GetComponent<MapDot>().IsSelected()) newEndColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+			if (endDot.GetComponent<MapDot>().IsSelected() && endStatus != MapDot.DotStatus.Hacked) {
+				newEndColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+			}
 
 			Color transStartColor = Color.Lerp(lastStartColor, newStartColor, timer);
 			Color transEndColor = Color.Lerp(lastEndColor, newEndColor, timer);
@@ -98,25 +101,6 @@ public class MapLine : MonoBehaviour {
 	
 	
 	public void SetOwners() {
-		
-		MapDot.DotStatus newStart = startDot.GetComponent<MapDot>().GetStatus();
-		MapDot.DotStatus newEnd = endDot.GetComponent<MapDot>().GetStatus();
-
-		if (startStatus == MapDot.DotStatus.PlayerUnpowered && newStart == MapDot.DotStatus.PlayerPowered) {
-			lastStartColor = Color.white;
-		}
-				
-		if (startStatus == MapDot.DotStatus.EnemyUnpowered && newStart == MapDot.DotStatus.EnemyPowered) {
-			lastStartColor = Color.white;
-		}
-
-		if (endStatus == MapDot.DotStatus.PlayerUnpowered && newEnd == MapDot.DotStatus.PlayerPowered) {
-			lastEndColor = Color.white;
-		}
-				
-		if (endStatus == MapDot.DotStatus.EnemyUnpowered && newEnd == MapDot.DotStatus.EnemyPowered) {
-			lastEndColor = Color.white;
-		}
 		
 		startStatus = startDot.GetComponent<MapDot>().GetStatus();
 		endStatus = endDot.GetComponent<MapDot>().GetStatus();

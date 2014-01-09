@@ -38,6 +38,8 @@ public class MapDot : MonoBehaviour {
 	public GameObject redPowerUpFX;
 
 	public Transform mapRing;
+	
+	int hackedTime;
 
 	void Start () {
 		GameObject mapControlObj = GameObject.Find("MapControl");
@@ -85,6 +87,16 @@ public class MapDot : MonoBehaviour {
 				lastColor = newColor;
 			}
 		}
+	}
+	
+	public void EndOfDay() {
+		if (hackedTime > 0) {
+			hackedTime--;
+			if (hackedTime <= 0) {
+				UnHack();	
+			}
+		}
+		print ("Day Over");
 	}
 	
 	public string GetName() {
@@ -141,10 +153,20 @@ public class MapDot : MonoBehaviour {
 	}
 	
 	public void SetAsHacked() {
+		hackedTime = 3;
 		currentStatus = DotStatus.Hacked;
 		timer = 0.0f;	
+		foreach (MapLine line in connectedLines) line.SetOwners();
 		UnSelect();
-	}	
+		SaveState();
+	}
+	
+	public void UnHack() {
+		currentStatus = DotStatus.None;
+		foreach (MapLine line in connectedLines) line.SetOwners();
+		mapControl.PowerDots();
+		SaveState();
+	}
 	
 	public bool IsHacked() {
 		if (currentStatus == DotStatus.Hacked) return true;
@@ -280,6 +302,7 @@ public class MapDot : MonoBehaviour {
 		
 		if (IsHacked()) {
 			label.SetAction1("Offline");	
+			label.SetAction2("Blank");
 			return;
 		}
 		
@@ -403,55 +426,69 @@ public class MapDot : MonoBehaviour {
 	
 	void LoadState() {
 		
-		int statusId = GameLoadSave.GetMapDotState(transform.name);
-		if (statusId < 0) return;
-		
-		switch (statusId) {
+		string[] dotStatus = GameLoadSave.GetMapDotState(transform.name).Split(new char[] {','});
 
-		case 0 :
+		if (dotStatus[0].Equals("none")) return;
+		
+		switch (dotStatus[0]) {
+
+		case "PlayerPowered" :
 			currentStatus = DotStatus.PlayerPowered;
 			break;
-		case 1 :
+		case "PlayerUnpowered" :
 			currentStatus = DotStatus.PlayerUnpowered;
 			break;
-		case 2 :
+		case "EnemyPowered" :
 			currentStatus = DotStatus.EnemyPowered;
 			break;
-		case 3 :
+		case "EnemyUnpowered" :
 			currentStatus = DotStatus.EnemyUnpowered;
 			break;
-		case 4 :
+		case "Depot" :
 			currentStatus = DotStatus.Depot;
 			break;
-		case 5 :
+		case "Hacked" :
+			currentStatus = DotStatus.Hacked;
+			break;
+		case "None" :
 			currentStatus = DotStatus.None;
 			break;
 		}
-		//print ("setting " + transform.name + " to " + currentStatus);
+		hackedTime = int.Parse(dotStatus[1]);
+		print ("setting " + transform.name + " to " + currentStatus);
+		foreach (MapLine line in connectedLines) {
+			line.UpdateLine();	
+		}
 	}
 	
 	void SaveState() {
-		int saveStatus = -1;
+		string saveStatus = "";
 		switch (currentStatus) {
 		case DotStatus.PlayerPowered :
-			saveStatus = 0;
+			saveStatus = "PlayerPowered";
 			break;
 		case DotStatus.PlayerUnpowered :
-			saveStatus = 1;
+			saveStatus = "PlayerUnpowered";
 			break;
 		case DotStatus.EnemyPowered :
-			saveStatus = 2;
+			saveStatus = "EnemyPowered";
 			break;
 		case DotStatus.EnemyUnpowered :
-			saveStatus = 3;
+			saveStatus = "EnemyUnpowered";
 			break;
 		case DotStatus.Depot :
-			saveStatus = 4;
+			saveStatus = "Depot";
+			break;
+		case DotStatus.Hacked :
+			saveStatus = "Hacked";
 			break;
 		case DotStatus.None :
-			saveStatus = 5;
+			saveStatus = "None";
 			break;
 		}
+		//add on hacked time
+		saveStatus += "," + hackedTime;
+			
 		GameLoadSave.SetMapDotState(transform.name, saveStatus);
 	}
 

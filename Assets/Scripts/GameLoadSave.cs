@@ -15,18 +15,18 @@ public class GameLoadSave : object {
 		return -1;
 	}
 
-	public static void SetMapDotState(string mapDot, int currentState) {  
+	public static void SetMapDotState(string mapDot, string currentState) {  
 		if (mapDot.Contains(":")) {
 			Debug.Log("ERROR: thats a pretty bad key name");	
 		}
-		PreviewLabs.PlayerPrefs.SetInt(mapDot, currentState);
+		PreviewLabs.PlayerPrefs.SetString(mapDot, currentState);
 	}
 	
-	public static int GetMapDotState(string mapDot) {
+	public static string GetMapDotState(string mapDot) {
 		if (PreviewLabs.PlayerPrefs.HasKey(mapDot)) {
-			return PreviewLabs.PlayerPrefs.GetInt(mapDot);
+			return PreviewLabs.PlayerPrefs.GetString(mapDot);
 		}
-		return -1;
+		return "none";
 	}
 	
 	public static void SetOpenCrates(int mapSeed, int crateId) {

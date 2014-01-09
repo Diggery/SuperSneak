@@ -139,6 +139,7 @@ public class MapControl : MonoBehaviour {
 	
 	void ResultsDone() {
 		GetComponent<MapAI>().StartTurn(this);	
+		EndOfDay();
 	}
 	
 	public List<Transform> GetPoints() {
@@ -390,6 +391,10 @@ public class MapControl : MonoBehaviour {
 	public void touchUp(TouchManager.TouchUpEvent touchEvent) {
 		if (!playersTurn) return;
 		cameraControl.touchUp(touchEvent);
+	}
+	
+	public void EndOfDay() {
+		foreach(Transform point in points) point.SendMessage("EndOfDay");
 	}
 	
 	public void InitScoreboard(Transform playerName, Transform playerScore, Transform enemyName, Transform enemyScore) {
